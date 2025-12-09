@@ -54,10 +54,7 @@ var KTDatatablesAdvancedColumnRendering = function () {
                     orderable: false,
                     searchable: false,
                     render: function (data, type, full) {
-                        return `
-                            <a href="/admin/appointments/${full[7]}" class="btn btn-sm btn-clean btn-icon" title="View">
-                                <i class="la la-eye"></i>
-                            </a>
+                        return `                            
                             <a href="/admin/appointments/${full[7]}/edit" class="btn btn-sm btn-clean btn-icon" title="Edit">
                                 <i class="la la-edit"></i>
                             </a>
