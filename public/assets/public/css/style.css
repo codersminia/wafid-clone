@@ -1,0 +1,845 @@
+/* ============================================
+   WAFID TEMPLATE - CUSTOM STYLES
+   ============================================ */
+
+:root {
+  --primary-dark: #3a3a3a;
+  --primary-light: #ffffff;
+  --accent-burgundy: #6b2c3e;
+  --accent-red: #e74c3c;
+  --accent-green: #27ae60;
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --border-light: #ecf0f1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.navbar {
+  background-color: var(--primary-dark) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--accent-red) !important;
+}
+
+.dropdown-menu {
+  background-color: var(--primary-dark);
+  border: none;
+}
+
+.dropdown-item {
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--accent-red);
+  color: white;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #4a4a4a 100%);
+  color: white;
+  padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  /* margin-bottom: 30px; */
+  line-height: 1.8;
+}
+
+.hero-tagline {
+  font-size: 1.3rem;
+  font-weight: 600;
+  /* margin-bottom: 40px; */
+}
+
+.hero-decoration {
+  position: relative;
+  height: 400px;
+}
+
+.decoration-circle {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 15px solid var(--accent-red);
+  border-radius: 50%;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.decoration-checkmark {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 50%;
+  top: 50%;
+  right: 80px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+  color: var(--accent-red);
+  font-weight: bold;
+}
+
+.decoration-checkmark::before {
+  content: "✓";
+}
+
+.decoration-diamond {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background-color: var(--accent-green);
+  transform: rotate(45deg);
+  bottom: -75px;
+  right: -75px;
+  z-index: -1;
+}
+
+/* ============================================
+   SERVICES SECTION
+   ============================================ */
+
+.services-section {
+  background-color: #f8f9fa;
+}
+
+.service-card {
+  background: white;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--accent-burgundy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.card-description {
+  color: var(--text-light);
+  margin-bottom: 25px;
+  line-height: 1.8;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card-buttons .btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.card-buttons .btn-dark {
+  background-color: var(--text-dark);
+  border-color: var(--text-dark);
+}
+
+.card-buttons .btn-dark:hover {
+  background-color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+.card-buttons .btn-outline-dark {
+  color: var(--text-dark);
+  border-color: var(--text-dark);
+}
+
+.card-buttons .btn-outline-dark:hover {
+  background-color: var(--text-dark);
+  border-color: var(--text-dark);
+  color: white;
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.page-header {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #4a4a4a 100%);
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.page-header .lead {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+
+.form-control {
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.card {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card-header .btn-link {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.card-header .btn-link:hover {
+  color: var(--accent-red);
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+/* ============================================
+   CONTACT INFO CARDS
+   ============================================ */
+
+.contact-info-card {
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--accent-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  margin: 0 auto 20px;
+}
+
+.contact-info-card h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.contact-info-card p {
+  margin-bottom: 5px;
+  color: var(--text-light);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background-color: var(--primary-dark) !important;
+  color: white;
+  margin-top: 60px;
+}
+
+.footer h5 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--accent-red);
+  text-decoration: none;
+}
+
+.footer ul li {
+  margin-bottom: 8px;
+}
+
+.footer hr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+}
+
+.btn-dark {
+  background-color: var(--text-dark);
+  border-color: var(--text-dark);
+}
+
+.btn-dark:hover {
+  background-color: var(--accent-red);
+  border-color: var(--accent-red);
+  color: white;
+}
+
+.btn-outline-dark {
+  color: var(--text-dark);
+  border-color: var(--text-dark);
+}
+
+.btn-outline-dark:hover {
+  background-color: var(--text-dark);
+  border-color: var(--text-dark);
+  color: white;
+}
+
+/* ============================================
+   WHATSAPP FLOATING BUTTON
+   ============================================ */
+
+.whatsapp-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.whatsapp-btn:hover {
+  background-color: #20ba5a;
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+  transform: scale(1.1);
+}
+
+.whatsapp-btn i {
+  color: white;
+  font-size: 28px;
+}
+
+.whatsapp-btn:hover i {
+  color: white;
+}
+
+/* WhatsApp button responsive */
+@media (max-width: 576px) {
+  .whatsapp-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+  }
+
+  .whatsapp-btn i {
+    font-size: 24px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-decoration {
+    height: 250px;
+    margin-top: 30px;
+  }
+
+  .decoration-circle {
+    width: 200px;
+    height: 200px;
+    border-width: 10px;
+  }
+
+  .decoration-checkmark {
+    width: 150px;
+    height: 150px;
+    right: 50px;
+    font-size: 80px;
+  }
+
+  .service-card {
+    padding: 30px;
+  }
+
+  .card-buttons {
+    flex-direction: column;
+  }
+
+  .card-buttons .btn {
+    width: 100%;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .contact-info-card {
+    margin-bottom: 20px;
+  }
+
+  .footer .row {
+    text-align: center;
+  }
+
+  .footer .col-md-6:last-child {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .page-header .lead {
+    font-size: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .form-control {
+    font-size: 16px;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* a:focus, */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   APPOINTMENT FORM STYLING
+   ============================================ */
+
+.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: none;
+}
+
+/* Disable Bootstrap's green valid styles */
+.was-validated .form-control:valid,
+.form-control.is-valid {
+    border-color: #ced4da !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Keep red for invalid fields */
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: none !important;
+}
+
+/* Customize invalid feedback message */
+.invalid-feedback {
+    display: block;
+    font-size: 0.875rem;
+    color: #dc3545;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+.appointment-form-wrapper {
+  /* background-color: #f5f5f5; */
+  /* padding: 40px 30px; */
+  border-radius: 8px;
+}
+
+.appointment-form {
+  background-color: white;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 15px;
+}
+
+.form-section-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.form-section-label:first-child {
+  margin-top: 0;
+}
+
+.appointment-form .form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.appointment-form .form-control {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  background-color: white;
+  height: 43px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.appointment-form .form-control:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.15);
+}
+
+.appointment-form .form-control::placeholder {
+  color: #999;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border-light);
+}
+
+.form-buttons .btn {
+  min-width: 180px;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.form-buttons .btn-outline-dark {
+  color: var(--text-dark);
+  border: 2px solid var(--text-dark);
+  background-color: transparent;
+}
+
+.form-buttons .btn-outline-dark:hover {
+  background-color: var(--text-dark);
+  color: white;
+  border-color: var(--text-dark);
+}
+
+.form-buttons .btn-dark {
+  background-color: var(--text-dark);
+  border: 2px solid var(--text-dark);
+  color: white;
+}
+
+.form-buttons .btn-dark:hover {
+  background-color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+.form-check {
+  margin-bottom: 30px;
+}
+
+.form-check-input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.form-check-input:checked {
+  background-color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+.form-check-label {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+/* Responsive Form */
+@media (max-width: 768px) {
+  .appointment-form-wrapper {
+    padding: 20px;
+  }
+
+  .appointment-form {
+    padding: 25px;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .form-section {
+    margin-bottom: 30px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-buttons .btn {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .appointment-form-wrapper {
+    padding: 15px;
+  }
+
+  .appointment-form {
+    padding: 20px;
+  }
+
+  .appointment-form .form-control {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .form-buttons {
+    margin-top: 30px;
+  }
+}
+
+#loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9); /* dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;              /* initially invisible */
+  pointer-events: none;    /* not clickable initially */
+  transition: opacity 0.3s ease; /* fade effect */
+}
+
+#loaderOverlay.show {
+  opacity: 1;              /* visible when .show is added */
+  pointer-events: all;     /* block clicks */
+}
+
+#loaderOverlay .loader-content {
+  text-align: center;
+}

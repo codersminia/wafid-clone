@@ -1,0 +1,53 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\AdminController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/guidelines', [PublicController::class, 'guidelines'])->name('guidelines');
+Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
+Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contactus');
+
+Route::get('/medical-examination', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
+Route::post('/appointment/store', [PublicController::class, 'storeAppointment'])->name('appointment.store');
+Route::get('/appointment/confirmation', [PublicController::class, 'confirmAppointment'])->name('appointment.confirmation');
+
+Route::post('/payment/upload-proof', [PublicController::class, 'uploadPaymentProof'])
+    ->name('payment.uploadProof');
+
+Route::get('/thank-you', [PublicController::class, 'thankYou'])->name('thank.you');
+
+
+// Guest routes (login page + submit)
+Route::middleware('guest')->group(function () {
+    Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
+});
+
+// Protected admin area
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    // appointments
+    Route::get('/appointments', [AdminController::class, 'allAppointments'])->name('appointments');
+    Route::get('/appointments/data', [AdminController::class, 'appointmentsData'])->name('appointments.data');
+
+    Route::get('/appointments/{id}/edit', [AdminController::class, 'editAppointment'])->name('appointments.edit');
+
+    Route::post('/appointments/{id}/update', [AdminController::class, 'updateAppointment'])->name('appointments.update');
+
+
+});
