@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Appointment;
 use App\Models\Payment;
-
+use App\Models\CheckResult;
+use Illuminate\Support\Str;
 
 class PublicController extends Controller
 {
@@ -31,7 +32,7 @@ class PublicController extends Controller
     }
 
     public function medicalExamination(){
-        return view('public.medical-examination');
+        return view('public.appointments.medical-examination');
     }
 
     public function storeAppointment(Request $request)
@@ -121,7 +122,7 @@ class PublicController extends Controller
         $appointment = Appointment::create($data);
 
         // Generate Appointment No (e.g., APPT-2025-00001)
-        $appointment->appointment_no = 'APT' . '-' . str_pad($appointment->id, 5, '0', STR_PAD_LEFT);
+        $appointment->appointment_no = 'APT' . '-' . str_pad($appointment->id, 3, '0', STR_PAD_LEFT);
         $appointment->save();
 
         
@@ -143,7 +144,7 @@ class PublicController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
 
-        return view('public.appointment-confirmation', compact('appointment'));
+        return view('public.appointments.appointment-confirmation', compact('appointment'));
     }
 
     public function uploadPaymentProof(Request $request)
@@ -165,8 +166,11 @@ class PublicController extends Controller
             'agreeTerms.accepted' => 'You must agree to the terms and conditions',
         ]);
 
-        // Upload image
-        $imagePath = $request->file('proof_image')->store('payment_proofs', 'public');
+        // Upload image manually to public/uploads
+        $image = $request->file('proof_image');
+        $randomName = Str::random(40) . '.' . $image->getClientOriginalExtension();
+
+        $image->move(public_path('uploads'), $randomName);
 
         // Save to DB
         Payment::create([
@@ -175,7 +179,7 @@ class PublicController extends Controller
             'mobile_no' => $request->mobile_no,
             'payment_method' => $request->payment_method,
             'transaction_no' => $request->transaction_no,
-            'proof_image' => $imagePath,
+            'proof_image' => $randomName,
         ]);
 
         // Store appointment ID in session for Thank You page
@@ -201,9 +205,27 @@ class PublicController extends Controller
         // Clear session so the user cannot reload the thank-you page
         session()->forget('appointment_paid_id');
 
-        return view('public.thank-you', compact('appointment'));
+        return view('public.appointments.thank-you', compact('appointment'));
     }
 
+    public function ViewMedicalReport(){
+        return view('public.appointments.ViewMedicalReport');
+    }
 
+    public function saveMedicalReport(Request $request)
+    {
+        $validated = $request->validate([
+            'passport_no' => 'required|string|max:255',
+            'nationality' => 'required|string|max:255',
+            'phone'       => 'required|string|max:20',
+        ]);
+
+        CheckResult::create($validated);
+
+        return response()->json([
+            'status'   => 'success',
+            'redirect' => route('ViewMedicalReport'),
+        ]);
+    }
 
 }

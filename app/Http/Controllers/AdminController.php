@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Appointment;
 use App\Models\Payment;
+use App\Models\CheckResult;
 
 class AdminController extends Controller
 {
@@ -67,13 +68,15 @@ class AdminController extends Controller
             3 => 'phone',
             4 => 'country_traveling_to',
             5 => 'payment_status', // Custom handling for payment status
+            6 => 'created_at'
         ];
 
         // Base query with left join for payment existence
         $query = Appointment::query()
-            ->leftJoin('payments as p', 'appointments.id', '=', 'p.appointment_id') // Adjust join based on your relation (assuming hasOne Payment)
+            ->leftJoin('payments as p', 'appointments.id', '=', 'p.appointment_id')
             ->with('payment')
-            ->select('appointments.*');
+            ->select('appointments.*')
+            ->whereNull('appointments.deleted_at'); 
 
         // SEARCH
         if ($request->search['value']) {
@@ -111,7 +114,7 @@ class AdminController extends Controller
             }
         } else {
             // Default order if none specified
-            $query->latest('appointments.created_at');
+            $query->orderBy('appointments.id', 'desc');
         }
 
         // APPLY LIMIT, OFFSET
@@ -130,9 +133,11 @@ class AdminController extends Controller
                 $a->passport_no,
                 $a->phone,
                 $a->country_traveling_to,
-                $a->payment ? 1 : 0,
+                $a->payment ? 1 : 0,                
                 '', // actions handled in JS render
-                $a->id // hidden id for actions
+                $a->id, // hidden id for actions
+                $a->is_new,
+                $a->created_at ? $a->created_at->format('d M Y') : '', // created date        
             ];
         }
 
@@ -147,9 +152,18 @@ class AdminController extends Controller
 
     public function editAppointment($id)
     {
-        $appointment = Appointment::with('payment')->findOrFail($id);
+        $appointment = Appointment::findOrFail($id);
+
+        // Set is_new to 0 when user opens the edit page
+        if ($appointment->is_new) {
+            $appointment->is_new = 0;
+            $appointment->save();
+        }
+
+        $appointment->load('payment'); // Load relation
         return view('admin.editappointment', compact('appointment'));
     }
+
 
     public function updateAppointment(Request $request, $id)
     {
@@ -183,5 +197,115 @@ class AdminController extends Controller
             ->with('success', 'Appointment updated successfully!');
     }
 
-    
+    public function deleteAppointment($id)
+    {
+        $appointment = Appointment::with('payment')->findOrFail($id);
+
+        // Delete payment manually (hard delete)
+        if ($appointment->payment) {
+            $appointment->payment->delete();
+        }
+
+        // Soft delete appointment
+        $appointment->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Appointment and payment deleted successfully'
+        ]);
+    }
+
+    public function checkResults()
+    {
+        return view('admin.checkMedicalResults');
+    }
+
+    public function checkResultsData(Request $request)
+    {
+        // Columns mapping for ordering
+        $columns = [
+            0 => 'id',
+            1 => 'passport_no',
+            2 => 'phone',
+            3 => 'created_at'
+        ];
+
+        // Base query
+        $query = CheckResult::query();
+
+        // SEARCH
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+
+            $query->where(function ($q) use ($search) {
+                $q->where('passport_no', 'like', "%$search%")
+                    ->orWhere('phone', 'like', "%$search%");
+            });
+        }
+
+        // TOTAL RECORDS
+        $recordsTotal = CheckResult::count();
+        $recordsFiltered = $query->count();
+
+        // ORDERING
+        if (isset($request->order) && count($request->order)) {
+            foreach ($request->order as $order) {
+                $columnIndex = intval($order['column']);
+                $dir = $order['dir'] === 'asc' ? 'asc' : 'desc';
+
+                if (isset($columns[$columnIndex])) {
+                    $query->orderBy($columns[$columnIndex], $dir);
+                }
+            }
+        } else {
+            // Default order: ID DESC
+            $query->orderBy('id', 'desc');
+        }
+
+        // PAGINATION
+        $results = $query
+            ->skip($request->start)
+            ->take($request->length)
+            ->get();
+
+        // BUILD RESPONSE DATA
+        $data = [];
+
+        foreach ($results as $row) {
+            $data[] = [
+                $row->id,
+                $row->passport_no,
+                $row->phone,
+                $row->created_at->format("d M Y"),
+                '<a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-result" data-id="' . $row->id . '" title="Delete">
+                    <i class="la la-trash"></i>
+                </a>'
+            ];
+        }
+
+        // RETURN JSON (datatables format)
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function deleteCheckResult($id)
+    {
+        $result = CheckResult::find($id);
+
+        if (!$result) {
+            return response()->json(['status' => 'error', 'message' => 'Record not found'], 404);
+        }
+
+        $result->delete(); // now performs SOFT DELETE
+
+        return response()->json(['status' => 'success', 'message' => 'Deleted successfully']);
+    }
+
+
+
+
 }

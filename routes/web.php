@@ -23,12 +23,15 @@ Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact
 Route::get('/medical-examination', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
 Route::post('/appointment/store', [PublicController::class, 'storeAppointment'])->name('appointment.store');
 Route::get('/appointment/confirmation', [PublicController::class, 'confirmAppointment'])->name('appointment.confirmation');
-
-Route::post('/payment/upload-proof', [PublicController::class, 'uploadPaymentProof'])
-    ->name('payment.uploadProof');
-
+Route::post('/payment/upload-proof', [PublicController::class, 'uploadPaymentProof'])->name('payment.uploadProof');
 Route::get('/thank-you', [PublicController::class, 'thankYou'])->name('thank.you');
 
+
+Route::get('medical-status-search', [PublicController::class, 'ViewMedicalReport'])->name('ViewMedicalReport');
+Route::post('medical-results/save', [PublicController::class, 'saveMedicalReport'])->name('medicalResults.save');
+
+
+Route::get('/special-medical-examination', [PublicController::class, 'specialMedicalExamination'])->name('specialMedicalExamination');
 
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
@@ -44,10 +47,13 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     // appointments
     Route::get('/appointments', [AdminController::class, 'allAppointments'])->name('appointments');
     Route::get('/appointments/data', [AdminController::class, 'appointmentsData'])->name('appointments.data');
-
     Route::get('/appointments/{id}/edit', [AdminController::class, 'editAppointment'])->name('appointments.edit');
-
     Route::post('/appointments/{id}/update', [AdminController::class, 'updateAppointment'])->name('appointments.update');
+    Route::delete('/appointments/{id}', [AdminController::class, 'deleteAppointment'])->name('admin.appointments.delete');
 
+
+    Route::get('/check-results', [AdminController::class, 'checkResults'])->name('checkResults');
+    Route::get('/check-results/data', [AdminController::class, 'checkResultsData'])->name('checkResults.data');
+    Route::delete('/check-results/{id}', [AdminController::class, 'deleteCheckResult'])->name('admin.checkResults.delete');
 
 });

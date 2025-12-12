@@ -407,7 +407,7 @@
                                 <p><strong>Proof Image:</strong></p>
 
                                 @if($appointment->payment && $appointment->payment->proof_image)
-                                    <img src="{{ asset('storage/' . $appointment->payment->proof_image) }}" 
+                                    <img src="{{ asset('uploads/' . $appointment->payment->proof_image) }}" 
                                         style="max-width: 200px; cursor: pointer;" 
                                         data-toggle="modal" data-target="#exampleModal">
                                     
@@ -422,7 +422,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <img src="{{ asset('storage/' . $appointment->payment->proof_image) }}" style="max-width: 100%; height: auto;">
+                                                    <img src="{{ asset('uploads/' . $appointment->payment->proof_image) }}" style="max-width: 100%; height: auto;">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>                

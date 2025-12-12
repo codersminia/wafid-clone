@@ -4,6 +4,12 @@
 
 @section('content')
 
+<style>
+    .new-record {
+        background-color: #a9d3ff8a !important; /* light blue */
+    }
+</style>
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -29,6 +35,7 @@
                                 <th>Mobile</th>
                                 <th>Traveling Country</th>
                                 <th>Payment Status</th>
+                                <th>Date</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -46,5 +53,28 @@
     <!--end::Entry-->
 </div>
 <!--end::Content-->
-
 @endsection
+
+@push('scripts')
+<script src="{{ asset('assets/admin/js/pages/crud/datatables/advanced/column-rendering.js?v=7.0.6') }}"></script>
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully!',
+        text: "{{ session('success') }}",
+        timer: 2000,
+        showConfirmButton: false,
+        position: 'center', 
+        customClass: {
+            popup: 'swal2-border-radius' 
+        },
+        didOpen: () => {
+            const icon = Swal.getIcon();
+            if(icon) icon.style.margin = '0 auto';
+        }
+    });
+</script>
+@endif
+@endpush

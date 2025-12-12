@@ -35,7 +35,7 @@
                         <p class="card-description">Book your health check-up appointment or view your test results</p>
                         <div class="card-buttons">
                             <a href="{{ route('medicalExamination')}}" class="btn btn-dark">Book an Appointment</a>
-                            <a href="medical-reports.html" class="btn btn-outline-dark">View Medical Reports</a>
+                            <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark">View Medical Reports</a>
                         </div>
                     </div>
                 </div>
@@ -44,10 +44,10 @@
                         <div class="card-icon">
                             <i class="fas fa-hospital"></i>
                         </div>
-                        <h3 class="card-title">Medical Centers</h3>
-                        <p class="card-description">Apply for Wafid medical centers accreditation</p>
+                        <h3 class="card-title">Special Medical Examinations</h3>
+                        <p class="card-description">Book your health check-up at your preferred medical center</p>
                         <div class="card-buttons">
-                            <a href="medical-centers.html" class="btn btn-dark">Apply</a>
+                            <a href="{{ route('specialMedicalExamination')}}" class="btn btn-dark">Book an Appointment</a>
                             <a href="medical-centers-list.html" class="btn btn-outline-dark">Medical Centers List</a>
                         </div>
                     </div>

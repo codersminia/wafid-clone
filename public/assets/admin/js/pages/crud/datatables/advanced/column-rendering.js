@@ -10,18 +10,21 @@ var KTDatatablesAdvancedColumnRendering = function () {
                 url: "/admin/appointments/data",
                 type: "GET"
             },
+            order: [[0, 'desc']], 
             responsive: true,
             ordering: true,
             searching: true,
             columns: [
-                { data: 0 }, // appointment_no
-                { data: 1 }, // name
-                { data: 2 }, // passport_no
-                { data: 3 }, // phone
-                { data: 4 }, // traveling country
-                { data: 5 }, // payment status (0/1)
-                { data: 6 },  // actions
-                { data: 7, visible: false }  // hidden id
+                { data: 0 }, // ID
+                { data: 1 }, // Name
+                { data: 2 }, // Passport No
+                { data: 3 }, // Mobile
+                { data: 4 }, // Traveling Country
+                { data: 5 }, // Payment Status
+                { data: 9 }, // Date
+                { data: 6 }, // Actions
+                { data: 7, visible: false },  // hidden id
+                { data: 8, visible: false }   // is_new
             ],
             columnDefs: [
                 {
@@ -34,6 +37,16 @@ var KTDatatablesAdvancedColumnRendering = function () {
                     targets: 3,
                     render: function (data) {
                         return `<a href="tel:${data}" class="text-primary">${data}</a>`;
+                    }
+                },
+                {
+                    targets: 4, // traveling country
+                    render: function (data) {
+                        if (!data) return '';
+                        return data
+                            .split('-')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ');
                     }
                 },
                 {
@@ -50,7 +63,11 @@ var KTDatatablesAdvancedColumnRendering = function () {
                     }
                 },
                 {
-                    targets: 6,
+                    targets: 6, // The Date Column
+                    orderable: true // Explicitly enable sorting (default is true, but good to be sure)
+                },
+                {
+                    targets: 7,
                     orderable: false,
                     searchable: false,
                     render: function (data, type, full) {
@@ -64,7 +81,13 @@ var KTDatatablesAdvancedColumnRendering = function () {
                         `;
                     }
                 }
-            ]
+            ],
+            createdRow: function(row, data, dataIndex) {
+                // Highlight new records
+                if (data[8] == 1) { // 8th index = is_new column
+                    $(row).addClass('new-record'); // add a CSS class
+                }
+            }
         });
     };
 
@@ -77,4 +100,41 @@ var KTDatatablesAdvancedColumnRendering = function () {
 
 jQuery(document).ready(function () {
     KTDatatablesAdvancedColumnRendering.init();
+
+    $(document).on("click", ".delete-appointment", function () {
+        let id = $(this).data("id");
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This appointment and its payment will be deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: `/admin/appointments/${id}`,
+                    type: "DELETE",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (res) {
+                        Swal.fire(
+                            "Deleted!",
+                            "Appointment has been deleted.",
+                            "success"
+                        );
+
+                        $('#kt_datatable').DataTable().ajax.reload();
+                    },
+                    error: function () {
+                        Swal.fire("Error", "Failed to delete appointment", "error");
+                    }
+                });
+            }
+        });
+    });
+
 });
