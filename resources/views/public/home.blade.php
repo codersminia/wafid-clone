@@ -47,7 +47,7 @@
                         <h3 class="card-title">Special Medical Examinations</h3>
                         <p class="card-description">Book your health check-up at your preferred medical center</p>
                         <div class="card-buttons">
-                            <a href="{{ route('specialMedicalExamination')}}" class="btn btn-dark">Book an Appointment</a>
+                            <a href="{{ route('special.appointment')}}" class="btn btn-dark">Book an Appointment</a>
                             <a href="medical-centers-list.html" class="btn btn-outline-dark">Medical Centers List</a>
                         </div>
                     </div>

@@ -20,6 +20,7 @@ Route::get('/guidelines', [PublicController::class, 'guidelines'])->name('guidel
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contactus');
 
+// Appointments
 Route::get('/medical-examination', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
 Route::post('/appointment/store', [PublicController::class, 'storeAppointment'])->name('appointment.store');
 Route::get('/appointment/confirmation', [PublicController::class, 'confirmAppointment'])->name('appointment.confirmation');
@@ -30,8 +31,13 @@ Route::get('/thank-you', [PublicController::class, 'thankYou'])->name('thank.you
 Route::get('medical-status-search', [PublicController::class, 'ViewMedicalReport'])->name('ViewMedicalReport');
 Route::post('medical-results/save', [PublicController::class, 'saveMedicalReport'])->name('medicalResults.save');
 
+// Special Appointments
+Route::get('/special-appointment', [PublicController::class, 'specialAppointmentForm'])->name('special.appointment');
+Route::post('/special-appointment/store', [PublicController::class, 'storeSpecialAppointment'])->name('special.store');
+Route::get('/special-appointment/confirmation', [PublicController::class, 'confirmSpecialAppointment'])->name('special.confirm');
+Route::post('/special-payment/upload-proof', [PublicController::class, 'uploadSpecialPaymentProof'])->name('special.payment.upload');
+Route::get('/special-thank-you', [PublicController::class, 'specialThankYou'])->name('special.thankyou');
 
-Route::get('/special-medical-examination', [PublicController::class, 'specialMedicalExamination'])->name('specialMedicalExamination');
 
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
