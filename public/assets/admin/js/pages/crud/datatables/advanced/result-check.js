@@ -41,7 +41,22 @@ var KTCheckResultsTable = function () {
                     orderable: false,
                     searchable: false
                 }
-            ]
+            ],
+
+            rowCallback: function (row, data) {
+                $(row).off('click').on('click', function () {
+
+                    // If row is blue (new), mark as read
+                    if ($(this).hasClass('new-record')) {
+                        let id = data[0]; // ID is first column
+                        $.post("/admin/check-results/read/" + id, {}, function(response) {
+                            if(response.success){
+                                $(row).removeClass('new-record'); // remove blue
+                            }
+                        });
+                    }
+                });
+            }
         });
     };
 

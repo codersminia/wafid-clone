@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Appointment;
 use App\Models\Payment;
 use App\Models\CheckResult;
+use App\Models\SpecialAppointment;
+use App\Models\SpecialPayment;
 
 class AdminController extends Controller
 {
@@ -55,7 +57,7 @@ class AdminController extends Controller
 
     public function allAppointments()
     {
-        return view('admin.appointments');
+        return view('admin.appointments.appointments');
     }
 
     public function appointmentsData(Request $request)
@@ -161,7 +163,7 @@ class AdminController extends Controller
         }
 
         $appointment->load('payment'); // Load relation
-        return view('admin.editappointment', compact('appointment'));
+        return view('admin.appointments.editappointment', compact('appointment'));
     }
 
 
@@ -272,7 +274,9 @@ class AdminController extends Controller
         $data = [];
 
         foreach ($results as $row) {
+            $rowClass = $row->is_new ? 'new-record' : '';
             $data[] = [
+                'DT_RowClass' => $rowClass, // add class for new records
                 $row->id,
                 $row->passport_no,
                 $row->phone,
@@ -292,6 +296,15 @@ class AdminController extends Controller
         ]);
     }
 
+    public function markAsRead($id)
+    {
+        $result = CheckResult::findOrFail($id);
+        $result->is_new = 0;
+        $result->save();
+
+        return response()->json(['success' => true, 'message' => 'Record marked as read']);
+    }
+
     public function deleteCheckResult($id)
     {
         $result = CheckResult::find($id);
@@ -305,7 +318,156 @@ class AdminController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Deleted successfully']);
     }
 
+    public function allSpecialAppointments()
+    {
+        return view('admin.specialappointments.appointments');
+    }
 
+    public function specialAppointmentsData(Request $request)
+    {
+        // 1. Match these exactly to your DB columns for sorting
+        $columns = [
+            0 => 'appointment_no', 
+            1 => 'first_name',
+            2 => 'passport_no',
+            3 => 'phone',
+            4 => 'city',
+            5 => 'medical_center',
+            6 => 'country_traveling_to',
+            7 => 'payment_status', // Virtual column logic handled in ordering below
+            8 => 'created_at',
+        ];
+
+        $query = SpecialAppointment::query()
+            ->leftJoin('special_payments as sp', 'special_appointments.id', '=', 'sp.special_appointment_id')
+            ->select('special_appointments.*', 'sp.id as payment_id') // Select payment_id to check status
+            ->whereNull('special_appointments.deleted_at');
+
+        // ... (Your Search Logic is fine) ... 
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('special_appointments.first_name', 'like', "%$search%")
+                ->orWhere('special_appointments.last_name', 'like', "%$search%")
+                ->orWhere('special_appointments.passport_no', 'like', "%$search%")
+                ->orWhere('special_appointments.phone', 'like', "%$search%");
+            });
+        }
+
+        $recordsTotal = SpecialAppointment::count();
+        $recordsFiltered = $query->count();
+
+        // ... (Your Ordering Logic) ...
+        if ($request->order) {
+            foreach ($request->order as $order) {
+                $column = $columns[$order['column']] ?? null;
+                $dir = $order['dir'];
+                if ($column === 'payment_status') {
+                    $query->orderByRaw("CASE WHEN sp.id IS NOT NULL THEN 1 ELSE 0 END $dir");
+                } elseif ($column) {
+                    $query->orderBy('special_appointments.' . $column, $dir);
+                }
+            }
+        } else {
+            $query->orderBy('special_appointments.id', 'desc');
+        }
+
+        $appointments = $query
+            ->skip($request->start)
+            ->take($request->length)
+            ->get();
+
+        $data = [];
+
+        foreach ($appointments as $a) {
+            // Determine Payment Status
+            $isPaid = $a->payment_id ? 1 : 0;
+
+            $data[] = [
+                $a->appointment_no,             // 0: ID (Fixed column name)
+                $a->first_name . ' ' . $a->last_name, // 1: Name
+                $a->passport_no,                // 2: Passport
+                $a->phone,                      // 3: Phone
+                $a->city,                       // 4: City
+                $a->medical_center,             // 5: Medical Center
+                $a->country_traveling_to,       // 6: Country
+                $isPaid,                        // 7: Payment Status (0 or 1)
+                $a->created_at?->format('d M Y'), // 8: Date
+                '',                             // 9: Actions (Placeholder)
+                $a->id,                         // 10: Hidden ID
+                $a->is_new                      // 11: Hidden Is New (For row highlighting)
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function editSpecialAppointment($id)
+    {
+        $appointment = SpecialAppointment::with('specialPayment')->findOrFail($id);
+
+        if ($appointment->is_new) {
+            $appointment->update(['is_new' => 0]);
+        }
+
+        return view('admin.specialappointments.editappointment', compact('appointment'));
+    }
+
+    public function updateSpecialAppointment(Request $request, $id)
+    {
+        $appointment = SpecialAppointment::findOrFail($id);
+
+        $request->validate([
+            'country' => 'required',
+            'city' => 'required',
+            'medical_center' => 'required',
+            'country_traveling_to' => 'required',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'nationality' => 'required',
+            'gender' => 'required|in:Male,Female',
+            'marital_status' => 'required|in:Single,Married',
+            'passport_no' => 'required|string|max:50',
+            'confirm_passport_no' => 'required|string|same:passport_no',
+            'passport_issue_date' => 'required|date',
+            'passport_issue_place' => 'required|string|max:255',
+            'passport_expiry_date' => 'required|date',
+            'visa_type' => 'required|in:work-visa,family-visa',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'national_id' => 'required|string|max:50',
+            'position_applied' => 'required|string',
+            'other_position' => 'nullable|string|max:255',
+        ]);
+
+        // Update the appointment
+        $appointment->update($request->all());
+
+        return redirect()->route('admin.special.appointments')
+            ->with('success', 'Special appointment updated successfully!');
+    }
+
+    public function deleteSpecialAppointment($id)
+    {
+        $appointment = SpecialAppointment::with('specialPayment')->findOrFail($id);
+
+        if ($appointment->specialPayment) {
+            $appointment->specialPayment->delete();
+        }
+
+        $appointment->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Special appointment deleted successfully'
+        ]);
+    }
 
 
 }

@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; 
 
 class SpecialAppointment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes; 
 
     protected $fillable = [
+        'appointment_no',
         'first_name',
         'last_name',
         'date_of_birth',
@@ -32,5 +34,14 @@ class SpecialAppointment extends Model
         'medical_center',
         'country_traveling_to',
         'confirm_info',
+        'is_new', 
     ];
+
+    // Dates that should be treated as Carbon instances
+    protected $dates = ['deleted_at']; 
+    
+    public function specialPayment()
+    {
+        return $this->hasOne(SpecialPayment::class);
+    }
 }

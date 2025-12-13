@@ -32,6 +32,13 @@
     </div>
 </div>
 
+<style>
+/* Blue for new records */
+.new-record {
+    background-color: #cce5ff !important;
+}
+</style>
+
 @endsection
 
 @push('scripts')

@@ -61,5 +61,14 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::get('/check-results', [AdminController::class, 'checkResults'])->name('checkResults');
     Route::get('/check-results/data', [AdminController::class, 'checkResultsData'])->name('checkResults.data');
     Route::delete('/check-results/{id}', [AdminController::class, 'deleteCheckResult'])->name('admin.checkResults.delete');
+    Route::post('/check-results/read/{id}', [AdminController::class, 'markAsRead']);
+
+
+    // special appointments
+    Route::get('/special-appointments', [AdminController::class, 'allSpecialAppointments'])->name('special.appointments');
+    Route::get('/special-appointments/data', [AdminController::class, 'specialAppointmentsData'])->name('special.appointments.data');
+    Route::get('/special-appointments/{id}/edit', [AdminController::class, 'editSpecialAppointment'])->name('special.appointments.edit');
+    Route::post('/special-appointments/{id}/update', [AdminController::class, 'updateSpecialAppointment'])->name('special.appointments.update');
+    Route::delete('/special-appointments/{id}', [AdminController::class, 'deleteSpecialAppointment'])->name('special.appointments.delete');
 
 });

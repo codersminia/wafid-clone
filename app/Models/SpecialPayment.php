@@ -20,4 +20,12 @@ class SpecialPayment extends Model
         'payment_method',
         'proof_image',
     ];
+    
+    // Dates that should be treated as Carbon instances
+    protected $dates = ['deleted_at'];
+
+    public function appointment()
+    {
+        return $this->belongsTo(SpecialAppointment::class, 'special_appointment_id');
+    }
 }

@@ -34,7 +34,8 @@ class Appointment extends Model
         'national_id',
         'position_applied',
         'other_position', 
-        'confirm_info'
+        'confirm_info',
+        'is_new',
     ];
 
     public function payment()
