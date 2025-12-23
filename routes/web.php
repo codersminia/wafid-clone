@@ -38,6 +38,11 @@ Route::get('/special-appointment/confirmation', [PublicController::class, 'confi
 Route::post('/special-payment/upload-proof', [PublicController::class, 'uploadSpecialPaymentProof'])->name('special.payment.upload');
 Route::get('/special-thank-you', [PublicController::class, 'specialThankYou'])->name('special.thankyou');
 
+// medical center search
+Route::get('medical-center-search', [PublicController::class, 'medicalCenters'])->name('ViewMedicalCenters');
+
+// Route to handle the AJAX search
+Route::post('/medical-centers/search', [PublicController::class, 'search'])->name('medical.search');
 
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {

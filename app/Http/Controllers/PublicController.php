@@ -11,6 +11,8 @@ use App\Models\CheckResult;
 use Illuminate\Support\Str;
 use App\Models\SpecialAppointment;
 use App\Models\SpecialPayment;
+use App\Models\MedicalCenter;
+use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
@@ -413,6 +415,47 @@ class PublicController extends Controller
         session()->forget('special_appointment_paid_id');
 
         return view('public.specialappointments.thank-you', compact('appointment'));
+    }
+
+    public function medicalCenters(){
+        return view('public.ViewMedicalCenters');
+    }
+
+    public function search(Request $request)
+    {
+        $query = DB::table('medical_centers');
+
+        // 1. Filtering
+        if ($request->filled('country')) {
+            $query->where('country', $request->country);
+        }
+        if ($request->filled('city')) {
+            $query->where('city', $request->city);
+        }
+        if ($request->filled('center_name')) {
+            $query->where('medical_center', 'LIKE', '%' . $request->center_name . '%');
+        }
+
+        // 2. Sorting (Default to medical_center ASC)
+        $sortColumn = $request->get('sort_by', 'medical_center');
+        $sortOrder = $request->get('sort_order', 'asc');
+
+        // Whitelist columns to prevent SQL injection
+        $allowedColumns = ['medical_center', 'country', 'city', 'address_line_1', 'address_line_2', 'phone', 'email', 'website', 'rating'];
+        
+        if (in_array($sortColumn, $allowedColumns)) {
+            $query->orderBy($sortColumn, $sortOrder);
+        } else {
+            $query->orderBy('medical_center', 'asc');
+        }
+
+        // 3. Pagination (10 per page)
+        $results = $query->paginate(10);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $results
+        ]);
     }
 
 }
