@@ -44,6 +44,10 @@ Route::get('medical-center-search', [PublicController::class, 'medicalCenters'])
 // Route to handle the AJAX search
 Route::post('/medical-centers/search', [PublicController::class, 'search'])->name('medical.search');
 
+Route::get('navtech-appointment', [PublicController::class, 'navtechform'])->name('navtechform');
+Route::post('navtech-appointment', [PublicController::class, 'navtechstore'])->name('navtechform.store');
+Route::get('navtech-thank-you', [PublicController::class, 'navtechThankYou'])->name('navtech.thankyou');
+
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');

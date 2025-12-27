@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Models\SpecialAppointment;
 use App\Models\SpecialPayment;
 use App\Models\MedicalCenter;
+use App\Models\NavtechAppointment;
 use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
@@ -456,6 +457,92 @@ class PublicController extends Controller
             'status' => 'success',
             'data' => $results
         ]);
+    }
+
+    public function navtechform(){
+        return view('public.navtechappointments.navtech-appointment-form');
+    }
+
+    public function navtechstore(Request $request)
+    {
+        // 1. Validation
+        $validator = Validator::make($request->all(), [
+            'country'         => 'required|string',
+            'city'            => 'required|string',
+            'whatsapp_number' => 'required|string',
+            'occupation'      => 'required|string',
+            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            // Custom messages if you want to override defaults
+            'passport_pic.required' => 'Please upload your Passport scan.',
+            'id_card_front.required' => 'The ID card front image is required.',
+            'user_pic.required' => 'A personal passport-size photo is required.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Prepare data for database
+            $data = $request->only(['country', 'city', 'whatsapp_number', 'occupation']);
+            $data['is_new'] = true;
+
+            // 2. Process and Save Files to public/uploads
+            $fileFields = ['passport_pic', 'id_card_front', 'user_pic'];
+
+            foreach ($fileFields as $field) {
+                if ($request->hasFile($field)) {
+                    $image = $request->file($field);
+                    
+                    // Generate random name as per your requirement
+                    $randomName = Str::random(40) . '.' . $image->getClientOriginalExtension();
+                    
+                    // Move to public/uploads
+                    $image->move(public_path('uploads'), $randomName);
+                    
+                    // Save the filename/path in the data array
+                    $data[$field] = $randomName;
+                }
+            }            
+
+            // Save to Database
+            $appointment = NavtechAppointment::create($data);
+
+            // FLASH the ID to the session
+            session()->flash('navtech_app_id', $appointment->id);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Registration submitted successfully!',
+                'redirect' => route('navtech.thankyou') // No ID in the URL anymore
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong. Please try again later.'
+            ], 500);
+        }
+    }
+
+    public function navtechThankYou()
+    {
+        // Retrieve ID from session
+        $id = session('navtech_app_id');
+
+        // If there is no ID in session (direct access), redirect back to the form
+        if (!$id) {
+            return redirect()->route('navtechform');
+        }
+
+        $appointment = NavtechAppointment::findOrFail($id);
+        return view('public.navtechappointments.thank-you', compact('appointment'));
     }
 
 }
