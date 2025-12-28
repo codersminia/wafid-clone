@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Models\CheckResult;
 use App\Models\SpecialAppointment;
 use App\Models\SpecialPayment;
+use App\Models\NavtechAppointment;
 
 class AdminController extends Controller
 {
@@ -469,5 +470,108 @@ class AdminController extends Controller
         ]);
     }
 
+    public function allNavtechAppointments()
+    {
+        return view('admin.navtechappointments.index');
+    }
+
+    public function navtechAppointmentsData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'occupation',
+            2 => 'whatsapp_number',
+            3 => 'city',
+            4 => 'country',
+            5 => 'id', // Placeholder for status sorting logic
+            6 => 'created_at',
+        ];
+
+        $query = NavtechAppointment::with('payment');
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('occupation', 'like', "%$search%")
+                ->orWhere('whatsapp_number', 'like', "%$search%")
+                ->orWhere('city', 'like', "%$search%");
+            });
+        }
+
+        $recordsTotal = NavtechAppointment::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $query->orderBy($columns[$request->order[0]['column']], $request->order[0]['dir']);
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $appointments = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($appointments as $a) {
+            $isPaid = $a->payment ? 1 : 0;
+            $data[] = [
+                $a->id,
+                $a->occupation,
+                $a->whatsapp_number,
+                $a->city,
+                $a->country,
+                $isPaid,
+                $a->created_at->format('d M Y'),
+                '', // Actions placeholder
+                $a->id, // Hidden ID for JS
+                $a->is_new // Hidden is_new for row highlighting
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function editNavtechAppointment($id)
+    {
+        $appointment = NavtechAppointment::with('payment')->findOrFail($id);
+
+        if ($appointment->is_new) {
+            $appointment->update(['is_new' => 0]);
+        }
+
+        return view('admin.navtechappointments.edit', compact('appointment'));
+    }
+
+    public function updateNavtechAppointment(Request $request, $id)
+    {
+        $appointment = NavtechAppointment::findOrFail($id);
+        
+        $request->validate([
+            'country' => 'required',
+            'city' => 'required',
+            'whatsapp_number' => 'required',
+            'occupation' => 'required',
+        ]);
+
+        $appointment->update($request->all());
+
+        return redirect()->route('admin.navtech.appointments')->with('success', 'Appointment updated successfully!');
+    }
+
+    public function deleteNavtechAppointment($id)
+    {
+        // Find the record
+        $appointment = NavtechAppointment::findOrFail($id);
+        
+        $appointment->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Appointment moved to trash successfully'
+        ]);
+    }
 
 }

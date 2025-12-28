@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; // 1. Add this
 
 class NavtechAppointment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes; // 2. Add SoftDeletes here
 
     // Explicitly define the table name
     protected $table = 'navtech_appointments';
@@ -28,4 +29,9 @@ class NavtechAppointment extends Model
     protected $casts = [
         'is_new' => 'boolean',
     ];
+
+    public function payment()
+    {
+        return $this->hasOne(NavtechPayment::class, 'navtech_appointment_id');
+    }
 }

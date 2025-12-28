@@ -13,6 +13,7 @@ use App\Models\SpecialAppointment;
 use App\Models\SpecialPayment;
 use App\Models\MedicalCenter;
 use App\Models\NavtechAppointment;
+use App\Models\NavtechPayment;
 use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
@@ -514,13 +515,12 @@ class PublicController extends Controller
             // Save to Database
             $appointment = NavtechAppointment::create($data);
 
-            // FLASH the ID to the session
-            session()->flash('navtech_app_id', $appointment->id);
+            // Store in session for the next step
+            session(['navtech_appointment_id' => $appointment->id]);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Registration submitted successfully!',
-                'redirect' => route('navtech.thankyou') // No ID in the URL anymore
+                'redirect' => route('navtech.confirm')
             ]);
 
         } catch (\Exception $e) {
@@ -531,17 +531,55 @@ class PublicController extends Controller
         }
     }
 
-    public function navtechThankYou()
-    {
-        // Retrieve ID from session
-        $id = session('navtech_app_id');
-
-        // If there is no ID in session (direct access), redirect back to the form
-        if (!$id) {
+    public function confirmNavtechAppointment() {
+        $id = session('navtech_appointment_id');
+        if (!$id || !$appointment = NavtechAppointment::find($id)) {
             return redirect()->route('navtechform');
         }
 
-        $appointment = NavtechAppointment::findOrFail($id);
+        // Custom Fee Logic for Navtech
+        $fee = 18000; 
+
+        return view('public.navtechappointments.navtech-confirmation', compact('appointment', 'fee'));
+    }
+
+    public function uploadNavtechPaymentProof(Request $request) {
+        $request->validate([
+            'navtech_appointment_id' => 'required|exists:navtech_appointments,id',
+            'whatsapp_number' => 'required',
+            'payment_method' => 'required',
+            'transaction_no' => 'required',
+            'proof_image' => 'required|image|max:2048',
+            'agreeTerms' => 'accepted',
+        ]);
+
+        $image = $request->file('proof_image');
+        $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads'), $name);
+
+        NavtechPayment::create([
+            'navtech_appointment_id' => $request->navtech_appointment_id,
+            'whatsapp_number' => $request->whatsapp_number,
+            'payment_method' => $request->payment_method,
+            'transaction_no' => $request->transaction_no,
+            'proof_image' => $name,
+        ]);
+
+        session(['navtech_paid_id' => $request->navtech_appointment_id]);
+
+        return response()->json([
+            'status' => 'success',
+            'redirect' => route('navtech.thankyou'),
+        ]);
+    }
+
+    // 4. Final Thank You
+    public function navtechThankYou() {
+        $id = session('navtech_paid_id');
+        if (!$id || !$appointment = NavtechAppointment::find($id)) {
+            return redirect()->route('navtechform');
+        }
+        session()->forget('navtech_paid_id');
         return view('public.navtechappointments.thank-you', compact('appointment'));
     }
 

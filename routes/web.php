@@ -48,6 +48,9 @@ Route::get('navtech-appointment', [PublicController::class, 'navtechform'])->nam
 Route::post('navtech-appointment', [PublicController::class, 'navtechstore'])->name('navtechform.store');
 Route::get('navtech-thank-you', [PublicController::class, 'navtechThankYou'])->name('navtech.thankyou');
 
+Route::get('navtech-confirmation', [PublicController::class, 'confirmNavtechAppointment'])->name('navtech.confirm');
+Route::post('navtech-payment-upload', [PublicController::class, 'uploadNavtechPaymentProof'])->name('navtech.payment.upload');
+
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
@@ -79,5 +82,13 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::get('/special-appointments/{id}/edit', [AdminController::class, 'editSpecialAppointment'])->name('special.appointments.edit');
     Route::post('/special-appointments/{id}/update', [AdminController::class, 'updateSpecialAppointment'])->name('special.appointments.update');
     Route::delete('/special-appointments/{id}', [AdminController::class, 'deleteSpecialAppointment'])->name('special.appointments.delete');
+
+    // Navtech Appointments
+    Route::get('/navtech-appointments', [AdminController::class, 'allNavtechAppointments'])->name('navtech.appointments');
+    Route::get('/navtech-appointments/data', [AdminController::class, 'navtechAppointmentsData'])->name('navtech.appointments.data');
+    Route::get('/navtech-appointments/{id}/edit', [AdminController::class, 'editNavtechAppointment'])->name('navtech.appointments.edit');
+    Route::post('/navtech-appointments/{id}/update', [AdminController::class, 'updateNavtechAppointment'])->name('navtech.appointments.update');
+    Route::delete('/navtech-appointments/{id}', [AdminController::class, 'deleteNavtechAppointment'])->name('navtech.appointments.delete');
+
 
 });
