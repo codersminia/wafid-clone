@@ -48,7 +48,7 @@
                         <p class="card-description">Book your health check-up at your preferred medical center</p>
                         <div class="card-buttons">
                             <a href="{{ route('special.appointment')}}" class="btn btn-dark">Book an Appointment</a>
-                            <a href="{{ route('ViewMedicalCenters')}}" class="btn btn-outline-dark">Medical Centers List</a>
+                            <a href="{{ route('ViewMedicalCenters')}}" class="btn btn-outline-dark">View Medical Centers</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,21 @@
                         <p class="card-description">Book your health check-up appointment or view your test results</p>
                         <div class="card-buttons">
                             <a href="{{ route('navtechform')}}" class="btn btn-dark">Book an Appointment</a>
-                            <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark">View Medical Reports</a>
+                            {{-- <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark">View Medical Reports</a> --}}
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="col-lg-6 mb-4">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="card-title">Tasheer Appointment</h3>
+                        <p class="card-description">Book your health check-up appointment or view your test results</p>
+                        <div class="card-buttons">
+                            <a href="{{ route('tasheer.form')}}" class="btn btn-dark">Book an Appointment</a>
+                            {{-- <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark">View Medical Reports</a> --}}
                         </div>
                     </div>
                 </div>                

@@ -51,6 +51,13 @@ Route::get('navtech-thank-you', [PublicController::class, 'navtechThankYou'])->n
 Route::get('navtech-confirmation', [PublicController::class, 'confirmNavtechAppointment'])->name('navtech.confirm');
 Route::post('navtech-payment-upload', [PublicController::class, 'uploadNavtechPaymentProof'])->name('navtech.payment.upload');
 
+// Tasheer Appointment Routes
+Route::get('tasheer-appointment', [PublicController::class, 'tasheerForm'])->name('tasheer.form');
+Route::post('tasheer-appointment', [PublicController::class, 'tasheerStore'])->name('tasheer.store');
+Route::get('tasheer-confirmation', [PublicController::class, 'confirmTasheerAppointment'])->name('tasheer.confirm');
+Route::post('tasheer-payment-upload', [PublicController::class, 'uploadTasheerPaymentProof'])->name('tasheer.payment.upload');
+Route::get('tasheer-thank-you', [PublicController::class, 'tasheerThankYou'])->name('tasheer.thankyou');
+
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');

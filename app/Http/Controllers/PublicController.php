@@ -14,6 +14,8 @@ use App\Models\SpecialPayment;
 use App\Models\MedicalCenter;
 use App\Models\NavtechAppointment;
 use App\Models\NavtechPayment;
+use App\Models\TasheerAppointment;
+use App\Models\TasheerPayment;
 use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
@@ -581,6 +583,81 @@ class PublicController extends Controller
         }
         session()->forget('navtech_paid_id');
         return view('public.navtechappointments.thank-you', compact('appointment'));
+    }
+
+    public function tasheerForm() {
+        return view('public.tasheerappointments.form');
+    }
+
+    public function tasheerStore(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'embassy'         => 'required|string',
+            'whatsapp_number' => 'required|string',
+            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
+        }
+
+        try {
+            $data = $request->only(['embassy', 'whatsapp_number']);
+            $data['is_new'] = true;
+
+            if ($request->hasFile('passport_pic')) {
+                $image = $request->file('passport_pic');
+                $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads'), $name);
+                $data['passport_pic'] = $name;
+            }
+
+            $appointment = TasheerAppointment::create($data);
+            session(['tasheer_appointment_id' => $appointment->id]);
+
+            return response()->json(['status' => 'success', 'redirect' => route('tasheer.confirm')]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error saving data.'], 500);
+        }
+    }
+
+    public function confirmTasheerAppointment() {
+        $id = session('tasheer_appointment_id');
+        if (!$id || !$appointment = TasheerAppointment::find($id)) return redirect()->route('tasheer.form');
+        $fee = 500;
+        return view('public.tasheerappointments.confirmation', compact('appointment', 'fee'));
+    }
+
+    public function uploadTasheerPaymentProof(Request $request) {
+        $request->validate([
+            'tasheer_appointment_id' => 'required|exists:tasheer_appointments,id',
+            'whatsapp_number' => 'required',
+            'payment_method' => 'required',
+            'transaction_no' => 'required',
+            'proof_image' => 'required|image|max:2048',
+            'agreeTerms' => 'accepted',
+        ]);
+
+        $image = $request->file('proof_image');
+        $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads'), $name);
+
+        TasheerPayment::create([
+            'tasheer_appointment_id' => $request->tasheer_appointment_id,
+            'whatsapp_number' => $request->whatsapp_number,
+            'payment_method' => $request->payment_method,
+            'transaction_no' => $request->transaction_no,
+            'proof_image' => $name,
+        ]);
+
+        session(['tasheer_paid_id' => $request->tasheer_appointment_id]);
+        return response()->json(['status' => 'success', 'redirect' => route('tasheer.thankyou')]);
+    }
+
+    public function tasheerThankYou() {
+        $id = session('tasheer_paid_id');
+        if (!$id || !$appointment = TasheerAppointment::find($id)) return redirect()->route('tasheer.form');
+        session()->forget('tasheer_paid_id');
+        return view('public.tasheerappointments.thank-you', compact('appointment'));
     }
 
 }
