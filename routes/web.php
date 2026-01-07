@@ -97,5 +97,10 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::post('/navtech-appointments/{id}/update', [AdminController::class, 'updateNavtechAppointment'])->name('navtech.appointments.update');
     Route::delete('/navtech-appointments/{id}', [AdminController::class, 'deleteNavtechAppointment'])->name('navtech.appointments.delete');
 
-
+    // Tasheer Appointments Admin Routes
+    Route::get('/tasheer-appointments', [AdminController::class, 'allTasheerAppointments'])->name('tasheer.appointments');
+    Route::get('/tasheer-appointments/data', [AdminController::class, 'tasheerAppointmentsData'])->name('tasheer.appointments.data');
+    Route::get('/tasheer-appointments/{id}/edit', [AdminController::class, 'editTasheerAppointment'])->name('tasheer.appointments.edit');
+    Route::post('/tasheer-appointments/{id}/update', [AdminController::class, 'updateTasheerAppointment'])->name('tasheer.appointments.update');
+    Route::delete('/tasheer-appointments/{id}', [AdminController::class, 'deleteTasheerAppointment'])->name('tasheer.appointments.delete');
 });

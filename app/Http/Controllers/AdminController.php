@@ -13,6 +13,7 @@ use App\Models\CheckResult;
 use App\Models\SpecialAppointment;
 use App\Models\SpecialPayment;
 use App\Models\NavtechAppointment;
+use App\Models\TasheerAppointment;
 
 class AdminController extends Controller
 {
@@ -572,6 +573,96 @@ class AdminController extends Controller
             'status' => 'success',
             'message' => 'Appointment moved to trash successfully'
         ]);
+    }
+
+    public function allTasheerAppointments()
+    {
+        return view('admin.tasheerappointments.index');
+    }
+
+    public function tasheerAppointmentsData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'embassy',
+            2 => 'whatsapp_number',
+            3 => 'id', // Status column sorting
+            4 => 'created_at',
+        ];
+
+        $query = TasheerAppointment::with('payment');
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('embassy', 'like', "%$search%")
+                ->orWhere('whatsapp_number', 'like', "%$search%");
+            });
+        }
+
+        $recordsTotal = TasheerAppointment::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $query->orderBy($columns[$request->order[0]['column']], $request->order[0]['dir']);
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $appointments = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($appointments as $a) {
+            $data[] = [
+                $a->id,                          // 0
+                $a->embassy,                     // 1
+                $a->whatsapp_number,             // 2
+                $a->payment ? 1 : 0,             // 3: Status (Paid/Pending)
+                $a->created_at->format('d M Y'), // 4
+                '',                              // 5: Actions placeholder
+                $a->id,                          // 6: Hidden ID
+                $a->is_new                       // 7: Hidden is_new
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function editTasheerAppointment($id)
+    {
+        $appointment = TasheerAppointment::with('payment')->findOrFail($id);
+
+        if ($appointment->is_new) {
+            $appointment->update(['is_new' => 0]);
+        }
+
+        return view('admin.tasheerappointments.edit', compact('appointment'));
+    }
+
+    public function updateTasheerAppointment(Request $request, $id)
+    {
+        $appointment = TasheerAppointment::findOrFail($id);
+        
+        $request->validate([
+            'embassy' => 'required',
+            'whatsapp_number' => 'required',
+        ]);
+
+        $appointment->update($request->all());
+
+        return redirect()->route('admin.tasheer.appointments')->with('success', 'Tasheer appointment updated successfully!');
+    }
+
+    public function deleteTasheerAppointment($id)
+    {
+        $appointment = TasheerAppointment::findOrFail($id);
+        $appointment->delete(); // Soft delete
+        return response()->json(['status' => 'success']);
     }
 
 }
