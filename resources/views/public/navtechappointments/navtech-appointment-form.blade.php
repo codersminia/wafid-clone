@@ -176,7 +176,7 @@
                                 <div class="form-row">
                                     <!-- Passport Upload Widget -->
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group">
+                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
                                             <label>Upload Passport</label>
                                             {{-- <p class="upload-subtitle">Please upload or take a photo of your <strong>passport</strong></p> --}}
                                             <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#passportModal">
@@ -190,7 +190,7 @@
 
                                     <!-- ID Card Upload Widget -->
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group">
+                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
                                             <label>ID Card Front Page</label>
                                             {{-- <p class="upload-subtitle">Please upload or take a photo of your <strong>ID Card</strong></p> --}}
                                             <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#idCardModal">
@@ -204,7 +204,7 @@
 
                                     <!-- User Photo Upload Widget -->
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group">
+                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
                                             <label>Passport Size Photo</label>
                                             {{-- <p class="upload-subtitle">Please upload or take a photo of <strong>yourself</strong></p> --}}
                                             <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#photoModal">
@@ -220,7 +220,7 @@
 
                             <!-- Buttons -->
                             <div class="form-buttons mt-4">
-                                <button type="reset" class="btn btn-outline-dark">Cancel</button>
+                                <a href="{{ route('home') }}" class="btn btn-outline-dark">Cancel</a>
                                 <button type="submit" class="btn btn-dark">Submit Registration</button>
                             </div>
                         </form>
@@ -330,7 +330,7 @@
                                     <i class="fas fa-cloud-upload-alt fa-3x text-info mb-3"></i>
                                     <p>Click, or <span class="text-info">Browse</span> to upload</p>
                                     <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
-                                    <input type="file" id="real-passport-input" accept="image/*" class="d-none">
+                                    <input type="file" id="real-passport-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
 
                                 <div id="passport-modal-error" class="text-danger small mt-2 font-weight-bold"></div>                                
@@ -387,7 +387,7 @@
                                     <i class="fas fa-id-card fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>ID Card Front</strong></p>
                                     <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
-                                    <input type="file" id="real-id-input" accept="image/*" class="d-none">
+                                    <input type="file" id="real-id-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="id-modal-error" class="text-danger small mt-2 font-weight-bold"></div>
                                 <div id="id-file-name" class="mt-2 text-success font-weight-bold"></div>
@@ -499,7 +499,7 @@
                                     <i class="fas fa-camera fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>Your Photo</strong></p>
                                     <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
-                                    <input type="file" id="real-photo-input" accept="image/*" class="d-none">
+                                    <input type="file" id="real-photo-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="photo-modal-error" class="text-danger small mt-2 font-weight-bold"></div>
                                 <div id="photo-file-name" class="mt-2 text-success font-weight-bold"></div>

@@ -505,7 +505,7 @@ class PublicController extends Controller
                     $randomName = Str::random(40) . '.' . $image->getClientOriginalExtension();
                     
                     // Move to public/uploads
-                    $image->move(public_path('uploads'), $randomName);
+                    $image->move(public_path('uploads/navtech'), $randomName);
                     
                     // Save the filename/path in the data array
                     $data[$field] = $randomName;
@@ -548,20 +548,18 @@ class PublicController extends Controller
             'navtech_appointment_id' => 'required|exists:navtech_appointments,id',
             'whatsapp_number' => 'required',
             'payment_method' => 'required',
-            'transaction_no' => 'required',
             'proof_image' => 'required|image|max:2048',
             'agreeTerms' => 'accepted',
         ]);
 
         $image = $request->file('proof_image');
         $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('uploads'), $name);
+        $image->move(public_path('uploads/navtech'), $name);
 
         NavtechPayment::create([
             'navtech_appointment_id' => $request->navtech_appointment_id,
             'whatsapp_number' => $request->whatsapp_number,
             'payment_method' => $request->payment_method,
-            'transaction_no' => $request->transaction_no,
             'proof_image' => $name,
         ]);
 

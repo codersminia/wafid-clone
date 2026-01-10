@@ -17,7 +17,6 @@ class NavtechPayment extends Model
         'navtech_appointment_id',
         'whatsapp_number',
         'payment_method',
-        'transaction_no',
         'proof_image'
     ];
 

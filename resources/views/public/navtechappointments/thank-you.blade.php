@@ -5,7 +5,7 @@
 @section('content')
     <style>
         :root {
-            --navtech-teal: #1a8a8a;
+            --navtech-teal: #25d366;
             --navtech-dark: #343a40;
         }
         .thank-you-card {
@@ -32,7 +32,7 @@
             list-style: none;
             padding: 0;
             text-align: left;
-            max-width: 500px;
+            max-width: 800px;
             margin: 30px auto;
         }
         .info-list li {

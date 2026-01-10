@@ -64,47 +64,75 @@
                 <hr>
                 <h5>Documents</h5>
                 <div class="row text-center">
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-4">
                         <label class="d-block font-weight-bold">Passport</label>                     
-                        <img src="{{ asset('uploads/' . $appointment->passport_pic) }}" 
-                             class="img-thumbnail view-image" 
-                             style="height: 150px; cursor: pointer;" 
-                             data-toggle="modal" 
-                             data-target="#imgModal" 
-                             data-src="{{ asset('uploads/' . $appointment->passport_pic) }}">
+                        <img src="{{ asset('uploads/navtech/' . $appointment->passport_pic) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/navtech/' . $appointment->passport_pic) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/navtech/' . $appointment->passport_pic) }}" download="passport_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-4">
                         <label class="d-block font-weight-bold">ID Card Front</label>
-                        <img src="{{ asset('uploads/' . $appointment->id_card_front) }}" 
-                             class="img-thumbnail view-image" 
-                             style="height: 150px; cursor: pointer;" 
-                             data-toggle="modal" 
-                             data-target="#imgModal" 
-                             data-src="{{ asset('uploads/' . $appointment->id_card_front) }}">
+                        <img src="{{ asset('uploads/navtech/' . $appointment->id_card_front) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/navtech/' . $appointment->id_card_front) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/navtech/' . $appointment->id_card_front) }}" download="id_front_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-4">
                         <label class="d-block font-weight-bold">User Photo</label>
-                        <img src="{{ asset('uploads/' . $appointment->user_pic) }}" 
-                             class="img-thumbnail view-image" 
-                             style="height: 150px; cursor: pointer;" 
-                             data-toggle="modal" 
-                             data-target="#imgModal" 
-                             data-src="{{ asset('uploads/' . $appointment->user_pic) }}">
+                        <img src="{{ asset('uploads/navtech/' . $appointment->user_pic) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/navtech/' . $appointment->user_pic) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/navtech/' . $appointment->user_pic) }}" download="user_photo_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 @if($appointment->payment)
                     <hr>
                     <div class="mt-4">
-                        <h3 class="mb-3 text-primary">Payment Information</h3>
+                        <h5 class="mb-3">Payment Information</h5>
                         <div class="row bg-light p-4 rounded">
                             <div class="col-md-4">
                                 <p class="mb-1 text-muted">Payment Method</p>
                                 <h6 class="font-weight-bold">{{ $appointment->payment->payment_method }}</h6>
                             </div>
                             <div class="col-md-4">
-                                <p class="mb-1 text-muted">Transaction ID / TRX</p>
-                                <h6 class="font-weight-bold text-danger">{{ $appointment->payment->transaction_no }}</h6>
+                                <label class="font-weight-bold text-muted text-uppercase small">Mobile/WhatsApp:</label>
+                                <div class="font-weight-bolder">
+                                    @php
+                                        // Clean the number (remove spaces, dashes, etc.) for the URL
+                                        $cleanNumber = preg_replace('/\D/', '', $appointment->payment->whatsapp_number);
+                                    @endphp
+                                    
+                                    <a href="https://wa.me/{{ $cleanNumber }}" 
+                                    target="_blank" 
+                                    class="text-dark text-hover-primary d-flex align-items-center" 
+                                    title="Chat on WhatsApp">
+                                        <i class="fab fa-whatsapp text-success mr-2 font-size-h4"></i>
+                                        {{ $appointment->payment->whatsapp_number }}
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <p class="mb-1 text-muted">Payment Proof</p>
@@ -131,9 +159,10 @@
                                 </div>
                                 <div class="modal-body text-center">
                                     {{-- Note: User controller logic saves proof as filename only in 'uploads' --}}
-                                    <img src="{{ asset('uploads/' . $appointment->payment->proof_image) }}" style="max-width: 100%; height: auto;">
+                                    <img src="{{ asset('uploads/navtech/' . $appointment->payment->proof_image) }}" style="width: 200px; height: auto; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
                                 </div>
                                 <div class="modal-footer">
+                                    <a href="{{ asset('uploads/navtech/' . $appointment->payment->proof_image) }}" target="_blank" class="btn btn-primary font-weight-bold">Open in New Tab</a>
                                     <button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
@@ -167,6 +196,9 @@
             </div>
             <div class="modal-body text-center">
                 <img id="modalImg" src="" style="max-width: 200px; height: auto; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+            </div>
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

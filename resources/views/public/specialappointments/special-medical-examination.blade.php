@@ -277,7 +277,7 @@
 
                             <!-- Buttons -->
                             <div class="form-buttons">
-                                <button type="reset" class="btn btn-outline-dark">Cancel</button>
+                                <a href="{{ route('home') }}" class="btn btn-outline-dark">Cancel</a>
                                 <button type="submit" class="btn btn-dark">Save And Continue</button>
                             </div>
                         </form>

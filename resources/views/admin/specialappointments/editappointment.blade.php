@@ -493,6 +493,11 @@
 	</div>
 </div>
 
+@php
+    // Calculate the value in PHP first to avoid Blade syntax errors
+    $selectedCenter = old('medical_center', $appointment->medical_center ?? '');
+@endphp
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const centers = {
@@ -536,17 +541,21 @@
 
         const cityDropdown = document.getElementById('city');
         const medicalDropdown = document.getElementById('medical_center');
+        
+        // Pass the pre-calculated PHP variable safely to JS
+        const selectedMedicalCenter = @json($selectedCenter);
 
         function populateMedicalCenters(selectedCity) {
-            medicalDropdown.innerHTML = '<option value="">Select Medical Center</option>'; // reset options
+            medicalDropdown.innerHTML = '<option value="">Select Medical Center</option>'; 
+            
             if (centers[selectedCity]) {
                 centers[selectedCity].forEach(center => {
                     const option = document.createElement('option');
                     option.value = center;
                     option.text = center;
 
-                    // Preselect if editing an appointment
-                    if(center === "{{ old('medical_center', $appointment->medical_center ?? '') }}") {
+                    // Comparison now works even with symbols like '&'
+                    if(center === selectedMedicalCenter) {
                         option.selected = true;
                     }
 
@@ -555,7 +564,7 @@
             }
         }
 
-        // Initial population (for edit form)
+        // Initial population
         populateMedicalCenters(cityDropdown.value);
 
         // Update when city changes
