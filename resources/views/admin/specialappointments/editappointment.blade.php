@@ -410,39 +410,76 @@
 
                             @if($appointment->specialPayment)
                                 <hr>
-                                <h3 class="mb-3">Payment Information</h3>
-                                <p><strong>Payment Method:</strong> {{ $appointment->specialPayment->payment_method }}</p>
-                                <p><strong>Transaction No:</strong> {{ $appointment->specialPayment->transaction_no }}</p>
-                                <p><strong>Proof Image:</strong></p>
+                                <h4 class="text-primary mb-4">Payment Proof</h4>
 
+                                <div class="row bg-light p-4 rounded align-items-center border">
+                                    <!-- Method -->
+                                    <div class="col-md-3">
+                                        <label class="font-weight-bold text-muted text-uppercase small">Method:</label>
+                                        <div class="font-weight-bolder text-dark">{{ ucfirst($appointment->specialPayment->payment_method) }}</div>
+                                    </div>
+
+                                    <!-- Passport No -->
+                                    <div class="col-md-3">
+                                        <label class="font-weight-bold text-muted text-uppercase small">Passport No:</label>
+                                        <div class="font-weight-bolder text-danger">{{ $appointment->specialPayment->passport_no }}</div>
+                                    </div>
+
+                                    <!-- WhatsApp -->
+                                    <div class="col-md-3">
+                                        <label class="font-weight-bold text-muted text-uppercase small">Mobile/WhatsApp:</label>
+                                        <div class="font-weight-bolder">
+                                            @php
+                                                // Clean the number (remove spaces, dashes, etc.) for the URL
+                                                $cleanNumber = preg_replace('/\D/', '', $appointment->specialPayment->mobile_no);
+                                            @endphp
+                                            
+                                            <a href="https://wa.me/{{ $cleanNumber }}" 
+                                               target="_blank" 
+                                               class="text-dark text-hover-primary d-flex align-items-center" 
+                                               title="Chat on WhatsApp">
+                                                <i class="fab fa-whatsapp text-success mr-2 font-size-h4"></i>
+                                                {{ $appointment->specialPayment->mobile_no }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Button -->
+                                    <div class="col-md-3 text-center">
+                                        @if($appointment->specialPayment->proof_image)
+                                            <button type="button" class="btn btn-info font-weight-bold px-6" data-toggle="modal" data-target="#receiptModal">
+                                                <i class="flaticon-eye"></i> View Receipt
+                                            </button>
+                                        @else
+                                            <span class="text-muted italic">No image uploaded</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Modal for Receipt View -->
                                 @if($appointment->specialPayment && $appointment->specialPayment->proof_image)
-                                    <img src="{{ asset('uploads/' . $appointment->specialPayment->proof_image) }}" 
-                                        style="max-width: 200px; cursor: pointer;" 
-                                        data-toggle="modal" data-target="#exampleModal">
-                                    
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Payment Proof</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <i aria-hidden="true" class="ki ki-close"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img src="{{ asset('uploads/' . $appointment->specialPayment->proof_image) }}" style="max-width: 100%; height: auto;">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>                
-                                                </div>
+                                <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-md" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="receiptModalLabel">Special Payment Proof</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center bg-dark-o-10">
+                                                <img src="{{ asset('uploads/special-medical/' . $appointment->specialPayment->proof_image) }}" 
+                                                     style="width: 200px; height: auto; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{ asset('uploads/special-medical/' . $appointment->specialPayment->proof_image) }}" target="_blank" class="btn btn-primary font-weight-bold">Open in New Tab</a>
+                                                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
-                                @else
-                                    <p>No proof uploaded.</p>
+                                </div>
                                 @endif
-                            @endif    
+                            @endif   
                         </div>
 
                         <div class="card-footer">

@@ -446,7 +446,7 @@
                                 <!-- Modal for Receipt View -->
                                 @if($appointment->payment->proof_image)
                                 <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-dialog modal-md" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="receiptModalLabel">Payment Receipt Proof</h5>
@@ -456,7 +456,7 @@
                                             </div>
                                             <div class="modal-body text-center bg-dark-o-10">
                                                 <img src="{{ asset('uploads/medical-examination/' . $appointment->payment->proof_image) }}" 
-                                                     style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                                                     style="width: 200px; height: auto; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="{{ asset('uploads/medical-examination/' . $appointment->payment->proof_image) }}" target="_blank" class="btn btn-primary font-weight-bold">Open in New Tab</a>

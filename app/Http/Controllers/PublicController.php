@@ -383,7 +383,7 @@ class PublicController extends Controller
         // Upload image to public/uploads
         $image = $request->file('proof_image');
         $randomName = Str::random(40) . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('uploads'), $randomName);
+        $image->move(public_path('uploads/special-medical'), $randomName);
 
         // Save special payment
         SpecialPayment::create([
