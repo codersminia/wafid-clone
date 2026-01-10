@@ -29,7 +29,8 @@
                             <i class="fas fa-exclamation-triangle"></i> Appointment Fee
                         </h5>
                         <p class="mb-0">
-                            <strong>Fee Amount: 4,500 PKR</strong> - Payment is required to confirm your appointment. Please proceed with payment using the account details below.
+                            <!-- Dynamic Fee shown here -->
+                            <strong>Fee Amount: {{ $fee }} PKR</strong> - Payment is required to confirm your appointment. Please proceed with payment using the account details below.
                         </p>
                     </div>
                 </div>
@@ -102,14 +103,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-600">Passport No.</label>
-                                    <input type="text" class="form-control" name="passport_no" placeholder="Enter passport number">
+                                    <!-- Auto-filled with passport_no from the appointment table -->
+                                    <input type="text" 
+                                        class="form-control" 
+                                        name="passport_no" 
+                                        value="{{ old('passport_no', $appointment->passport_no) }}" 
+                                        placeholder="Enter passport number">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-600">Mobile No.</label>
-                                    <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Enter mobile number">
+                                    <!-- Auto-filled with phone from the appointment table -->
+                                    <input type="text" 
+                                        class="form-control" 
+                                        id="mobile_no" 
+                                        name="mobile_no" 
+                                        value="{{ old('mobile_no', $appointment->phone) }}" 
+                                        placeholder="Enter mobile number">
                                 </div>
                             </div>
                         </div>
@@ -126,21 +138,14 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="font-weight-600">Deposit slip No / Trx ID</label>
-                                    <input type="text" class="form-control" name="transaction_no" placeholder="Enter trx id">
-                                </div>
-                            </div>
                         </div>                        
 
                         <!-- Payment Screenshot Upload -->
                         <div class="form-group mb-4">
                             <label for="paymentProof" class="font-weight-600">Upload Payment Screenshot</label>
                             <div id="dropzone" class="border-2 rounded p-4 text-center dropzone-area" style="border: 2px dashed #dc3545; background-color: #fafafa; cursor: pointer !important; transition: all 0.3s ease;">
-                                <input type="file" name="proof_image" class="form-control-file d-none" id="paymentProof" accept="image/*">
-                                <label for="paymentProof" class="cursor-pointer mb-0">
+                                <input type="file" name="proof_image" class="form-control-file d-none" id="paymentProof" accept=".jpg, .jpeg, .png">
+                                <label for="paymentProof" class="cursor-pointer mb-0" style="pointer-events: none;">
                                     <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
                                     <p class="text-muted mb-1"><strong>Drag & drop your payment screenshot here</strong></p>
                                     <p class="text-muted small">or click to select from your device</p>
@@ -258,28 +263,36 @@
             }
         });
 
-        // Display preview function
+        dropzone.addEventListener('click', function(e) {
+            // If the click is on the "Remove" button, don't trigger the file input
+            if (e.target.id === 'removePreview' || e.target.closest('#removePreview')) {
+                return;
+            }
+            fileInput.click();
+        });
+
+        // 2. Adjust Display Preview to hide instructions
         function displayPreview(file) {
             if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     previewImage.src = event.target.result;
-                    fileName.textContent = 'File: ' + file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)';
+                    fileName.textContent = 'File: ' + file.name;
                     previewContainer.style.display = 'block';
-                    dropzone.querySelector('label').style.display = 'none';
+                    // Hide the instructions label
+                    dropzone.querySelector('label[for="paymentProof"]').style.display = 'none';
                 };
                 reader.readAsDataURL(file);
-            } else {
-                alert('Please select a valid image file');
-                fileInput.value = '';
             }
         }
 
-        // Remove preview
-        removePreview.addEventListener('click', function() {
+        // 3. Update Remove Preview logic
+        removePreview.addEventListener('click', function(e) {
+            e.stopPropagation(); // Stop the click from triggering the dropzone click event
             fileInput.value = '';
             previewContainer.style.display = 'none';
-            dropzone.querySelector('label').style.display = 'block';
+            // Show the instructions label again
+            dropzone.querySelector('label[for="paymentProof"]').style.display = 'block';
         });
 
         document.addEventListener('DOMContentLoaded', function () {

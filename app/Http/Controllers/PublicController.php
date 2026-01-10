@@ -154,7 +154,9 @@ class PublicController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
 
-        return view('public.appointments.appointment-confirmation', compact('appointment'));
+        $fee = "4,500"; 
+
+        return view('public.appointments.appointment-confirmation', compact('appointment', 'fee'));
     }
 
     public function uploadPaymentProof(Request $request)
@@ -164,14 +166,12 @@ class PublicController extends Controller
             'passport_no' => 'required|string|max:50',
             'mobile_no' => 'required|string|max:20',
             'payment_method' => 'required|string',
-            'transaction_no' => 'required|string',
             'proof_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'agreeTerms' => 'accepted', // Checkbox must be checked
         ], [
             'passport_no.required' => 'Enter passport number',
             'mobile_no.required' => 'Enter phone number',
             'payment_method.required' => 'Select a payment method',
-            'transaction_no.required' => 'Enter transaction number',
             'proof_image.required' => 'Upload your payment screenshot',
             'agreeTerms.accepted' => 'You must agree to the terms and conditions',
         ]);
@@ -188,7 +188,6 @@ class PublicController extends Controller
             'passport_no' => $request->passport_no,
             'mobile_no' => $request->mobile_no,
             'payment_method' => $request->payment_method,
-            'transaction_no' => $request->transaction_no,
             'proof_image' => $randomName,
         ]);
 
