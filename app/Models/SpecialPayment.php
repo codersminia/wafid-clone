@@ -16,7 +16,6 @@ class SpecialPayment extends Model
         'special_appointment_id',
         'passport_no',
         'mobile_no',
-        'transaction_no',
         'payment_method',
         'proof_image',
     ];

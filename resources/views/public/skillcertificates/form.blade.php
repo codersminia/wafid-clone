@@ -275,7 +275,7 @@
                                     <i class="fas fa-id-card fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>ID Card Back</strong></p>
                                     <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
-                                    <input type="file" id="real-idb-input" accept="image/*" class="d-none">
+                                    <input type="file" id="real-idb-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="idb-file-name" class="mt-2 text-success font-weight-bold"></div>
                                 <div id="idb-error" class="text-danger mt-2 small font-weight-bold"></div>

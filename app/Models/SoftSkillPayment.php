@@ -13,7 +13,6 @@ class SoftSkillPayment extends Model
         'softskill_id',
         'whatsapp_number',
         'payment_method',
-        'transaction_no',
         'proof_image'
     ];
 

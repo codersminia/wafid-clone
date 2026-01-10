@@ -628,7 +628,6 @@ class PublicController extends Controller
             'tasheer_appointment_id' => 'required|exists:tasheer_appointments,id',
             'whatsapp_number' => 'required',
             'payment_method' => 'required',
-            'transaction_no' => 'required',
             'proof_image' => 'required|image|max:2048',
             'agreeTerms' => 'accepted',
         ]);
@@ -641,7 +640,6 @@ class PublicController extends Controller
             'tasheer_appointment_id' => $request->tasheer_appointment_id,
             'whatsapp_number' => $request->whatsapp_number,
             'payment_method' => $request->payment_method,
-            'transaction_no' => $request->transaction_no,
             'proof_image' => $name,
         ]);
 

@@ -13,7 +13,6 @@ class TasheerPayment extends Model
         'tasheer_appointment_id',
         'whatsapp_number',
         'payment_method',
-        'transaction_no',
         'proof_image'
     ];
 

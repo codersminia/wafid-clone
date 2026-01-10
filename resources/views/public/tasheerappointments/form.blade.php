@@ -141,7 +141,7 @@
                                 <h5 class="section-title">Required Documents</h5>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group">
+                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
                                             <label>Passport Copy</label>
                                             <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#passportModal">
                                                 Upload Passport
@@ -217,7 +217,8 @@
                                 <div class="upload-area text-center p-5 border rounded" id="drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-cloud-upload-alt fa-3x text-info mb-3"></i>
                                     <p>Click, or <span class="text-info">Browse</span> to upload</p>
-                                    <input type="file" id="real-passport-input" accept="image/*" class="d-none">
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <input type="file" id="real-passport-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="passport-modal-error" class="text-danger small mt-2 font-weight-bold"></div>                                
                                 <div id="file-name-display" class="mt-2 text-success font-weight-bold"></div>

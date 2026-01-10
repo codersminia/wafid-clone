@@ -18,7 +18,6 @@ class Payment extends Model
         'payment_method',
         'passport_no',
         'mobile_no',
-        'transaction_no',
         'proof_image',
     ];
 
