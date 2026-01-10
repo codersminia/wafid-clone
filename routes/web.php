@@ -117,4 +117,14 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::get('/softskill-appointments/{id}/edit', [AdminController::class, 'editSoftSkillAppointment'])->name('softskill.appointments.edit');
     Route::post('/softskill-appointments/{id}/update', [AdminController::class, 'updateSoftSkillAppointment'])->name('softskill.appointments.update');
     Route::delete('/softskill-appointments/{id}', [AdminController::class, 'deleteSoftSkillAppointment'])->name('softskill.appointments.delete');
+
+    Route::prefix('payment-methods')->name('payment.methods.')->group(function () {
+        Route::get('/', [AdminController::class, 'allPaymentMethods'])->name('index');
+        Route::get('/data', [AdminController::class, 'paymentMethodsData'])->name('data');
+        Route::get('/create', [AdminController::class, 'createPaymentMethod'])->name('create');
+        Route::post('/store', [AdminController::class, 'storePaymentMethod'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'editPaymentMethod'])->name('edit');
+        Route::post('/{id}/update', [AdminController::class, 'updatePaymentMethod'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'deletePaymentMethod'])->name('delete');
+    });
 });

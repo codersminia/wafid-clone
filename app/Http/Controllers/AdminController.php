@@ -16,6 +16,8 @@ use App\Models\NavtechAppointment;
 use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
+use App\Models\PaymentMethod;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -736,6 +738,81 @@ class AdminController extends Controller
         $appointment = SoftSkillCertificate::findOrFail($id);
         $appointment->delete();
 
+        return response()->json(['status' => 'success']);
+    }
+
+    public function allPaymentMethods() {
+        return view('admin.paymentmethods.index');
+    }
+
+    public function paymentMethodsData(Request $request) {
+        $query = PaymentMethod::query();
+        $recordsTotal = PaymentMethod::count();
+        $recordsFiltered = $query->count();
+        $methods = $query->get();
+
+        $data = [];
+        foreach ($methods as $m) {
+            $data[] = [
+                $m->id,
+                $m->account_name,
+                $m->account_title,
+                $m->account_number,
+                $m->status,
+                $m->qr_code ? asset('uploads/qr/' . $m->qr_code) : null,
+                $m->id
+            ];
+        }
+        return response()->json(['draw' => intval($request->draw), 'recordsTotal' => $recordsTotal, 'recordsFiltered' => $recordsFiltered, 'data' => $data]);
+    }
+
+    public function createPaymentMethod() {
+        return view('admin.paymentmethods.create');
+    }
+
+    public function storePaymentMethod(Request $request) {
+        $data = $request->validate([
+            'account_name' => 'required',
+            'account_title' => 'required',
+            'account_number' => 'required',
+            'iban' => 'nullable',
+            'qr_code' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        if ($request->hasFile('qr_code')) {
+            $imageName = time().'.'.$request->qr_code->extension();
+            $request->qr_code->move(public_path('uploads/qr'), $imageName);
+            $data['qr_code'] = $imageName;
+        }
+
+        PaymentMethod::create($data);
+        return redirect()->route('admin.payment.methods.index')->with('success', 'Payment method added!');
+    }
+
+    public function editPaymentMethod($id) {
+        $method = PaymentMethod::findOrFail($id);
+        return view('admin.paymentmethods.edit', compact('method'));
+    }
+
+    public function updatePaymentMethod(Request $request, $id) {
+        $method = PaymentMethod::findOrFail($id);
+        $data = $request->all();
+
+        if ($request->hasFile('qr_code')) {
+            if($method->qr_code) File::delete(public_path('uploads/qr/'.$method->qr_code));
+            $imageName = time().'.'.$request->qr_code->extension();
+            $request->qr_code->move(public_path('uploads/qr'), $imageName);
+            $data['qr_code'] = $imageName;
+        }
+
+        $method->update($data);
+        return redirect()->route('admin.payment.methods.index')->with('success', 'Updated successfully!');
+    }
+
+    public function deletePaymentMethod($id) {
+        $method = PaymentMethod::findOrFail($id);
+        if($method->qr_code) File::delete(public_path('uploads/qr/'.$method->qr_code));
+        $method->delete();
         return response()->json(['status' => 'success']);
     }
 

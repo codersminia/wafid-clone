@@ -178,7 +178,7 @@
                     </div>
 
                     <div class="form-buttons mt-4">
-                        <button type="reset" class="btn btn-outline-dark">Cancel</button>
+                        <a href="{{ route('home') }}" class="btn btn-outline-dark">Cancel</a>
                         <button type="submit" class="btn btn-dark px-5">Submit Registration</button>
                     </div>
                 </form>

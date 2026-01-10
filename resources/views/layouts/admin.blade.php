@@ -81,7 +81,7 @@
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto" id="kt_brand">
                         <!--begin::Logo-->
-                        <a href="index.html" class="brand-logo">
+                        <a href="{{ route('admin.dashboard')}}" class="brand-logo">
                             <img alt="Logo" src="{{ asset('assets/admin/media/logos/logo-light.png') }}" />
                         </a>
                         <!--end::Logo-->
@@ -166,7 +166,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <span class="menu-text">Appointments</span>
+                                        <span class="menu-text">Medical Appointments</span>
                                     </a>                                    
                                 </li>    
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -268,6 +268,22 @@
                                         </span>
                                         <span class="menu-text">Soft Skill Certificates</span>
                                     </a>                                    
+                                </li>
+                                <li class="menu-item" aria-haspopup="true">
+                                    <a href="{{ route('admin.payment.methods.index') }}" class="menu-link">
+                                        <span class="svg-icon menu-icon">
+                                            <!-- Use a Credit Card Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24" />
+                                                    <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2" />
+                                                    <rect fill="#000000" x="2" y="8" width="20" height="3" />
+                                                    <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="menu-text">Payment Methods</span>
+                                    </a>
                                 </li>
                             </ul>
                             <!--end::Menu Nav-->
