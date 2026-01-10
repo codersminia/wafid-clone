@@ -58,6 +58,14 @@ Route::get('tasheer-confirmation', [PublicController::class, 'confirmTasheerAppo
 Route::post('tasheer-payment-upload', [PublicController::class, 'uploadTasheerPaymentProof'])->name('tasheer.payment.upload');
 Route::get('tasheer-thank-you', [PublicController::class, 'tasheerThankYou'])->name('tasheer.thankyou');
 
+// Soft Skill Certificate Routes
+Route::get('soft-skill-certificate', [PublicController::class, 'softSkillForm'])->name('softskill.form');
+Route::post('soft-skill-certificate', [PublicController::class, 'softSkillStore'])->name('softskill.store');
+Route::get('soft-skill-confirmation', [PublicController::class, 'softSkillConfirm'])->name('softskill.confirm');
+Route::post('soft-skill-payment-upload', [PublicController::class, 'softSkillPaymentUpload'])->name('softskill.payment.upload');
+Route::get('soft-skill-thank-you', [PublicController::class, 'softSkillThankYou'])->name('softskill.thankyou');
+
+
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');

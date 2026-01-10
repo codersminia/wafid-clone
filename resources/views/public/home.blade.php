@@ -84,6 +84,22 @@
                 </div>                
             </div>
 
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="card-title">Soft Skill Certificates</h3>
+                        <p class="card-description">Book your health check-up appointment or view your test results</p>
+                        <div class="card-buttons">
+                            <a href="{{ route('softskill.form')}}" class="btn btn-dark">Apply For Certificate</a>                            
+                        </div>
+                    </div>
+                </div> 
+               
+            </div>
+
         </div>
     </section>
 @endsection

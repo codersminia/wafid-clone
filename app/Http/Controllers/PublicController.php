@@ -16,6 +16,8 @@ use App\Models\NavtechAppointment;
 use App\Models\NavtechPayment;
 use App\Models\TasheerAppointment;
 use App\Models\TasheerPayment;
+use App\Models\SoftSkillCertificate;
+use App\Models\SoftSkillPayment;
 use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
@@ -658,6 +660,84 @@ class PublicController extends Controller
         if (!$id || !$appointment = TasheerAppointment::find($id)) return redirect()->route('tasheer.form');
         session()->forget('tasheer_paid_id');
         return view('public.tasheerappointments.thank-you', compact('appointment'));
+    }
+
+    public function softSkillForm() {
+        return view('public.skillcertificates.form');
+    }
+
+    public function softSkillStore(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'whatsapp_number' => 'required|string',
+            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'id_card_back'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'user_pic'      => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
+        }
+
+        try {
+            $data = $request->only(['whatsapp_number']);
+            
+            // Handle File Uploads
+            foreach(['id_card_front', 'id_card_back', 'user_pic'] as $field) {
+                if ($request->hasFile($field)) {
+                    $image = $request->file($field);
+                    $name = Str::random(20) . '_' . $field . '.' . $image->getClientOriginalExtension();
+                    $image->move(public_path('uploads/softskill'), $name);
+                    $data[$field] = $name;
+                }
+            }
+
+            $appointment = SoftSkillCertificate::create($data);
+            session(['softskill_id' => $appointment->id]);
+
+            return response()->json(['status' => 'success', 'redirect' => route('softskill.confirm')]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error saving data.'], 500);
+        }
+    }
+
+    public function softSkillConfirm() {
+        $id = session('softskill_id');
+        if (!$id || !$record = SoftSkillCertificate::find($id)) return redirect()->route('softskill.form');
+        $fee = 1500; // Example Fee
+        return view('public.skillcertificates.confirmation', compact('record', 'fee'));
+    }
+
+    public function softSkillPaymentUpload(Request $request) {
+        $request->validate([
+            'softskill_id'    => 'required|exists:soft_skill_certificates,id',
+            'whatsapp_number' => 'required',
+            'payment_method'  => 'required',
+            'transaction_no'  => 'required',
+            'proof_image'     => 'required|image|max:2048',
+            'agreeTerms'      => 'accepted',
+        ]);
+
+        $image = $request->file('proof_image');
+        $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads/payments'), $name);
+
+        SoftSkillPayment::create([
+            'softskill_id'    => $request->softskill_id,
+            'whatsapp_number' => $request->whatsapp_number,
+            'payment_method'  => $request->payment_method,
+            'transaction_no'  => $request->transaction_no,
+            'proof_image'     => $name,
+        ]);
+
+        session(['softskill_paid_id' => $request->softskill_id]);
+        return response()->json(['status' => 'success', 'redirect' => route('softskill.thankyou')]);
+    }
+
+    public function softSkillThankYou() {
+        $id = session('softskill_paid_id');
+        if (!$id || !$record = SoftSkillCertificate::find($id)) return redirect()->route('softskill.form');
+        session()->forget('softskill_paid_id');
+        return view('public.skillcertificates.thank-you', compact('record'));
     }
 
 }
