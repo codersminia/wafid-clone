@@ -111,4 +111,10 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::get('/tasheer-appointments/{id}/edit', [AdminController::class, 'editTasheerAppointment'])->name('tasheer.appointments.edit');
     Route::post('/tasheer-appointments/{id}/update', [AdminController::class, 'updateTasheerAppointment'])->name('tasheer.appointments.update');
     Route::delete('/tasheer-appointments/{id}', [AdminController::class, 'deleteTasheerAppointment'])->name('tasheer.appointments.delete');
+
+    Route::get('/softskill-appointments', [AdminController::class, 'allSoftSkillAppointments'])->name('softskill.appointments');
+    Route::get('/softskill-appointments/data', [AdminController::class, 'softSkillAppointmentsData'])->name('softskill.appointments.data');
+    Route::get('/softskill-appointments/{id}/edit', [AdminController::class, 'editSoftSkillAppointment'])->name('softskill.appointments.edit');
+    Route::post('/softskill-appointments/{id}/update', [AdminController::class, 'updateSoftSkillAppointment'])->name('softskill.appointments.update');
+    Route::delete('/softskill-appointments/{id}', [AdminController::class, 'deleteSoftSkillAppointment'])->name('softskill.appointments.delete');
 });

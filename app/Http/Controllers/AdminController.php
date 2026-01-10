@@ -14,6 +14,8 @@ use App\Models\SpecialAppointment;
 use App\Models\SpecialPayment;
 use App\Models\NavtechAppointment;
 use App\Models\TasheerAppointment;
+use App\Models\SoftSkillCertificate;
+use App\Models\SoftSkillPayment;
 
 class AdminController extends Controller
 {
@@ -662,6 +664,78 @@ class AdminController extends Controller
     {
         $appointment = TasheerAppointment::findOrFail($id);
         $appointment->delete(); // Soft delete
+        return response()->json(['status' => 'success']);
+    }
+
+    public function allSoftSkillAppointments()
+    {
+        return view('admin.softskill.index');
+    }
+
+    public function softSkillAppointmentsData(Request $request)
+    {
+        $columns = [0 => 'id', 1 => 'whatsapp_number', 2 => 'id', 3 => 'created_at'];
+
+        $query = SoftSkillCertificate::with('payment');
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('whatsapp_number', 'like', "%$search%");
+        }
+
+        $recordsTotal = SoftSkillCertificate::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $query->orderBy($columns[$request->order[0]['column']], $request->order[0]['dir']);
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $appointments = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($appointments as $a) {
+            $data[] = [
+                $a->id,
+                $a->whatsapp_number,
+                $a->payment ? 1 : 0,
+                $a->created_at->format('d M Y'),
+                '', 
+                $a->id,
+                $a->is_new // Assuming you added this column in migration
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function editSoftSkillAppointment($id)
+    {
+        $appointment = SoftSkillCertificate::with('payment')->findOrFail($id);
+        if ($appointment->is_new) { 
+            $appointment->update(['is_new' => 0]); 
+        }
+        return view('admin.softskill.edit', compact('appointment'));
+    }
+
+    public function updateSoftSkillAppointment(Request $request, $id)
+    {
+        $appointment = SoftSkillCertificate::findOrFail($id);
+        $appointment->update($request->only(['whatsapp_number']));
+        return redirect()->route('admin.softskill.appointments')->with('success', 'Record updated successfully!');
+    }
+
+    public function deleteSoftSkillAppointment($id)
+    {
+        $appointment = SoftSkillCertificate::findOrFail($id);
+        $appointment->delete();
+
         return response()->json(['status' => 'success']);
     }
 
