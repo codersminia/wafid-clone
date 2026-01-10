@@ -1,187 +1,182 @@
 @extends('layouts.admin')
 
 @section('content')
-
-<style>
-    #imageModalImg {
-        cursor: zoom-in;
-        transition: transform .3s ease;
-    }
-
-    #imageModalImg.zoomed {
-        transform: scale(1.8);
-        cursor: zoom-out;
-    }
-</style>
-
 <div class="container">
-    <div class="card card-custom gutter-b">
+    <div class="card card-custom">
         <div class="card-header">
-            <h3 class="card-title">Edit Registration #SKL-{{ $appointment->id }}</h3>
+            <h3 class="card-title">Edit Softskill Registration #SKL-{{ $appointment->id }}</h3>
         </div>
-
+        
         <form method="POST" action="{{ route('admin.softskill.appointments.update', $appointment->id) }}">
             @csrf
-
             <div class="card-body">
-
-                {{-- WhatsApp --}}
-                <div class="form-group">
-                    <label>WhatsApp Number</label>
-                    <input type="text"
-                           name="whatsapp_number"
-                           class="form-control"
-                           value="{{ $appointment->whatsapp_number }}">
+                <!-- General Information -->
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label for="whatsapp_number">WhatsApp Number:</label>
+                        <input required type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" 
+                            value="{{ $appointment->whatsapp_number }}" placeholder="03xx xxxxxxx">
+                    </div>
                 </div>
 
                 <hr>
-                <h5 class="mb-4">Submitted Documents</h5>
-
+                <h5>Submitted Documents</h5>
                 <div class="row text-center">
-                    {{-- ID Card Front --}}
-                    <div class="col-md-4">
-                        <label class="font-weight-bold">ID Card Front</label>
-                        <img src="{{ asset('uploads/softskill/'.$appointment->id_card_front) }}"
-                             class="img-thumbnail view-image"
-                             style="height:150px; cursor:pointer;"
-                             data-title="ID Card Front"
-                             data-src="{{ asset('uploads/softskill/'.$appointment->id_card_front) }}">
+                    <!-- ID Card Front -->
+                    <div class="col-md-4 mb-4">
+                        <label class="d-block font-weight-bold">ID Card Front</label>                     
+                        <img src="{{ asset('uploads/softskill/' . $appointment->id_card_front) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/softskill/' . $appointment->id_card_front) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/softskill/' . $appointment->id_card_front) }}" download="id_front_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
 
-                    {{-- ID Card Back --}}
-                    <div class="col-md-4">
-                        <label class="font-weight-bold">ID Card Back</label>
-                        <img src="{{ asset('uploads/softskill/'.$appointment->id_card_back) }}"
-                             class="img-thumbnail view-image"
-                             style="height:150px; cursor:pointer;"
-                             data-title="ID Card Back"
-                             data-src="{{ asset('uploads/softskill/'.$appointment->id_card_back) }}">
+                    <!-- ID Card Back -->
+                    <div class="col-md-4 mb-4">
+                        <label class="d-block font-weight-bold">ID Card Back</label>
+                        <img src="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}" download="id_back_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
 
-                    {{-- User Photo --}}
-                    <div class="col-md-4">
-                        <label class="font-weight-bold">User Photo</label>
-                        <img src="{{ asset('uploads/softskill/'.$appointment->user_pic) }}"
-                             class="img-thumbnail view-image"
-                             style="height:150px; cursor:pointer;"
-                             data-title="User Photo"
-                             data-src="{{ asset('uploads/softskill/'.$appointment->user_pic) }}">
+                    <!-- User Photo -->
+                    <div class="col-md-4 mb-4">
+                        <label class="d-block font-weight-bold">User Photo</label>
+                        <img src="{{ asset('uploads/softskill/' . $appointment->user_pic) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/softskill/' . $appointment->user_pic) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/softskill/' . $appointment->user_pic) }}" download="user_photo_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                {{-- Payment Proof --}}
                 @if($appointment->payment)
                     <hr>
-                    <h4 class="text-primary mb-3">Payment Proof</h4>
-
-                    <div class="row bg-light p-4 rounded align-items-center">
-                        <div class="col-md-3">
-                            <strong>Method:</strong><br>
-                            {{ $appointment->payment->payment_method }}
-                        </div>
-
-                        <div class="col-md-3">
-                            <strong>TRX ID:</strong><br>
-                            <span class="text-danger font-weight-bold">
-                                {{ $appointment->payment->transaction_no }}
-                            </span>
-                        </div>
-
-                        <div class="col-md-3">
-                            <strong>WhatsApp:</strong><br>
-                            {{ $appointment->payment->whatsapp_number }}
-                        </div>
-
-                        <div class="col-md-3 text-center">
-                            <button type="button"
-                                    class="btn btn-sm btn-info view-image"
-                                    data-title="Payment Proof"
-                                    data-src="{{ asset('uploads/payments/'.$appointment->payment->proof_image) }}">
-                                View Receipt
-                            </button>
+                    <div class="mt-4">
+                        <h5 class="mb-3">Payment Information</h5>
+                        <div class="row bg-light p-4 rounded">
+                            <div class="col-md-4">
+                                <p class="mb-1 text-muted">Payment Method</p>
+                                <h6 class="font-weight-bold">{{ $appointment->payment->payment_method }}</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="font-weight-bold text-muted text-uppercase small">Mobile/WhatsApp:</label>
+                                <div class="font-weight-bolder">
+                                    @php
+                                        $cleanNumber = preg_replace('/\D/', '', $appointment->payment->whatsapp_number);
+                                    @endphp
+                                    
+                                    <a href="https://wa.me/{{ $cleanNumber }}" 
+                                    target="_blank" 
+                                    class="text-dark text-hover-primary d-flex align-items-center" 
+                                    title="Chat on WhatsApp">
+                                        <i class="fab fa-whatsapp text-success mr-2 font-size-h4"></i>
+                                        {{ $appointment->payment->whatsapp_number }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="mb-1 text-muted">Payment Proof</p>
+                                @if($appointment->payment->proof_image)
+                                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#paymentProofModal">
+                                        <i class="fas fa-eye"></i> View Receipt
+                                    </button>
+                                @else
+                                    <span class="text-muted">No image uploaded</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Modal for Payment Proof -->
+                    <div class="modal fade" id="paymentProofModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Payment Receipt Preview</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <img src="{{ asset('uploads/payments/' . $appointment->payment->proof_image) }}" style="width: 200px; height: auto; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{ asset('uploads/payments/' . $appointment->payment->proof_image) }}" target="_blank" class="btn btn-primary font-weight-bold">Open in New Tab</a>
+                                    <button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <hr>
+                    <div class="alert alert-custom alert-light-warning fade show mb-5" role="alert">
+                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                        <div class="alert-text font-weight-bold">This applicant has not submitted payment proof yet.</div>
+                    </div>
                 @endif
-
             </div>
-
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">
-                    Save Changes
-                </button>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('admin.softskill.appointments') }}" class="btn btn-secondary">Cancel</a>
             </div>
-
         </form>
     </div>
 </div>
 
-{{-- ONE UNIVERSAL IMAGE MODAL --}}
-<div class="modal fade" id="imageModal" tabindex="-1" role="dialog">
+<!-- Modal for Documents -->
+<div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-
             <div class="modal-header">
-                <h5 class="modal-title" id="imageModalTitle">Preview</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
+                <h5 class="modal-title">Document Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
-            <div class="modal-body d-flex justify-content-center align-items-center">
-                <img id="imageModalImg" class="img-fluid">
+            <div class="modal-body text-center">
+                <img id="modalImg" src="" style="max-width: 200px; height: auto; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
             </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-primary" data-dismiss="modal">
-                    Close
-                </button>
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal">Close</button>
             </div>
-
         </div>
     </div>
 </div>
-
-
-<div class="modal fade" id="imageModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="imageModalTitle">Preview</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body p-2">
-                <div class="image-wrapper">
-                    <img id="imageModalImg">
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-primary" data-dismiss="modal">
-                    Close
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @push('scripts')
 <script>
-    $(document).on('click', '.view-image', function () {
-        $('#imageModalTitle').text($(this).data('title'));
-        $('#imageModalImg').attr('src', $(this).data('src'));
-        $('#imageModal').modal('show');
-    });
-    
-    $('#imageModalImg').on('click', function () {
-        $(this).toggleClass('zoomed');
+    $(document).ready(function() {
+        $('.view-image').on('click', function() {
+            var imageSrc = $(this).attr('data-src');
+            $('#modalImg').attr('src', imageSrc);
+        });
+
+        $('#imgModal').on('hidden.bs.modal', function () {
+            $('#modalImg').attr('src', '');
+        });
     });
 </script>
-
 @endpush

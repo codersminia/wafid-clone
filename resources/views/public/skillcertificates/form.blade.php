@@ -222,7 +222,7 @@
                                     <i class="fas fa-id-card fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>ID Card Front</strong></p>
                                     <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
-                                    <input type="file" id="real-idf-input" accept="image/*" class="d-none">
+                                    <input type="file" id="real-idf-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="idf-file-name" class="mt-2 text-success font-weight-bold"></div>
                                 <div id="idf-error" class="text-danger mt-2 small font-weight-bold"></div>
@@ -362,9 +362,9 @@
                             <div class="step-content d-none" id="ph-step-6">
                                 <div class="upload-area text-center p-5 border rounded" id="ph-drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-camera fa-3x text-info mb-3"></i>
-                                    <p>Click to upload <strong>Passport Photo</strong></p>
+                                    <p>Click to upload <strong>Personal Photo</strong></p>
                                     <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
-                                    <input type="file" id="real-ph-input" accept="image/*" class="d-none">
+                                    <input type="file" id="real-ph-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="ph-file-name" class="mt-2 text-success font-weight-bold"></div>
                                 <div id="ph-error" class="text-danger mt-2 small font-weight-bold"></div>

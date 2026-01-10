@@ -704,7 +704,6 @@ class PublicController extends Controller
             'softskill_id'    => 'required|exists:soft_skill_certificates,id',
             'whatsapp_number' => 'required',
             'payment_method'  => 'required',
-            'transaction_no'  => 'required',
             'proof_image'     => 'required|image|max:2048',
             'agreeTerms'      => 'accepted',
         ]);
@@ -717,7 +716,6 @@ class PublicController extends Controller
             'softskill_id'    => $request->softskill_id,
             'whatsapp_number' => $request->whatsapp_number,
             'payment_method'  => $request->payment_method,
-            'transaction_no'  => $request->transaction_no,
             'proof_image'     => $name,
         ]);
 
