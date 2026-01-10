@@ -368,7 +368,6 @@ class PublicController extends Controller
             'passport_no' => 'required|string|max:50',
             'mobile_no' => 'required|string|max:20',
             'payment_method' => 'required|string',
-            'transaction_no' => 'required|string',
             'proof_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'agreeTerms' => 'accepted',
         ], [
@@ -377,7 +376,6 @@ class PublicController extends Controller
             'passport_no.required' => 'Enter passport number',
             'mobile_no.required' => 'Enter phone number',
             'payment_method.required' => 'Select a payment method',
-            'transaction_no.required' => 'Enter transaction number',
             'proof_image.required' => 'Upload your payment screenshot',
             'agreeTerms.accepted' => 'You must agree to the terms and conditions',
         ]);
@@ -393,7 +391,6 @@ class PublicController extends Controller
             'passport_no' => $request->passport_no,
             'mobile_no' => $request->mobile_no,
             'payment_method' => $request->payment_method,
-            'transaction_no' => $request->transaction_no,
             'proof_image' => $randomName,
         ]);
 

@@ -84,14 +84,6 @@
                 </div>
             </div>
 
-            <!-- Important Announcement -->
-            {{-- <div class="alert alert-danger border-0 mb-4" style="background-color: #ffe6e6;">
-                <div class="p-3" style="background-color: #ffeb3b; color: #333; border-radius: 4px;" class="mb-3">
-                    <strong><i class="fas fa-info-circle"></i> Important Notice:</strong>
-                    <p class="mb-0">Pay the full amount of 4,500 and use your appointment number in the transfer reference. Make your payment and upload the proof below for confirmation.</p>
-                </div>
-            </div> --}}
-
             <!-- Payment Details Form -->
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-white border-bottom pt-4 pb-3">
@@ -106,14 +98,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-600">Passport No.</label>
-                                    <input type="text" class="form-control" name="passport_no" placeholder="Enter passport number">
+                                    <!-- Auto-filled from the database -->
+                                    <input type="text" 
+                                        class="form-control" 
+                                        name="passport_no" 
+                                        value="{{ old('passport_no', $appointment->passport_no) }}" 
+                                        placeholder="Enter passport number">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-600">Mobile No.</label>
-                                    <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Enter mobile number">
+                                    <!-- Auto-filled from the 'phone' column in the database -->
+                                    <input type="text" 
+                                        class="form-control" 
+                                        id="mobile_no" 
+                                        name="mobile_no" 
+                                        value="{{ old('mobile_no', $appointment->phone) }}" 
+                                        placeholder="Enter mobile number">
                                 </div>
                             </div>
                         </div>
@@ -130,21 +133,14 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="font-weight-600">Deposit slip No / Trx ID</label>
-                                    <input type="text" class="form-control" name="transaction_no" placeholder="Enter trx id">
-                                </div>
-                            </div>
                         </div>                        
 
                         <!-- Payment Screenshot Upload -->
                         <div class="form-group mb-4">
                             <label for="paymentProof" class="font-weight-600">Upload Payment Screenshot</label>
                             <div id="dropzone" class="border-2 rounded p-4 text-center dropzone-area" style="border: 2px dashed #dc3545; background-color: #fafafa; cursor: pointer !important; transition: all 0.3s ease;">
-                                <input type="file" name="proof_image" class="form-control-file d-none" id="paymentProof" accept="image/*">
-                                <label for="paymentProof" class="cursor-pointer mb-0">
+                                <input type="file" name="proof_image" class="form-control-file d-none" id="paymentProof" accept=".jpg, .jpeg, .png">
+                                <label for="paymentProof" class="cursor-pointer mb-0" style="pointer-events: none;">
                                     <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
                                     <p class="text-muted mb-1"><strong>Drag & drop your payment screenshot here</strong></p>
                                     <p class="text-muted small">or click to select from your device</p>
@@ -262,7 +258,26 @@
             }
         });
 
-        // Display preview function
+        // NEW: Make the entire dropzone div clickable
+        dropzone.addEventListener('click', function (e) {
+            // If the user clicked the 'Remove' button or its icon, don't open the file dialog
+            if (e.target.id === 'removePreview' || e.target.closest('#removePreview')) {
+                return;
+            }
+            fileInput.click();
+        });
+
+        // Update the Remove Preview logic to stop event bubbling
+        removePreview.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevents the click from reaching the 'dropzone' div
+            
+            fileInput.value = '';
+            previewContainer.style.display = 'none';
+            dropzone.querySelector('label').style.display = 'block';
+        });
+
+        // Update displayPreview to hide instructions when image is loaded
         function displayPreview(file) {
             if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
@@ -270,6 +285,8 @@
                     previewImage.src = event.target.result;
                     fileName.textContent = 'File: ' + file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)';
                     previewContainer.style.display = 'block';
+                    
+                    // Hide the "Drag & Drop" instructions so the image is the focus
                     dropzone.querySelector('label').style.display = 'none';
                 };
                 reader.readAsDataURL(file);
@@ -278,13 +295,6 @@
                 fileInput.value = '';
             }
         }
-
-        // Remove preview
-        removePreview.addEventListener('click', function() {
-            fileInput.value = '';
-            previewContainer.style.display = 'none';
-            dropzone.querySelector('label').style.display = 'block';
-        });
 
         document.addEventListener('DOMContentLoaded', function () {
 

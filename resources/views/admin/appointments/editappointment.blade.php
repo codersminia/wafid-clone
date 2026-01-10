@@ -401,7 +401,7 @@
 
                             @if($appointment->payment)
                                 <hr>
-                                <h4 class="text-primary mb-4">Payment Proof</h4>
+                                <h4 class="mb-4">Payment Proof</h4>
 
                                 <div class="row bg-light p-4 rounded align-items-center border">
                                     <div class="col-md-3">
