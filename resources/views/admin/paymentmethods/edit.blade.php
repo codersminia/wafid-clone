@@ -26,9 +26,9 @@
                         <input type="text" name="account_number" class="form-control" value="{{ $method->account_number }}" required>
                     </div>
                     <div class="col-lg-6">
-                        <label>IBAN Number:</label>
-                        <input type="text" name="account_number" class="form-control" value="{{ $method->iban }}">
-                    </div>                    
+                        <label>IBAN Number (Optional):</label>
+                        <input type="text" name="iban" class="form-control" value="{{ $method->iban }}">
+                    </div>                   
                 </div>
 
                 <div class="form-group row">

@@ -747,10 +747,39 @@ class AdminController extends Controller
 
     public function paymentMethodsData(Request $request) {
         $query = PaymentMethod::query();
-        $recordsTotal = PaymentMethod::count();
-        $recordsFiltered = $query->count();
-        $methods = $query->get();
 
+        // 1. Total records (before filtering)
+        $recordsTotal = PaymentMethod::count();
+
+        // 2. Apply Search
+        if ($request->has('search') && !empty($request->input('search')['value'])) {
+            $searchValue = $request->input('search')['value'];
+            $query->where(function($q) use ($searchValue) {
+                $q->where('account_name', 'LIKE', "%{$searchValue}%")
+                ->orWhere('account_title', 'LIKE', "%{$searchValue}%")
+                ->orWhere('account_number', 'LIKE', "%{$searchValue}%");
+            });
+        }
+
+        // 3. Count records after filtering (for pagination calculation)
+        $recordsFiltered = $query->count();
+
+        // 4. Apply Ordering (Optional but recommended)
+        if ($request->has('order')) {
+            $columns = ['id', 'account_name', 'account_title', 'account_number', 'status']; // Map columns to indices
+            $columnIndex = $request->input('order')[0]['column'];
+            $columnDir = $request->input('order')[0]['dir'];
+            if(isset($columns[$columnIndex])) {
+                $query->orderBy($columns[$columnIndex], $columnDir);
+            }
+        }
+
+        // 5. Apply Pagination (Limit and Offset)
+        $start = $request->input('start', 0);
+        $length = $request->input('length', 10);
+        $methods = $query->offset($start)->limit($length)->get();
+
+        // 6. Format Data
         $data = [];
         foreach ($methods as $m) {
             $data[] = [
@@ -760,10 +789,16 @@ class AdminController extends Controller
                 $m->account_number,
                 $m->status,
                 $m->qr_code ? asset('uploads/qr/' . $m->qr_code) : null,
-                $m->id
+                $m->id // Used for actions
             ];
         }
-        return response()->json(['draw' => intval($request->draw), 'recordsTotal' => $recordsTotal, 'recordsFiltered' => $recordsFiltered, 'data' => $data]);
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
     }
 
     public function createPaymentMethod() {
@@ -776,7 +811,7 @@ class AdminController extends Controller
             'account_title' => 'required',
             'account_number' => 'required',
             'iban' => 'nullable',
-            'qr_code' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'qr_code' => 'required|image|mimes:jpeg,png,jpg|max:2048' // Required as requested
         ]);
 
         if ($request->hasFile('qr_code')) {
@@ -786,7 +821,7 @@ class AdminController extends Controller
         }
 
         PaymentMethod::create($data);
-        return redirect()->route('admin.payment.methods.index')->with('success', 'Payment method added!');
+        return redirect()->route('admin.payment.methods.index')->with('success', 'Payment method added successfully!');
     }
 
     public function editPaymentMethod($id) {
@@ -796,17 +831,27 @@ class AdminController extends Controller
 
     public function updatePaymentMethod(Request $request, $id) {
         $method = PaymentMethod::findOrFail($id);
-        $data = $request->all();
+        
+        $data = $request->validate([
+            'account_name' => 'required',
+            'account_title' => 'required',
+            'account_number' => 'required',
+            'iban' => 'nullable',
+            'status' => 'required|in:0,1',
+            'qr_code' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
 
         if ($request->hasFile('qr_code')) {
-            if($method->qr_code) File::delete(public_path('uploads/qr/'.$method->qr_code));
+            if($method->qr_code && file_exists(public_path('uploads/qr/'.$method->qr_code))) {
+                unlink(public_path('uploads/qr/'.$method->qr_code));
+            }
             $imageName = time().'.'.$request->qr_code->extension();
             $request->qr_code->move(public_path('uploads/qr'), $imageName);
             $data['qr_code'] = $imageName;
         }
 
         $method->update($data);
-        return redirect()->route('admin.payment.methods.index')->with('success', 'Updated successfully!');
+        return redirect()->route('admin.payment.methods.index')->with('success', 'Payment method updated successfully!');
     }
 
     public function deletePaymentMethod($id) {

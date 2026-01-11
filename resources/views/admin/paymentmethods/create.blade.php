@@ -42,7 +42,7 @@
 
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="Change QR Code">
                                 <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="qr_code" accept=".png, .jpg, .jpeg"/>
+                                <input type="file" name="qr_code" accept=".png, .jpg, .jpeg" required />
                                 <input type="hidden" name="qr_code_remove"/>
                             </label>
 
