@@ -19,6 +19,7 @@ use App\Models\TasheerPayment;
 use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
 use Illuminate\Support\Facades\DB;
+use App\Models\PaymentMethod;
 
 class PublicController extends Controller
 {
@@ -154,9 +155,12 @@ class PublicController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
 
+        // Fetch only active payment methods
+        $paymentMethods = PaymentMethod::where('status', 1)->get();
+
         $fee = "4,500"; 
 
-        return view('public.appointments.appointment-confirmation', compact('appointment', 'fee'));
+        return view('public.appointments.appointment-confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
 
     public function uploadPaymentProof(Request $request)
@@ -351,6 +355,9 @@ class PublicController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
 
+        // NEW: Fetch active payment methods from the database
+        $paymentMethods = PaymentMethod::where('status', 1)->get();
+
         // Fee calculation based on city
         $fee = match (strtolower($appointment->city)) {
             'gujranwala' => 7000,
@@ -358,7 +365,8 @@ class PublicController extends Controller
             default => 4500,
         };
 
-        return view('public.specialappointments.appointment-confirmation', compact('appointment', 'fee'));
+        // Pass $paymentMethods to the view
+        return view('public.specialappointments.appointment-confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
 
     public function uploadSpecialPaymentProof(Request $request)
@@ -537,10 +545,13 @@ class PublicController extends Controller
             return redirect()->route('navtechform');
         }
 
+        // NEW: Fetch active payment methods
+        $paymentMethods = PaymentMethod::where('status', 1)->get();
+
         // Custom Fee Logic for Navtech
         $fee = 18000; 
 
-        return view('public.navtechappointments.navtech-confirmation', compact('appointment', 'fee'));
+        return view('public.navtechappointments.navtech-confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
 
     public function uploadNavtechPaymentProof(Request $request) {
@@ -618,9 +629,17 @@ class PublicController extends Controller
 
     public function confirmTasheerAppointment() {
         $id = session('tasheer_appointment_id');
-        if (!$id || !$appointment = TasheerAppointment::find($id)) return redirect()->route('tasheer.form');
+        if (!$id || !$appointment = TasheerAppointment::find($id)) {
+            return redirect()->route('tasheer.form');
+        }
+
+        // NEW: Fetch active payment methods
+        $paymentMethods = PaymentMethod::where('status', 1)->get();
+        
         $fee = 500;
-        return view('public.tasheerappointments.confirmation', compact('appointment', 'fee'));
+
+        // Pass $paymentMethods to the view
+        return view('public.tasheerappointments.confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
 
     public function uploadTasheerPaymentProof(Request $request) {
@@ -694,9 +713,17 @@ class PublicController extends Controller
 
     public function softSkillConfirm() {
         $id = session('softskill_id');
-        if (!$id || !$record = SoftSkillCertificate::find($id)) return redirect()->route('softskill.form');
-        $fee = 1500; // Example Fee
-        return view('public.skillcertificates.confirmation', compact('record', 'fee'));
+        if (!$id || !$record = SoftSkillCertificate::find($id)) {
+            return redirect()->route('softskill.form');
+        }
+
+        // NEW: Fetch active payment methods from the database
+        $paymentMethods = PaymentMethod::where('status', 1)->get();
+
+        $fee = 1500; 
+
+        // Pass $paymentMethods to the view
+        return view('public.skillcertificates.confirmation', compact('record', 'fee', 'paymentMethods'));
     }
 
     public function softSkillPaymentUpload(Request $request) {

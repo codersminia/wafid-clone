@@ -46,43 +46,31 @@
                 </div>
                 <div class="card-body p-4">
                     <div class="row">
-                        <!-- QR Codes Section -->
-                        <div class="col-lg-12 mb-4 mb-lg-0">
-                            <div class="row">
-                                <div class="col-md-6 text-left mb-4">
-                                    <div class="p-3 m-3 border rounded row" style="background-color: #fff9e6;box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
-                                        <div class="col-md-6">
-                                            <img src="{{asset('assets/public/images/qrcode.jpg')}}?height=180&width=180" alt="QR Code 1" class="img-fluid mb-3" style="max-width: 150px;">
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <p class="small text-dark mb-2"><span style="font-weight:600">Account: </span>Jazz Cash</p>
-                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">Account Title: </span> Mahad Butt</p>
-                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">Account Number: </span> 19123456789</p>
-                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">IBAN Number: </span> 19123456789</p>
-                                        </div>                        
+                        @foreach($paymentMethods as $method)
+                            <div class="col-md-6 text-left mb-4">
+                                <div class="p-3 border rounded h-100 row mx-0" style="background-color: #fff9e6; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                                    <div class="col-md-5 text-center">
+                                        @if($method->qr_code)
+                                            <img src="{{ asset('uploads/qr/' . $method->qr_code) }}" alt="QR Code" class="img-fluid mb-3" style="max-width: 140px; border: 1px solid #ddd; padding: 5px; background: #fff;">
+                                        @else
+                                            <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 140px; background: #eee; border: 1px dashed #ccc;">No QR Code</div>
+                                        @endif
                                     </div>
-                                </div>
-                                <div class="col-md-6 text-left mb-4">
-                                    <div class="p-3 m-3 border rounded row" style="background-color: #fff9e6;box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
-                                        <div class="col-md-6">
-                                            <img src="{{asset('assets/public/images/qrcode.jpg')}}?height=180&width=180" alt="QR Code 1" class="img-fluid mb-3" style="max-width: 150px;">
-                                        </div>
 
-                                        <div class="col-md-6">
-                                            <p class="small text-dark mb-2"><span style="font-weight:600">Account: </span>Meezan Bank</p>
-                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">Account Title: </span> Mahad Butt</p>
-                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">Account Number: </span> 19123456789</p>
-                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">IBAN Number: </span> 19123456789</p>
-                                        </div>  
-                                    </div>
+                                    <div class="col-md-7">
+                                        <p class="small text-dark mb-2"><span style="font-weight:600">Account: </span>{{ $method->account_name }}</p>
+                                        <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">Account Title: </span> {{ $method->account_title }}</p>
+                                        <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">Account Number: </span> {{ $method->account_number }}</p>
+                                        @if($method->iban)
+                                            <p class="small font-weight-600 text-dark mb-2"><span style="font-weight:600">IBAN: </span> {{ $method->iban }}</p>
+                                        @endif
+                                    </div>                        
                                 </div>
                             </div>
-                        </div>
-                        
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            </div>            
 
             <!-- Payment Details Form -->
             <div class="card mb-4 shadow-sm">
@@ -121,15 +109,15 @@
                             </div>
                         </div>
 
-
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-600">Payment Method</label>
                                     <select class="form-control p-2" name="payment_method">
                                         <option value="">Select Payment Method</option>
-                                        <option value="bank">Bank Transfer</option>
-                                        <option value="jazzcash">Jazzcash</option>
+                                        @foreach($paymentMethods as $method)
+                                            <option value="{{ $method->account_name }}">{{ $method->account_name }} ({{ $method->account_title }})</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
