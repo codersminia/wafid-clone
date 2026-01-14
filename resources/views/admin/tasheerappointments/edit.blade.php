@@ -10,24 +10,30 @@
             <div class="card-body">
                 <!-- General Information -->
                 <div class="form-group row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <label for="embassy">Embassy Center:</label>
                         <select required name="embassy" class="form-control" id="embassy">
                             <option value="">Select Center</option>
-                            @php
-                                $centers = ['Karachi', 'Lahore', 'Islamabad', 'Peshawar', 'Quetta'];
-                            @endphp
+                            @php $centers = ['Karachi', 'Islamabad']; @endphp
                             @foreach($centers as $center)
-                                <option value="{{ $center }}" {{ $appointment->embassy == $center ? 'selected' : '' }}>
-                                    {{ $center }}
-                                </option>
+                                <option value="{{ $center }}" {{ $appointment->embassy == $center ? 'selected' : '' }}>{{ $center }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <label for="etimad_center">Etimad Center:</label>
+                        <select required name="etimad_center" class="form-control" id="etimad_center">
+                            <option value="">Select Center</option>
+                            @php $e_centers = ['Lahore', 'Islamabad']; @endphp
+                            @foreach($e_centers as $ec)
+                                <option value="{{ $ec }}" {{ $appointment->etimad_center == $ec ? 'selected' : '' }}>{{ $ec }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
                         <label for="whatsapp_number">WhatsApp Number:</label>
                         <input required type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" 
-                            value="{{ $appointment->whatsapp_number }}" placeholder="03xx xxxxxxx">
+                            value="{{ $appointment->whatsapp_number }}">
                     </div>
                 </div>
 

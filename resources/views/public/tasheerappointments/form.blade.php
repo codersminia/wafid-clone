@@ -119,16 +119,23 @@
                                 <h5 class="section-title">General Information</h5>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="embassy">Embassy / Visa Center</label>
+                                        <label for="embassy">Visa Embassy</label>
                                         <select name="embassy" class="form-control" id="embassy">
                                             <option value="">Select Center</option>
-                                            <option value="Karachi">Tasheer Karachi</option>
-                                            <option value="Lahore">Tasheer Lahore</option>
-                                            <option value="Islamabad">Tasheer Islamabad</option>
-                                            <option value="Peshawar">Tasheer Peshawar</option>
-                                            <option value="Quetta">Tasheer Quetta</option>
+                                            <option value="Karachi">Karachi</option>
+                                            <option value="Islamabad">Islamabad</option>
                                         </select>
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="etimad_center">Etimad Center</label> <!-- Changed ID and Label -->
+                                        <select name="etimad_center" class="form-control" id="etimad_center"> <!-- Changed Name and ID -->
+                                            <option value="">Select Center</option>
+                                            <option value="Lahore">Lahore</option>
+                                            <option value="Islamabad">Islamabad</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">                                    
                                     <div class="form-group col-md-6">
                                         <label for="whatsapp_number">WhatsApp Number</label>
                                         <input type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" placeholder="03xx xxxxxxx">

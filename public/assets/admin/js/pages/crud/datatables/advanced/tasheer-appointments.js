@@ -8,12 +8,12 @@ var TasheerTable = function () {
             ajax: { url: "/admin/tasheer-appointments/data", type: "GET" },
             order: [[0, 'desc']],
             columns: [
-                { data: 0 }, { data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, { data: 5 }, 
-                { data: 6, visible: false }, { data: 7, visible: false }
+                { data: 0 }, { data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, { data: 5 }, { data: 6 }, 
+                { data: 7, visible: false }, { data: 8, visible: false } // Shifted hidden indices
             ],
             columnDefs: [
                 {
-                    targets: 2, // WhatsApp
+                    targets: 3, // WhatsApp (was 2)
                     render: function (data) {
                         let clean = data.replace(/\D/g, '');
                         if (clean.startsWith('0')) clean = '92' + clean.substring(1);
@@ -21,22 +21,22 @@ var TasheerTable = function () {
                     }
                 },
                 {
-                    targets: 3, // Status
+                    targets: 4, // Status (was 3)
                     render: function (data) {
                         var s = { 0: { t: 'Pending', c: 'label-light-warning' }, 1: { t: 'Paid', c: 'label-light-success' } };
                         return `<span class="label label-lg font-weight-bold ${s[data].c} label-inline">${s[data].t}</span>`;
                     }
                 },
                 {
-                    targets: 5, // Actions
+                    targets: 6, // Actions (was 5)
                     render: function (data, type, full) {
-                        var id = full[6];
+                        var id = full[7]; // Shifted from 6
                         return `<a href="/admin/tasheer-appointments/${id}/edit" class="btn btn-sm btn-clean btn-icon"><i class="la la-edit"></i></a>
                                 <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-tasheer" data-id="${id}"><i class="la la-trash"></i></a>`;
                     }
                 }
             ],
-            createdRow: function(row, data) { if (data[7] == 1) $(row).addClass('new-record'); }
+            createdRow: function(row, data) { if (data[8] == 1) $(row).addClass('new-record'); } // Shifted from 7
         });
     };
     return { init: function () { init(); } };

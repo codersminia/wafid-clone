@@ -8,7 +8,7 @@
         <div class="card-body">
             <table class="table table-striped table-head-custom table-checkable" id="tasheer_datatable">
                 <thead class="thead-dark">
-                    <tr><th>ID</th><th>Embassy</th><th>WhatsApp</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+                    <tr><th>ID</th><th>Embassy</th><th>Etimad Center</th><th>WhatsApp</th><th>Status</th><th>Date</th><th>Actions</th></tr>
                 </thead>
                 <tbody></tbody>
             </table>

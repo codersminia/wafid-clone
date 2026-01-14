@@ -599,6 +599,7 @@ class PublicController extends Controller
     public function tasheerStore(Request $request) {
         $validator = Validator::make($request->all(), [
             'embassy'         => 'required|string',
+            'etimad_center'   => 'required|string', // Added validation
             'whatsapp_number' => 'required|string',
             'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -608,7 +609,8 @@ class PublicController extends Controller
         }
 
         try {
-            $data = $request->only(['embassy', 'whatsapp_number']);
+            // Updated to include etimad_center in the array
+            $data = $request->only(['embassy', 'etimad_center', 'whatsapp_number']);
             $data['is_new'] = true;
 
             if ($request->hasFile('passport_pic')) {

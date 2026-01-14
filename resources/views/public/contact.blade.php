@@ -74,7 +74,7 @@
                                     <label for="contactMessage">Message</label>
                                     <textarea class="form-control" id="contactMessage" rows="6" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-dark btn-lg">Send Message</button>
+                                <button type="submit" class="btn btn-dark">Send Message</button>
                             </form>
                         </div>
                     </div>

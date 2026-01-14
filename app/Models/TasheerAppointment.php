@@ -12,6 +12,7 @@ class TasheerAppointment extends Model
 
     protected $fillable = [
         'embassy',
+        'etimad_center',
         'whatsapp_number',
         'passport_pic',
         'is_new'

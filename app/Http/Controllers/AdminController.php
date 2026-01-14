@@ -589,9 +589,10 @@ class AdminController extends Controller
         $columns = [
             0 => 'id',
             1 => 'embassy',
-            2 => 'whatsapp_number',
-            3 => 'id', // Status column sorting
-            4 => 'created_at',
+            2 => 'etimad_center', // Added this
+            3 => 'whatsapp_number',
+            4 => 'id', // Status column sorting
+            5 => 'created_at',
         ];
 
         $query = TasheerAppointment::with('payment');
@@ -600,6 +601,7 @@ class AdminController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('embassy', 'like', "%$search%")
+                ->orWhere('etimad_center', 'like', "%$search%") // Added this
                 ->orWhere('whatsapp_number', 'like', "%$search%");
             });
         }
@@ -620,12 +622,13 @@ class AdminController extends Controller
             $data[] = [
                 $a->id,                          // 0
                 $a->embassy,                     // 1
-                $a->whatsapp_number,             // 2
-                $a->payment ? 1 : 0,             // 3: Status (Paid/Pending)
-                $a->created_at->format('d M Y'), // 4
-                '',                              // 5: Actions placeholder
-                $a->id,                          // 6: Hidden ID
-                $a->is_new                       // 7: Hidden is_new
+                $a->etimad_center,               // 2 (New)
+                $a->whatsapp_number,             // 3
+                $a->payment ? 1 : 0,             // 4: Status
+                $a->created_at->format('d M Y'), // 5
+                '',                              // 6: Actions
+                $a->id,                          // 7: Hidden ID
+                $a->is_new                       // 8: Hidden is_new
             ];
         }
 
@@ -654,6 +657,7 @@ class AdminController extends Controller
         
         $request->validate([
             'embassy' => 'required',
+            'etimad_center' => 'required', // Added validation
             'whatsapp_number' => 'required',
         ]);
 
