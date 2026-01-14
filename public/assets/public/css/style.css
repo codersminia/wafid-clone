@@ -843,3 +843,50 @@ html {
 #loaderOverlay .loader-content {
   text-align: center;
 }
+
+
+/* ============================================
+   FAQ ACCORDION STYLES
+   ============================================ */
+
+#faqAccordion .card-header {
+    padding: 0;
+    background-color: #fff;
+}
+
+#faqAccordion .btn-link {
+    display: flex; /* Aligns text and arrow */
+    justify-content: space-between; /* Pushes arrow to the right */
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+#faqAccordion .btn-link:hover {
+    color: var(--accent-red);
+    background-color: #f8f9fa;
+}
+
+/* Style when the menu is OPEN */
+#faqAccordion .btn-link:not(.collapsed) {
+    color: var(--accent-red);
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-light); /* Optional separator */
+}
+
+/* The Arrow Icon */
+.faq-arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+#faqAccordion .btn-link:not(.collapsed) .faq-arrow {
+    transform: rotate(180deg); /* Flip the arrow up */
+    color: var(--accent-red);
+}

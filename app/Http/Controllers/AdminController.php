@@ -18,7 +18,9 @@ use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
 use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
+use App\Models\Faq;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -883,6 +885,143 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('success', 'Appointment fees updated successfully.');
+    }
+
+    public function showFaqPage()
+    {
+        return view('admin.faqs.index');
+    }
+
+    public function fetchFaqData(Request $request)
+    {
+        // 1. Basic Query
+        $query = Faq::query();
+
+        // 2. Count Total Records (before filtering)
+        $totalRecords = $query->count();
+
+        // 3. Search Logic
+        // DataTables sends search value in $request->input('search')['value']
+        if ($searchValue = $request->input('search.value')) {
+            $query->where(function($q) use ($searchValue) {
+                $q->where('question', 'LIKE', "%{$searchValue}%")
+                  ->orWhere('answer', 'LIKE', "%{$searchValue}%");
+            });
+        }
+
+        // 4. Count Filtered Records (after search, before pagination)
+        $filteredRecords = $query->count();
+
+        // 5. Sorting Logic
+        // Map DataTables column index to Database column name
+        $columns = ['id', 'question', 'answer', 'status']; 
+        
+        if ($request->has('order')) {
+            $orderColumnIndex = $request->input('order.0.column');
+            $orderDirection = $request->input('order.0.dir'); // asc or desc
+
+            // Ensure we don't try to sort by the "Actions" column (index 4)
+            if (isset($columns[$orderColumnIndex])) {
+                $query->orderBy($columns[$orderColumnIndex], $orderDirection);
+            }
+        } else {
+            // Default Sort
+            $query->orderBy('created_at', 'desc');
+        }
+
+        // 6. Pagination Logic
+        $start  = $request->input('start');  // Offset
+        $length = $request->input('length'); // Limit
+
+        // Apply pagination only if length is valid (not -1 for "All")
+        if ($length != -1) {
+            $query->skip($start)->take($length);
+        }
+
+        $faqs = $query->get();
+
+        // 7. Format Data for Display
+        $data = [];
+        foreach ($faqs as $faq) {
+            $statusBadge = $faq->status == 1 
+                ? '<span class="label label-light-success label-inline">Active</span>' 
+                : '<span class="label label-light-danger label-inline">Inactive</span>';
+
+            $buttons = '<a href="'.route('admin.faqs.edit', $faq->id).'" class="btn btn-sm btn-clean btn-icon" title="Edit"><i class="la la-edit"></i></a>
+                        <button class="btn btn-sm btn-clean btn-icon delete-btn" data-id="'.$faq->id.'" title="Delete"><i class="la la-trash"></i></button>';
+
+            $data[] = [
+                $faq->id,
+                $faq->question,
+                Str::limit($faq->answer, 50),
+                $statusBadge,
+                $buttons
+            ];
+        }
+
+        // 8. Return JSON
+        return response()->json([
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data"            => $data
+        ]);
+    }
+
+    public function addFaqForm()
+    {
+        return view('admin.faqs.create');
+    }
+
+    public function saveFaqEntry(Request $request)
+    {
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+            'status' => 'required|in:0,1',
+        ]);
+
+        Faq::create([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'status' => $request->status
+        ]);
+
+        return redirect()->route('admin.faqs.page')->with('success', 'FAQ Added Successfully');
+    }
+
+    public function editFaqForm($id)
+    {
+        $faq = Faq::findOrFail($id);
+        return view('admin.faqs.edit', compact('faq'));
+    }
+
+    public function updateFaqEntry(Request $request, $id)
+    {
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+            'status' => 'required|in:0,1',
+        ]);
+
+        $faq = Faq::findOrFail($id);
+        $faq->update([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'status' => $request->status
+        ]);
+
+        return redirect()->route('admin.faqs.page')->with('success', 'FAQ Updated Successfully');
+    }
+
+    public function removeFaqEntry($id)
+    {
+        $faq = Faq::find($id);
+        if($faq) {
+            $faq->delete();
+            return response()->json(['success' => 'Deleted successfully']);
+        }
+        return response()->json(['error' => 'Not found'], 404);
     }
 
 }

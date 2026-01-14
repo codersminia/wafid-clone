@@ -21,6 +21,7 @@ use App\Models\SoftSkillPayment;
 use Illuminate\Support\Facades\DB;
 use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
+use App\Models\Faq;
 
 class PublicController extends Controller
 {
@@ -39,7 +40,10 @@ class PublicController extends Controller
 
     public function faq()
     {
-        return view('public.faq');
+        // Fetch active FAQs
+        $faqs = Faq::where('status', 1)->get();
+
+        return view('public.faq', compact('faqs'));
     }
 
     public function contactus(){

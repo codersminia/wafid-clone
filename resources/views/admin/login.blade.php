@@ -23,9 +23,9 @@
             <div class="login-form text-center p-7 position-relative overflow-hidden">
 
                 <!-- Logo -->
-                <div class="d-flex flex-center mb-15">
-                    <a href="#">
-                        <img src="{{ asset('assets/admin/media/logos/logo-letter-13.png') }}" class="max-h-75px" alt=""/>
+                <div class="d-flex flex-center">
+                    <a href="{{ route('admin.dashboard') }}">
+                        <img src="{{ asset('assets/admin/media/logos/gmc_logo.png') }}" width="150px" height="150px" alt=""/>
                     </a>
                 </div>
 

@@ -266,16 +266,35 @@
                                 <li class="menu-item" aria-haspopup="true">
                                     <a href="{{ route('admin.fees.edit') }}" class="menu-link">
                                         <span class="svg-icon menu-icon">
-                                            <!-- Dollar Sign / Settings Icon -->
+                                            <!-- Banknote Icon -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24"/>
-                                                    <circle fill="#000000" cx="12" cy="12" r="10" opacity="0.3"/>
-                                                    <path d="M12,16 C12.5522847,16 13,16.4477153 13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 C11,16.4477153 11.4477153,16 12,16 Z M10.591,14.868 L10.591,13.209 L11.851,13.209 C13.447,13.209 13.902,13.07 14.134,12.735 C14.366,12.4 14.31,11.856 13.966,11.103 L13.562,10.223 C13.31,9.671 13.286,9.273 13.49,9.029 C13.694,8.785 14.122,8.663 14.774,8.663 L16.11,8.663 L16.11,10.155 L15.11,10.155 C13.95,10.155 13.618,10.283 13.426,10.539 C13.234,10.795 13.27,11.231 13.534,11.847 L13.938,12.791 C14.286,13.603 14.282,14.087 13.926,14.475 C13.57,14.863 12.878,15.057 11.85,15.057 L10.591,15.057 L10.591,14.868 Z" fill="#000000" transform="translate(13.350500, 13.331500) scale(-1, 1) translate(-13.350500, -13.331500) "/>
+                                                    <!-- Faded Card Background -->
+                                                    <rect fill="#000000" opacity="0.3" x="2" y="6" width="20" height="12" rx="2"/>
+                                                    <!-- Solid Circle/Dollar Center -->
+                                                    <circle fill="#000000" cx="12" cy="12" r="3"/>
                                                 </g>
                                             </svg>
                                         </span>
                                         <span class="menu-text">Appointment Fees</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item" aria-haspopup="true">
+                                    <a href="{{ route('admin.faqs.page') }}" class="menu-link">
+                                        <span class="svg-icon menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <!-- The Bubble -->
+                                                    <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776219,3 C21.8728676,3 23.0039377,4.13107011 23.0039377,5.52631579 L23.0039377,13.1052632 C23.0039377,14.5005089 21.8728676,15.6315789 20.4776219,15.6315789 L16,15.6315789 Z" fill="#000000"/>
+                                                    <!-- The Question Mark / Dot -->
+                                                    <rect fill="#000000" opacity="0.3" x="2" y="9" width="15" height="12" rx="2"/>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="menu-text">FAQs</span>
                                     </a>
                                 </li>
                             </ul>
