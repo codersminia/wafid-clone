@@ -20,9 +20,13 @@ use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
 use Illuminate\Support\Facades\DB;
 use App\Models\PaymentMethod;
+use App\Models\AppointmentFee;
 
 class PublicController extends Controller
 {
+    private function getFee($key, $default = 0) {
+        return AppointmentFee::where('fee_key', $key)->value('amount') ?? $default;
+    }
     public function index()
     {
         return view('public.home');
@@ -158,7 +162,9 @@ class PublicController extends Controller
         // Fetch only active payment methods
         $paymentMethods = PaymentMethod::where('status', 1)->get();
 
-        $fee = "4,500"; 
+        // DYNAMIC FEE
+        $rawFee = $this->getFee('wafid_fee', 4500);
+        $fee = number_format($rawFee); // Converts 4500 to "4,500"
 
         return view('public.appointments.appointment-confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
@@ -358,12 +364,19 @@ class PublicController extends Controller
         // NEW: Fetch active payment methods from the database
         $paymentMethods = PaymentMethod::where('status', 1)->get();
 
-        // Fee calculation based on city
-        $fee = match (strtolower($appointment->city)) {
-            'gujranwala' => 7000,
-            'lahore' => 12000,
-            default => 4500,
+        // DYNAMIC FEE WITH CITY LOGIC
+        // We fetch the values from DB first to ensure they are dynamic
+        $gujranwalaFee = $this->getFee('special_gujranwala', 7000);
+        $lahoreFee     = $this->getFee('special_lahore', 12000);
+        $defaultFee    = $this->getFee('special_default', 4500);
+
+        $rawFee = match (strtolower($appointment->city)) {
+            'gujranwala' => $gujranwalaFee,
+            'lahore'     => $lahoreFee,
+            default      => $defaultFee,
         };
+        
+        $fee = number_format($rawFee); // Optional formatting if view expects "7,000"
 
         // Pass $paymentMethods to the view
         return view('public.specialappointments.appointment-confirmation', compact('appointment', 'fee', 'paymentMethods'));
@@ -548,8 +561,8 @@ class PublicController extends Controller
         // NEW: Fetch active payment methods
         $paymentMethods = PaymentMethod::where('status', 1)->get();
 
-        // Custom Fee Logic for Navtech
-        $fee = 18000; 
+        // DYNAMIC FEE
+        $fee = $this->getFee('navtech_fee', 18000); // Returns integer 18000 
 
         return view('public.navtechappointments.navtech-confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
@@ -638,7 +651,8 @@ class PublicController extends Controller
         // NEW: Fetch active payment methods
         $paymentMethods = PaymentMethod::where('status', 1)->get();
         
-        $fee = 500;
+        // DYNAMIC FEE
+        $fee = $this->getFee('tasheer_fee', 500);
 
         // Pass $paymentMethods to the view
         return view('public.tasheerappointments.confirmation', compact('appointment', 'fee', 'paymentMethods'));
@@ -725,7 +739,8 @@ class PublicController extends Controller
         // NEW: Fetch active payment methods from the database
         $paymentMethods = PaymentMethod::where('status', 1)->get();
 
-        $fee = 1500; 
+        // DYNAMIC FEE
+        $fee = $this->getFee('softskill_fee', 1500); 
 
         // Pass $paymentMethods to the view
         return view('public.skillcertificates.confirmation', compact('record', 'fee', 'paymentMethods'));

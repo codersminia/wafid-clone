@@ -17,6 +17,7 @@ use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
 use App\Models\PaymentMethod;
+use App\Models\AppointmentFee;
 use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
@@ -863,6 +864,25 @@ class AdminController extends Controller
         if($method->qr_code) File::delete(public_path('uploads/qr/'.$method->qr_code));
         $method->delete();
         return response()->json(['status' => 'success']);
+    }
+
+    public function editfee()
+    {
+        // Fetch all fees keyed by their 'fee_key' for easy access in view
+        $fees = AppointmentFee::all()->pluck('amount', 'fee_key');
+        
+        return view('admin.fees.edit', compact('fees'));
+    }
+
+    public function updatefee(Request $request)
+    {
+        $data = $request->except('_token');
+
+        foreach ($data as $key => $amount) {
+            AppointmentFee::where('fee_key', $key)->update(['amount' => $amount]);
+        }
+
+        return redirect()->back()->with('success', 'Appointment fees updated successfully.');
     }
 
 }

@@ -30,7 +30,7 @@
                         </h5>
                         <p class="mb-0">
                             <strong>
-                                Fee Amount: {{ number_format($fee) }} PKR
+                                Fee Amount: {{ $fee }} PKR
                             </strong>
                             - Payment is required to confirm your appointment.
                             Please proceed with payment using the account details below.

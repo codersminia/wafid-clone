@@ -127,4 +127,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
         Route::post('/{id}/update', [AdminController::class, 'updatePaymentMethod'])->name('update');
         Route::delete('/{id}', [AdminController::class, 'deletePaymentMethod'])->name('delete');
     });
+
+    Route::get('appointment-fees', [AdminController::class, 'editfee'])->name('fees.edit');
+    Route::post('appointment-fees/update', [AdminController::class, 'updatefee'])->name('fees.update');
 });
