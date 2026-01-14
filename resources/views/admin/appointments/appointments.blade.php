@@ -20,7 +20,7 @@
                 <div class="card-header flex-wrap py-5">
                     <div class="card-title">
                         <h3 class="card-label">
-                            Appointments
+                            Wafid Appointments
                         </h3>
                     </div>                    
                 </div>

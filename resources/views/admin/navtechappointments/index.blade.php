@@ -9,7 +9,7 @@
         <div class="container">
             <div class="card card-custom">
                 <div class="card-header flex-wrap py-5">
-                    <div class="card-title"><h3 class="card-label">Navtech Appointments</h3></div>
+                    <div class="card-title"><h3 class="card-label">NAVTTC Appointments</h3></div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-head-custom table-checkable" id="navtech_datatable">

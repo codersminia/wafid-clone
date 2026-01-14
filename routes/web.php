@@ -21,22 +21,22 @@ Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contactus');
 
 // Appointments
-Route::get('/medical-examination', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
+Route::get('/wafid-appointment', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
 Route::post('/appointment/store', [PublicController::class, 'storeAppointment'])->name('appointment.store');
-Route::get('/appointment/confirmation', [PublicController::class, 'confirmAppointment'])->name('appointment.confirmation');
+Route::get('/wafid-appointment/confirmation', [PublicController::class, 'confirmAppointment'])->name('appointment.confirmation');
 Route::post('/payment/upload-proof', [PublicController::class, 'uploadPaymentProof'])->name('payment.uploadProof');
-Route::get('/thank-you', [PublicController::class, 'thankYou'])->name('thank.you');
+Route::get('/wafid-appointment/thank-you', [PublicController::class, 'thankYou'])->name('thank.you');
 
 
 Route::get('medical-status-search', [PublicController::class, 'ViewMedicalReport'])->name('ViewMedicalReport');
 Route::post('medical-results/save', [PublicController::class, 'saveMedicalReport'])->name('medicalResults.save');
 
 // Special Appointments
-Route::get('/special-appointment', [PublicController::class, 'specialAppointmentForm'])->name('special.appointment');
+Route::get('/wafid-special-appointment', [PublicController::class, 'specialAppointmentForm'])->name('special.appointment');
 Route::post('/special-appointment/store', [PublicController::class, 'storeSpecialAppointment'])->name('special.store');
-Route::get('/special-appointment/confirmation', [PublicController::class, 'confirmSpecialAppointment'])->name('special.confirm');
+Route::get('/wafid-special-appointment/confirmation', [PublicController::class, 'confirmSpecialAppointment'])->name('special.confirm');
 Route::post('/special-payment/upload-proof', [PublicController::class, 'uploadSpecialPaymentProof'])->name('special.payment.upload');
-Route::get('/special-thank-you', [PublicController::class, 'specialThankYou'])->name('special.thankyou');
+Route::get('/wafid-special-appointment/thank-you', [PublicController::class, 'specialThankYou'])->name('special.thankyou');
 
 // medical center search
 Route::get('medical-center-search', [PublicController::class, 'medicalCenters'])->name('ViewMedicalCenters');
@@ -44,11 +44,11 @@ Route::get('medical-center-search', [PublicController::class, 'medicalCenters'])
 // Route to handle the AJAX search
 Route::post('/medical-centers/search', [PublicController::class, 'search'])->name('medical.search');
 
-Route::get('navtech-appointment', [PublicController::class, 'navtechform'])->name('navtechform');
-Route::post('navtech-appointment', [PublicController::class, 'navtechstore'])->name('navtechform.store');
-Route::get('navtech-thank-you', [PublicController::class, 'navtechThankYou'])->name('navtech.thankyou');
+Route::get('navttc-appointment', [PublicController::class, 'navtechform'])->name('navtechform');
+Route::post('navttc-appointment', [PublicController::class, 'navtechstore'])->name('navtechform.store');
+Route::get('navttc-thank-you', [PublicController::class, 'navtechThankYou'])->name('navtech.thankyou');
 
-Route::get('navtech-confirmation', [PublicController::class, 'confirmNavtechAppointment'])->name('navtech.confirm');
+Route::get('navttc-confirmation', [PublicController::class, 'confirmNavtechAppointment'])->name('navtech.confirm');
 Route::post('navtech-payment-upload', [PublicController::class, 'uploadNavtechPaymentProof'])->name('navtech.payment.upload');
 
 // Tasheer Appointment Routes
@@ -99,11 +99,11 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::delete('/special-appointments/{id}', [AdminController::class, 'deleteSpecialAppointment'])->name('special.appointments.delete');
 
     // Navtech Appointments
-    Route::get('/navtech-appointments', [AdminController::class, 'allNavtechAppointments'])->name('navtech.appointments');
-    Route::get('/navtech-appointments/data', [AdminController::class, 'navtechAppointmentsData'])->name('navtech.appointments.data');
-    Route::get('/navtech-appointments/{id}/edit', [AdminController::class, 'editNavtechAppointment'])->name('navtech.appointments.edit');
-    Route::post('/navtech-appointments/{id}/update', [AdminController::class, 'updateNavtechAppointment'])->name('navtech.appointments.update');
-    Route::delete('/navtech-appointments/{id}', [AdminController::class, 'deleteNavtechAppointment'])->name('navtech.appointments.delete');
+    Route::get('/navttc-appointments', [AdminController::class, 'allNavtechAppointments'])->name('navtech.appointments');
+    Route::get('/navttc-appointments/data', [AdminController::class, 'navtechAppointmentsData'])->name('navtech.appointments.data');
+    Route::get('/navttc-appointments/{id}/edit', [AdminController::class, 'editNavtechAppointment'])->name('navtech.appointments.edit');
+    Route::post('/navttc-appointments/{id}/update', [AdminController::class, 'updateNavtechAppointment'])->name('navtech.appointments.update');
+    Route::delete('/navttc-appointments/{id}', [AdminController::class, 'deleteNavtechAppointment'])->name('navtech.appointments.delete');
 
     // Tasheer Appointments Admin Routes
     Route::get('/tasheer-appointments', [AdminController::class, 'allTasheerAppointments'])->name('tasheer.appointments');

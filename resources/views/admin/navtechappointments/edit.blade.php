@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="card card-custom">
-        <div class="card-header"><h3 class="card-title">Edit Navtech Appointment</h3></div>
+        <div class="card-header"><h3 class="card-title">Edit NAVTTC Appointment</h3></div>
         <form method="POST" action="{{ route('admin.navtech.appointments.update', $appointment->id) }}">
             @csrf
             <div class="card-body">

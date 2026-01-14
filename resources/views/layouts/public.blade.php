@@ -35,8 +35,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown">Services</a>
                         <div class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <a class="dropdown-item" href="{{ route('medicalExamination')}}">Medical Examinations</a>
-                            <a class="dropdown-item" href="medical-centers.html">Medical Centers</a>
+                            <a class="dropdown-item" href="{{ route('medicalExamination')}}">Wafid Appointments</a>
+                            <a class="dropdown-item" href="{{ route('special.appointment')}}">Wafid Special Appointments</a>
+                            <a class="dropdown-item" href="{{ route('navtechform')}}">NAVTTC Appointments</a>
+                            <a class="dropdown-item" href="{{ route('tasheer.form')}}">Tasheer Appointments</a>
+                            <a class="dropdown-item" href="{{ route('softskill.form')}}">Soft Skill Certificates</a>
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('guidelines') }}">Guidelines</a></li>

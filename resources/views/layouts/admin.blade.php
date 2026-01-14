@@ -149,130 +149,108 @@
                                     <h4 class="menu-text">Modules</h4>
                                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                                 </li>
+                                <!-- Wafid Appointments - Calendar Icon -->
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                     <a href="{{ route('admin.appointments') }}" class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24" />
-                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000"
-                                                        opacity="0.3"
-                                                    />
+                                                    <path d="M6,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 Z" fill="#000000" opacity="0.3" />
+                                                    <path d="M10,12 L11,12 C11.5522847,12 12,12.4477153 12,13 L12,14 C12,14.5522847 11.5522847,15 11,15 L10,15 C9.44771525,15 9,14.5522847 9,14 L9,13 C9,12.4477153 9.44771525,12 10,12 Z M14,12 L15,12 C15.5522847,12 16,12.4477153 16,13 L16,14 C16,14.5522847 15.5522847,15 15,15 L14,15 C13.4477153,15 13,14.5522847 13,14 L13,13 C13,12.4477153 13.4477153,12 14,12 Z M10,16 L11,16 C11.5522847,16 12,16.4477153 12,17 L12,18 C12,18.5522847 11.5522847,19 11,19 L10,19 C9.44771525,19 9,18.5522847 9,18 L9,17 C9,16.4477153 9.44771525,16 10,16 Z M14,16 L15,16 C15.5522847,16 16,16.4477153 16,17 L16,18 C16,18.5522847 15.5522847,19 15,19 L14,19 C13.4477153,19 13,18.5522847 13,18 L13,17 C13,16.4477153 13.4477153,16 14,16 Z" fill="#000000" />
+                                                    <rect fill="#000000" x="8" y="2" width="2" height="4" rx="1" />
+                                                    <rect fill="#000000" x="14" y="2" width="2" height="4" rx="1" />
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
                                         </span>
-                                        <span class="menu-text">Medical Appointments</span>
+                                        <span class="menu-text">Wafid Appointments</span>
                                     </a>                                    
                                 </li>    
+
+                                <!-- Special Appointments - Star/Featured Icon -->
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                     <a href="{{ route('admin.special.appointments') }}" class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24" />
-                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000"
-                                                        opacity="0.3"
-                                                    />
+                                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                                    <path d="M12,18 L7.91561965,20.1473306 C7.46691658,20.383193 6.92404156,20.2113514 6.68817915,19.7626483 C6.59905581,19.593134 6.5652611,19.3986421 6.59105509,19.2086909 L7.37084192,13.4756515 L3.18182788,9.39202111 C2.79375745,9.01368681 2.77884488,8.38053644 3.14833215,7.98394639 C3.28438268,7.8378516 3.46363065,7.74205513 3.66065586,7.71344406 L9.41685657,6.87700345 L11.9902641,1.66352016 C12.2217524,1.19476228 12.7876807,1.00684157 13.2564385,1.2383298 C13.435728,1.32655323 13.5833443,1.4741695 13.6715677,1.653459 L16.2449752,6.86694229 L22,7.70338291 C22.5186638,7.7787343 22.876793,8.26189912 22.7999948,8.78044733 C22.7713837,8.9736173 22.6775691,9.1501708 22.5332219,9.28441113 L18.3442079,13.1680415 L19.1239947,18.9010809 C19.1944888,19.4184714 18.8358461,19.8974558 18.3223007,19.9705988 C18.1306121,19.997871 17.9344473,19.965415 17.7632615,19.8775619 L12,16.8926944 L12,18 Z" fill="#000000" opacity="0.3"/>
+                                                    <path d="M12,16.8926944 L7.91561965,19.0354153 C7.46691658,19.2712777 6.92404156,19.0994361 6.68817915,18.650733 C6.59905581,18.4812187 6.5652611,18.2867268 6.59105509,18.0967756 L7.37084192,12.3637362 L3.18182788,8.28010582 C2.79375745,7.90177152 2.77884488,7.26862115 3.14833215,6.87203109 C3.28438268,6.7259363 3.46363065,6.63013983 3.66065586,6.60152877 L9.41685657,5.76508816 L11.9902641,0.551604862 C12.2217524,0.0828469853 12.7876807,-0.105073719 13.2564385,0.126414515 C13.435728,0.214637949 13.5833443,0.362254212 13.6715677,0.54154371 L16.2449752,5.755027 L22,6.59146761 C22.5186638,6.66681901 22.876793,7.14998383 22.7999948,7.66853204 C22.7713837,7.86170201 22.6775691,8.03825551 22.5332219,8.17249583 L18.3442079,12.0561262 L19.1239947,17.7891656 C19.1944888,18.3065561 18.8358461,18.7855405 18.3223007,18.8586835 C18.1306121,18.8859557 17.9344473,18.8535 17.7632615,18.7656466 L12,15.7807792 L12,16.8926944 Z" fill="#000000"/>
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
                                         </span>
                                         <span class="menu-text">Special Appointments</span>
                                     </a>                                    
                                 </li>                            
+
+                                <!-- Medical Results Requests - Clipboard/Analysis Icon -->
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                     <a href="{{ route('admin.checkResults') }}" class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24" />
-                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000"
-                                                        opacity="0.3"
-                                                    />
+                                                    <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3" />
+                                                    <path d="M11,19 L13,19 L13,17 L11,17 L11,19 Z M11,15 L13,15 L13,7 L11,7 L11,15 Z" fill="#000000" />
+                                                    <rect fill="#000000" x="10" y="2" width="4" height="2" rx="1" />
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
                                         </span>
-                                        <span class="menu-text">Results Check</span>
+                                        <span class="menu-text">Medical Results Requests</span>
                                     </a>                                    
                                 </li> 
+
+                                <!-- NAVTTC Appointments - Education/Cap Icon -->
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                     <a href="{{ route('admin.navtech.appointments') }}" class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24" />
-                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000"
-                                                        opacity="0.3"
-                                                    />
+                                                    <path d="M12,2 L2,7 L12,12 L22,7 L12,2 Z" fill="#000000" />
+                                                    <path d="M12,15 L2,10 L2,17 C2,18.7 6.5,22 12,22 C17.5,22 22,18.7 22,17 L22,10 L12,15 Z" fill="#000000" opacity="0.3" />
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
                                         </span>
-                                        <span class="menu-text">Navtech Appointments</span>
+                                        <span class="menu-text">NAVTTC Appointments</span>
                                     </a>                                    
                                 </li> 
+
+                                <!-- Tasheer Appointments - Globe/Travel Icon -->
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                     <a href="{{ route('admin.tasheer.appointments') }}" class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24" />
-                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000"
-                                                        opacity="0.3"
-                                                    />
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <path d="M13,18.9450712 L13,20 L14,20 C14.5522847,20 15,20.4477153 15,21 C15,21.5522847 14.5522847,22 14,22 L10,22 C9.44771525,22 9,21.5522847 9,21 C9,20.4477153 9.44771525,20 10,20 L11,20 L11,18.9450712 C6.50326515,18.4585255 3,14.632911 3,10 C3,5.02943725 7.02943725,1 12,1 C16.9705627,1 21,5.02943725 21,10 C21,14.632911 17.4967348,18.4585255 13,18.9450712 Z" fill="#000000" opacity="0.3"/>
+                                                    <path d="M12,5 C10.3431458,5 9,6.34314575 9,8 C9,9.65685425 10.3431458,11 12,11 C13.6568542,11 15,9.65685425 15,8 C15,6.34314575 13.6568542,5 12,5 Z" fill="#000000"/>
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
                                         </span>
                                         <span class="menu-text">Tasheer Appointments</span>
                                     </a>                                    
                                 </li> 
+
+                                <!-- Soft Skill Certificates - Award Icon -->
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                     <a href="{{ route('admin.softskill.appointments') }}" class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24" />
-                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000"
-                                                        opacity="0.3"
-                                                    />
+                                                    <path d="M12,11 C14.209139,11 16,9.209139 16,7 C16,4.790861 14.209139,3 12,3 C9.790861,3 8,4.790861 8,7 C8,9.209139 9.790861,11 12,11 Z" fill="#000000" opacity="0.3" />
+                                                    <path d="M10,13 C10,12.4477153 10.4477153,12 11,12 L13,12 C13.5522847,12 14,12.4477153 14,13 L14,21.4354132 L12.551699,20.501509 C12.2072615,20.2792945 11.7701764,20.2825852 11.4287813,20.5101815 L10,21.4627254 L10,13 Z" fill="#000000" />
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
                                         </span>
                                         <span class="menu-text">Soft Skill Certificates</span>
                                     </a>                                    
                                 </li>
+
+                                <!-- Payment Methods (Keeping your existing good one) -->
                                 <li class="menu-item" aria-haspopup="true">
                                     <a href="{{ route('admin.payment.methods.index') }}" class="menu-link">
                                         <span class="svg-icon menu-icon">
-                                            <!-- Use a Credit Card Icon -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24" />

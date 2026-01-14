@@ -5,7 +5,7 @@ var NavtechTable = function () {
         var table = $('#navtech_datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: { url: "/admin/navtech-appointments/data", type: "GET" },
+            ajax: { url: "/admin/navttc-appointments/data", type: "GET" },
             order: [[0, 'desc']],
             columns: [
                 { data: 0 }, { data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, 
@@ -35,7 +35,7 @@ var NavtechTable = function () {
                     render: function (data, type, full) {
                         var id = full[8];
                         return `
-                            <a href="/admin/navtech-appointments/${id}/edit" class="btn btn-sm btn-clean btn-icon"><i class="la la-edit"></i></a>
+                            <a href="/admin/navttc-appointments/${id}/edit" class="btn btn-sm btn-clean btn-icon"><i class="la la-edit"></i></a>
                             <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-navtech" data-id="${id}"><i class="la la-trash"></i></a>
                         `;
                     }
@@ -61,7 +61,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: `/admin/navtech-appointments/${id}`,
+                    url: `/admin/navttc-appointments/${id}`,
                     type: "DELETE",
                     data: { _token: $('meta[name="csrf-token"]').attr('content') },
                     success: function () {

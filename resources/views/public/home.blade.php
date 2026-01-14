@@ -31,7 +31,7 @@
                         <div class="card-icon">
                             <i class="fas fa-user-md"></i>
                         </div>
-                        <h3 class="card-title">Medical Examinations</h3>
+                        <h3 class="card-title">Wafid Appointments</h3>
                         <p class="card-description">Book your health check-up appointment or view your test results</p>
                         <div class="card-buttons">
                             <a href="{{ route('medicalExamination')}}" class="btn btn-dark">Book an Appointment</a>
@@ -44,7 +44,7 @@
                         <div class="card-icon">
                             <i class="fas fa-hospital"></i>
                         </div>
-                        <h3 class="card-title">Special Medical Examinations</h3>
+                        <h3 class="card-title">Wafid Special Appointments</h3>
                         <p class="card-description">Book your health check-up at your preferred medical center</p>
                         <div class="card-buttons">
                             <a href="{{ route('special.appointment')}}" class="btn btn-dark">Book an Appointment</a>
@@ -60,7 +60,7 @@
                         <div class="card-icon">
                             <i class="fas fa-user-md"></i>
                         </div>
-                        <h3 class="card-title">Nav Tech</h3>
+                        <h3 class="card-title">NAVTTC Appointments</h3>
                         <p class="card-description">Book your health check-up appointment or view your test results</p>
                         <div class="card-buttons">
                             <a href="{{ route('navtechform')}}" class="btn btn-dark">Book an Appointment</a>
@@ -74,7 +74,7 @@
                         <div class="card-icon">
                             <i class="fas fa-user-md"></i>
                         </div>
-                        <h3 class="card-title">Tasheer Appointment</h3>
+                        <h3 class="card-title">Tasheer Appointments</h3>
                         <p class="card-description">Book your health check-up appointment or view your test results</p>
                         <div class="card-buttons">
                             <a href="{{ route('tasheer.form')}}" class="btn btn-dark">Book an Appointment</a>
