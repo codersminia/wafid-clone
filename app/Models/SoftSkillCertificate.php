@@ -16,6 +16,7 @@ class SoftSkillCertificate extends Model
         'id_card_back',
         'user_pic',
         'is_new',
+        'passport_pic',
     ];
 
     protected $dates = ['deleted_at'];

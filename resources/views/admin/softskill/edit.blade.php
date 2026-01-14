@@ -23,7 +23,7 @@
                 <h5>Submitted Documents</h5>
                 <div class="row text-center">
                     <!-- ID Card Front -->
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <label class="d-block font-weight-bold">ID Card Front</label>                     
                         <img src="{{ asset('uploads/softskill/' . $appointment->id_card_front) }}" 
                             class="img-thumbnail view-image" 
@@ -39,7 +39,7 @@
                     </div>
 
                     <!-- ID Card Back -->
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <label class="d-block font-weight-bold">ID Card Back</label>
                         <img src="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}" 
                             class="img-thumbnail view-image" 
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- User Photo -->
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <label class="d-block font-weight-bold">User Photo</label>
                         <img src="{{ asset('uploads/softskill/' . $appointment->user_pic) }}" 
                             class="img-thumbnail view-image" 
@@ -69,6 +69,23 @@
                             </a>
                         </div>
                     </div>
+
+                        <!-- Passport Copy (NEW) -->
+                    <div class="col-md-3 mb-4">
+                        <label class="d-block font-weight-bold">Passport Copy</label>
+                        <img src="{{ asset('uploads/softskill/' . $appointment->passport_pic) }}" 
+                            class="img-thumbnail view-image" 
+                            style="height: 150px; cursor: pointer;" 
+                            data-toggle="modal" 
+                            data-target="#imgModal" 
+                            data-src="{{ asset('uploads/softskill/' . $appointment->passport_pic) }}">
+                        <div class="mt-2">
+                            <a href="{{ asset('uploads/softskill/' . $appointment->passport_pic) }}" download="passport_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
 
                 @if($appointment->payment)

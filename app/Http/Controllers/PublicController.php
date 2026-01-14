@@ -684,7 +684,8 @@ class PublicController extends Controller
             'whatsapp_number' => 'required|string',
             'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'id_card_back'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'user_pic'      => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048', // Added this
         ]);
 
         if ($validator->fails()) {
@@ -694,8 +695,10 @@ class PublicController extends Controller
         try {
             $data = $request->only(['whatsapp_number']);
             
-            // Handle File Uploads
-            foreach(['id_card_front', 'id_card_back', 'user_pic'] as $field) {
+            // Updated array to include passport_pic
+            $fields = ['id_card_front', 'id_card_back', 'user_pic', 'passport_pic'];
+
+            foreach($fields as $field) {
                 if ($request->hasFile($field)) {
                     $image = $request->file($field);
                     $name = Str::random(20) . '_' . $field . '.' . $image->getClientOriginalExtension();

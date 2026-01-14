@@ -205,7 +205,7 @@
                                     <!-- User Photo Upload Widget -->
                                     <div class="col-md-4 mb-4">
                                         <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                            <label>Passport Size Photo</label>
+                                            <label>Personal Photo</label>
                                             {{-- <p class="upload-subtitle">Please upload or take a photo of <strong>yourself</strong></p> --}}
                                             <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#photoModal">
                                                 Upload Photo
