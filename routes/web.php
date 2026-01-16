@@ -134,12 +134,13 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     // FAQ Routes 
     Route::get('faq-list', [AdminController::class, 'showFaqPage'])->name('faqs.page');
     Route::get('faq-data-load', [AdminController::class, 'fetchFaqData'])->name('faqs.data');
-    
     Route::get('faq-add', [AdminController::class, 'addFaqForm'])->name('faqs.add');
     Route::post('faq-save-entry', [AdminController::class, 'saveFaqEntry'])->name('faqs.save');
-    
     Route::get('faq-edit-entry/{id}', [AdminController::class, 'editFaqForm'])->name('faqs.edit');
     Route::post('faq-update-entry/{id}', [AdminController::class, 'updateFaqEntry'])->name('faqs.update');
-    
     Route::delete('faq-remove/{id}', [AdminController::class, 'removeFaqEntry'])->name('faqs.delete');
+
+    // Profile Routes
+    Route::get('/profile', [AdminController::class, 'editprofile'])->name('profile.edit');
+    Route::put('/profile', [AdminController::class, 'updateprofile'])->name('profile.update');
 });

@@ -21,6 +21,7 @@ use App\Models\AppointmentFee;
 use App\Models\Faq;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -52,7 +53,41 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');
+        // 1. Fetch Counts for the Cards
+        $stats = [
+            'wafid' => [
+                'total' => Appointment::count(),
+                'new'   => Appointment::where('is_new', 1)->count()
+            ],
+            'special' => [
+                'total' => SpecialAppointment::count(),
+                'new'   => SpecialAppointment::where('is_new', 1)->count()
+            ],
+            'tasheer' => [
+                'total' => TasheerAppointment::count(),
+                'new'   => TasheerAppointment::where('is_new', 1)->count()
+            ],
+            'navtech' => [
+                'total' => NavtechAppointment::count(),
+                'new'   => NavtechAppointment::where('is_new', 1)->count()
+            ],
+            'medical' => [
+                'total' => CheckResult::count(),
+                'new'   => CheckResult::where('is_new', 1)->count()
+            ],
+            'softskill' => [
+                'total' => SoftSkillCertificate::count(),
+                'new'   => SoftSkillCertificate::where('is_new', 1)->count()
+            ],
+        ];
+
+        // 2. Fetch Recent Wafid Appointments (e.g., last 5)
+        $recent_appointments = Appointment::with('payment')
+                                ->orderBy('created_at', 'desc')
+                                ->take(5)
+                                ->get();
+
+        return view('admin.dashboard', compact('stats', 'recent_appointments'));
     }
 
     public function logout(Request $request)
@@ -1022,6 +1057,57 @@ class AdminController extends Controller
             return response()->json(['success' => 'Deleted successfully']);
         }
         return response()->json(['error' => 'Not found'], 404);
+    }
+
+    public function editprofile()
+    {
+        $user = Auth::user();
+        return view('admin.profile.edit', compact('user'));
+    }
+
+    public function updateprofile(Request $request)
+    {
+        $user = Auth::user();
+
+        // 1. Handle "Info" Update
+        if ($request->input('action') == 'info') {
+            $request->validate([
+                'name'   => ['required', 'string', 'max:255'],
+                'email'  => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            ]);
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+
+            // Handle Avatar Upload
+            if ($request->hasFile('avatar')) {
+                if ($user->avatar && File::exists(public_path($user->avatar))) {
+                    File::delete(public_path($user->avatar));
+                }
+                $file = $request->file('avatar');
+                $filename = time() . '_' . $user->id . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/users'), $filename);
+                $user->avatar = 'uploads/users/' . $filename;
+            }
+
+            $user->save();
+            return redirect()->back()->with('success', 'Personal information updated successfully!');
+        }
+
+        // 2. Handle "Password" Update
+        if ($request->input('action') == 'password') {
+            $request->validate([
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+
+            $user->password = Hash::make($request->password);
+            $user->save();
+            
+            return redirect()->back()->with('success', 'Password changed successfully!');
+        }
+
+        return redirect()->back()->with('error', 'Invalid request.');
     }
 
 }
