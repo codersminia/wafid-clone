@@ -44,7 +44,7 @@ Route::get('medical-center-search', [PublicController::class, 'medicalCenters'])
 // Route to handle the AJAX search
 Route::post('/medical-centers/search', [PublicController::class, 'search'])->name('medical.search');
 
-Route::get('navttc-appointment', [PublicController::class, 'navtechform'])->name('navtechform');
+Route::get('navttc-takamol-booking', [PublicController::class, 'navtechform'])->name('navtechform');
 Route::post('navttc-appointment', [PublicController::class, 'navtechstore'])->name('navtechform.store');
 Route::get('navttc-thank-you', [PublicController::class, 'navtechThankYou'])->name('navtech.thankyou');
 
@@ -52,7 +52,7 @@ Route::get('navttc-confirmation', [PublicController::class, 'confirmNavtechAppoi
 Route::post('navtech-payment-upload', [PublicController::class, 'uploadNavtechPaymentProof'])->name('navtech.payment.upload');
 
 // Tasheer Appointment Routes
-Route::get('tasheer-appointment', [PublicController::class, 'tasheerForm'])->name('tasheer.form');
+Route::get('tasheer-saudi-visa-appointment', [PublicController::class, 'tasheerForm'])->name('tasheer.form');
 Route::post('tasheer-appointment', [PublicController::class, 'tasheerStore'])->name('tasheer.store');
 Route::get('tasheer-confirmation', [PublicController::class, 'confirmTasheerAppointment'])->name('tasheer.confirm');
 Route::post('tasheer-payment-upload', [PublicController::class, 'uploadTasheerPaymentProof'])->name('tasheer.payment.upload');

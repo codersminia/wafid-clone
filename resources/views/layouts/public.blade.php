@@ -3,21 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Wafid - Employment and residency services for Gulf Cooperation Council States">
-    <meta name="keywords" content="employment, residency, medical examination, Gulf, GCC">
-    <meta name="author" content="Wafid">
-    <meta property="og:title" content="Wafid - Welcome">
-    <meta property="og:description" content="Wafid is an individual seeking employment or residency in any of The Gulf Cooperation Council States.">
-    <meta property="og:type" content="website">
-
-    <title>@yield('title', 'Wafid - Employment & Residency Services')</title>
     
-    <!-- Bootstrap 4 CSS -->
+    {{-- Dynamic SEO Tags --}}
+    <title>@yield('title', 'Gulf Medical Consultant - GCC Appointments & Services')</title>
+    <meta name="description" content="@yield('meta_description', 'Professional assistance for Wafid (GAMCA) appointments, NAVTTC registration, and Tasheer visa services in Pakistan and India.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'wafid appointment, gamca medical, navttc booking, tasheer appointment, saudi visa medical')">
+    
+    {{-- Open Graph for WhatsApp/Facebook Sharing --}}
+    <meta property="og:title" content="@yield('title', 'Gulf Medical Consultant')">
+    <meta property="og:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    
+    {{-- Canonical Link (Prevents duplicate content issues) --}}
+    <link rel="canonical" href="{{ url()->current() }}" />
+
+    <!-- Bootstrap & CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/public/css/style.css') }}">
+    
+    {{-- Add Schema Markup for Local Business --}}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Gulf Medical Consultant",
+      "image": "{{ asset('assets/public/images/white-logo.svg') }}",
+      "description": "Consultancy service for GCC medical appointments and visa processing assistance.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "PK" 
+      },
+      "priceRange": "$$"
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -35,11 +55,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown">Services</a>
                         <div class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <a class="dropdown-item" href="{{ route('medicalExamination')}}">Wafid Appointments</a>
-                            <a class="dropdown-item" href="{{ route('special.appointment')}}">Wafid Special Appointments</a>
-                            <a class="dropdown-item" href="{{ route('navtechform')}}">NAVTTC Appointments</a>
-                            <a class="dropdown-item" href="{{ route('tasheer.form')}}">Tasheer Appointments</a>
-                            <a class="dropdown-item" href="{{ route('softskill.form')}}">Soft Skill Certificates</a>
+                            <a class="dropdown-item" href="{{ route('medicalExamination')}}">Wafid (GAMCA) Medical</a>
+                            <a class="dropdown-item" href="{{ route('special.appointment')}}">Wafid Choice Center</a>
+                            <a class="dropdown-item" href="{{ route('navtechform')}}">NAVTTC / Takamol Appointment</a>
+                            <a class="dropdown-item" href="{{ route('tasheer.form')}}">Tasheer Appointment</a>
+                            <a class="dropdown-item" href="{{ route('softskill.form')}}">Soft Skill Certificate</a>
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('guidelines') }}">Guidelines</a></li>
@@ -86,6 +106,15 @@
                     <a href="#" class="text-white-50 mr-3"><i class="fab fa-facebook"></i></a>
                     <a href="#" class="text-white-50 mr-3"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="text-white-50"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-disclaimer-box">
+                        <p>
+                            <strong>Disclaimer:</strong> GamcaWafidOnline.com is a private consultancy service. We are not the official Wafid, NAVTTC, or Tasheer government website. We charge a service fee to assist users in booking appointments and processing paperwork. You can book directly on the official websites if you possess the technical knowledge and payment methods.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

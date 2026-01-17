@@ -3,10 +3,10 @@
    ============================================ */
 
 :root {
-  --primary-dark: #3a3a3a;
+  --primary-dark: #2a2a2a;
   --primary-light: #ffffff;
   --accent-burgundy: #6b2c3e;
-  --accent-red: #e74c3c;
+  --accent-red: #FFC654;
   --accent-green: #27ae60;
   --text-dark: #2c3e50;
   --text-light: #7f8c8d;
@@ -68,11 +68,9 @@ body {
    ============================================ */
 
 .hero-section {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, #4a4a4a 100%);
   color: white;
   padding: 40px 0;
-  position: relative;
-  overflow: hidden;
+  min-height: 65vh; 
 }
 
 .hero-title {
@@ -889,4 +887,381 @@ html {
 #faqAccordion .btn-link:not(.collapsed) .faq-arrow {
     transform: rotate(180deg); /* Flip the arrow up */
     color: var(--accent-red);
+}
+
+/* ============================================
+   NEW: HOW IT WORKS SECTION (AGENCY LOOK)
+   ============================================ */
+.process-section {
+    position: relative;
+    z-index: 1;
+}
+
+.process-step {
+    transition: transform 0.3s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-5px);
+}
+
+.process-icon-wrapper {
+    width: 90px;
+    height: 90px;
+    background-color: rgba(231, 76, 60, 0.1); /* Light transparent red */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+/* Icon colors matching your theme */
+.process-step:hover .process-icon-wrapper {
+    background-color: var(--accent-red);
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+}
+
+.process-step i {
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    transition: all 0.3s ease;
+}
+
+.process-step:hover i {
+    color: white;
+}
+
+.process-step h4 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.process-step p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   NEW: FOOTER DISCLAIMER STYLING
+   ============================================ */
+.footer-disclaimer-box {
+    background-color: rgba(0, 0, 0, 0.2); /* Darker background box */
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 4px solid var(--accent-red); /* Red Accent Line */
+    margin-top: 30px;
+    text-align: left; /* Easier to read */
+}
+
+.footer-disclaimer-box p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.footer-disclaimer-box strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ============================================
+   UPDATE: SERVICE CARD ENHANCEMENTS
+   ============================================ */
+.service-card {
+    border-top: 4px solid transparent; /* Prepare for hover effect */
+}
+
+/* Color coding services for better UX */
+.service-card:hover {
+    border-top-color: var(--accent-red); 
+}
+
+/* If you add specific classes to cards later */
+.service-card.navttc:hover { border-top-color: var(--accent-green); }
+.service-card.tasheer:hover { border-top-color: #2980b9; }
+
+/* ============================================
+   UPDATE: FORM STYLING (PROFESSIONAL TWEAK)
+   ============================================ */
+/* Updating your existing form control to look less rounded/cartoony */
+.appointment-form .form-control {
+    border-radius: 6px !important; /* Changed from 15px to 6px for professional look */
+    border: 1px solid #ced4da;
+    background-color: #fcfcfc;
+}
+
+.appointment-form .form-control:focus {
+    background-color: #fff;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.input-group-text {
+    background-color: #f1f1f1;
+    border: 1px solid #ced4da;
+    color: var(--text-light);
+}
+
+/* ============================================
+   NEW HOME PAGE PROFESSIONAL STYLES
+   ============================================ */
+
+/* Hero Text Spacing */
+.letter-spacing-2 {
+    letter-spacing: 2px;
+}
+
+/* Service Cards with Logos */
+.service-logo-box {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Light grey background for logo */
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    padding: 10px;
+}
+
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Icons in 'Why Choose Us' */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Testimonial Avatars */
+.avatar {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Divider Line */
+.divider {
+    border-radius: 2px;
+}
+
+/* Specific Badge Colors */
+.badge-info {
+    background-color: #17a2b8;
+    color: white;
+}
+.badge-dark {
+    background-color: #343a40;
+    color: white;
+}
+
+/* Button Shadow */
+.btn.shadow-lg {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+
+
+/* ============================================
+   THEME UTILITIES (Based on your variables)
+   ============================================ */
+
+/* Text Colors */
+.text-accent-red { color: var(--accent-red) !important; }
+.text-accent-burgundy { color: var(--accent-burgundy) !important; }
+.text-accent-green { color: var(--accent-green) !important; }
+.text-primary-dark { color: var(--primary-dark) !important; }
+
+/* Background Colors */
+.bg-accent-red { background-color: var(--accent-red) !important; }
+.bg-primary-dark { background-color: var(--primary-dark) !important; }
+.bg-light-grey { background-color: #f3f3f3bd !important; }
+
+/* Custom Badge Styles to match theme */
+.badge-theme-red { background-color: var(--accent-red); color: white; }
+.badge-theme-dark { background-color: var(--primary-dark); color: white; }
+.badge-theme-green { background-color: var(--accent-green); color: white; }
+
+/* Service Logo Box (Your Theme) */
+.service-logo-box {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px;
+    margin-right: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* ============================================
+   UPDATED STATS BAR (Premium Look)
+   ============================================ */
+
+.stats-bar {
+    background-color: #ffffff; /* White background is cleaner */
+    color: var(--text-dark);   /* Dark text for contrast */
+    position: relative;
+    z-index: 10;
+    margin-top: -20px;         /* Pulls it up over the hero image */
+    border-radius: 8px;
+    /* Soft shadow to make it float */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    /* The Red Accent Line on top to keep your theme */
+    border-top: 4px solid var(--accent-red); 
+    padding: 25px 15px;
+}
+
+.stat-item {
+    padding: 0 15px;
+    position: relative;
+}
+
+/* Desktop Dividers */
+.stat-item::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background-color: #eee;
+}
+
+.stat-item:last-child::after {
+    display: none; /* No line on the last item */
+}
+
+/* The Number Styling */
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-red); /* Red numbers */
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+/* The Label Styling */
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    margin-bottom: 0;
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS (Crucial for your screenshot)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .stats-bar {
+        margin-top: -20px; /* Less overlap on mobile */
+        padding: 15px 10px;
+        border-radius: 6px;
+    }
+
+    /* Force items to stay in one row on mobile */
+    .stats-bar .row {
+        display: flex;
+        flex-wrap: nowrap; /* Prevent stacking */
+        justify-content: space-between;
+    }
+
+    .stat-item {
+        padding: 0 5px;
+        text-align: center;
+        flex: 1; /* Make them equal width */
+    }
+
+    /* Hide dividers on very small screens to save space */
+    .stat-item::after {
+        display: none;
+    }
+
+    .stat-number {
+        font-size: 1.3rem; /* Smaller numbers for mobile */
+        margin-bottom: 2px;
+    }
+
+    .stat-label {
+        font-size: 0.6rem; /* Smaller text */
+        letter-spacing: 0;
+        line-height: 1.2;
+    }
+}
+
+/* Process Steps */
+.process-icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(231, 76, 60, 0.1); /* Light Red */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+.process-step:hover .process-icon-circle {
+    background-color: var(--accent-red);
+    color: white;
+}
+
+.process-step:hover .process-icon-circle i {
+    color: white !important; /* Force icon white on hover */
+}
+
+/* Section Dividers */
+.theme-divider {
+    height: 3px;
+    width: 60px;
+    background-color: var(--accent-red);
+    margin: 15px auto;
+}
+
+/* ============================================
+   MOBILE HERO BUTTONS FIX
+   ============================================ */
+@media (max-width: 768px) {
+    /* Stack buttons vertically */
+    .hero-buttons {
+        flex-direction: column !important;
+        width: 100%;
+        padding: 0 15px; /* Add slight side padding so they don't touch edges */
+    }
+
+    /* Make buttons full width and add spacing */
+    .hero-buttons .btn {
+        width: 100%;       /* Full width for easy tapping */
+        margin-right: 0 !important; /* Remove the desktop side margin */
+        margin-bottom: 15px; /* Add space between the two buttons */
+        display: block;
+    }
+
+    /* Remove margin from the last button */
+    .hero-buttons .btn:last-child {
+        margin-bottom: 0;
+    }
+
+    .hero-section{
+      height: auto;
+    }
 }
