@@ -135,6 +135,11 @@ class PublicController extends Controller
 
         $data = $request->all();
 
+        $data['passport_no'] = strtoupper($request->passport_no);
+        $data['confirm_passport_no'] = strtoupper($request->confirm_passport_no);
+        $data['first_name'] = strtoupper($request->first_name);
+        $data['last_name'] = strtoupper($request->last_name);
+
         // Convert checkbox value to boolean
         $data['confirm_info'] = $request->has('confirm_info') ? 1 : 0;
 

@@ -6,10 +6,16 @@
     
     {{-- Dynamic SEO Tags --}}
     <title>@yield('title', 'Gulf Medical Consultant - GCC Appointments & Services')</title>
-    <meta name="description" content="@yield('meta_description', 'Professional assistance for Wafid (GAMCA) appointments, NAVTTC registration, and Tasheer visa services in Pakistan and India.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'wafid appointment, gamca medical, navttc booking, tasheer appointment, saudi visa medical')">
+    <meta name="description" content="@yield('meta_description', 'Secure online booking for Wafid (GAMCA) medical slips, NAVTTC Takamol skill tests, and Tasheer Saudi visa appointments. Pay via JazzCash/Easypaisa.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'gamca appointment pakistan, wafid online booking, navttc saudi test, tasheer appointment check, gamca medical fee, gamca lahore, gamca karachi')">
     
+    {{-- Geo-Tagging (Crucial for Local SEO in Pakistan/India) --}}
+    <meta name="geo.region" content="PK" />
+    <meta name="geo.position" content="30.3753;69.3451" />
+    <meta name="ICBM" content="30.3753, 69.3451" />
+
     {{-- Open Graph for WhatsApp/Facebook Sharing --}}
+    <meta property="og:site_name" content="Gulf Medical Consultant">
     <meta property="og:title" content="@yield('title', 'Gulf Medical Consultant')">
     <meta property="og:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
     <meta property="og:type" content="website">
@@ -30,7 +36,7 @@
       "@type": "ProfessionalService",
       "name": "Gulf Medical Consultant",
       "image": "{{ asset('assets/public/images/white-logo.svg') }}",
-      "description": "Consultancy service for GCC medical appointments and visa processing assistance.",
+      "description": "Third-party consultancy for processing Wafid, NAVTTC, and Tasheer appointments for GCC visas.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "PK" 

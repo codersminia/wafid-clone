@@ -1,25 +1,20 @@
 @extends('layouts.public')
 
-@section('title', 'Wafid - Medical Examination')
+@section('title', 'Complete Payment - Wafid Appointment')
 
 @section('content')
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>Appointment Confirmation</h1>
-            <p class="lead">Complete Your Payment and Confirm Your Appointment</p>
+            <h1>Complete Your Booking</h1>
+            <p class="lead">Step 2 of 3: Payment Verification</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="py-5 bg-light">
         <div class="container">
-            
-            {{-- <h3>Your Appointment Number</h3>
-            <div class="alert alert-success">
-                <strong>{{ $appointment->appointment_no }}</strong>
-            </div> --}}
 
             <!-- Fee Alert -->
             <div class="alert alert-warning border-0 mb-4" style="background-color: #fff3cd;">
@@ -146,21 +141,20 @@
                         <div class="form-check mb-4">
                             <input type="checkbox" class="form-check-input" id="agreeTerms" name="agreeTerms">
                             <label class="form-check" for="agreeTerms">
-                                I certify that the information given in this form is true, complete, and accurate.
+                                I accept the terms and confirm payment.
                             </label>
                         </div>
 
                         <!-- Terms Text -->
                         <div class="mb-4 p-3 border rounded bg-light">
                             <p class="small text-muted mb-3">
-                                <strong>Privacy & Terms Information:</strong><br>
-                                We offer genuine/swift services and efficient services for Gomco medical appointments. Whether you are a first-timer or any other case, we offer the best possible help for your situation as a whole. Wafid appoints a specialized team that follows all international standards to ensure your medical examinations are done in a safe and secure environment. We also provide the option to print your Gomco appointment slip for easy reference. Whether you are in Karachi, Lahore, Islamabad, Multan, Faisalabad, Sargodha, Jhang, Bahawalpur, Rawalpindi, Sargodha, Jhang, Bahawalpur, Rawalpindi, Faisalabad, Sahiwal, or any other city, we are here to help. You can conveniently book your generic appointment slip for easy reference. Whether you are in Karachi, Lahore, Islamabad, and other cities like Quetta, Peshawar, Multan (DAI), Bannu, Kohat, Hassan Abdal, Taxila, Gujrat, Jhang, etc you can conveniently book your generic appointments for all need.
+                                <strong><i class="fas fa-shield-alt"></i> Service Agreement:</strong><br>
+                                By clicking Submit, I agree that Gulf Medical Consultant is a third-party service provider. The fee charged is for processing assistance only. The generated slip is valid for 30 days. Fee is non-refundable once the slip is generated.
                             </p>
                         </div>
 
                         <div class="form-buttons">
-                            {{-- <button type="reset" class="btn btn-outline-dark">Previous</button> --}}
-                            <button type="submit" class="btn btn-dark">Submit</button>
+                            <button type="submit" class="btn btn-dark">Submit Verification Request</button>
                         </div>
                     </form>
                 </div>
