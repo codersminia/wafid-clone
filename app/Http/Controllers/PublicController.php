@@ -720,10 +720,10 @@ class PublicController extends Controller
     public function softSkillStore(Request $request) {
         $validator = Validator::make($request->all(), [
             'whatsapp_number' => 'required|string',
-            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'id_card_back'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048', // Added this
+            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120', // 5MB
+            'id_card_back'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         if ($validator->fails()) {

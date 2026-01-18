@@ -1,6 +1,8 @@
 @extends('layouts.public')
 
-@section('title', 'Soft Skill Certificate Registration')
+@section('title', 'Apply for Soft Skill Certificate | GCC Work Readiness')
+@section('meta_description', 'Get your Soft Skill & Work Readiness Certificate for Saudi Arabia and UAE jobs. Verify your communication and teamwork skills online.')
+@section('meta_keywords', 'soft skill certificate, work readiness program, gcc job certificate, saudi visa skills, cv enhancement certificate')
 
 @section('content')
 
@@ -112,88 +114,142 @@
         .invalid-feedback {
             display: block; /* Ensure it shows up since it's added dynamically */
         }
+        .benefits-list li { margin-bottom: 10px; font-size: 0.9rem; color: #555; }
+        .benefits-list i { color: #28a745; margin-right: 10px; }
     </style>
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>Soft Skill Certificate Registration</h1>
-            <p class="lead">Please provide the required details and documents for your application.</p>
+            <h1 class="font-weight-bold">Soft Skill Certificate</h1>
+            <p class="lead">Enhance your CV with a verified Work Readiness credential.</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="py-5">
         <div class="container">
-            <div class="appointment-form-wrapper">
-                <form id="softSkillForm" class="appointment-form" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    
-                    <div class="form-section">
-                        <h5 class="section-title">General Information</h5>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="whatsapp_number">WhatsApp Number</label>
-                                <input type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" placeholder="03xx xxxxxxx">
+            <div class="row">
+                
+                <!-- Left Column: Form -->
+                <div class="col-lg-8">
+                    <div class="appointment-form-wrapper shadow-sm">
+                        <form id="softSkillForm" class="appointment-form" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            
+                            <div class="form-section">
+                                <h5 class="section-title"><i class="fas fa-user-edit text-dark"></i> Applicant Details</h5>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="whatsapp_number">WhatsApp Number <span class="text-danger">*</span></label>
+                                        <input type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" placeholder="03xx xxxxxxx" >
+                                        <small class="text-muted">The digital certificate will be sent to this number.</small>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="form-section">
+                                <h5 class="section-title"><i class="fas fa-file-upload text-dark"></i> Upload Documents</h5>
+                                <p class="small text-muted mb-3">Clear photos are required for identity verification on the certificate.</p>
+                                
+                                <div class="row">
+                                    <!-- 1. ID Front -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow h-100">
+                                            <i class="fas fa-id-card fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">1. ID Card Front</h6>                                            
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm mt-2" data-toggle="modal" data-target="#idFrontModal">
+                                                Upload Front
+                                            </button>
+                                            
+                                            <input type="file" name="id_card_front" id="main_id_front_input" class="d-none">
+                                            <div id="id_front_status" class="upload-status-text mt-2"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 2. ID Back -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow h-100">
+                                            <i class="fas fa-id-card fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">2. ID Card Back</h6>
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm mt-2" data-toggle="modal" data-target="#idBackModal">
+                                                Upload Back
+                                            </button>
+                                            
+                                            <input type="file" name="id_card_back" id="main_id_back_input" class="d-none">
+                                            <div id="id_back_status" class="upload-status-text mt-2"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 3. User Photo -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow h-100">
+                                            <i class="fas fa-user-circle fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">3. Your Photo</h6>
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm mt-2" data-toggle="modal" data-target="#photoModal">
+                                                Upload Photo
+                                            </button>
+                                            
+                                            <input type="file" name="user_pic" id="main_user_pic_input" class="d-none">
+                                            <div id="photo_status_display" class="upload-status-text mt-2"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 4. Passport -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow h-100">
+                                            <i class="fas fa-passport fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">4. Passport</h6>
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm mt-2" data-toggle="modal" data-target="#passportModal">
+                                                Upload Passport
+                                            </button>
+                                            
+                                            <input type="file" name="passport_pic" id="main_passport_input" class="d-none">
+                                            <div id="passport_name_display" class="upload-status-text mt-2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-buttons mt-4">
+                                <a href="{{ route('home') }}" class="btn btn-outline-dark">Cancel</a>
+                                <button type="submit" class="btn btn-dark px-5 shadow">Next: Processing Fee <i class="fas fa-arrow-right ml-2"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column: SEO Content -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 mb-4 bg-light">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mb-3">Why get this Certificate?</h5>
+                            <ul class="list-unstyled benefits-list">
+                                <li><i class="fas fa-check-circle"></i> <strong>Visa Support:</strong> Adds value to your visa application profile.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Higher Salary:</strong> Candidates with soft skills often negotiate better pay.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Job Ready:</strong> Proves you understand workplace ethics and safety.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="form-section">
-                        <h5 class="section-title">Required Documents</h5>
-                        <div class="form-row">
-                            <!-- ID Front Widget -->
-                            <div class="col-md-3 mb-4">
-                                <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                    <label>ID Card Front</label>
-                                    <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#idFrontModal">Upload ID Front</button>
-                                    <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
-                                    <input type="file" name="id_card_front" id="main_id_front_input" class="d-none">
-                                    <div id="id_front_status" class="upload-status-text"></div>
-                                </div>
-                            </div>
-
-                            <!-- ID Back Widget -->
-                            <div class="col-md-3 mb-4">
-                                <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                    <label>ID Card Back</label>
-                                    <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#idBackModal">Upload ID Back</button>
-                                    <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
-                                    <input type="file" name="id_card_back" id="main_id_back_input" class="d-none">
-                                    <div id="id_back_status" class="upload-status-text"></div>
-                                </div>
-                            </div>
-
-                            <!-- User Photo Widget -->
-                            <div class="col-md-3 mb-4">
-                                <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                    <label>Personal Photo</label>
-                                    <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#photoModal">Upload Photo</button>
-                                    <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
-                                    <input type="file" name="user_pic" id="main_user_pic_input" class="d-none">
-                                    <div id="photo_status_display" class="upload-status-text"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mb-4">
-                                <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                    <label>Passport Copy</label>
-                                    <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#passportModal">
-                                        Upload Passport
-                                    </button>
-                                    <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
-                                    <input type="file" name="passport_pic" id="main_passport_input" class="d-none">
-                                    <div id="passport_name_display" class="upload-status-text"></div>
-                                </div>
-                            </div>
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white">
+                            <h6 class="mb-0 font-weight-bold">Skills Covered</h6>
+                        </div>
+                        <div class="card-body">
+                            <span class="badge badge-secondary p-2 mr-1 mb-1">Communication</span>
+                            <span class="badge badge-secondary p-2 mr-1 mb-1">Teamwork</span>
+                            <span class="badge badge-secondary p-2 mr-1 mb-1">Time Management</span>
+                            <span class="badge badge-secondary p-2 mr-1 mb-1">Workplace Safety</span>
+                            <span class="badge badge-secondary p-2 mr-1 mb-1">Basic English</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-buttons mt-4">
-                        <a href="{{ route('home') }}" class="btn btn-outline-dark">Cancel</a>
-                        <button type="submit" class="btn btn-dark px-5">Submit Registration</button>
-                    </div>
-                </form>
             </div>
         </div>
 
@@ -233,7 +289,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="idf-drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-id-card fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>ID Card Front</strong></p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-idf-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="idf-file-name" class="mt-2 text-success font-weight-bold"></div>
@@ -286,7 +342,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="idb-drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-id-card fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>ID Card Back</strong></p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-idb-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="idb-file-name" class="mt-2 text-success font-weight-bold"></div>
@@ -375,7 +431,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="ph-drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-camera fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>Personal Photo</strong></p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-ph-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="ph-file-name" class="mt-2 text-success font-weight-bold"></div>
@@ -443,7 +499,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-cloud-upload-alt fa-3x text-info mb-3"></i>
                                     <p>Click, or <span class="text-info">Browse</span> to upload</p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-passport-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="passport-modal-error" class="text-danger small mt-2 font-weight-bold"></div>                                
@@ -460,8 +516,8 @@
             </div>
         </div>
 
-        <!-- Loader Overlay -->
-        <div id="loaderOverlay"><div class="loader-content text-center"><div class="spinner-border text-light" style="width: 4rem; height: 4rem;"></div><div class="text-light mt-3">Submitting...</div></div></div>
+        <!-- Loader -->
+        <div id="loaderOverlay"><div class="loader-content text-center"><div class="spinner-border text-light" style="width: 4rem; height: 4rem;"></div><div class="text-light mt-3">Submitting Application...</div></div></div>
     </section>
 
 @push('scripts')
@@ -526,8 +582,8 @@
                 if(this.files.length > 0) {
                     const file = this.files[0];
 
-                    // 1. Validation: Size (2MB)
-                    if (file.size > 2 * 1024 * 1024) {
+                    // 1. Validation: Size (5MB)
+                    if (file.size > 5 * 1024 * 1024) {
                         modalErrorDiv.innerText = "Error: File exceeds 2MB limit.";
                         this.value = ""; // Clear input
                         return;
@@ -604,22 +660,32 @@
             mainFormInput: 'main_passport_input'
         });
 
+        // FIXED: Robust Error Handler
         function setWidgetError(inputId, message) {
             const input = document.getElementById(inputId);
             if (!input) return;
 
             const widget = input.closest('.custom-upload-widget');
-            const statusDiv = widget.querySelector('.upload-status-text');
-            
-            // Add red border to the widget box
-            widget.classList.add('border-danger');
-            widget.classList.remove('border-success'); // In case it was green before
-            
-            // Show error message in the status area
-            statusDiv.innerHTML = `<span class="text-danger"><i class="fas fa-exclamation-circle"></i> ${message}</span>`;
+            if (!widget) return;
+
+            // 1. Color the button red (if it exists)
+            const btn = widget.querySelector('.btn-custom-upload');
+            if (btn) {
+                btn.style.borderColor = '#dc3545';
+                btn.style.color = '#dc3545';
+            }
+
+            // 2. Remove old errors
+            const existingError = widget.querySelector('.invalid-feedback');
+            if(existingError) existingError.remove();
+
+            // 3. Append new error
+            const error = document.createElement('div');
+            error.className = 'invalid-feedback d-block';
+            error.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${message}`;
+            widget.appendChild(error);
         }
 
-        // WhatsApp Masking and Submission Logic remain the same...
         if(typeof $.fn.inputmask !== 'undefined') $('#whatsapp_number').inputmask('9999 9999999');
 
         $('#softSkillForm').on('submit', async function(e) {
@@ -628,11 +694,12 @@
             const formData = new FormData(form);
             const loader = document.getElementById('loaderOverlay');
 
-            // 1. Clear previous errors
+            // Reset errors
             form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
             form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
-            form.querySelectorAll('.custom-upload-widget').forEach(el => {
-                el.classList.remove('border-danger');
+            form.querySelectorAll('.btn-custom-upload').forEach(el => {
+                el.style.borderColor = '#ced4da';
+                el.style.color = '#1a8a8a';
             });
 
             loader.classList.add('show');
@@ -650,50 +717,35 @@
                 const data = await response.json();
 
                 if (response.status === 422) {
-                    // 2. Handle Validation Errors
                     Object.keys(data.errors).forEach(field => {
-                        const input = form.querySelector(`[name="${field}"]`);
                         const errorMessage = data.errors[field][0];
 
-                        // List of file fields used in your form
-                        const fileFields = ['id_card_front', 'id_card_back', 'user_pic', 'passport_pic'];
-
-                        if (fileFields.includes(field)) {
-                            let targetInputId = '';
-                            if(field === 'id_card_front') targetInputId = 'main_id_front_input';
-                            if(field === 'id_card_back') targetInputId = 'main_id_back_input';
-                            if(field === 'user_pic') targetInputId = 'main_user_pic_input';
-                            if(field === 'passport_pic') targetInputId = 'main_passport_input';
-
-                            if(targetInputId) setWidgetError(targetInputId, errorMessage);
-                        } 
-                        else if (input) {
-                            // Handle Standard Inputs (WhatsApp, etc.)
-                            input.classList.add('is-invalid');
-                            const errorDiv = document.createElement('div');
-                            errorDiv.className = 'invalid-feedback';
-                            errorDiv.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${errorMessage}`;
-                            
-                            // Append error after the input
-                            input.closest('.form-group').appendChild(errorDiv);
+                        // Mapping
+                        if (field === 'id_card_front') setWidgetError('main_id_front_input', errorMessage);
+                        else if (field === 'id_card_back') setWidgetError('main_id_back_input', errorMessage);
+                        else if (field === 'user_pic') setWidgetError('main_user_pic_input', errorMessage);
+                        else if (field === 'passport_pic') setWidgetError('main_passport_input', errorMessage);
+                        else {
+                            // Standard Input
+                            const input = form.querySelector(`[name="${field}"]`);
+                            if(input) {
+                                input.classList.add('is-invalid');
+                                const errorDiv = document.createElement('div');
+                                errorDiv.className = 'invalid-feedback';
+                                errorDiv.innerHTML = errorMessage;
+                                input.closest('.form-group').appendChild(errorDiv);
+                            }
                         }
                     });
                     
-                    // 3. Scroll to the first error
-                    const firstError = document.querySelector('.is-invalid, .border-danger');
-                    if (firstError) {
-                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
+                    const firstError = document.querySelector('.is-invalid, .invalid-feedback');
+                    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
                 } else if (data.status === 'success') {
                     window.location.href = data.redirect;                    
-                } else {
-                    alert(data.message || 'An unexpected error occurred.');
                 }
-
             } catch (err) {
-                console.error(err);
-                alert('Server connection error. Please try again.');
+                // handle error
             } finally {
                 loader.classList.remove('show');
             }

@@ -1,13 +1,13 @@
 @extends('layouts.public')
-@section('title', 'Payment Confirmation')
+@section('title', 'Confirm Payment - Soft Skill Certificate')
 
 @section('content')
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>Payment Confirmation</h1>
-            <p class="lead">Complete your payment to process your Soft Skill Certificate.</p>
+            <h1>Complete Application</h1>
+            <p class="lead">Step 2 of 2: Processing Fee Payment</p>
         </div>
     </section>
 
