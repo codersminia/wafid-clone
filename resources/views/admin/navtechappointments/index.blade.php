@@ -18,7 +18,6 @@
                                 <th>ID</th>
                                 <th>Occupation</th>
                                 <th>WhatsApp</th>
-                                <th>City</th>
                                 <th>Country</th>
                                 <th>Status</th>
                                 <th>Date</th>

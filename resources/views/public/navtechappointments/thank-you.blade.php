@@ -19,10 +19,8 @@
                     <div class="bg-light p-3 rounded my-4 text-left">
                         <h6 class="font-weight-bold border-bottom pb-2">Your Details:</h6>
                         <div class="row">
-                            <div class="col-6 text-muted">Trade:</div>
+                            <div class="col-6 text-muted">Occupation:</div>
                             <div class="col-6 font-weight-bold text-dark">{{ $appointment->occupation }}</div>
-                            <div class="col-6 text-muted">City:</div>
-                            <div class="col-6 font-weight-bold text-dark">{{ $appointment->city }}</div>
                             <div class="col-6 text-muted">Ref ID:</div>
                             <div class="col-6 font-weight-bold text-primary">#SVP-{{ $appointment->id }}</div>
                         </div>

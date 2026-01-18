@@ -5,7 +5,20 @@
 
 @section('content')
 
+    <!-- Add Select2 CSS locally in the view or in your layout -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
+        /* Fix Select2 height to match Bootstrap inputs */
+        .select2-container .select2-selection--single {
+            height: 38px !important;
+            border: 1px solid #ced4da !important;
+            display: flex;
+            align-items: center;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 36px !important;
+        }
         .stepper-wrapper {
             display: flex;
             justify-content: space-between;
@@ -150,45 +163,83 @@
                             <div class="form-section">
                                 <h5 class="section-title"><i class="fas fa-briefcase text-dark"></i> Job Details</h5>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4">
+                                    <!-- Changed to col-md-6 -->
+                                    <div class="form-group col-md-6">
                                         <label for="country">Country</label>
                                         <select class="form-control" id="country" name="country">
                                             <option value="Pakistan">Pakistan</option>                                            
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label>City <span class="text-danger">*</span></label>
-                                        <select name="city" class="form-control" id="city" >
-                                            <option value="">Select City</option>
-                                            <option value="Islamabad">Islamabad</option>
-                                            <option value="Karachi">Karachi</option>
-                                            <option value="Lahore">Lahore</option>
-                                            <option value="Peshawar">Peshawar</option>
-                                            <option value="Quetta">Quetta</option>
-                                            <option value="Multan">Multan</option>
-                                            <option value="Sialkot">Sialkot</option>
-                                            <option value="Faisalabad">Faisalabad</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
+
+                                    <!-- Changed to col-md-6 -->
+                                    <div class="form-group col-md-6">
                                         <label>WhatsApp Number <span class="text-danger">*</span></label>
                                         <input type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" placeholder="0300 1234567" >
-                                        <input type="hidden" name="country" value="Pakistan">
+                                        <!-- Removed duplicate hidden country input to prevent array issues -->
                                     </div>                                    
                                 </div>
                                 <div class="form-row">                                    
                                     <div class="form-group col-md-6">
                                         <label>Select Your Occupation <span class="text-danger">*</span></label>
-                                        <select name="occupation" class="form-control" id="occupation" >
+                                        <select name="occupation" class="form-control" id="occupation">
                                             <option value="">-- Choose Occupation --</option>
-                                            <option value="Electrician">Building Electrician</option>
-                                            <option value="Plumber">Plumber</option>
-                                            <option value="Carpenter">Carpenter</option>
-                                            <option value="Mason">Mason</option>
-                                            <option value="Welder">Welder</option>
-                                            <option value="Painter">Painter</option>
-                                            <option value="AC Technician">AC Technician</option>
-                                            <option value="Other">Other</option>
+                                            @php
+                                                $occupations = [
+                                                    "Agricultural equipment mechanic", "A sharpener and a metal tool grinder", "Asphalt roofing agent and synthetic components", 
+                                                    "Auto Electrician", "Auto Glazier", "Auto Mechanic", "Auto plumber", "Baker", "Barber", "Barista", "Blacksmith", 
+                                                    "Boiler smith", "Brick and tile kiln operator", "Brick mason", "Builder", "Building Electrician", "Building Facade Cleaner", 
+                                                    "Build stacks", "Bus Driver", "Bus Mechanic", "Butcher", "Car Driver", "Carpenter", "Carpet and rug Cleaner", 
+                                                    "Carpet rug and plastic flooring installer", "Chef", "Clay mason", "Clothes Seller", "Compressor mechanic", 
+                                                    "Concrete Finisher", "Concrete Mix Worker", "Constructing Worker", "Construction formwork Carpenter", "Construction Worker", 
+                                                    "Copper Blacksmith", "Cosmetics and Toiletries Seller", "Craftsman of wooden products", "Crusher operator", "Curtain washer", 
+                                                    "Decorative Painter", "Demolition worker", "Drilling and shell carpenter", "Drilling ground wells", "Drilling Rig Electrician", 
+                                                    "Drilling Rig Mechanic", "Drilling worker", "Electrical Devices Maintenance Technician", "Electrical Equipment Assembler", 
+                                                    "Electrical transformer assembly", "Electric Devices Assembler", "Electro mechanic", "Electronic equipment mechanic", 
+                                                    "Electronic Exchange Assembler", "Electronic Mechanical Equipment Assembler", "Elevator mechanic", "Excavator Operator", 
+                                                    "Explosive agent", "Fast food maker", "Fiber processing machine operator", "Flame cutting machine operator", 
+                                                    "Food and Beverage Seller", "Food & Beverage's Counter Server", "Food Peddler", "Forged press blacksmith", 
+                                                    "Fur Clothing & Bisht Tailor", "Furniture Assembling Worker", "Furniture Carpenter", "Furniture Seller", "Garden clean worker", 
+                                                    "Gas Station Attendant", "Grocer", "Gypsum Worker", "Haddad blades", "Hairdresser", "Hardwood floor installer", 
+                                                    "Heavy Equipment Mechanic", "Heavy truck Driver", "Hospital Cleaner", "HVAC mechanic", "ICT Lines Installer", 
+                                                    "ICT Services Technician", "Inflatable Musical Instruments Maker & Repairer", "Ironer", 
+                                                    "Jeweler precious metal ornament and enameler", "Jewelry Seller", "Kitchen Worker", "Labeling worker", "Lathe operator", 
+                                                    "Laundryman", "Light equipment mechanic", "Lingerie Female Seller", "Load and Unload Worker", "Locksmith", 
+                                                    "Manufacturing Officer", "Marble finishing machine operator", "Market Seller", "Meal Maker For a Food Cart", 
+                                                    "Measuring Instruments Repairer", "Mechanical Equipment Assembler", "Mechanical hammer smith", "Men's Clothing Tailor", 
+                                                    "Metal boring machine operator", "Metal caster", "Metal casting machine operator", "Metal Construction Assembler", 
+                                                    "Metal extrusion machine operator", "Metal finisher", "Metal forging machine operator", "Metal galvanizing machine operator", 
+                                                    "Metal grinding and polishing equipment operator", "Metal heat treatment machine operator", "Metal mold maker", 
+                                                    "Metal rolling machine operator", "Military Tailor", "Mine machines operator", "Miner", "Mine roofing installer", 
+                                                    "Mining equipment mechanic", "Mining worker", "Minitruck driver", "Mosaic composite", "Mosaic molding agent", 
+                                                    "Motorcycle Driver", "Motorcycle mechanic", "Nail Care Specialist", "Naval Construction Diver", "Newspaper Seller", 
+                                                    "NMVs Repairer", "Offices and Facilities Cleaning Worker", "Offshore drilling rig", "Optical Instruments Repairer", 
+                                                    "Ore smelter operator", "Packaging worker", "Packing the shelves worker", "Painter", "Peddler", "Peddler-Green Grocer", 
+                                                    "Percussion Musical Instruments Maker & Repairer", "Perfume Seller", "Pipe and Boiler Insulation Worker", "Pipe installer", 
+                                                    "Plasterer", "Plumber", "Power Cable Connector", "Power Distribution Boards Assembler", "Power Lines Operator", 
+                                                    "Precision instrument repairer", "Products Spray Painter", "Quarry worker", "Readymix concrete construction", 
+                                                    "Refrigeration assembler", "Refrigeration mechanic", "Riveting worker", "Road maintenance worker", 
+                                                    "Roofing Sheet metal worker", "Roofs Cleaner", "Roof slate and tiles worker", "Scaffold Laborer", "Seller", 
+                                                    "Seller of Agricultural Supplies", "Seller of Building Materials", "Seller of Flowers and Plants", 
+                                                    "Seller of Fuelwood and Coal", "Seller of Household Appliances and Tools", "Seller of Musical Instruments", 
+                                                    "Seller of Vehicles Spare Parts", "Seller of Vehicles Supplies", "Sewing and Knitting Supplies Seller", "Ship carpenter", 
+                                                    "Shoes and Bags Seller", "Sifting machine operator", "Slaughterer", "Spice Seller", "Spray Painter", "Stall seller", 
+                                                    "Stone cutter", "Stone engraver", "Stone mason", "Stones", "Store Keeper", "Street clean worker", 
+                                                    "String Musical Instruments Maker & Repairer", "Tailor", "Taxi Driver", "Textile Seller", "Tile making machine operator", 
+                                                    "Tile setter", "Timber and mud roofing worker", "Tinsmith", "Tire Installer", "Tool and kit maker", "Trailer Truck Driver", 
+                                                    "Transport car worker", "Truck Driver", "Underwater welder", "Unique Occupation Worker", "Used tires reconstruction worker", 
+                                                    "Vehicle Assembler", "Vehicles Oiler and Greaser", "Vehicles Seller", "Veneer making machine operator", "Waiter", 
+                                                    "Wallpaper Hanger", "Warehouse Worker", "Watch Repairer", "Watch Seller", 
+                                                    "Weaving Canes, Bamboo, Fronds & Wicker Artificer", "Welder", "Windows cleaner", "Wire Robe Technician", 
+                                                    "Women's Clothing Tailor", "Wood cutting machine operator", "Wood Drying Oven Operator", "Wooden formwork carpenter", 
+                                                    "Wood planing machine operator", "Wood Press Machine Operator", "Wood Processor", 
+                                                    "Wood Product Manufacturing Machine Operator", "Wood saw operator", "Wood Shaping Machine Operator", 
+                                                    "Woodworking Machines and Tools Operator and Preparer", "Workshop Worker"
+                                                ];
+                                            @endphp
+
+                                            @foreach($occupations as $job)
+                                                <option value="{{ $job }}" {{ old('occupation') == $job ? 'selected' : '' }}>{{ $job }}</option>
+                                            @endforeach
                                         </select>
                                         <small class="text-muted">Select the trade written on your visa.</small>
                                     </div>
@@ -561,9 +612,18 @@
     </section>
 
     @push('scripts')
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
+
+            // Initialize Select2 on the occupation dropdown
+            $('#occupation').select2({
+                placeholder: "-- Choose Occupation --",
+                allowClear: false,
+                width: '100%' // Fixes responsiveness issues
+            });
             
             // --- GENERIC MODAL HANDLER FUNCTION ---
             function setupStepper(config) {

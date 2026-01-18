@@ -22,8 +22,8 @@
                 <hr>
                 <h5>Submitted Documents</h5>
                 <div class="row text-center">
-                    <!-- ID Card Front -->
-                    <div class="col-md-3 mb-4">
+                    <!-- 1. ID Card Front -->
+                    <div class="col-md-6 mb-4">
                         <label class="d-block font-weight-bold">ID Card Front</label>                     
                         <img src="{{ asset('uploads/softskill/' . $appointment->id_card_front) }}" 
                             class="img-thumbnail view-image" 
@@ -38,40 +38,8 @@
                         </div>
                     </div>
 
-                    <!-- ID Card Back -->
-                    <div class="col-md-3 mb-4">
-                        <label class="d-block font-weight-bold">ID Card Back</label>
-                        <img src="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}" 
-                            class="img-thumbnail view-image" 
-                            style="height: 150px; cursor: pointer;" 
-                            data-toggle="modal" 
-                            data-target="#imgModal" 
-                            data-src="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}">
-                        <div class="mt-2">
-                            <a href="{{ asset('uploads/softskill/' . $appointment->id_card_back) }}" download="id_back_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- User Photo -->
-                    <div class="col-md-3 mb-4">
-                        <label class="d-block font-weight-bold">User Photo</label>
-                        <img src="{{ asset('uploads/softskill/' . $appointment->user_pic) }}" 
-                            class="img-thumbnail view-image" 
-                            style="height: 150px; cursor: pointer;" 
-                            data-toggle="modal" 
-                            data-target="#imgModal" 
-                            data-src="{{ asset('uploads/softskill/' . $appointment->user_pic) }}">
-                        <div class="mt-2">
-                            <a href="{{ asset('uploads/softskill/' . $appointment->user_pic) }}" download="user_photo_{{ $appointment->id }}" class="btn btn-sm btn-light-primary font-weight-bold">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-
-                        <!-- Passport Copy (NEW) -->
-                    <div class="col-md-3 mb-4">
+                    <!-- 2. Passport Copy -->
+                    <div class="col-md-6 mb-4">
                         <label class="d-block font-weight-bold">Passport Copy</label>
                         <img src="{{ asset('uploads/softskill/' . $appointment->passport_pic) }}" 
                             class="img-thumbnail view-image" 
@@ -85,7 +53,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
 
                 @if($appointment->payment)

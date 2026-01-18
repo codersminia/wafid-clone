@@ -13,8 +13,6 @@ class SoftSkillCertificate extends Model
     protected $fillable = [
         'whatsapp_number',
         'id_card_front',
-        'id_card_back',
-        'user_pic',
         'is_new',
         'passport_pic',
     ];

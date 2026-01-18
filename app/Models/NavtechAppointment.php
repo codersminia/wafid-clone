@@ -16,7 +16,6 @@ class NavtechAppointment extends Model
     // Fields that can be filled via the form
     protected $fillable = [
         'country',
-        'city',
         'whatsapp_number',
         'occupation',
         'passport_pic',

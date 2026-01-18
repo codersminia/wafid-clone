@@ -8,27 +8,14 @@
             <div class="card-body">
                 <!-- General Information -->
                 <div class="form-group row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <label for="country">Country:</label>
                         <select required class="form-control" id="country" name="country">
                             <option value="Pakistan" {{ $appointment->country == 'Pakistan' ? 'selected' : '' }}>Pakistan</option>                                            
                         </select>
                     </div>
-                    <div class="col-lg-4">
-                        <label for="city">City:</label>
-                        <select required name="city" class="form-control" id="city">
-                            <option value="">Select City</option>
-                            @php
-                                $cities = ['Islamabad', 'Karachi', 'Lahore', 'Peshawar', 'Quetta', 'Multan', 'Sialkot', 'Faisalabad'];
-                            @endphp
-                            @foreach($cities as $city)
-                                <option value="{{ $city }}" {{ $appointment->city == $city ? 'selected' : '' }}>
-                                    {{ $city }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-lg-4">
+                    
+                    <div class="col-lg-6">
                         <label for="whatsapp_number">WhatsApp Number:</label>
                         <input required type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" 
                             value="{{ $appointment->whatsapp_number }}" placeholder="03xx xxxxxxx">
@@ -41,20 +28,63 @@
                         <select required name="occupation" class="form-control" id="occupation">
                             <option value="">Select Occupation</option>
                             @php
+                                // Same list as frontend
                                 $occupations = [
-                                    'Electrician' => 'Building Electrician',
-                                    'Plumber' => 'Plumber',
-                                    'Carpenter' => 'Carpenter',
-                                    'Mason' => 'Mason',
-                                    'Welder' => 'Welder',
-                                    'Painter' => 'Painter',
-                                    'AC Technician' => 'AC Technician',
-                                    'Other' => 'Other'
+                                    "Agricultural equipment mechanic", "A sharpener and a metal tool grinder", "Asphalt roofing agent and synthetic components", 
+                                    "Auto Electrician", "Auto Glazier", "Auto Mechanic", "Auto plumber", "Baker", "Barber", "Barista", "Blacksmith", 
+                                    "Boiler smith", "Brick and tile kiln operator", "Brick mason", "Builder", "Building Electrician", "Building Facade Cleaner", 
+                                    "Build stacks", "Bus Driver", "Bus Mechanic", "Butcher", "Car Driver", "Carpenter", "Carpet and rug Cleaner", 
+                                    "Carpet rug and plastic flooring installer", "Chef", "Clay mason", "Clothes Seller", "Compressor mechanic", 
+                                    "Concrete Finisher", "Concrete Mix Worker", "Constructing Worker", "Construction formwork Carpenter", "Construction Worker", 
+                                    "Copper Blacksmith", "Cosmetics and Toiletries Seller", "Craftsman of wooden products", "Crusher operator", "Curtain washer", 
+                                    "Decorative Painter", "Demolition worker", "Drilling and shell carpenter", "Drilling ground wells", "Drilling Rig Electrician", 
+                                    "Drilling Rig Mechanic", "Drilling worker", "Electrical Devices Maintenance Technician", "Electrical Equipment Assembler", 
+                                    "Electrical transformer assembly", "Electric Devices Assembler", "Electro mechanic", "Electronic equipment mechanic", 
+                                    "Electronic Exchange Assembler", "Electronic Mechanical Equipment Assembler", "Elevator mechanic", "Excavator Operator", 
+                                    "Explosive agent", "Fast food maker", "Fiber processing machine operator", "Flame cutting machine operator", 
+                                    "Food and Beverage Seller", "Food & Beverage's Counter Server", "Food Peddler", "Forged press blacksmith", 
+                                    "Fur Clothing & Bisht Tailor", "Furniture Assembling Worker", "Furniture Carpenter", "Furniture Seller", "Garden clean worker", 
+                                    "Gas Station Attendant", "Grocer", "Gypsum Worker", "Haddad blades", "Hairdresser", "Hardwood floor installer", 
+                                    "Heavy Equipment Mechanic", "Heavy truck Driver", "Hospital Cleaner", "HVAC mechanic", "ICT Lines Installer", 
+                                    "ICT Services Technician", "Inflatable Musical Instruments Maker & Repairer", "Ironer", 
+                                    "Jeweler precious metal ornament and enameler", "Jewelry Seller", "Kitchen Worker", "Labeling worker", "Lathe operator", 
+                                    "Laundryman", "Light equipment mechanic", "Lingerie Female Seller", "Load and Unload Worker", "Locksmith", 
+                                    "Manufacturing Officer", "Marble finishing machine operator", "Market Seller", "Meal Maker For a Food Cart", 
+                                    "Measuring Instruments Repairer", "Mechanical Equipment Assembler", "Mechanical hammer smith", "Men's Clothing Tailor", 
+                                    "Metal boring machine operator", "Metal caster", "Metal casting machine operator", "Metal Construction Assembler", 
+                                    "Metal extrusion machine operator", "Metal finisher", "Metal forging machine operator", "Metal galvanizing machine operator", 
+                                    "Metal grinding and polishing equipment operator", "Metal heat treatment machine operator", "Metal mold maker", 
+                                    "Metal rolling machine operator", "Military Tailor", "Mine machines operator", "Miner", "Mine roofing installer", 
+                                    "Mining equipment mechanic", "Mining worker", "Minitruck driver", "Mosaic composite", "Mosaic molding agent", 
+                                    "Motorcycle Driver", "Motorcycle mechanic", "Nail Care Specialist", "Naval Construction Diver", "Newspaper Seller", 
+                                    "NMVs Repairer", "Offices and Facilities Cleaning Worker", "Offshore drilling rig", "Optical Instruments Repairer", 
+                                    "Ore smelter operator", "Packaging worker", "Packing the shelves worker", "Painter", "Peddler", "Peddler-Green Grocer", 
+                                    "Percussion Musical Instruments Maker & Repairer", "Perfume Seller", "Pipe and Boiler Insulation Worker", "Pipe installer", 
+                                    "Plasterer", "Plumber", "Power Cable Connector", "Power Distribution Boards Assembler", "Power Lines Operator", 
+                                    "Precision instrument repairer", "Products Spray Painter", "Quarry worker", "Readymix concrete construction", 
+                                    "Refrigeration assembler", "Refrigeration mechanic", "Riveting worker", "Road maintenance worker", 
+                                    "Roofing Sheet metal worker", "Roofs Cleaner", "Roof slate and tiles worker", "Scaffold Laborer", "Seller", 
+                                    "Seller of Agricultural Supplies", "Seller of Building Materials", "Seller of Flowers and Plants", 
+                                    "Seller of Fuelwood and Coal", "Seller of Household Appliances and Tools", "Seller of Musical Instruments", 
+                                    "Seller of Vehicles Spare Parts", "Seller of Vehicles Supplies", "Sewing and Knitting Supplies Seller", "Ship carpenter", 
+                                    "Shoes and Bags Seller", "Sifting machine operator", "Slaughterer", "Spice Seller", "Spray Painter", "Stall seller", 
+                                    "Stone cutter", "Stone engraver", "Stone mason", "Stones", "Store Keeper", "Street clean worker", 
+                                    "String Musical Instruments Maker & Repairer", "Tailor", "Taxi Driver", "Textile Seller", "Tile making machine operator", 
+                                    "Tile setter", "Timber and mud roofing worker", "Tinsmith", "Tire Installer", "Tool and kit maker", "Trailer Truck Driver", 
+                                    "Transport car worker", "Truck Driver", "Underwater welder", "Unique Occupation Worker", "Used tires reconstruction worker", 
+                                    "Vehicle Assembler", "Vehicles Oiler and Greaser", "Vehicles Seller", "Veneer making machine operator", "Waiter", 
+                                    "Wallpaper Hanger", "Warehouse Worker", "Watch Repairer", "Watch Seller", 
+                                    "Weaving Canes, Bamboo, Fronds & Wicker Artificer", "Welder", "Windows cleaner", "Wire Robe Technician", 
+                                    "Women's Clothing Tailor", "Wood cutting machine operator", "Wood Drying Oven Operator", "Wooden formwork carpenter", 
+                                    "Wood planing machine operator", "Wood Press Machine Operator", "Wood Processor", 
+                                    "Wood Product Manufacturing Machine Operator", "Wood saw operator", "Wood Shaping Machine Operator", 
+                                    "Woodworking Machines and Tools Operator and Preparer", "Workshop Worker"
                                 ];
                             @endphp
-                            @foreach($occupations as $value => $label)
-                                <option value="{{ $value }}" {{ $appointment->occupation == $value ? 'selected' : '' }}>
-                                    {{ $label }}
+                            
+                            @foreach($occupations as $job)
+                                <option value="{{ $job }}" {{ $appointment->occupation == $job ? 'selected' : '' }}>
+                                    {{ $job }}
                                 </option>
                             @endforeach
                         </select>
@@ -208,6 +238,18 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
+
+        // Initialize Select2
+        $('#occupation').select2({
+            placeholder: "Select Occupation",
+            allowClear: true,
+            width: '100%'
+        });
+        
+        // Also apply it to City and Country if you want consistency
+        $('#city').select2({ width: '100%' });
+        $('#country').select2({ width: '100%' });
+
         // Use a specific class 'view-image' to avoid conflicts
         $('.view-image').on('click', function() {
             var imageSrc = $(this).attr('data-src');

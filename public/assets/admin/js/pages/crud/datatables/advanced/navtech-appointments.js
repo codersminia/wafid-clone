@@ -8,8 +8,15 @@ var NavtechTable = function () {
             ajax: { url: "/admin/navttc-appointments/data", type: "GET" },
             order: [[0, 'desc']],
             columns: [
-                { data: 0 }, { data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, 
-                { data: 5 }, { data: 6 }, { data: 7 }, { data: 8, visible: false }, { data: 9, visible: false }
+                { data: 0 }, // ID
+                { data: 1 }, // Occupation
+                { data: 2 }, // WhatsApp
+                { data: 3 }, // Country (Shifted up)
+                { data: 4 }, // Status (Shifted up)
+                { data: 5 }, // Date (Shifted up)
+                { data: 6 }, // Actions (Shifted up)
+                { data: 7, visible: false }, // Hidden ID
+                { data: 8, visible: false }  // Hidden New Check
             ],
             columnDefs: [
                 {
@@ -21,7 +28,7 @@ var NavtechTable = function () {
                     }
                 },
                 {
-                    targets: 5, // Payment Status
+                    targets: 4, // Payment Status (Changed from 5 to 4)
                     render: function (data) {
                         var status = {
                             0: { 'title': 'Pending', 'class': 'label-light-warning' },
@@ -31,9 +38,9 @@ var NavtechTable = function () {
                     }
                 },
                 {
-                    targets: 7, // Actions
+                    targets: 6, // Actions (Changed from 7 to 6)
                     render: function (data, type, full) {
-                        var id = full[8];
+                        var id = full[7]; // ID is now at index 7
                         return `
                             <a href="/admin/navttc-appointments/${id}/edit" class="btn btn-sm btn-clean btn-icon"><i class="la la-edit"></i></a>
                             <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-navtech" data-id="${id}"><i class="la la-trash"></i></a>
@@ -42,7 +49,8 @@ var NavtechTable = function () {
                 }
             ],
             createdRow: function(row, data) {
-                if (data[9] == 1) $(row).addClass('new-record');
+                // is_new is now at index 8
+                if (data[8] == 1) $(row).addClass('new-record');
             }
         });
     };

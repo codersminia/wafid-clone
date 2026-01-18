@@ -50,6 +50,10 @@ class PublicController extends Controller
         return view('public.contact');
     }
 
+    public function about() {
+        return view('public.about');
+    }
+
     public function medicalExamination(){
         return view('public.appointments.medical-examination');
     }
@@ -511,14 +515,12 @@ class PublicController extends Controller
         // 1. Validation
         $validator = Validator::make($request->all(), [
             'country'         => 'required|string',
-            'city'            => 'required|string',
             'whatsapp_number' => 'required|string',
             'occupation'      => 'required|string',
             'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
             'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120',
             'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ], [
-            // Custom messages if you want to override defaults
             'passport_pic.max' => 'Your passport photo is too large. Please use a smaller image (max 5MB).',
             'passport_pic.required' => 'Please upload your Passport scan.',
             'id_card_front.required' => 'The ID card front image is required.',
@@ -533,32 +535,23 @@ class PublicController extends Controller
         }
 
         try {
-            // Prepare data for database
-            $data = $request->only(['country', 'city', 'whatsapp_number', 'occupation']);
+            // REMOVED 'city' from the only() array
+            $data = $request->only(['country', 'whatsapp_number', 'occupation']);
             $data['is_new'] = true;
 
-            // 2. Process and Save Files to public/uploads
+            // 2. Process and Save Files...
             $fileFields = ['passport_pic', 'id_card_front', 'user_pic'];
 
             foreach ($fileFields as $field) {
                 if ($request->hasFile($field)) {
                     $image = $request->file($field);
-                    
-                    // Generate random name as per your requirement
                     $randomName = Str::random(40) . '.' . $image->getClientOriginalExtension();
-                    
-                    // Move to public/uploads
                     $image->move(public_path('uploads/navtech'), $randomName);
-                    
-                    // Save the filename/path in the data array
                     $data[$field] = $randomName;
                 }
             }            
 
-            // Save to Database
             $appointment = NavtechAppointment::create($data);
-
-            // Store in session for the next step
             session(['navtech_appointment_id' => $appointment->id]);
 
             return response()->json([
@@ -567,10 +560,7 @@ class PublicController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Something went wrong. Please try again later.'
-            ], 500);
+            return response()->json(['status' => 'error', 'message' => 'Something went wrong.'], 500);
         }
     }
 
@@ -720,9 +710,7 @@ class PublicController extends Controller
     public function softSkillStore(Request $request) {
         $validator = Validator::make($request->all(), [
             'whatsapp_number' => 'required|string',
-            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120', // 5MB
-            'id_card_back'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
-            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120', 
             'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
@@ -733,8 +721,8 @@ class PublicController extends Controller
         try {
             $data = $request->only(['whatsapp_number']);
             
-            // Updated array to include passport_pic
-            $fields = ['id_card_front', 'id_card_back', 'user_pic', 'passport_pic'];
+            // Only processing ID Front and Passport now
+            $fields = ['id_card_front', 'passport_pic'];
 
             foreach($fields as $field) {
                 if ($request->hasFile($field)) {

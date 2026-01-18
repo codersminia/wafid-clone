@@ -31,18 +31,41 @@
     
     {{-- Add Schema Markup for Local Business --}}
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Gulf Medical Consultant",
-      "image": "{{ asset('assets/public/images/white-logo.svg') }}",
-      "description": "Third-party consultancy for processing Wafid, NAVTTC, and Tasheer appointments for GCC visas.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "PK" 
-      },
-      "priceRange": "$$"
-    }
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Gulf Medical Consultant",
+            "url": "https://gamcawafidonline.com",
+            "logo": "{{ asset('assets/public/images/white-logo.svg') }}",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+923000000000",
+                "contactType": "customer service"
+            },
+            "department": [
+                {
+                    "@type": "ProfessionalService",
+                    "name": "Gulf Medical Consultant - Lahore",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "Office 123, Ferozepur Road",
+                        "addressLocality": "Lahore",
+                        "addressCountry": "PK"
+                    }
+                },
+                {
+                    "@type": "ProfessionalService",
+                    "name": "Gulf Medical Consultant - Karachi",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "Suite 405, Shahrah-e-Faisal",
+                        "addressLocality": "Karachi",
+                        "addressCountry": "PK"
+                    }
+                }
+                // Add other 2 locations here...
+            ]
+        }
     </script>
 </head>
 <body>
@@ -71,6 +94,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('guidelines') }}">Guidelines</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('contactus')}}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
                 </ul>
             </div>
         </div>

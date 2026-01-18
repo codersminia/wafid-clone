@@ -524,10 +524,9 @@ class AdminController extends Controller
             0 => 'id',
             1 => 'occupation',
             2 => 'whatsapp_number',
-            3 => 'city',
-            4 => 'country',
-            5 => 'id', // Placeholder for status sorting logic
-            6 => 'created_at',
+            3 => 'country', // Was City, now Country
+            4 => 'id',      // Placeholder for Status
+            5 => 'created_at',
         ];
 
         $query = NavtechAppointment::with('payment');
@@ -536,8 +535,7 @@ class AdminController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('occupation', 'like', "%$search%")
-                ->orWhere('whatsapp_number', 'like', "%$search%")
-                ->orWhere('city', 'like', "%$search%");
+                ->orWhere('whatsapp_number', 'like', "%$search%");
             });
         }
 
@@ -556,16 +554,15 @@ class AdminController extends Controller
         foreach ($appointments as $a) {
             $isPaid = $a->payment ? 1 : 0;
             $data[] = [
-                $a->id,
-                $a->occupation,
-                $a->whatsapp_number,
-                $a->city,
-                $a->country,
-                $isPaid,
-                $a->created_at->format('d M Y'),
-                '', // Actions placeholder
-                $a->id, // Hidden ID for JS
-                $a->is_new // Hidden is_new for row highlighting
+                $a->id,                     // 0
+                $a->occupation,             // 1
+                $a->whatsapp_number,        // 2
+                $a->country,                // 3 (City removed)
+                $isPaid,                    // 4
+                $a->created_at->format('d M Y'), // 5
+                '',                         // 6 (Actions)
+                $a->id,                     // 7 (Hidden ID)
+                $a->is_new                  // 8 (Hidden New Status)
             ];
         }
 
@@ -594,7 +591,6 @@ class AdminController extends Controller
         
         $request->validate([
             'country' => 'required',
-            'city' => 'required',
             'whatsapp_number' => 'required',
             'occupation' => 'required',
         ]);
