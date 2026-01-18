@@ -514,11 +514,12 @@ class PublicController extends Controller
             'city'            => 'required|string',
             'whatsapp_number' => 'required|string',
             'occupation'      => 'required|string',
-            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ], [
             // Custom messages if you want to override defaults
+            'passport_pic.max' => 'Your passport photo is too large. Please use a smaller image (max 5MB).',
             'passport_pic.required' => 'Please upload your Passport scan.',
             'id_card_front.required' => 'The ID card front image is required.',
             'user_pic.required' => 'A personal passport-size photo is required.',

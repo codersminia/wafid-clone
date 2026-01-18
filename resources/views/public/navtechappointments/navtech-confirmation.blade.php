@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
-@section('title', 'Payment Confirmation - Navtech')
+@section('title', 'Confirm SVP Test Payment')
 
 @section('content')
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>Payment Confirmation</h1>
-            <p class="lead">Complete your payment to process your SVP application.</p>
+            <h1>Confirm Booking</h1>
+            <p class="lead">Step 2 of 3: Payment Verification</p>
         </div>
     </section>
 
@@ -129,7 +129,7 @@
                         </div>
 
                         <div class="form-buttons">
-                            <button type="submit" class="btn btn-dark">Submit Payment</button>
+                            <button type="submit" class="btn btn-dark">Submit Verification</button>
                         </div>
                     </form>
                 </div>

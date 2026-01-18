@@ -1,6 +1,7 @@
 @extends('layouts.public')
 
-@section('title', 'SVP Registration - Medical Examination')
+@section('title', 'Book NAVTTC / Takamol Skill Test | Saudi SVP Program')
+@section('meta_description', 'Official booking partner for NAVTTC Takamol Skill Verification Program (SVP). Book your test for Electrician, Plumber, Welder, and HVAC for Saudi Visa.')
 
 @section('content')
 
@@ -102,28 +103,52 @@
             font-weight: bold;
             margin-top: 5px;
         }
+
+        /* Add specific mobile responsiveness tweaks */
+        @media (max-width: 768px) {
+            .stepper-item .step-name { display: none; } /* Hide text on small screens */
+        }
+        .trust-badges img { height: 50px; margin: 0 10px; filter: grayscale(100%); opacity: 0.7; transition: 0.3s; }
+        .trust-badges img:hover { filter: grayscale(0%); opacity: 1; }
     </style>
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>SVP International Registration</h1>
-            <p class="lead">Please provide the required details and documents for your application.</p>
+            <h1>Saudi Skill Verification Program (SVP)</h1>
+            <p class="lead">Book your NAVTTC / Takamol Trade Test online.</p>
+            
+            <!-- Trust Badges -->
+            <div class="trust-badges mt-3 bg-white p-2 d-inline-block rounded shadow-sm">
+                <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC">
+                <span class="text-muted font-weight-bold">x</span>
+                <img src="{{ asset('assets/public/images/takamol-logo.svg') }}" alt="Takamol"> <!-- Ensure you have this logo -->
+            </div>
         </div>
     </section>
+
+    <!-- Warning Alert -->
+    <div class="bg-warning py-2 text-dark text-center">
+        <div class="container">
+            <small>
+                <i class="fas fa-exclamation-triangle"></i> 
+                <strong>Requirement:</strong> This test is mandatory for 12 technical trades traveling to Saudi Arabia on a new Work Visa.
+            </small>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <section class="py-5">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="appointment-form-wrapper">
+                    <div class="appointment-form-wrapper shadow-lg">
                         <form id="appointmentForm" class="appointment-form" method="POST" enctype="multipart/form-data">
                             @csrf
                             
-                            <!-- Location & Basic Info -->
+                            <!-- Section 1: Job Details -->
                             <div class="form-section">
-                                <h5 class="section-title">General Information</h5>
+                                <h5 class="section-title"><i class="fas fa-briefcase text-dark"></i> Job Details</h5>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="country">Country</label>
@@ -132,8 +157,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="city">City</label>
-                                        <select name="city" class="form-control" id="city">
+                                        <label>City <span class="text-danger">*</span></label>
+                                        <select name="city" class="form-control" id="city" >
                                             <option value="">Select City</option>
                                             <option value="Islamabad">Islamabad</option>
                                             <option value="Karachi">Karachi</option>
@@ -146,16 +171,16 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="whatsapp_number">WhatsApp Number</label>
-                                        <input type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" placeholder="03xx xxxxxxx">
-                                    </div>
+                                        <label>WhatsApp Number <span class="text-danger">*</span></label>
+                                        <input type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" placeholder="0300 1234567" >
+                                        <input type="hidden" name="country" value="Pakistan">
+                                    </div>                                    
                                 </div>
-
-                                <div class="form-row">
+                                <div class="form-row">                                    
                                     <div class="form-group col-md-6">
-                                        <label for="occupation">Occupation</label>
-                                        <select name="occupation" class="form-control" id="occupation">
-                                            <option value="">Select Occupation</option>
+                                        <label>Select Your Occupation <span class="text-danger">*</span></label>
+                                        <select name="occupation" class="form-control" id="occupation" >
+                                            <option value="">-- Choose Occupation --</option>
                                             <option value="Electrician">Building Electrician</option>
                                             <option value="Plumber">Plumber</option>
                                             <option value="Carpenter">Carpenter</option>
@@ -165,63 +190,74 @@
                                             <option value="AC Technician">AC Technician</option>
                                             <option value="Other">Other</option>
                                         </select>
+                                        <small class="text-muted">Select the trade written on your visa.</small>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Document Upload Section -->
+                            <!-- Section 2: Documents -->
                             <div class="form-section">
-                                <h5 class="section-title">Required Documents</h5>
+                                <h5 class="section-title"><i class="fas fa-file-upload text-dark"></i> Document Upload</h5>
+                                <p class="small text-muted mb-4">Please upload clear photos. We will crop and resize them for the official portal.</p>
                                 
-                                <div class="form-row">
-                                    <!-- Passport Upload Widget -->
+                                <div class="row">
+                                    <!-- Passport -->
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                            <label>Upload Passport</label>
-                                            {{-- <p class="upload-subtitle">Please upload or take a photo of your <strong>passport</strong></p> --}}
-                                            <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#passportModal">
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow">
+                                            <i class="fas fa-passport fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">1. Passport</h6>
+                                            <p class="small text-muted">Front page with photo</p>
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm btn-block" data-toggle="modal" data-target="#passportModal">
                                                 Upload Passport
                                             </button>
-                                            <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
+                                            
                                             <input type="file" name="passport_pic" id="main_passport_input" class="d-none">
-                                            <div id="passport_name_display" class="upload-status-text"></div>
+                                            <div id="passport_name_display" class="upload-status-text mt-2"></div>
                                         </div>
                                     </div>
 
-                                    <!-- ID Card Upload Widget -->
+                                    <!-- ID Card -->
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                            <label>ID Card Front Page</label>
-                                            {{-- <p class="upload-subtitle">Please upload or take a photo of your <strong>ID Card</strong></p> --}}
-                                            <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#idCardModal">
-                                                Upload ID Card
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow">
+                                            <i class="fas fa-id-card fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">2. CNIC</h6>
+                                            <p class="small text-muted">Front side of ID Card</p>
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm btn-block" data-toggle="modal" data-target="#idCardModal">
+                                                Upload CNIC
                                             </button>
-                                            <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
+                                            
                                             <input type="file" name="id_card_front" id="main_id_card_input" class="d-none">
-                                            <div id="id_status_display" class="upload-status-text"></div>
+                                            <div id="id_status_display" class="upload-status-text mt-2"></div>
                                         </div>
                                     </div>
 
-                                    <!-- User Photo Upload Widget -->
+                                    <!-- User Photo -->
                                     <div class="col-md-4 mb-4">
-                                        <div class="custom-upload-widget form-group border p-3 rounded shadow-sm bg-white">
-                                            <label>Personal Photo</label>
-                                            {{-- <p class="upload-subtitle">Please upload or take a photo of <strong>yourself</strong></p> --}}
-                                            <button type="button" class="btn btn-custom-upload" data-toggle="modal" data-target="#photoModal">
+                                        <div class="custom-upload-widget border text-center p-4 rounded bg-light hover-shadow">
+                                            <i class="fas fa-user-circle fa-3x text-muted mb-3"></i>
+                                            <h6 class="font-weight-bold">3. Your Photo</h6>
+                                            <p class="small text-muted">White background selfie</p>
+                                            
+                                            <button type="button" class="btn btn-outline-dark btn-sm btn-block" data-toggle="modal" data-target="#photoModal">
                                                 Upload Photo
                                             </button>
-                                            <p class="upload-format-info">PNG, JPG or JPEG format, max 2MB.</p>
+                                            
                                             <input type="file" name="user_pic" id="main_user_pic_input" class="d-none">
-                                            <div id="photo_status_display" class="upload-status-text"></div>
+                                            <div id="photo_status_display" class="upload-status-text mt-2"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Buttons -->
+                            <!-- Info Box -->
+                            <div class="alert alert-info border-0 small">
+                                <i class="fas fa-info-circle"></i> <strong>Note:</strong> By clicking Submit, you agree to our service terms. Our team will manually review your documents before applying to the official Takamol system to prevent rejection.
+                            </div>
+
                             <div class="form-buttons mt-4">
-                                <a href="{{ route('home') }}" class="btn btn-outline-dark">Cancel</a>
-                                <button type="submit" class="btn btn-dark">Submit Registration</button>
+                                <button type="submit" class="btn btn-dark px-5 shadow">Next Step: Payment <i class="fas fa-arrow-right ml-2"></i></button>
                             </div>
                         </form>
                     </div>
@@ -515,270 +551,289 @@
             </div>
         </div>
 
-        <!-- Loader Overlay -->
+        <!-- Loader -->
         <div id="loaderOverlay">
             <div class="loader-content text-center">
-                <div class="spinner-border text-light" role="status" style="width: 4rem; height: 4rem;">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <div class="text-light mt-3" style="font-size: 1.5rem;">Loading...</div>
+                <div class="spinner-border text-light" style="width: 4rem; height: 4rem;"></div>
+                <div class="text-light mt-3">Uploading Documents...</div>
             </div>
         </div>
     </section>
 
-@push('scripts')
-<script>
+    @push('scripts')
+    <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        
-        // --- GENERIC MODAL HANDLER FUNCTION ---
-        function setupStepper(config) {
-            let currentStep = 1;
-            const modal = document.getElementById(config.modalId);
-            const btnContinue = document.getElementById(config.btnContinue);
-            const btnBack = document.getElementById(config.btnBack);
-            const btnFinish = document.getElementById(config.btnFinish);
-            const reviewCheck = config.checkId ? document.getElementById(config.checkId) : null;
-            const realInput = document.getElementById(config.realInput);
-            const dropZone = document.getElementById(config.dropZone);
-            const statusDisplay = document.getElementById(config.statusDisplay);
-            const fileNameDisplay = document.getElementById(config.fileNameDisplay);
-            const mainFormInput = document.getElementById(config.mainFormInput);
+        document.addEventListener('DOMContentLoaded', function () {
             
-            // Target the new error div
-            const modalErrorDiv = document.getElementById(config.modalErrorId);
-
-            function goToStep(step) {
-                modal.querySelectorAll('.step-content').forEach(el => el.classList.add('d-none'));
-                modal.querySelector(`#${config.stepPrefix}${step}`).classList.remove('d-none');
+            // --- GENERIC MODAL HANDLER FUNCTION ---
+            function setupStepper(config) {
+                let currentStep = 1;
+                const modal = document.getElementById(config.modalId);
+                const btnContinue = document.getElementById(config.btnContinue);
+                const btnBack = document.getElementById(config.btnBack);
+                const btnFinish = document.getElementById(config.btnFinish);
+                const reviewCheck = config.checkId ? document.getElementById(config.checkId) : null;
+                const realInput = document.getElementById(config.realInput);
+                const dropZone = document.getElementById(config.dropZone);
+                const statusDisplay = document.getElementById(config.statusDisplay);
+                const fileNameDisplay = document.getElementById(config.fileNameDisplay);
+                const mainFormInput = document.getElementById(config.mainFormInput);
                 
-                modal.querySelectorAll('.stepper-item').forEach((item, index) => {
-                    const stepIdx = index + 1;
-                    item.classList.toggle('completed', stepIdx < step);
-                    item.classList.toggle('active', stepIdx === step);
-                });
+                // Target the new error div
+                const modalErrorDiv = document.getElementById(config.modalErrorId);
 
-                currentStep = step;
-                btnBack.classList.toggle('d-none', step === 1);
-                btnContinue.classList.toggle('d-none', step === config.totalSteps);
-                btnFinish.classList.toggle('d-none', step !== config.totalSteps);
-                
-                if (step === config.checkStep && reviewCheck) {
-                    btnContinue.disabled = !reviewCheck.checked;
-                } else if (step === config.totalSteps) {
-                    btnFinish.disabled = !realInput.files.length;
-                } else {
-                    btnContinue.disabled = false;
-                }
-            }
-
-            if (reviewCheck) {
-                reviewCheck.addEventListener('change', () => {
-                    if (currentStep === config.checkStep) btnContinue.disabled = !reviewCheck.checked;
-                });
-            }
-
-            btnContinue.addEventListener('click', () => { if (currentStep < config.totalSteps) goToStep(currentStep + 1); });
-            btnBack.addEventListener('click', () => goToStep(currentStep - 1));
-            
-            dropZone.addEventListener('click', () => realInput.click());
-
-            realInput.addEventListener('change', function() {
-                // Reset state
-                modalErrorDiv.innerText = "";
-                fileNameDisplay.innerText = "";
-                btnFinish.disabled = true;
-
-                if(this.files.length > 0) {
-                    const file = this.files[0];
-
-                    // 1. Validation: Size
-                    if (file.size > 2 * 1024 * 1024) {
-                        modalErrorDiv.innerText = "Error: File exceeds 2MB limit.";
-                        this.value = ""; // Clear input
-                        return;
-                    }
-
-                    // 2. Validation: Type
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-                    if (!allowedTypes.includes(file.type)) {
-                        modalErrorDiv.innerText = "Error: Only JPG, JPEG, and PNG are allowed.";
-                        this.value = ""; // Clear input
-                        return;
-                    }
-
-                    // If valid
-                    fileNameDisplay.innerText = "Selected: " + file.name;
-                    btnFinish.disabled = false;
-                }
-            });
-
-            btnFinish.addEventListener('click', function() {
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(realInput.files[0]);
-                mainFormInput.files = dataTransfer.files;
-                
-                statusDisplay.innerHTML = `<i class="fas fa-check-circle"></i> ${realInput.files[0].name} attached`;
-                $(modal).modal('hide');
-            });
-        }
-
-        // --- INITIALIZE THE THREE MODALS ---
-
-        // 1. Passport
-        setupStepper({
-            modalId: 'passportModal',
-            modalErrorId: 'passport-modal-error', // Added
-            stepPrefix: 'step-',
-            totalSteps: 6,
-            checkStep: 5,
-            checkId: 'reviewCheck',
-            btnContinue: 'btn-continue',
-            btnBack: 'btn-back',
-            btnFinish: 'btn-upload-finish',
-            realInput: 'real-passport-input',
-            dropZone: 'drop-zone',
-            fileNameDisplay: 'file-name-display',
-            statusDisplay: 'passport_name_display',
-            mainFormInput: 'main_passport_input'
-        });
-
-        // 2. ID Card
-        setupStepper({
-            modalId: 'idCardModal',
-            modalErrorId: 'id-modal-error', // Added
-            stepPrefix: 'id-step-',
-            totalSteps: 4,
-            checkStep: 3,
-            checkId: 'idReviewCheck',
-            btnContinue: 'btn-id-continue',
-            btnBack: 'btn-id-back',
-            btnFinish: 'btn-id-finish',
-            realInput: 'real-id-input',
-            dropZone: 'id-drop-zone',
-            fileNameDisplay: 'id-file-name',
-            statusDisplay: 'id_status_display',
-            mainFormInput: 'main_id_card_input'
-        });
-
-        // 3. Photo (Modified for 6 steps)
-        setupStepper({
-            modalId: 'photoModal',
-            modalErrorId: 'photo-modal-error',
-            stepPrefix: 'photo-step-',
-            totalSteps: 6,         // Changed from 3 to 6
-            checkStep: 5,          // Review checkbox is now on Step 5 (Headdress)
-            checkId: 'photoReviewCheck',
-            btnContinue: 'btn-photo-continue',
-            btnBack: 'btn-photo-back',
-            btnFinish: 'btn-photo-finish',
-            realInput: 'real-photo-input',
-            dropZone: 'photo-drop-zone',
-            fileNameDisplay: 'photo-file-name',
-            statusDisplay: 'photo_status_display',
-            mainFormInput: 'main_user_pic_input'
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // Phone Mask for WhatsApp
-        if(typeof $.fn.inputmask !== 'undefined'){
-            $('#whatsapp_number').inputmask('9999 9999999');
-        }
-
-        // Update file name label on select
-        $('.custom-file-input').on('change', function() {
-            let fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        });
-
-        const form = document.getElementById('appointmentForm');
-        const loader = document.getElementById('loaderOverlay');
-
-        // Helper to show errors on custom widgets
-        function setWidgetError(inputId, message) {
-            const input = document.getElementById(inputId);
-            const widget = input.closest('.custom-upload-widget');
-            const btn = widget.querySelector('.btn-custom-upload');
-            
-            btn.style.borderColor = '#dc3545';
-            btn.style.color = '#dc3545';
-            
-            const error = document.createElement('div');
-            error.className = 'invalid-feedback d-block';
-            error.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${message}`;
-            widget.appendChild(error);
-        }
-
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            // 1. Reset previous errors
-            form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-            form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
-            form.querySelectorAll('.btn-custom-upload').forEach(el => {
-                el.style.borderColor = '#ced4da';
-                el.style.color = '#1a8a8a';
-            });
-
-            // 2. Submit via AJAX
-            const formData = new FormData(form);
-            loader.classList.add('show');
-
-            try {
-                const response = await fetch("{{ route('navtechform.store') }}", {
-                    method: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
-                        "Accept": "application/json",
-                    },
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (response.status === 422) {
-                    // Server-side validation errors
-                    Object.keys(data.errors).forEach(field => {
-                        const input = form.querySelector(`[name="${field}"]`);
-                        const errorMessage = data.errors[field][0];
-
-                        // Handle Standard Inputs (City, WhatsApp, etc)
-                        if (input && !['passport_pic', 'id_card_front', 'user_pic'].includes(field)) {
-                            input.classList.add('is-invalid');
-                            const errorDiv = document.createElement('div');
-                            errorDiv.className = 'invalid-feedback';
-                            errorDiv.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${data.errors[field][0]}`;
-                            input.closest('.form-group').appendChild(errorDiv);
-                        } 
-                        // Handle Custom File Widgets
-                        else {
-                            let targetInputId = '';
-                            if(field === 'passport_pic') targetInputId = 'main_passport_input';
-                            if(field === 'id_card_front') targetInputId = 'main_id_card_input';
-                            if(field === 'user_pic') targetInputId = 'main_user_pic_input';
-
-                            if(targetInputId) setWidgetError(targetInputId, errorMessage);
-                        }
-                    });
+                function goToStep(step) {
+                    modal.querySelectorAll('.step-content').forEach(el => el.classList.add('d-none'));
+                    modal.querySelector(`#${config.stepPrefix}${step}`).classList.remove('d-none');
                     
-                    // Scroll to the first error
-                    const firstError = document.querySelector('.is-invalid, .invalid-feedback');
-                    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    modal.querySelectorAll('.stepper-item').forEach((item, index) => {
+                        const stepIdx = index + 1;
+                        item.classList.toggle('completed', stepIdx < step);
+                        item.classList.toggle('active', stepIdx === step);
+                    });
 
-                } else if (data.status === 'success') {
-                    window.location.href = data.redirect;                    
+                    currentStep = step;
+                    btnBack.classList.toggle('d-none', step === 1);
+                    btnContinue.classList.toggle('d-none', step === config.totalSteps);
+                    btnFinish.classList.toggle('d-none', step !== config.totalSteps);
+                    
+                    if (step === config.checkStep && reviewCheck) {
+                        btnContinue.disabled = !reviewCheck.checked;
+                    } else if (step === config.totalSteps) {
+                        btnFinish.disabled = !realInput.files.length;
+                    } else {
+                        btnContinue.disabled = false;
+                    }
                 }
-            } catch (error) {
-                console.error(error);
-                alert('A connection error occurred. Please try again.');
-            } finally {
-                loader.classList.remove('show');
+
+                if (reviewCheck) {
+                    reviewCheck.addEventListener('change', () => {
+                        if (currentStep === config.checkStep) btnContinue.disabled = !reviewCheck.checked;
+                    });
+                }
+
+                btnContinue.addEventListener('click', () => { if (currentStep < config.totalSteps) goToStep(currentStep + 1); });
+                btnBack.addEventListener('click', () => goToStep(currentStep - 1));
+                
+                dropZone.addEventListener('click', () => realInput.click());
+
+                realInput.addEventListener('change', function() {
+                    // Reset state
+                    modalErrorDiv.innerText = "";
+                    fileNameDisplay.innerText = "";
+                    btnFinish.disabled = true;
+
+                    if(this.files.length > 0) {
+                        const file = this.files[0];
+
+                        // 1. Validation: Size
+                        if (file.size > 2 * 1024 * 1024) {
+                            modalErrorDiv.innerText = "Error: File exceeds 2MB limit.";
+                            this.value = ""; // Clear input
+                            return;
+                        }
+
+                        // 2. Validation: Type
+                        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                        if (!allowedTypes.includes(file.type)) {
+                            modalErrorDiv.innerText = "Error: Only JPG, JPEG, and PNG are allowed.";
+                            this.value = ""; // Clear input
+                            return;
+                        }
+
+                        // If valid
+                        fileNameDisplay.innerText = "Selected: " + file.name;
+                        btnFinish.disabled = false;
+                    }
+                });
+
+                btnFinish.addEventListener('click', function() {
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(realInput.files[0]);
+                    mainFormInput.files = dataTransfer.files;
+                    
+                    statusDisplay.innerHTML = `<i class="fas fa-check-circle"></i> ${realInput.files[0].name} attached`;
+                    $(modal).modal('hide');
+                });
             }
+
+            // --- INITIALIZE THE THREE MODALS ---
+
+            // 1. Passport
+            setupStepper({
+                modalId: 'passportModal',
+                modalErrorId: 'passport-modal-error', // Added
+                stepPrefix: 'step-',
+                totalSteps: 6,
+                checkStep: 5,
+                checkId: 'reviewCheck',
+                btnContinue: 'btn-continue',
+                btnBack: 'btn-back',
+                btnFinish: 'btn-upload-finish',
+                realInput: 'real-passport-input',
+                dropZone: 'drop-zone',
+                fileNameDisplay: 'file-name-display',
+                statusDisplay: 'passport_name_display',
+                mainFormInput: 'main_passport_input'
+            });
+
+            // 2. ID Card
+            setupStepper({
+                modalId: 'idCardModal',
+                modalErrorId: 'id-modal-error', // Added
+                stepPrefix: 'id-step-',
+                totalSteps: 4,
+                checkStep: 3,
+                checkId: 'idReviewCheck',
+                btnContinue: 'btn-id-continue',
+                btnBack: 'btn-id-back',
+                btnFinish: 'btn-id-finish',
+                realInput: 'real-id-input',
+                dropZone: 'id-drop-zone',
+                fileNameDisplay: 'id-file-name',
+                statusDisplay: 'id_status_display',
+                mainFormInput: 'main_id_card_input'
+            });
+
+            // 3. Photo (Modified for 6 steps)
+            setupStepper({
+                modalId: 'photoModal',
+                modalErrorId: 'photo-modal-error',
+                stepPrefix: 'photo-step-',
+                totalSteps: 6,         // Changed from 3 to 6
+                checkStep: 5,          // Review checkbox is now on Step 5 (Headdress)
+                checkId: 'photoReviewCheck',
+                btnContinue: 'btn-photo-continue',
+                btnBack: 'btn-photo-back',
+                btnFinish: 'btn-photo-finish',
+                realInput: 'real-photo-input',
+                dropZone: 'photo-drop-zone',
+                fileNameDisplay: 'photo-file-name',
+                statusDisplay: 'photo_status_display',
+                mainFormInput: 'main_user_pic_input'
+            });
         });
 
-    });
-</script>
-@endpush
+        document.addEventListener('DOMContentLoaded', function () {
+            // Phone Mask for WhatsApp
+            if(typeof $.fn.inputmask !== 'undefined'){
+                $('#whatsapp_number').inputmask('9999 9999999');
+            }
+
+            // Update file name label on select
+            $('.custom-file-input').on('change', function() {
+                let fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+            });
+
+            const form = document.getElementById('appointmentForm');
+            const loader = document.getElementById('loaderOverlay');
+
+            // Helper to show errors on custom widgets
+            function setWidgetError(inputId, message) {
+                const input = document.getElementById(inputId);
+                
+                // Safety Check 1: Ensure the hidden input exists
+                if (!input) {
+                    console.error("Input not found: " + inputId);
+                    return;
+                }
+
+                const widget = input.closest('.custom-upload-widget');
+                
+                // Safety Check 2: Ensure the widget container exists
+                if (!widget) {
+                    console.error("Widget container not found for: " + inputId);
+                    return;
+                }
+
+                // Safety Check 3: Check if button exists before trying to style it
+                const btn = widget.querySelector('.btn-custom-upload');
+                if (btn) {
+                    btn.style.borderColor = '#dc3545';
+                    btn.style.color = '#dc3545';
+                }
+
+                // Remove any existing error messages in this widget to prevent duplicates
+                const existingError = widget.querySelector('.invalid-feedback');
+                if(existingError) existingError.remove();
+                
+                // Append the error message text
+                const error = document.createElement('div');
+                error.className = 'invalid-feedback d-block';
+                error.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${message}`;
+                widget.appendChild(error);
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // 1. Reset previous errors
+                form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+                form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+                form.querySelectorAll('.btn-custom-upload').forEach(el => {
+                    el.style.borderColor = '#ced4da';
+                    el.style.color = '#1a8a8a';
+                });
+
+                // 2. Submit via AJAX
+                const formData = new FormData(form);
+                loader.classList.add('show');
+
+                try {
+                    const response = await fetch("{{ route('navtechform.store') }}", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                            "Accept": "application/json",
+                        },
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (response.status === 422) {
+                        // Server-side validation errors
+                        Object.keys(data.errors).forEach(field => {
+                            const input = form.querySelector(`[name="${field}"]`);
+                            const errorMessage = data.errors[field][0];
+
+                            // A. Handle Custom File Widgets (Check these fields specifically)
+                            if(['passport_pic', 'id_card_front', 'user_pic'].includes(field)) {
+                                let targetInputId = '';
+                                if(field === 'passport_pic') targetInputId = 'main_passport_input';
+                                if(field === 'id_card_front') targetInputId = 'main_id_card_input';
+                                if(field === 'user_pic') targetInputId = 'main_user_pic_input';
+
+                                if(targetInputId) setWidgetError(targetInputId, errorMessage);
+                            } 
+                            // B. Handle Standard Inputs (City, WhatsApp, etc)
+                            else if (input) {
+                                input.classList.add('is-invalid');
+                                const errorDiv = document.createElement('div');
+                                errorDiv.className = 'invalid-feedback';
+                                errorDiv.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${errorMessage}`;
+                                input.closest('.form-group').appendChild(errorDiv);
+                            }
+                        });
+                        
+                        // Scroll to the first error
+                        const firstError = document.querySelector('.is-invalid, .invalid-feedback');
+                        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    } else if (data.status === 'success') {
+                        window.location.href = data.redirect;                    
+                    }
+                } catch (error) {
+                    console.error(error);
+                    // alert('A connection error occurred. Please try again.');
+                } finally {
+                    loader.classList.remove('show');
+                }
+            });
+
+        });
+    </script>
+    @endpush
 
 @endsection

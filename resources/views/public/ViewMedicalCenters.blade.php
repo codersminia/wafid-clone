@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Approved Wafid (GAMCA) Medical Centers List 2025 | Pakistan')
+@section('title', 'Approved Wafid (GAMCA) Medical Centers List 2026 | Pakistan')
 @section('meta_description', 'Find the address and contact details of all approved Wafid (GAMCA) medical centers in Lahore, Karachi, Islamabad, Multan, and Peshawar. View ratings and locations.')
 @section('meta_keywords', 'gamca medical center list, wafid approved centers, gamca lahore address, gamca karachi location, gcc medical center pakistan')
 
