@@ -179,7 +179,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label>Trade / Position Applied For <span class="text-danger">*</span></label>
+                                        <label>Position Applied For <span class="text-danger">*</span></label>
                                         <select name="position_applied" class="form-control" id="positionApplied" >
                                             <option value="">-- Select Profession --</option>
                                             <option value="banking-finance">Banking & Finance</option>

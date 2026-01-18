@@ -1,111 +1,85 @@
 @extends('layouts.public')
-
-@section('title', 'Submission Successful - Wafid Special Medical')
+@section('title', 'Special Booking Received')
 
 @section('content')
 <style>
-    :root { 
-        --accent-teal: #1a8a8a; 
-        --accent-burgundy: #800020;
-        --accent-green: #25d366;
-        --tasheer-dark: #343a40; 
-    }
-    .thank-you-card { background: white; border-radius: 12px; padding: 60px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 0 auto; }
-    .success-icon { font-size: 5rem; color: var(--accent-green); margin-bottom: 20px; }
-    
-    .reference-box { background-color: #f8f9fa; border: 2px dashed var(--accent-teal); padding: 15px; border-radius: 8px; margin: 25px 0; }
-    
-    .info-list { list-style: none; padding: 0; text-align: left; max-width: 800px; margin: 30px auto; }
-    .info-list li { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .info-list li strong { color: var(--tasheer-dark); font-weight: 700; }
-    .info-list li span { color: #666; }
-
-    .doc-required-list { text-align: left; background: #fff9e6; padding: 25px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 30px; }
-    .doc-required-list h5 { color: var(--accent-burgundy); font-weight: 700; margin-bottom: 15px; }
-    .doc-required-list ul { list-style: none; padding: 0; margin: 0; }
-    .doc-required-list ul li { margin-bottom: 8px; font-size: 0.95rem; color: #444; }
-    .doc-required-list ul li i { color: var(--accent-teal); margin-right: 8px; }
-
-    .btn-whatsapp { background-color: #25d366; color: white; padding: 14px 40px; font-weight: 700; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; }
-    .btn-whatsapp:hover { background-color: #1eb954; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37,211,102,0.3); text-decoration: none; }
+    .thank-card { max-width: 700px; margin: 0 auto; border-top: 5px solid #1a8a8a; } /* Teal for Special */
+    .ref-box { background: #f8f9fa; border: 1px dashed #1a8a8a; padding: 15px; border-radius: 8px; }
+    .step-badge { width: 30px; height: 30px; background: #1a8a8a; color: #fff; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; }
 </style>
 
-<section class="py-5 bg-light" style="min-height: 90vh; display: flex; align-items: center;">
-    <div class="container text-center">
-        <div class="thank-you-card">
-            
-            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+<section class="py-5 bg-white" style="min-height: 85vh; display: flex; align-items: center;">
+    <div class="container">
+        
+        <div class="card shadow-lg thank-card border-0">
+            <div class="card-body text-center p-5">
+                
+                <i class="fas fa-check-circle text-info mb-3" style="font-size: 5rem; color: #1a8a8a !important;"></i>
+                
+                <h2 class="font-weight-bold mb-2">Premium Request Received</h2>
+                <p class="text-muted">We are securing your specific medical center slot.</p>
 
-            <h1 class="font-weight-bold" style="color: var(--tasheer-dark);">Special Submission Successful!</h1>
-            <p class="lead text-muted">Your Special Medical Examination request has been successfully received.</p>
+                <div class="ref-box my-4">
+                    <small class="text-uppercase text-muted">Tracking ID</small>
+                    <h3 class="text-dark font-weight-bold mb-0">{{ $appointment->appointment_no }}</h3>
+                </div>
 
-            <!-- Reference Section -->
-            <div class="reference-box">
-                <span class="text-uppercase small font-weight-bold text-muted d-block">Special Appointment Number</span>
-                <h2 class="mb-0 font-weight-bold" style="color: var(--accent-teal);">{{ $appointment->appointment_no }}</h2>
-            </div>
-
-            <!-- Summary List -->
-            <ul class="info-list">
-                <li><strong>Candidate Name:</strong> <span>{{ $appointment->first_name }} {{ $appointment->last_name }}</span></li>
-                <li><strong>Medical Center:</strong> <span>{{ $appointment->medical_center }}</span></li>
-                <li><strong>City:</strong> <span>{{ ucfirst($appointment->city) }}</span></li>
-                <li><strong>Token Validity:</strong> <span class="badge badge-success px-3 py-2 text-white" style="border-radius: 20px;">1 Month</span></li>
-            </ul>
-
-            <!-- Required Documents Box -->
-            <div class="doc-required-list">
-                <h5><i class="fas fa-file-invoice"></i> Documents Required for Medical Center</h5>
-                <div class="row text-left">
-                    <div class="col-md-6">
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> 1. Original Passport</li>
-                            <li><i class="fas fa-check-circle"></i> 2. Original CNIC</li>
-                            <li><i class="fas fa-check-circle"></i> 3. 4 Photos (Blue Background)</li>
-                        </ul>
+                <div class="text-left bg-light p-3 rounded mb-4">
+                    <h6 class="font-weight-bold text-center border-bottom pb-2">Booking Summary</h6>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Center:</span>
+                        <strong class="text-primary">{{ $appointment->medical_center }}</strong>
                     </div>
-                    <div class="col-md-6">
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> 4. One Passport Copy</li>
-                            <li><i class="fas fa-check-circle"></i> 5. Two CNIC Copies</li>
-                            <li><i class="fas fa-check-circle"></i> 6. Entry Timing: 9AM - 1PM</li>
-                        </ul>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>City:</span>
+                        <strong>{{ $appointment->city }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Candidate:</span>
+                        <strong>{{ $appointment->first_name }} {{ $appointment->last_name }}</strong>
                     </div>
                 </div>
-            </div>
 
-            <!-- Alert Box -->
-            <div class="alert alert-danger border-0 text-left mb-4" style="background-color: #ffe6e6; color: #c0392b; border-radius: 8px;">
-                <p class="mb-0">
-                    <i class="fas fa-exclamation-circle mr-2"></i> <strong>Important Note:</strong> 
-                    Medical Center Fees (Approx. 24,000/-) must be paid directly at the Medical Center.
-                </p>
-            </div>
+                <div class="text-left mb-4">
+                    <h5 class="mb-3">Next Steps:</h5>
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="step-badge">1</div>
+                        <div>Payment Verification (Priority Queue).</div>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="step-badge">2</div>
+                        <div>We book the specific slot at <strong>{{ $appointment->medical_center }}</strong>.</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="step-badge">3</div>
+                        <div>You receive the PDF on WhatsApp.</div>
+                    </div>
+                </div>
 
-            <div class="alert alert-info border-0 text-left mb-5" style="background-color: #e3f2fd; color: #0d47a1; border-radius: 8px;">
-                <p class="mb-0">
-                    <i class="fas fa-info-circle mr-2"></i> Click below to share your <strong>Payment Proof</strong> & <strong>Passport</strong> via WhatsApp to receive your Medical Slip.
-                </p>
-            </div>
+                <hr>
 
-            <!-- Action Buttons -->
-            <div class="d-flex flex-column flex-md-row justify-content-center" style="gap: 15px;">
+                <div class="alert alert-info border-0 mb-4">
+                    <i class="fab fa-whatsapp"></i> <strong>Expedite Process:</strong> Click below to confirm your choice center request.
+                </div>
+
                 @php
-                    $wa_message = "Hi, I have just submitted my SPECIAL Medical Appointment.\n\n" . 
-                                 "*Appointment No:* " . $appointment->appointment_no . "\n" .
-                                 "*Candidate:* " . $appointment->first_name . " " . $appointment->last_name . "\n" .
-                                 "*Passport:* " . $appointment->passport_no . "\n\n" .
-                                 "I am sending the payment screenshot and passport for verification.";
+                    $wa_message = "Hello, I booked a CHOICE CENTER appointment.\n\n" . 
+                                 "ID: " . $appointment->appointment_no . "\n" .
+                                 "Center: " . $appointment->medical_center . "\n" .
+                                 "Proof attached. Please process ASAP.";
                 @endphp
-                <a href="https://wa.me/923000000000?text={{ urlencode($wa_message) }}" target="_blank" class="btn-whatsapp">
-                    <i class="fab fa-whatsapp fa-lg"></i> Finalize on WhatsApp
-                </a>
-                <a href="{{ route('home') }}" class="btn btn-outline-dark px-5 py-3" style="border-radius: 50px; font-weight: 700;">
-                    Back to Home
-                </a>
-            </div>
 
+                <a href="https://wa.me/923000000000?text={{ urlencode($wa_message) }}" class="btn btn-success btn-lg rounded-pill px-5 shadow" style="background-color: #25d366; border:none;">
+                    <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
+                </a>
+                
+                <div class="mt-4">
+                    <a href="{{ route('home') }}" class="text-muted small">Return to Home</a>
+                </div>
+
+            </div>
         </div>
+
     </div>
 </section>
 @endsection

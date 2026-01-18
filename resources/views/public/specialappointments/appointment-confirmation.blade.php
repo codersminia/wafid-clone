@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
-@section('title', 'Wafid - Medical Examination')
+@section('title', 'Confirm Choice Booking - Wafid')
 
 @section('content')
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>Appointment Confirmation</h1>
-            <p class="lead">Complete Your Payment and Confirm Your Appointment</p>
+            <h1>Confirm Choice Booking</h1>
+            <p class="lead">Step 2 of 3: Premium Service Payment</p>
         </div>
     </section>
 
@@ -148,21 +148,20 @@
                         <div class="form-check mb-4">
                             <input type="checkbox" class="form-check-input" id="agreeTerms" name="agreeTerms">
                             <label class="form-check" for="agreeTerms">
-                                I certify that the information given in this form is true, complete, and accurate.
+                                I agree to the non-refundable policy and confirm payment.
                             </label>
                         </div>
 
                         <!-- Terms Text -->
                         <div class="mb-4 p-3 border rounded bg-light">
                             <p class="small text-muted mb-3">
-                                <strong>Privacy & Terms Information:</strong><br>
-                                We offer genuine/swift services and efficient services for Gomco medical appointments. Whether you are a first-timer or any other case, we offer the best possible help for your situation as a whole. Wafid appoints a specialized team that follows all international standards to ensure your medical examinations are done in a safe and secure environment. We also provide the option to print your Gomco appointment slip for easy reference. Whether you are in Karachi, Lahore, Islamabad, Multan, Faisalabad, Sargodha, Jhang, Bahawalpur, Rawalpindi, Sargodha, Jhang, Bahawalpur, Rawalpindi, Faisalabad, Sahiwal, or any other city, we are here to help. You can conveniently book your generic appointment slip for easy reference. Whether you are in Karachi, Lahore, Islamabad, and other cities like Quetta, Peshawar, Multan (DAI), Bannu, Kohat, Hassan Abdal, Taxila, Gujrat, Jhang, etc you can conveniently book your generic appointments for all need.
+                                <strong><i class="fas fa-shield-alt"></i> Refund Policy:</strong><br>
+                                Choice center fees are strictly non-refundable once the appointment is booked, as this is a paid premium slot.
                             </p>
                         </div>
 
                         <div class="form-buttons">
-                            {{-- <button type="reset" class="btn btn-outline-dark">Previous</button> --}}
-                            <button type="submit" class="btn btn-dark">Submit</button>
+                            <button type="submit" class="btn btn-dark">Complete Booking</button>
                         </div>
                     </form>
                 </div>
