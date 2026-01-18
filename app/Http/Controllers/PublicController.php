@@ -636,7 +636,9 @@ class PublicController extends Controller
             'embassy'         => 'required|string',
             'etimad_center'   => 'required|string', // Added validation
             'whatsapp_number' => 'required|string',
-            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
+        ], [
+            'passport_pic.required' => 'Please upload a clear photo of the passport front page.'
         ]);
 
         if ($validator->fails()) {

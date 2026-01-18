@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
-@section('title', 'Tasheer Appointment - Payment Confirmation')
+@section('title', 'Confirm Tasheer Appointment')
 
 @section('content')
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container text-center">
-            <h1>Appointment Confirmation</h1>
-            <p class="lead">Complete your payment to process your Tasheer application.</p>
+            <h1>Confirm Appointment</h1>
+            <p class="lead">Step 2 of 3: Fee Payment</p>
         </div>
     </section>
 
