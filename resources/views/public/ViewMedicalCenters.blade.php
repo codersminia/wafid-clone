@@ -1,6 +1,8 @@
 @extends('layouts.public')
 
-@section('title', 'Wafid - Medical Examination')
+@section('title', 'Approved Wafid (GAMCA) Medical Centers List 2025 | Pakistan')
+@section('meta_description', 'Find the address and contact details of all approved Wafid (GAMCA) medical centers in Lahore, Karachi, Islamabad, Multan, and Peshawar. View ratings and locations.')
+@section('meta_keywords', 'gamca medical center list, wafid approved centers, gamca lahore address, gamca karachi location, gcc medical center pakistan')
 
 @section('content')
 
@@ -119,19 +121,37 @@
         .pagination-wrapper { padding: 15px; background: #fff; border-top: 1px solid #dee2e6; }
         .page-link { cursor: pointer; color: #333; }
         .page-item.active .page-link { background-color: #333; border-color: #333; color: #fff; }
+        
+        /* New SEO Content Styles */
+        .seo-content h3 { font-weight: 700; color: #343a40; margin-top: 1.5rem; }
+        .seo-content p { color: #6c757d; line-height: 1.7; }
+        .city-badge { background: #e9ecef; color: #495057; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 5px; margin-bottom: 5px; display: inline-block; }
     </style>
 
     <!-- Page Header -->
     <section class="page-header bg-dark text-white py-5">
         <div class="container">
-            <h1>Medical Examinations</h1>
-            <p class="lead">Book your health check-up appointment or view your test results</p>
+            <h1 class="font-weight-bold">Approved Medical Centers List</h1>
+            <p class="lead">Search for Wafid authorized laboratories and hospitals in Pakistan.</p>
         </div>
     </section>
 
+    <!-- Intro Text (SEO) -->
+    <div class="bg-light py-4 border-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 mx-auto text-center">
+                    <p class="mb-0 text-muted">
+                        To obtain a work visa for Saudi Arabia, UAE, Oman, Qatar, Kuwait, or Bahrain, you must visit an approved medical center. Use the search tool below to find the <strong>address, phone number, and location map</strong> of the nearest GAMCA center in your city.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <section class="py-5">
-        <div class="container"> <!-- Custom fluid container -->
+        <div class="container"> 
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     
@@ -140,7 +160,7 @@
                         <form id="appointmentForm" class="appointment-form">
                             @csrf
                             <div class="form-section">
-                                <h5 class="section-title">Medical Center Search</h5>
+                                <h5 class="section-title"><i class="fas fa-hospital-alt"></i> Find a Center</h5>
                                 
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
@@ -173,21 +193,30 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="center_name">Medical center name</label>
-                                        <input type="text" class="form-control" name="center_name" id="center_name">
+                                        <label for="center_name">Search by Name</label>
+                                        <input type="text" class="form-control" name="center_name" id="center_name" placeholder="E.g. Al-Hilal">
                                     </div>
                                 </div>
                             </div>                            
 
-                            <div class="">
-                                <button type="submit" class="btn btn-dark">Search</button>
-                                <button type="reset" id="resetBtn" class="btn btn-outline-dark">Reset</button>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <button type="submit" class="btn btn-dark shadow"><i class="fas fa-search"></i> Search</button>
+                                    <button type="reset" id="resetBtn" class="btn btn-outline-dark ml-2">Reset</button>
+                                </div>
+                                
+                                <!-- CTA for Booking -->
+                                <a href="{{ route('medicalExamination') }}" class="btn btn-success text-white shadow">
+                                    <i class="fas fa-calendar-check"></i> Book Appointment
+                                </a>
                             </div>
                         </form>
                     </div>
 
                     <!-- Dynamic Results Area -->
                     <div id="resultsArea" style="display:none;">
+                        
+                        <h5 class="mt-4 mb-3 font-weight-bold text-dark">Search Results:</h5>
                         
                         <!-- Table -->
                         <div class="table-responsive">
@@ -237,7 +266,7 @@
 
                     <!-- No Results -->
                     <div id="noResults" class="alert alert-warning text-center mt-4" style="display:none;">
-                        No medical centers found matching your criteria.
+                        <i class="fas fa-exclamation-circle"></i> No medical centers found matching your criteria.
                     </div>
 
                 </div>
@@ -247,15 +276,64 @@
         <!-- Loader -->
         <div id="loaderOverlay">
             <div class="loader-content text-center">
-                <div class="spinner-border text-light" role="status" style="width: 4rem; height: 4rem;">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <div class="text-light mt-3" style="font-size: 1.5rem;">Loading...</div>
+                <div class="spinner-border text-light" role="status" style="width: 4rem; height: 4rem;"></div>
+                <div class="text-light mt-3">Searching Database...</div>
             </div>
         </div>
     </section>
 
-    <!-- JavaScript -->
+    <!-- SEO Content Block (Crucial for ranking) -->
+    <section class="py-5 bg-white border-top">
+        <div class="container seo-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Guide to GAMCA Medical Centers in Pakistan</h3>
+                    <p>
+                        The GCC Health Council has authorized specific private medical centers in Pakistan to conduct medical examinations for work visa applicants. You cannot visit just any hospital; you must go to the center assigned to you on your appointment slip.
+                    </p>
+
+                    <h3>Centers by City</h3>
+                    <div class="mb-3">
+                        <span class="city-badge">Lahore</span>
+                        <span class="city-badge">Karachi</span>
+                        <span class="city-badge">Islamabad</span>
+                        <span class="city-badge">Rawalpindi</span>
+                        <span class="city-badge">Multan</span>
+                        <span class="city-badge">Peshawar</span>
+                        <span class="city-badge">Quetta</span>
+                        <span class="city-badge">Gujranwala</span>
+                        <span class="city-badge">Sialkot</span>
+                        <span class="city-badge">Faisalabad</span>
+                    </div>
+                    <p>
+                        <strong>Note for Applicants:</strong> If you book a standard appointment, the system will automatically assign one of these centers based on your city. If you wish to choose a specific center (e.g., one closer to your home), please use our <a href="{{ route('special.appointment') }}">Choice Appointment Service</a>.
+                    </p>
+
+                    <h3>Contacting a Center</h3>
+                    <p>
+                        You can use the list above to find the phone number and location map of your assigned center. It is recommended to call them before visiting to confirm their opening hours, usually <strong>9:00 AM to 5:00 PM</strong>.
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card bg-light border-0">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mb-3">Documents to Bring</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> Original Passport</li>
+                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> Original CNIC</li>
+                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> Wafid Appointment Slip</li>
+                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> 4 Recent Photos (Blue Background)</li>
+                            </ul>
+                            <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-block mt-3">Book Appointment Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @push('scripts')
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('appointmentForm');
@@ -447,4 +525,6 @@
             };
         });
     </script>
+    @endpush
+
 @endsection

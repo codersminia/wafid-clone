@@ -246,7 +246,14 @@ class PublicController extends Controller
             'passport_no' => 'required|string|max:255',
             'nationality' => 'required|string|max:255',
             'phone'       => 'required|string|max:20',
+        ],
+        [
+            'passport_no.required' => 'Please enter your passport number',
+            'phone.required' => 'WhatsApp number is required to send the report'
         ]);
+
+        // Force Uppercase for Passport
+        $validated['passport_no'] = strtoupper($request->passport_no);
 
         CheckResult::create($validated);
 
