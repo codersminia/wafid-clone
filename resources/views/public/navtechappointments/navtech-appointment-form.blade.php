@@ -44,16 +44,16 @@
             margin-bottom: 5px;
         }
         .stepper-item.active .step-counter {
-            border-color: #1a8a8a;
-            color: #1a8a8a;
+            border-color: #2c3e50;
+            color: #2c3e50;
         }
         .stepper-item.completed .step-counter {
-            background-color: #1a8a8a;
-            border-color: #1a8a8a;
+            background-color: #2c3e50;
+            border-color: #2c3e50;
             color: white;
         }
         .step-name { font-size: 12px; color: #999; }
-        .stepper-item.active .step-name { color: #1a8a8a; font-weight: bold; }
+        .stepper-item.active .step-name { color: #2c3e50; font-weight: bold; }
 
         .instruction-list li { margin-bottom: 12px; font-size: 14px; color: #555; }
         .comparison-box img { max-width: 100%; height: auto; border: 1px solid #f0f0f0; }
@@ -75,7 +75,7 @@
         .btn-custom-upload {
             background-color: transparent;
             border: 1px solid #ced4da;
-            color: #1a8a8a; /* Teal color from image */
+            color: #2c3e50; /* Teal color from image */
             padding: 5px 10px;
             font-size: 12px;
             border-radius: 5px;
@@ -86,7 +86,7 @@
 
         .btn-custom-upload:hover {
             background-color: #f8f9fa;
-            border-color: #1a8a8a;
+            border-color: #2c3e50;
             color: #146e6e;
         }
 
@@ -365,7 +365,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-cloud-upload-alt fa-3x text-info mb-3"></i>
                                     <p>Click, or <span class="text-info">Browse</span> to upload</p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-passport-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
 
@@ -376,8 +376,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-back">Back</button>
-                        <button type="button" class="btn btn-info text-white px-4" id="btn-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white px-4 d-none" id="btn-upload-finish" style="background-color: #1a8a8a;">Upload file</button>
+                        <button type="button" class="btn btn-info text-white px-4" id="btn-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white px-4 d-none" id="btn-upload-finish" style="background-color: #2c3e50;">Upload file</button>
                     </div>
                 </div>
             </div>
@@ -422,7 +422,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="id-drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-id-card fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>ID Card Front</strong></p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-id-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="id-modal-error" class="text-danger small mt-2 font-weight-bold"></div>
@@ -432,8 +432,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-id-back">Back</button>
-                        <button type="button" class="btn btn-info text-white" id="btn-id-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white d-none" id="btn-id-finish" style="background-color: #1a8a8a;">Finish</button>
+                        <button type="button" class="btn btn-info text-white" id="btn-id-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white d-none" id="btn-id-finish" style="background-color: #2c3e50;">Finish</button>
                     </div>
                 </div>
             </div>
@@ -534,7 +534,7 @@
                                 <div class="upload-area text-center p-5 border rounded" id="photo-drop-zone" style="border: 2px dashed #ddd !important; cursor: pointer;">
                                     <i class="fas fa-camera fa-3x text-info mb-3"></i>
                                     <p>Click to upload <strong>Your Photo</strong></p>
-                                    <small class="text-muted">PNG, JPG or JPEG (Max 2MB)</small>
+                                    <small class="text-muted">PNG, JPG or JPEG (Max 5MB)</small>
                                     <input type="file" id="real-photo-input" accept=".jpg, .jpeg, .png" class="d-none">
                                 </div>
                                 <div id="photo-modal-error" class="text-danger small mt-2 font-weight-bold"></div>
@@ -544,8 +544,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-photo-back">Back</button>
-                        <button type="button" class="btn btn-info text-white" id="btn-photo-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white d-none" id="btn-photo-finish" style="background-color: #1a8a8a;">Finish</button>
+                        <button type="button" class="btn btn-info text-white" id="btn-photo-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white d-none" id="btn-photo-finish" style="background-color: #2c3e50;">Finish</button>
                     </div>
                 </div>
             </div>
@@ -627,7 +627,7 @@
                         const file = this.files[0];
 
                         // 1. Validation: Size
-                        if (file.size > 2 * 1024 * 1024) {
+                        if (file.size > 5 * 1024 * 1024) {
                             modalErrorDiv.innerText = "Error: File exceeds 2MB limit.";
                             this.value = ""; // Clear input
                             return;
@@ -772,8 +772,8 @@
                 form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
                 form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
                 form.querySelectorAll('.btn-custom-upload').forEach(el => {
-                    el.style.borderColor = '#ced4da';
-                    el.style.color = '#1a8a8a';
+                    el.style.borderColor = '#2c3e50';
+                    el.style.color = '#2c3e50';
                 });
 
                 // 2. Submit via AJAX

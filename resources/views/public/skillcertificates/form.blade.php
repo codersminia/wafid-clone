@@ -45,16 +45,16 @@
             margin-bottom: 5px;
         }
         .stepper-item.active .step-counter {
-            border-color: #1a8a8a;
-            color: #1a8a8a;
+            border-color: #2c3e50;
+            color: #2c3e50;
         }
         .stepper-item.completed .step-counter {
-            background-color: #1a8a8a;
-            border-color: #1a8a8a;
+            background-color: #2c3e50;
+            border-color: #2c3e50;
             color: white;
         }
         .step-name { font-size: 12px; color: #999; }
-        .stepper-item.active .step-name { color: #1a8a8a; font-weight: bold; }
+        .stepper-item.active .step-name { color: #2c3e50; font-weight: bold; }
 
         .instruction-list li { margin-bottom: 12px; font-size: 14px; color: #555; }
         .comparison-box img { max-width: 100%; height: auto; border: 1px solid #f0f0f0; }
@@ -64,7 +64,7 @@
         .btn-custom-upload {
             background-color: transparent;
             border: 1px solid #ced4da;
-            color: #1a8a8a;
+            color: #2c3e50;
             padding: 5px 10px;
             font-size: 12px;
             border-radius: 5px;
@@ -82,7 +82,7 @@
 
         .btn-custom-upload:hover {
             background-color: #f8f9fa;
-            border-color: #1a8a8a;
+            border-color: #2c3e50;
             color: #146e6e;
         }
 
@@ -299,8 +299,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-idf-back">Back</button>
-                        <button type="button" class="btn btn-info text-white" id="btn-idf-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white d-none" id="btn-idf-finish" style="background-color: #1a8a8a;">Finish</button>
+                        <button type="button" class="btn btn-info text-white" id="btn-idf-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white d-none" id="btn-idf-finish" style="background-color: #2c3e50;">Finish</button>
                     </div>
                 </div>
             </div>
@@ -352,8 +352,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-idb-back">Back</button>
-                        <button type="button" class="btn btn-info text-white" id="btn-idb-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white d-none" id="btn-idb-finish" style="background-color: #1a8a8a;">Finish</button>
+                        <button type="button" class="btn btn-info text-white" id="btn-idb-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white d-none" id="btn-idb-finish" style="background-color: #2c3e50;">Finish</button>
                     </div>
                 </div>
             </div>
@@ -381,7 +381,7 @@
                                 <ul class="instruction-list list-unstyled">
                                     <li><i class="far fa-image mr-2"></i> Photo must <strong>both show a close up of your face and the top of the shoulders</strong>.</li>
                                     <li><i class="far fa-smile mr-2"></i> Your <strong>face</strong> must take up <strong>70% to 80%</strong> of the photo.</li>
-                                    <li><i class="fas fa-file-alt mr-2"></i> The size of the photo should not be more than <strong>2 MBs</strong>.</li>
+                                    <li><i class="fas fa-file-alt mr-2"></i> The size of the photo should not be more than <strong>5 MBs</strong>.</li>
                                     <li><i class="fas fa-file-image mr-2"></i> Only <strong>PNG, JPEG or JPG</strong> images must be used.</li>
                                     <li><i class="fas fa-expand-arrows-alt mr-2"></i> Photo must be in dimension of <strong>40 (height) x 30 (width)</strong>. Min resolution <strong>720px</strong>.</li>
                                     <li><i class="far fa-calendar-alt mr-2"></i> Your photo must be taken <strong>less than 6 months</strong> ago.</li>
@@ -441,8 +441,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-ph-back">Back</button>
-                        <button type="button" class="btn btn-info text-white" id="btn-ph-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white d-none" id="btn-ph-finish" style="background-color: #1a8a8a;">Finish</button>
+                        <button type="button" class="btn btn-info text-white" id="btn-ph-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white d-none" id="btn-ph-finish" style="background-color: #2c3e50;">Finish</button>
                     </div>
                 </div>
             </div>
@@ -471,7 +471,7 @@
                             <div class="step-content active" id="step-1">
                                 <ul class="instruction-list list-unstyled">
                                     <li><i class="far fa-image mr-2"></i> Only <strong>PNG, JPEG or JPG</strong> images must be used</li>
-                                    <li><i class="fas fa-file-alt mr-2"></i> The <strong>size</strong> of the photo should not exceed <strong>2 MBs</strong></li>
+                                    <li><i class="fas fa-file-alt mr-2"></i> The <strong>size</strong> of the photo should not exceed <strong>5 MBs</strong></li>
                                     <li><i class="fas fa-barcode mr-2"></i> The <strong>MRZ code</strong> should be <strong>clearly visible</strong></li>
                                 </ul>
                                 <div class="comparison-box text-center mt-3"><img src="{{ asset('assets/public/images/generalDocumentsFormat.13061148.webp') }}" class="img-fluid rounded"></div>
@@ -509,8 +509,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-secondary d-none" id="btn-back">Back</button>
-                        <button type="button" class="btn btn-info text-white px-4" id="btn-continue" style="background-color: #1a8a8a;">Continue</button>
-                        <button type="button" class="btn btn-info text-white px-4 d-none" id="btn-upload-finish" style="background-color: #1a8a8a;">Upload file</button>
+                        <button type="button" class="btn btn-info text-white px-4" id="btn-continue" style="background-color: #2c3e50;">Continue</button>
+                        <button type="button" class="btn btn-info text-white px-4 d-none" id="btn-upload-finish" style="background-color: #2c3e50;">Upload file</button>
                     </div>
                 </div>
             </div>
@@ -699,7 +699,7 @@
             form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
             form.querySelectorAll('.btn-custom-upload').forEach(el => {
                 el.style.borderColor = '#ced4da';
-                el.style.color = '#1a8a8a';
+                el.style.color = '#2c3e50';
             });
 
             loader.classList.add('show');

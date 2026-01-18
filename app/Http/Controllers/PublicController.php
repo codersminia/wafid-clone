@@ -594,7 +594,7 @@ class PublicController extends Controller
             'navtech_appointment_id' => 'required|exists:navtech_appointments,id',
             'whatsapp_number' => 'required',
             'payment_method' => 'required',
-            'proof_image' => 'required|image|max:2048',
+            'proof_image' => 'required|image|max:5120',
             'agreeTerms' => 'accepted',
         ]);
 
@@ -687,7 +687,7 @@ class PublicController extends Controller
             'tasheer_appointment_id' => 'required|exists:tasheer_appointments,id',
             'whatsapp_number' => 'required',
             'payment_method' => 'required',
-            'proof_image' => 'required|image|max:2048',
+            'proof_image' => 'required|image|max:5120',
             'agreeTerms' => 'accepted',
         ]);
 
@@ -775,7 +775,7 @@ class PublicController extends Controller
             'softskill_id'    => 'required|exists:soft_skill_certificates,id',
             'whatsapp_number' => 'required',
             'payment_method'  => 'required',
-            'proof_image'     => 'required|image|max:2048',
+            'proof_image'     => 'required|image|max:5120',
             'agreeTerms'      => 'accepted',
         ]);
 

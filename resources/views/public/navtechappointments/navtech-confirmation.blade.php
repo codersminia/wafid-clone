@@ -106,7 +106,7 @@
                                 <div id="dropzone-instructions">
                                     <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
                                     <p class="text-muted mb-1"><strong>Click or Drag & drop payment screenshot</strong></p>
-                                    <p class="text-muted small">JPG, PNG or JPEG (Max 2MB)</p>
+                                    <p class="text-muted small">JPG, PNG or JPEG (Max 5MB)</p>
                                 </div>
                                 
                                 <!-- Image preview container -->
