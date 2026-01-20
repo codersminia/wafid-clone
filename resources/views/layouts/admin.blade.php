@@ -284,6 +284,28 @@
                                     </a>                                    
                                 </li>
 
+                                <!-- Contact Inquiries -->
+                                <li class="menu-item {{ request()->routeIs('admin.contacts') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                    <a href="{{ route('admin.contacts')}}" class="menu-link">
+                                        <span class="svg-icon menu-icon">
+                                            <!-- Mail Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <path d="M6,2 L18,2 C19.6568542,2 21,3.34314575 21,5 L21,19 C21,20.6568542 19.6568542,22 18,22 L6,22 C4.34314575,22 3,20.6568542 3,19 L3,5 C3,3.34314575 4.34314575,2 6,2 Z M5.90869686,5.09311267 C5.59005085,5.27503164 5.48011276,5.67988358 5.66203173,5.99852959 L11.1620317,15.6318629 C11.370211,15.9965042 11.8384214,16.0827181 12.1629858,15.8239019 L18.1629858,11.0399019 C18.4529007,10.8087053 18.528343,10.3860088 18.3312015,10.0682619 L12.3312015,3.96826192 C12.0292523,3.66129992 11.5363388,3.66649836 11.2396102,3.97992982 L5.90869686,5.09311267 Z" fill="#000000" opacity="0.3"/>
+                                                    <path d="M12,14.6 L6.5,8 L17.5,8 L12,14.6 Z" fill="#000000"/>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="menu-text">Contact Inquiries</span>
+                                        @if($contact_new > 0)
+                                            <span class="menu-label">
+                                                <span class="label label-danger label-inline font-weight-bold">{{ $contact_new }}</span>
+                                            </span>
+                                        @endif
+                                    </a>
+                                </li>
+
                                 <!-- ========================================================= -->
                                 <!-- SECTION: SETTINGS -->
                                 <!-- ========================================================= -->
@@ -356,6 +378,8 @@
                                         <span class="menu-text">My Profile</span>
                                     </a>
                                 </li>
+
+
                             </ul>
                             <!--end::Menu Nav-->
                         </div>

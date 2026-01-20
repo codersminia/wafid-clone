@@ -10,6 +10,7 @@ use App\Models\CheckResult;
 use App\Models\NavtechAppointment;
 use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
+use App\Models\ContactInquiry;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 'navtech_new'   => NavtechAppointment::where('is_new', 1)->count(),
                 'tasheer_new'   => TasheerAppointment::where('is_new', 1)->count(),
                 'softskill_new' => SoftSkillCertificate::where('is_new', 1)->count(),
+                'contact_new'   => ContactInquiry::where('is_new', 1)->count(),
             ];
 
             $view->with($counts);

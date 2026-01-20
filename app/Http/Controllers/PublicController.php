@@ -73,6 +73,7 @@ class PublicController extends Controller
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message,
+            'is_new' => 1,
         ];
 
         // 1. Save to Database

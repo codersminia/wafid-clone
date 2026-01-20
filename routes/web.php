@@ -121,6 +121,12 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::post('/softskill-appointments/{id}/update', [AdminController::class, 'updateSoftSkillAppointment'])->name('softskill.appointments.update');
     Route::delete('/softskill-appointments/{id}', [AdminController::class, 'deleteSoftSkillAppointment'])->name('softskill.appointments.delete');
 
+    // Contact Inquiries
+    Route::get('/contacts', [AdminController::class, 'allContacts'])->name('contacts');
+    Route::post('/contacts/data', [AdminController::class, 'contactsData'])->name('contacts.data');
+    Route::post('/contacts/read/{id}', [AdminController::class, 'markContactAsRead'])->name('contacts.read');
+    Route::delete('/contacts/{id}', [AdminController::class, 'deleteContact'])->name('contacts.delete');
+
     Route::prefix('payment-methods')->name('payment.methods.')->group(function () {
         Route::get('/', [AdminController::class, 'allPaymentMethods'])->name('index');
         Route::get('/data', [AdminController::class, 'paymentMethodsData'])->name('data');

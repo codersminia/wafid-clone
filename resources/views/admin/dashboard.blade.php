@@ -126,6 +126,41 @@
             </div>
             <!-- End Row 1 -->
 
+            <!-- ROW 1.5: Contact Inquiries (Full Width or added to a new row) -->
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card card-custom bg-info card-stretch gutter-b">
+                        <div class="position-absolute right-0 top-0 h-100 w-100 bgi-no-repeat bgi-position-y-top bgi-position-x-right" 
+                             style="background-image: url({{ asset('assets/admin/media/svg/shapes/abstract-1.svg') }}); opacity: 0.1;"></div>
+                        
+                        <div class="card-body">
+                            <a href="{{ route('admin.contacts') }}" class="card-title font-weight-bold text-white font-size-h4 mb-3 d-block hover-white">
+                                Contact Inquiries
+                            </a>
+                            <div class="d-flex align-items-center justify-content-between mt-5">
+                                <div class="">
+                                    <span class="text-white-50 font-weight-bold d-block">Total Messages</span>
+                                    <span class="text-white font-weight-bolder font-size-h1">{{ $stats['contact']['total'] }}</span>
+                                </div>
+                                <div class="">
+                                    @if($stats['contact']['new'] > 0)
+                                        <span class="label label-white label-text-info label-inline font-weight-bolder py-4 px-5 font-size-h6">
+                                            +{{ $stats['contact']['new'] }} New
+                                        </span>
+                                    @else
+                                        <span class="symbol symbol-light-white symbol-45">
+                                            <span class="symbol-label">
+                                                <i class="flaticon2-chat-1 text-info"></i>
+                                            </span>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- ROW 2: Secondary Modules (White BG with Colored Icons) -->
             <div class="row">
                 <!-- NAVTTC -->

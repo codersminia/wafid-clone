@@ -22,6 +22,7 @@ use App\Models\Faq;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use App\Models\ContactInquiry;
 
 class AdminController extends Controller
 {
@@ -78,6 +79,10 @@ class AdminController extends Controller
             'softskill' => [
                 'total' => SoftSkillCertificate::count(),
                 'new'   => SoftSkillCertificate::where('is_new', 1)->count()
+            ],
+            'contact' => [
+                'total' => ContactInquiry::count(),
+                'new'   => ContactInquiry::where('is_new', 1)->count()
             ],
         ];
 
@@ -1104,6 +1109,95 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('error', 'Invalid request.');
+    }
+
+    // ==========================================
+    // Contact Inquiries Management
+    // ==========================================
+
+    public function allContacts()
+    {
+        return view('admin.contacts.index');
+    }
+
+    public function contactsData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'name',
+            2 => 'email',
+            3 => 'subject',
+            4 => 'created_at',
+            5 => 'id', // Actions
+        ];
+
+        $query = ContactInquiry::query();
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                  ->orWhere('email', 'like', "%$search%")
+                  ->orWhere('subject', 'like', "%$search%")
+                  ->orWhere('phone', 'like', "%$search%");
+            });
+        }
+
+        $recordsTotal = ContactInquiry::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $query->orderBy($columns[$request->order[0]['column']], $request->order[0]['dir']);
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $contacts = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($contacts as $c) {
+            // Add 'new-record' class if is_new == 1
+            $rowClass = ($c->is_new == 1) ? 'new-record' : '';
+            
+            $data[] = [
+                "DT_RowClass" => $rowClass,
+                "",
+                $c->name . '<br><small class="text-muted">' . $c->phone . '</small>',
+                $c->email,
+                Str::limit($c->subject, 30),
+                $c->created_at->format('d M Y h:i A'),
+                '
+                <button class="btn btn-sm btn-info view-contact" data-id="' . $c->id . '" data-msg="' . e($c->message) . '" title="View Message"><i class="la la-eye"></i></button>
+                <button class="btn btn-sm btn-danger delete-contact" data-id="' . $c->id . '" title="Delete"><i class="la la-trash"></i></button>
+                ',
+                $c->id
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function markContactAsRead($id)
+    {
+        $contact = ContactInquiry::find($id);
+        if($contact) {
+            $contact->is_new = 0;
+            $contact->save();
+            return response()->json(['status' => 'success']);
+        }
+        return response()->json(['status' => 'error'], 404);
+    }
+
+    public function deleteContact($id)
+    {
+        $contact = ContactInquiry::findOrFail($id);
+        $contact->delete();
+        return response()->json(['status' => 'success', 'message' => 'Inquiry deleted successfully']);
     }
 
 }
