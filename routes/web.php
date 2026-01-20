@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,10 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::post('/contacts/data', [AdminController::class, 'contactsData'])->name('contacts.data');
     Route::post('/contacts/read/{id}', [AdminController::class, 'markContactAsRead'])->name('contacts.read');
     Route::delete('/contacts/{id}', [AdminController::class, 'deleteContact'])->name('contacts.delete');
+
+    // Website Settings
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
 
     Route::prefix('payment-methods')->name('payment.methods.')->group(function () {
         Route::get('/', [AdminController::class, 'allPaymentMethods'])->name('index');
