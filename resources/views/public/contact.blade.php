@@ -10,8 +10,6 @@
     .custom-location-tabs .nav-link { background-color: #fff; color: #333; transition: all 0.3s; border-left: 5px solid transparent; }
     .custom-location-tabs .nav-link.active { background-color: #f8f9fa; border-left: 5px solid #d9534f; transform: translateX(5px); }
     .custom-location-tabs .nav-link:hover { background-color: #f8f9fa; }
-    #loaderOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 9999; }
-    #loaderOverlay.show { display: flex; }
 </style>
 @endpush
 
@@ -77,22 +75,22 @@
                         <form id="contactForm"> 
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label for="contactName">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="name" id="contactName" placeholder="As per passport" required>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" placeholder="As per passport" required>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="contactPhone">Phone Number <span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="phone" id="contactPhone" placeholder="0300-1234567" required>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="0300 1234567" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="contactEmail">Email Address</label>
-                                <input type="email" class="form-control" name="email" id="contactEmail" required>
+                            <div class="mb-3">
+                                <label class="font-weight-bold">Email Address</label>
+                                <input type="email" class="form-control" name="email" required>
                             </div>
-                            <div class="form-group">
-                                <label for="contactSubject">Select Service Issue <span class="text-danger">*</span></label>
-                                <select class="form-control p-2" name="subject" id="contactSubject" required>
+                            <div class="mb-3">
+                                <label class="font-weight-bold">Select Service Issue <span class="text-danger">*</span></label>
+                                <select class="form-control custom-select p-2" name="subject" required>
                                     <option value="" selected disabled>Choose a topic...</option>
                                     <option value="Wafid Appointment">Wafid (GAMCA) Appointment Issue</option>
                                     <option value="NAVTTC Booking">NAVTTC / Takamol Registration</option>
@@ -102,11 +100,16 @@
                                     <option value="Other">Other Inquiry</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="contactMessage">Message Details <span class="text-danger">*</span></label>
-                                <textarea class="form-control" name="message" id="contactMessage" rows="5" placeholder="Please describe your issue..." required></textarea>
+                            <div class="mb-3">
+                                <label class="font-weight-bold">Message Details <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="message" rows="5" placeholder="Please describe your issue..." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-dark px-5 mt-2">Submit Query</button>
+                            
+                            <!-- Improved Button with Spinner -->
+                            <button type="submit" id="submitBtn" class="btn btn-dark px-5 mt-2">
+                                <span id="btnText">Submit Query</span>
+                                <span id="btnLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -288,29 +291,40 @@
     </div>
 </section>
 
-<!-- Loader Overlay -->
-<div id="loaderOverlay">
-    <div class="text-center">
-        <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"></div>
-        <div class="text-light mt-2">Sending Inquiry...</div>
-    </div>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // Apply mask
+    $('#phone').inputmask('9999 9999999', {
+        clearMaskOnLostFocus: true
+    });
+
     const form = document.getElementById('contactForm');
-    const loader = document.getElementById('loaderOverlay');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnLoader = document.getElementById('btnLoader');
+
+    // Function to wipe away all red borders and error messages
+    function clearErrors() {
+        form.classList.remove('was-validated'); // FIX: Remove browser validation style
+        form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+    }
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // Remove previous errors
-        form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-        form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+        // 1. Clear old errors immediately when user clicks submit
+        clearErrors();
+
+        // UI Loading state
+        submitBtn.disabled = true;
+        btnText.innerText = "Sending...";
+        btnLoader.classList.remove('d-none');
 
         const formData = new FormData(form);
-        loader.classList.add('show');
 
         try {
             const response = await fetch("{{ route('contact.store') }}", {
@@ -325,6 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
 
             if (response.status === 422) {
+                // Handle Validation Errors (Red Borders)
                 Object.keys(data.errors).forEach(field => {
                     const input = form.querySelector(`[name="${field}"]`);
                     if (input) {
@@ -336,14 +351,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             } else if (data.status === 'success') {
-                alert(data.message);
-                form.reset();
+                // SUCCESS LOGIC
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Message Sent!',
+                    text: data.message,
+                    confirmButtonColor: '#343a40'
+                });
+
+                form.reset();      // Clears the text in the boxes
+                clearErrors();     // Removes the red borders/icons
             }
         } catch (err) {
-            console.error(err);
-            alert('Something went wrong! Please try again.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong. Please try again later.'
+            });
         } finally {
-            loader.classList.remove('show');
+            // Reset Button
+            submitBtn.disabled = false;
+            btnText.innerText = "Submit Query";
+            btnLoader.classList.add('d-none');
         }
     });
 });

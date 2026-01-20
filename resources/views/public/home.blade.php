@@ -21,7 +21,7 @@
                         </a>
                         
                         {{-- Button 2: Transparent outline --}}
-                        <a href="{{ route('contactus') }}" class="btn btn-outline-light font-weight-bold px-5 py-3">
+                        <a href="{{ route('contact') }}" class="btn btn-outline-light font-weight-bold px-5 py-3">
                             Contact Support
                         </a>
                     </div>

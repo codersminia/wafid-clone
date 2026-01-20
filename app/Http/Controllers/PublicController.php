@@ -23,6 +23,8 @@ use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
 use App\Models\Faq;
 use App\Models\ContactInquiry;
+use App\Mail\ContactInquiryMail;
+use Illuminate\Support\Facades\Mail;
 
 class PublicController extends Controller
 {
@@ -65,18 +67,28 @@ class PublicController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        ContactInquiry::create([
+        $data = [
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message,
-            'ip_address' => $request->ip(),
-        ]);
+        ];
+
+        // 1. Save to Database
+        ContactInquiry::create(array_merge($data, ['ip_address' => $request->ip()]));
+
+        // 2. Send Email (Update 'admin@example.com' to your email)
+        try {
+            Mail::to('admin@yourdomain.com')->send(new ContactInquiryMail($data));
+        } catch (\Exception $e) {
+            // Log error but continue so the user knows their data was saved
+            \Log::error("Mail failed: " . $e->getMessage());
+        }
 
         return response()->json([
             'status' => 'success', 
-            'message' => 'Your inquiry has been submitted successfully!'
+            'message' => 'Thank you! Your inquiry has been sent successfully.'
         ]);
     }
 
