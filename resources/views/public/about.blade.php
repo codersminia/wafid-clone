@@ -120,7 +120,7 @@
         <div class="container">
             <h2 class="font-weight-bold mb-4">Need Assistance?</h2>
             <p class="text-muted mb-4">Our team is sitting in 4 offices across Pakistan, ready to help you.</p>
-            <a href="{{ route('contactus') }}" class="btn btn-dark btn-lg px-5">Contact Us Today</a>
+            <a href="{{ route('contact') }}" class="btn btn-dark btn-lg px-5">Contact Us Today</a>
         </div>
     </section>
 

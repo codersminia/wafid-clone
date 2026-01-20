@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
 use App\Models\Faq;
+use App\Models\ContactInquiry;
 
 class PublicController extends Controller
 {
@@ -48,6 +49,35 @@ class PublicController extends Controller
 
     public function contactus(){
         return view('public.contact');
+    }
+
+    public function storecontact(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string',
+            'message' => 'required|string|min:5',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        ContactInquiry::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'ip_address' => $request->ip(),
+        ]);
+
+        return response()->json([
+            'status' => 'success', 
+            'message' => 'Your inquiry has been submitted successfully!'
+        ]);
     }
 
     public function about() {

@@ -93,7 +93,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('guidelines') }}">Guidelines</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contactus')}}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
                 </ul>
             </div>
@@ -116,7 +116,7 @@
                         <li><a href="{{ route('home') }}" class="text-white-50">Home</a></li>
                         <li><a href="{{ route('guidelines') }}" class="text-white-50">Guidelines</a></li>
                         <li><a href="{{ route('faq') }}" class="text-white-50">FAQ</a></li>
-                        <li><a href="{{ route('contactus') }}" class="text-white-50">Contact</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-white-50">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-3">

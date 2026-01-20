@@ -18,8 +18,10 @@ use App\Http\Controllers\AdminController;
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/guidelines', [PublicController::class, 'guidelines'])->name('guidelines');
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
-Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contactus');
 Route::get('/about-us', [PublicController::class, 'about'])->name('about');
+
+Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact');
+Route::post('/contact-us', [PublicController::class, 'storecontact'])->name('contact.store');
 
 // Appointments
 Route::get('/wafid-appointment', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
