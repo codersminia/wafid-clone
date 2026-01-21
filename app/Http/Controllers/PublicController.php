@@ -838,13 +838,34 @@ class PublicController extends Controller
     // Blog Methods
     // ==========================
 
-    public function blogs()
+    public function blogs(Request $request)
     {
-        $blogs = Blog::with('category')
-            ->where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->paginate(9);
-        return view('public.blogs.index', compact('blogs'));
+        $query = Blog::with('category')->where('status', 'published');
+
+        // Search Filter
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%$search%")
+                    ->orWhere('short_description', 'like', "%$search%")
+                    ->orWhere('content', 'like', "%$search%");
+            });
+        }
+
+        // Category Filter
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $blogs = $query->orderBy('published_at', 'desc')->paginate(9);
+
+        $categories = BlogCategory::withCount([
+            'blogs' => function ($q) {
+                $q->where('status', 'published');
+            }
+        ])->get();
+
+        return view('public.blogs.index', compact('blogs', 'categories'));
     }
 
     public function blogDetails($slug)

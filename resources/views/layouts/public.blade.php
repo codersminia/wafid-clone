@@ -76,7 +76,7 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 1050;">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg') }}"

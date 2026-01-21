@@ -12,6 +12,7 @@ use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\ContactInquiry;
 use App\Models\Setting;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrapFour();
+
         // Share counts with the admin layout view (assuming your file is 'admin.blade.php' or inside layouts)
         // Note: Replace 'admin.blade.php' with the actual path if it's in a folder, e.g., 'layouts.admin'
         // Using '*' shares it with ALL views, which is safest for the sidebar.
