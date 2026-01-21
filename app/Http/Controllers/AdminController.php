@@ -1347,7 +1347,10 @@ class AdminController extends Controller
         $recordsFiltered = $query->count();
 
         if ($request->order) {
-            $query->orderBy('id', 'desc');
+            $columnIndex = $request->order[0]['column'];
+            $columnName = $columns[$columnIndex] ?? 'id';
+            $columnSortOrder = $request->order[0]['dir'];
+            $query->orderBy($columnName, $columnSortOrder);
         } else {
             $query->orderBy('id', 'desc');
         }
