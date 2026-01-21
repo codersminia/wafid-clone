@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use App\Models\ContactInquiry;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 
 class AdminController extends Controller
 {
@@ -1198,6 +1200,241 @@ class AdminController extends Controller
         $contact = ContactInquiry::findOrFail($id);
         $contact->delete();
         return response()->json(['status' => 'success', 'message' => 'Inquiry deleted successfully']);
+    }
+
+
+    // ==========================
+    // Blog Categories
+    // ==========================
+
+    public function blogCategories()
+    {
+        return view('admin.blogs.categories.index');
+    }
+
+    public function blogCategoriesData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'name',
+            2 => 'slug',
+            3 => 'created_at',
+        ];
+
+        $query = BlogCategory::query();
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('name', 'like', "%$search%")
+                ->orWhere('slug', 'like', "%$search%");
+        }
+
+        $recordsTotal = BlogCategory::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $column = $columns[$request->order[0]['column']] ?? 'id';
+            $dir = $request->order[0]['dir'];
+            $query->orderBy($column, $dir);
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $categories = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($categories as $c) {
+            $data[] = [
+                $c->id,
+                $c->name,
+                $c->slug,
+                $c->created_at->format('d M Y'),
+                '<a href="' . route('admin.blog.categories.edit', $c->id) . '" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details"><i class="la la-edit"></i></a>' .
+                '<a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-category" data-id="' . $c->id . '" title="Delete"><i class="la la-trash"></i></a>'
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function storeBlogCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:blog_categories,slug',
+        ]);
+
+        BlogCategory::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->slug),
+        ]);
+
+        return redirect()->route('admin.blog.categories')->with('success', 'Category created successfully');
+    }
+
+    public function editBlogCategory($id)
+    {
+        $category = BlogCategory::findOrFail($id);
+        return view('admin.blogs.categories.edit', compact('category'));
+    }
+
+    public function updateBlogCategory(Request $request, $id)
+    {
+        $category = BlogCategory::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:blog_categories,slug,' . $id,
+        ]);
+
+        $category->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->slug),
+        ]);
+
+        return redirect()->route('admin.blog.categories')->with('success', 'Category updated successfully');
+    }
+
+    public function deleteBlogCategory($id)
+    {
+        $category = BlogCategory::findOrFail($id);
+        $category->delete();
+        return response()->json(['status' => 'success', 'message' => 'Category deleted successfully']);
+    }
+
+    // ==========================
+    // Blogs
+    // ==========================
+
+    public function blogs()
+    {
+        return view('admin.blogs.index');
+    }
+
+    public function blogsData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'title',
+            2 => 'category_id',
+            3 => 'status',
+            4 => 'created_at',
+        ];
+
+        $query = Blog::with('category');
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('title', 'like', "%$search%")
+                ->orWhereHas('category', function ($q) use ($search) {
+                    $q->where('name', 'like', "%$search%");
+                });
+        }
+
+        $recordsTotal = Blog::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $query->orderBy('id', 'desc');
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $blogs = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($blogs as $b) {
+            $data[] = [
+                $b->id,
+                $b->title,
+                $b->category ? $b->category->name : 'N/A',
+                '<span class="label label-lg font-weight-bold label-light-' . ($b->status == 'published' ? 'success' : 'warning') . ' label-inline">' . ucfirst($b->status) . '</span>',
+                $b->created_at->format('d M Y'),
+                '<a href="' . route('admin.blogs.edit', $b->id) . '" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details"><i class="la la-edit"></i></a>' .
+                '<a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-blog" data-id="' . $b->id . '" title="Delete"><i class="la la-trash"></i></a>'
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function createBlog()
+    {
+        $categories = BlogCategory::all();
+        return view('admin.blogs.create', compact('categories'));
+    }
+
+    public function storeBlog(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:blogs,slug',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $data = $request->except('image');
+        $data['slug'] = Str::slug($request->slug);
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/blogs'), $imageName);
+            $data['image'] = 'uploads/blogs/' . $imageName;
+        }
+
+        Blog::create($data);
+
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully');
+    }
+
+    public function editBlog($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $categories = BlogCategory::all();
+        return view('admin.blogs.edit', compact('blog', 'categories'));
+    }
+
+    public function updateBlog(Request $request, $id)
+    {
+        $blog = Blog::findOrFail($id);
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:blogs,slug,' . $id,
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $data = $request->except('image');
+        $data['slug'] = Str::slug($request->slug);
+
+        if ($request->hasFile('image')) {
+            if ($blog->image && file_exists(public_path($blog->image))) {
+                @unlink(public_path($blog->image));
+            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/blogs'), $imageName);
+            $data['image'] = 'uploads/blogs/' . $imageName;
+        }
+
+        $blog->update($data);
+
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully');
+    }
+
+    public function deleteBlog($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->delete();
+        return response()->json(['status' => 'success', 'message' => 'Blog deleted successfully']);
     }
 
 }

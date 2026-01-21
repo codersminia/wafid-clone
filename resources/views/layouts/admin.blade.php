@@ -231,7 +231,7 @@
                                             </span>
                                         @endif
                                     </a>                                    
-                                </li> 
+                                </li>                                 
                                 
                                 <!-- ========================================================= -->
                                 <!-- SECTION: REQUESTS & CERTIFICATES -->
@@ -303,6 +303,54 @@
                                                 <span class="label label-danger label-inline font-weight-bold">{{ $contact_new }}</span>
                                             </span>
                                         @endif
+                                    </a>
+                                </li>
+
+
+                                <li class="menu-section">
+                                    <h4 class="menu-text">Blogs Management</h4>
+                                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                                </li>
+
+                                <!-- Blog Categories -->
+                                <li class="menu-item {{ request()->routeIs('admin.blog.categories*') ? 'menu-item-active' : '' }}"
+                                    aria-haspopup="true">
+                                    <a href="{{ route('admin.blog.categories') }}" class="menu-link">
+                                        <span class="svg-icon menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24" />
+                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
+                                                    <path
+                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                        fill="#000000" opacity="0.3" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="menu-text">Categories</span>
+                                    </a>
+                                </li>
+
+                                <!-- Blogs -->
+                                <li class="menu-item {{ request()->routeIs('admin.blogs*') ? 'menu-item-active' : '' }}"
+                                    aria-haspopup="true">
+                                    <a href="{{ route('admin.blogs.index') }}" class="menu-link">
+                                        <span class="svg-icon menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24" />
+                                                    <path
+                                                        d="M3,4 L20,4 C21.1045695,4 22,4.8954305 22,6 L22,18 C22,19.1045695 21.1045695,20 20,20 L3,20 C1.8954305,20 1,19.1045695 1,18 L1,6 C1,4.8954305 1.8954305,4 3,4 Z M3,6 L3,18 L20,18 L20,6 L3,6 Z"
+                                                        fill="#000000" opacity="0.3" />
+                                                    <path
+                                                        d="M4,8 L10,8 L10,14 L4,14 L4,8 Z M12,8 L19,8 L19,10 L12,10 L12,8 Z M12,12 L19,12 L19,14 L12,14 L12,12 Z"
+                                                        fill="#000000" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="menu-text">Blogs</span>
                                     </a>
                                 </li>
 

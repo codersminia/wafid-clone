@@ -70,6 +70,11 @@ Route::post('soft-skill-payment-upload', [PublicController::class, 'softSkillPay
 Route::get('soft-skill-thank-you', [PublicController::class, 'softSkillThankYou'])->name('softskill.thankyou');
 
 
+
+// Blogs Public Routes
+Route::get('/blogs', [PublicController::class, 'blogs'])->name('public.blogs');
+Route::get('/blogs/{slug}', [PublicController::class, 'blogDetails'])->name('public.blogs.details');
+
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
@@ -157,4 +162,21 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     // Profile Routes
     Route::get('/profile', [AdminController::class, 'editprofile'])->name('profile.edit');
     Route::put('/profile', [AdminController::class, 'updateprofile'])->name('profile.update');
+
+    // Blog Categories
+    Route::get('/blog-categories', [AdminController::class, 'blogCategories'])->name('blog.categories');
+    Route::get('/blog-categories/data', [AdminController::class, 'blogCategoriesData'])->name('blog.categories.data');
+    Route::post('/blog-categories/store', [AdminController::class, 'storeBlogCategory'])->name('blog.categories.store');
+    Route::get('/blog-categories/{id}/edit', [AdminController::class, 'editBlogCategory'])->name('blog.categories.edit');
+    Route::post('/blog-categories/{id}/update', [AdminController::class, 'updateBlogCategory'])->name('blog.categories.update');
+    Route::delete('/blog-categories/{id}', [AdminController::class, 'deleteBlogCategory'])->name('blog.categories.delete');
+
+    // Blogs
+    Route::get('/blogs', [AdminController::class, 'blogs'])->name('blogs.index');
+    Route::get('/blogs/data', [AdminController::class, 'blogsData'])->name('blogs.data');
+    Route::get('/blogs/create', [AdminController::class, 'createBlog'])->name('blogs.create');
+    Route::post('/blogs/store', [AdminController::class, 'storeBlog'])->name('blogs.store');
+    Route::get('/blogs/{id}/edit', [AdminController::class, 'editBlog'])->name('blogs.edit');
+    Route::post('/blogs/{id}/update', [AdminController::class, 'updateBlog'])->name('blogs.update');
+    Route::delete('/blogs/{id}', [AdminController::class, 'deleteBlog'])->name('blogs.delete');
 });

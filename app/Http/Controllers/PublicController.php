@@ -25,6 +25,8 @@ use App\Models\Faq;
 use App\Models\ContactInquiry;
 use App\Mail\ContactInquiryMail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 
 class PublicController extends Controller
 {
@@ -830,6 +832,35 @@ class PublicController extends Controller
         if (!$id || !$record = SoftSkillCertificate::find($id)) return redirect()->route('softskill.form');
         session()->forget('softskill_paid_id');
         return view('public.skillcertificates.thank-you', compact('record'));
+    }
+
+    // ==========================
+    // Blog Methods
+    // ==========================
+
+    public function blogs()
+    {
+        $blogs = Blog::with('category')
+            ->where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->paginate(9);
+        return view('public.blogs.index', compact('blogs'));
+    }
+
+    public function blogDetails($slug)
+    {
+        $blog = Blog::with('category')
+            ->where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        $recentBlogs = Blog::where('status', 'published')
+            ->where('id', '!=', $blog->id)
+            ->orderBy('published_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('public.blogs.details', compact('blog', 'recentBlogs'));
     }
 
 }

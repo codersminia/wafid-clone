@@ -6,8 +6,8 @@
 @section('content')
 
     <!-- Page Header -->
-    <section class="page-header bg-dark text-white py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('assets/public/images/about-bg.jpg') }}') center/cover;">
-        <div class="container text-center">
+    <section class="page-header bg-dark text-white py-5">
+        <div class="container">
             <h1 class="font-weight-bold">About Gulf Medical Consultant</h1>
             <p class="lead">Simplifying GCC Visa Medicals & Skill Tests since 2018.</p>
         </div>
@@ -18,8 +18,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="{{ asset('assets/public/images/office-team.jpg') }}" alt="Our Team" class="img-fluid rounded shadow-lg">
-                    <!-- Note: If you don't have a real team photo, use a high-quality stock photo of an office environment, but real is better! -->
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Our Team" class="img-fluid rounded shadow-lg">                 
                 </div>
                 <div class="col-lg-6 pl-lg-5">
                     <h6 class="text-accent-red font-weight-bold text-uppercase">Who We Are</h6>
