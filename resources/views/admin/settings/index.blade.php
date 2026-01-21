@@ -58,6 +58,10 @@
                                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel Logo">
                                                 <i class="ki ki-bold-close icon-xs text-muted"></i>
                                             </span>
+
+                                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove Logo">
+                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                            </span>
                                         </div>
                                         <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
                                     </div>
@@ -75,6 +79,10 @@
                                             </label>
 
                                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel Favicon">
+                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                            </span>
+
+                                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove Favicon">
                                                 <i class="ki ki-bold-close icon-xs text-muted"></i>
                                             </span>
                                         </div>
@@ -328,10 +336,26 @@
         // Remove Office
         $(document).on('click', '.btn-remove-office', function() {
             $(this).closest('.office-item').remove();
-            // Re-index logic if strictly needed, but PHP handles non-consecutive arrays fine mostly,
-            // or we just rely on unique keys if we used random IDs.
-            // For simple list, appending with new index is fine, removals might leave gaps but standard PHP form handling usually handles array keys.
-            // Actually, to be safe, we could re-index name attributes on submission or remove but Laravel handles `office_locations[0]`, `office_locations[2]` etc. as an array.
+        });
+
+        // Auto-extract Iframe SRC for Map inputs
+        $(document).on('input paste', '.field-map, input[name*="[map_url]"]', function() {
+            var input = $(this);
+            setTimeout(function() {
+                var val = input.val();
+                // Check if input looks like an iframe tag
+                if (val.trim().startsWith('<iframe') && val.includes('src="')) {
+                    // Create a dummy element to parse the HTML string
+                    var $temp = $('<div>').html(val);
+                    var src = $temp.find('iframe').attr('src');
+                    
+                    if (src) {
+                        input.val(src);
+                        // Optional: Show a small toast notification
+                        toastr.success('Map URL extracted successfully!');
+                    }
+                }
+            }, 100);
         });
     });
 </script>

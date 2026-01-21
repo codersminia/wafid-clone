@@ -11,6 +11,7 @@ use App\Models\NavtechAppointment;
 use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\ContactInquiry;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,12 @@ class AppServiceProvider extends ServiceProvider
             ];
 
             $view->with($counts);
+        });
+
+        // Share Website Settings with ALL views
+        View::composer('*', function ($view) {
+            $settings = Setting::pluck('value', 'key')->toArray();
+            $view->with('settings', $settings);
         });
     }
 }

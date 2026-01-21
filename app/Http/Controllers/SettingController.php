@@ -33,6 +33,8 @@ class SettingController extends Controller
             $name = 'logo_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/settings'), $name);
             Setting::set('logo', 'uploads/settings/' . $name);
+        } elseif ($request->input('logo_remove') == '1') {
+            Setting::where('key', 'logo')->delete();
         }
 
         // 3. Handle Favicon Upload
@@ -41,6 +43,8 @@ class SettingController extends Controller
             $name = 'favicon_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/settings'), $name);
             Setting::set('favicon', 'uploads/settings/' . $name);
+        } elseif ($request->input('favicon_remove') == '1') {
+            Setting::where('key', 'favicon')->delete();
         }
 
         // Redirect back with success message and input (for active_tab)

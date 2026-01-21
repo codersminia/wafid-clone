@@ -7,9 +7,31 @@
 
 @push('head')
 <style>
-    .custom-location-tabs .nav-link { background-color: #fff; color: #333; transition: all 0.3s; border-left: 5px solid transparent; }
-    .custom-location-tabs .nav-link.active { background-color: #f8f9fa; border-left: 5px solid #d9534f; transform: translateX(5px); }
-    .custom-location-tabs .nav-link:hover { background-color: #f8f9fa; }
+    .custom-location-tabs .nav-link { 
+        background-color: #fff; 
+        color: #333; 
+        transition: all 0.3s; 
+        border: 1px solid #eee;
+        border-left: 5px solid transparent; 
+    }
+    .custom-location-tabs .nav-link:hover { 
+        background-color: #f8f9fa; 
+        transform: translateX(5px);
+    }
+    .custom-location-tabs .nav-link.active { 
+        background-color: #2c3e50 !important; /* User Requested Color */
+        color: #fff !important; 
+        border-color: #2c3e50 !important;
+        border-left: 5px solid #1a252f !important; 
+        transform: translateX(5px); 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .custom-location-tabs .nav-link.active small {
+        color: rgba(255,255,255,0.8) !important;
+    }
+    .custom-location-tabs .nav-link.active h5 {
+        color: #fff !important;
+    }
 </style>
 @endpush
 
@@ -26,8 +48,10 @@
 <!-- Main Content -->
 <section class="py-5 bg-light-grey">
     <div class="container">
-        <!-- Contact Cards (Kept exactly as yours) -->
+        
+        <!-- DYNAMIC CONTACT CARDS -->
         <div class="row mb-5">
+            <!-- WhatsApp -->
             <div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm h-100 text-center py-4">
                     <div class="card-body">
@@ -36,10 +60,11 @@
                         </div>
                         <h5 class="font-weight-bold">WhatsApp Support</h5>
                         <p class="text-muted small">Fastest response for booking issues.</p>
-                        <a href="https://wa.me/92xxxxxxxxxx" class="btn btn-success btn-sm px-4">Chat Now</a>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '92xxxxxxxxxx') }}" class="btn btn-success btn-sm px-4">Chat Now</a>
                     </div>
                 </div>
             </div>
+            <!-- Email -->
             <div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm h-100 text-center py-4">
                     <div class="card-body">
@@ -48,10 +73,11 @@
                         </div>
                         <h5 class="font-weight-bold">Email Us</h5>
                         <p class="text-muted small">Send your documents for review.</p>
-                        <a href="mailto:support@gamcawafidonline.com" class="text-dark font-weight-bold">support@gamcawafidonline.com</a>
+                        <a href="mailto:{{ $settings['site_email'] ?? 'support@gamcawafidonline.com' }}" class="text-dark font-weight-bold">{{ $settings['site_email'] ?? 'support@gamcawafidonline.com' }}</a>
                     </div>
                 </div>
             </div>
+            <!-- Hours -->
             <div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm h-100 text-center py-4">
                     <div class="card-body">
@@ -115,7 +141,7 @@
                 </div>
             </div>
 
-            <!-- Sidebar (Kept exactly as yours) -->
+            <!-- Sidebar -->
             <div class="col-lg-4 mt-4 mt-lg-0">
                 <div class="card bg-white border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -143,150 +169,84 @@
         <div class="text-center mb-5">
             <h6 class="text-accent-red font-weight-bold text-uppercase">Find Us</h6>
             <h2 class="font-weight-bold text-dark">Visit Our Offices</h2>
-            <p class="text-muted">We have physical presence in 4 major cities for your convenience.</p>
+            <p class="text-muted">We have physical presence in Gujranwala city for your convenience.</p>
             <div class="theme-divider"></div>
         </div>
 
         <div class="row">
-            <!-- Location Tabs (Left Side) -->
-            <div class="col-md-4 mb-4">
-                <div class="nav flex-column nav-pills custom-location-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    
-                    <!-- Office 1 -->
-                    <a class="nav-link active p-4 shadow-sm mb-3 border rounded" id="v-pills-lahore-tab" data-toggle="pill" href="#v-pills-lahore" role="tab" aria-controls="v-pills-lahore" aria-selected="true">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-red text-danger rounded-circle mr-3" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-0 font-weight-bold text-dark">Lahore (Head Office)</h5>
-                                <small class="text-muted">Ferozepur Road</small>
-                            </div>
-                        </div>
-                    </a>
+            @php
+                $offices = isset($settings['office_locations']) ? json_decode($settings['office_locations'], true) : [];
+                $colors = ['text-danger', 'text-primary', 'text-success', 'text-warning', 'text-info'];
+                $bg_colors = ['bg-light-red', 'bg-light-blue', 'bg-light-green', 'bg-light-orange', 'bg-light-info'];
+                $icons = ['fa-map-marker-alt', 'fa-building', 'fa-landmark', 'fa-star', 'fa-map'];
+            @endphp
 
-                    <!-- Office 2 -->
-                    <a class="nav-link p-4 shadow-sm mb-3 border rounded" id="v-pills-karachi-tab" data-toggle="pill" href="#v-pills-karachi" role="tab" aria-controls="v-pills-karachi" aria-selected="false">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-blue text-primary rounded-circle mr-3" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-0 font-weight-bold text-dark">Karachi Branch</h5>
-                                <small class="text-muted">Shahrah-e-Faisal</small>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Office 3 -->
-                    <a class="nav-link p-4 shadow-sm mb-3 border rounded" id="v-pills-islamabad-tab" data-toggle="pill" href="#v-pills-islamabad" role="tab" aria-controls="v-pills-islamabad" aria-selected="false">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-green text-success rounded-circle mr-3" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
-                                <i class="fas fa-landmark"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-0 font-weight-bold text-dark">Islamabad Branch</h5>
-                                <small class="text-muted">Blue Area</small>
-                            </div>
-                        </div>
-                    </a>
-
-                        <!-- Office 4 -->
-                        <a class="nav-link p-4 shadow-sm border rounded" id="v-pills-peshawar-tab" data-toggle="pill" href="#v-pills-peshawar" role="tab" aria-controls="v-pills-peshawar" aria-selected="false">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-light-orange text-warning rounded-circle mr-3" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-0 font-weight-bold text-dark">Peshawar Branch</h5>
-                                <small class="text-muted">University Road</small>
-                            </div>
-                        </div>
-                    </a>
-
+            @if(count($offices) > 0)
+                <!-- Location Tabs (Left Side) -->
+                <div class="col-md-4 mb-4">
+                    <div class="nav flex-column nav-pills custom-location-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        @foreach($offices as $index => $office)
+                            @php
+                                $color = $colors[$index % count($colors)];
+                                $bg = $bg_colors[$index % count($bg_colors)];
+                                $icon = $icons[$index % count($icons)];
+                                $activeClass = ($index === 0) ? 'active' : '';
+                                $ariaSelected = ($index === 0) ? 'true' : 'false';
+                            @endphp
+                            <a class="nav-link {{ $activeClass }} p-4 shadow-sm mb-3 border rounded" id="v-pills-office{{ $index }}-tab" data-toggle="pill" href="#v-pills-office{{ $index }}" role="tab" aria-controls="v-pills-office{{ $index }}" aria-selected="{{ $ariaSelected }}">
+                                <div class="d-flex align-items-center">
+                                    <div class=" {{ $bg }} {{ $color }} rounded-circle mr-3" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+                                        <i class="fas {{ $icon }}"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark">{{ $office['title'] ?? 'Office' }}</h5>
+                                        <small class="text-muted">{{ $office['city'] ?? 'Branch' }}</small>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
 
-            <!-- Map Content (Right Side) -->
-            <div class="col-md-8">
-                <div class="tab-content" id="v-pills-tabContent">
-                    
-                    <!-- Lahore Content -->
-                    <div class="tab-pane fade show active" id="v-pills-lahore" role="tabpanel">
-                        <div class="card border-0 shadow-lg">
-                            <div class="card-body p-0">
-                                <!-- Embedded Map (Replace src with your actual Embed Link) -->
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.04021200923!2d74.300!3d31.500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMwJzAwLjAiTiA3NMKwMTgnMDAuMCJF!5e0!3m2!1sen!2s!4v1645555555555" 
-                                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                
-                                <div class="p-4 bg-light">
-                                    <h4 class="font-weight-bold">Lahore Office</h4>
-                                    <p><i class="fas fa-map-pin text-danger mr-2"></i> Office No 123, Plaza Name, Ferozepur Road, Lahore.</p>
-                                    <p><i class="fas fa-phone text-success mr-2"></i> 042-35123456</p>
-                                    <a href="https://goo.gl/maps/exampleLink1" target="_blank" class="btn btn-outline-dark btn-sm">
-                                        <i class="fas fa-directions"></i> Get Directions
-                                    </a>
+                <!-- Map Content (Right Side) -->
+                <div class="col-md-8">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        @foreach($offices as $index => $office)
+                            @php
+                                $activeClass = ($index === 0) ? 'show active' : '';
+                            @endphp
+                            <div class="tab-pane fade {{ $activeClass }}" id="v-pills-office{{ $index }}" role="tabpanel">
+                                <div class="card border-0 shadow-lg">
+                                    <div class="card-body p-0">
+                                        <!-- Embedded Map -->
+                                        @if(!empty($office['map_url']))
+                                            <iframe src="{{ $office['map_url'] }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                        @else
+                                            <div style="height: 400px; display: flex; align-items: center; justify-content: center; background: #eee;">
+                                                <p class="text-muted">Map URL not provided.</p>
+                                            </div>
+                                        @endif
+                                        
+                                        <div class="p-4 bg-light">
+                                            <h4 class="font-weight-bold">{{ $office['title'] ?? 'Our Office' }}</h4>
+                                            <p><i class="fas fa-map-pin text-danger mr-2"></i> {{ $office['address'] ?? '' }}</p>
+                                            <p><i class="fas fa-phone text-success mr-2"></i> {{ $office['phone'] ?? '' }}</p>
+                                            
+                                            <!-- Optional: Directions link if you store coordinates or separate link, assuming map_url can serve or add another field -->
+                                            <!-- Just linking to google maps general if url is embed, extracting might be hard. -->
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-
-                    <!-- Karachi Content -->
-                    <div class="tab-pane fade" id="v-pills-karachi" role="tabpanel">
-                        <div class="card border-0 shadow-lg">
-                            <div class="card-body p-0">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.04021200923!2d67.000!3d24.860!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMwJzAwLjAiTiA3NMKwMTgnMDAuMCJF!5e0!3m2!1sen!2s!4v1645555555555" 
-                                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                <div class="p-4 bg-light">
-                                    <h4 class="font-weight-bold">Karachi Office</h4>
-                                    <p><i class="fas fa-map-pin text-danger mr-2"></i> Suite 405, Business Center, Shahrah-e-Faisal, Karachi.</p>
-                                    <p><i class="fas fa-phone text-success mr-2"></i> 021-35123456</p>
-                                    <a href="https://goo.gl/maps/exampleLink2" target="_blank" class="btn btn-outline-dark btn-sm">
-                                        <i class="fas fa-directions"></i> Get Directions
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Islamabad Content -->
-                    <div class="tab-pane fade" id="v-pills-islamabad" role="tabpanel">
-                        <div class="card border-0 shadow-lg">
-                            <div class="card-body p-0">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.04021200923!2d73.000!3d33.680!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMwJzAwLjAiTiA3NMKwMTgnMDAuMCJF!5e0!3m2!1sen!2s!4v1645555555555" 
-                                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                <div class="p-4 bg-light">
-                                    <h4 class="font-weight-bold">Islamabad Office</h4>
-                                    <p><i class="fas fa-map-pin text-danger mr-2"></i> Office 10, Blue Area, Islamabad.</p>
-                                    <p><i class="fas fa-phone text-success mr-2"></i> 051-35123456</p>
-                                    <a href="https://goo.gl/maps/exampleLink3" target="_blank" class="btn btn-outline-dark btn-sm">
-                                        <i class="fas fa-directions"></i> Get Directions
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Peshawar Content -->
-                    <div class="tab-pane fade" id="v-pills-peshawar" role="tabpanel">
-                        <div class="card border-0 shadow-lg">
-                            <div class="card-body p-0">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.04021200923!2d71.500!3d34.000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMwJzAwLjAiTiA3NMKwMTgnMDAuMCJF!5e0!3m2!1sen!2s!4v1645555555555" 
-                                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                <div class="p-4 bg-light">
-                                    <h4 class="font-weight-bold">Peshawar Office</h4>
-                                    <p><i class="fas fa-map-pin text-danger mr-2"></i> University Road, Opposite KFC, Peshawar.</p>
-                                    <p><i class="fas fa-phone text-success mr-2"></i> 091-35123456</p>
-                                    <a href="https://goo.gl/maps/exampleLink4" target="_blank" class="btn btn-outline-dark btn-sm">
-                                        <i class="fas fa-directions"></i> Get Directions
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
+            @else
+                <div class="col-12 text-center">
+                    <p class="text-muted">No office locations configured yet.</p>
+                </div>
+            @endif
         </div>
     </div>
 </section>
@@ -308,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to wipe away all red borders and error messages
     function clearErrors() {
-        form.classList.remove('was-validated'); // FIX: Remove browser validation style
+        form.classList.remove('was-validated'); 
         form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
         form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
     }
@@ -316,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // 1. Clear old errors immediately when user clicks submit
+        // 1. Clear old errors
         clearErrors();
 
         // UI Loading state
@@ -339,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
 
             if (response.status === 422) {
-                // Handle Validation Errors (Red Borders)
+                // Handle Validation Errors
                 Object.keys(data.errors).forEach(field => {
                     const input = form.querySelector(`[name="${field}"]`);
                     if (input) {
@@ -351,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             } else if (data.status === 'success') {
-                // SUCCESS LOGIC
                 Swal.fire({
                     icon: 'success',
                     title: 'Message Sent!',
@@ -359,8 +318,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     confirmButtonColor: '#343a40'
                 });
 
-                form.reset();      // Clears the text in the boxes
-                clearErrors();     // Removes the red borders/icons
+                form.reset();      
+                clearErrors();    
             }
         } catch (err) {
             Swal.fire({
