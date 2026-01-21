@@ -179,4 +179,15 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::get('/blogs/{id}/edit', [AdminController::class, 'editBlog'])->name('blogs.edit');
     Route::post('/blogs/{id}/update', [AdminController::class, 'updateBlog'])->name('blogs.update');
     Route::delete('/blogs/{id}', [AdminController::class, 'deleteBlog'])->name('blogs.delete');
+
+    // Medical Centers
+    Route::prefix('medical-centers')->name('medical_centers.')->group(function () {
+        Route::get('/', [AdminController::class, 'allMedicalCenters'])->name('index');
+        Route::get('/data', [AdminController::class, 'medicalCentersData'])->name('data');
+        Route::get('/create', [AdminController::class, 'createMedicalCenter'])->name('create');
+        Route::post('/store', [AdminController::class, 'storeMedicalCenter'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'editMedicalCenter'])->name('edit');
+        Route::post('/{id}/update', [AdminController::class, 'updateMedicalCenter'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'deleteMedicalCenter'])->name('delete');
+    });
 });

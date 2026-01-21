@@ -25,6 +25,7 @@ use Illuminate\Validation\Rule;
 use App\Models\ContactInquiry;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\MedicalCenter;
 
 class AdminController extends Controller
 {
@@ -1469,6 +1470,125 @@ class AdminController extends Controller
         $blog = Blog::findOrFail($id);
         $blog->delete();
         return response()->json(['status' => 'success', 'message' => 'Blog deleted successfully']);
+    }
+
+    public function allMedicalCenters()
+    {
+        return view('admin.medical_centers.index');
+    }
+
+    public function medicalCentersData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'city',
+            2 => 'medical_center',
+            3 => 'phone',
+            4 => 'created_at'
+        ];
+
+        $query = MedicalCenter::query();
+
+        if ($request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('medical_center', 'like', "%$search%")
+                    ->orWhere('country', 'like', "%$search%")
+                    ->orWhere('city', 'like', "%$search%")
+                    ->orWhere('phone', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
+            });
+        }
+
+        $recordsTotal = MedicalCenter::count();
+        $recordsFiltered = $query->count();
+
+        if (isset($request->order) && count($request->order)) {
+            $columnIndex = intval($request->order[0]['column']);
+            $dir = $request->order[0]['dir'];
+            $column = $columns[$columnIndex] ?? 'id';
+            $query->orderBy($column, $dir);
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $centers = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($centers as $c) {
+            $data[] = [
+                $c->id,
+                $c->city,
+                $c->medical_center,
+                $c->phone,
+                $c->id, // actions handled in JS
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function createMedicalCenter()
+    {
+        return view('admin.medical_centers.create');
+    }
+
+    public function storeMedicalCenter(Request $request)
+    {
+        $request->validate([
+            'country' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'medical_center' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'address_line_1' => 'nullable|string',
+            'address_line_2' => 'nullable|string',
+            'website' => 'nullable|url|max:255',
+            'rating' => 'nullable|numeric|min:0|max:5',
+        ]);
+
+        MedicalCenter::create($request->all());
+
+        return redirect()->route('admin.medical_centers.index')->with('success', 'Medical Center created successfully!');
+    }
+
+    public function editMedicalCenter($id)
+    {
+        $center = MedicalCenter::findOrFail($id);
+        return view('admin.medical_centers.edit', compact('center'));
+    }
+
+    public function updateMedicalCenter(Request $request, $id)
+    {
+        $center = MedicalCenter::findOrFail($id);
+
+        $request->validate([
+            'country' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'medical_center' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'address_line_1' => 'nullable|string',
+            'address_line_2' => 'nullable|string',
+            'website' => 'nullable|url|max:255',
+            'rating' => 'nullable|numeric|min:0|max:5',
+        ]);
+
+        $center->update($request->all());
+
+        return redirect()->route('admin.medical_centers.index')->with('success', 'Medical Center updated successfully!');
+    }
+
+    public function deleteMedicalCenter($id)
+    {
+        $center = MedicalCenter::findOrFail($id);
+        $center->delete();
+        return response()->json(['status' => 'success', 'message' => 'Medical Center deleted successfully']);
     }
 
 }

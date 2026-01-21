@@ -310,6 +310,28 @@
                                     </a>
                                 </li>
 
+                                <li class="menu-section">
+                                    <h4 class="menu-text">Medical Centers</h4>
+                                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                                </li>
+
+                                <!-- Medical Centers -->
+                                <li class="menu-item {{ request()->routeIs('admin.medical_centers*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                    <a href="{{ route('admin.medical_centers.index') }}" class="menu-link">
+                                        <span class="svg-icon menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <path d="M5,21 L19,21 C19.5522847,21 20,20.5522847 20,20 L20,8 L18,8 L18,20 L6,20 L6,5 L11,5 L11,3 L5,3 C4.44771525,3 4,3.44771525 4,4 L4,20 C4,20.5522847 4.44771525,21 5,21 Z" fill="#000000" opacity="0.3"/>
+                                                    <path d="M14,3 L14,7 C14,7.55228475 14.4477153,8 15,8 L19,8 L14,3 Z" fill="#000000"/>
+                                                    <path d="M11,11 L13,11 L13,13 L15,13 L15,15 L13,15 L13,17 L11,17 L11,15 L9,15 L9,13 L11,13 L11,11 Z" fill="#000000"/>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="menu-text">Medical Centers</span>
+                                    </a>
+                                </li>
+
 
                                 <li class="menu-section">
                                     <h4 class="menu-text">Blogs Management</h4>
