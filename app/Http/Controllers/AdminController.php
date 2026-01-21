@@ -36,13 +36,13 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
         $user = User::where('email', $request->email)
-                                ->where('is_admin', true)
-                                ->first();
+            ->where('is_admin', true)
+            ->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user, $request->filled('remember'));
@@ -60,39 +60,39 @@ class AdminController extends Controller
         $stats = [
             'wafid' => [
                 'total' => Appointment::count(),
-                'new'   => Appointment::where('is_new', 1)->count()
+                'new' => Appointment::where('is_new', 1)->count()
             ],
             'special' => [
                 'total' => SpecialAppointment::count(),
-                'new'   => SpecialAppointment::where('is_new', 1)->count()
+                'new' => SpecialAppointment::where('is_new', 1)->count()
             ],
             'tasheer' => [
                 'total' => TasheerAppointment::count(),
-                'new'   => TasheerAppointment::where('is_new', 1)->count()
+                'new' => TasheerAppointment::where('is_new', 1)->count()
             ],
             'navtech' => [
                 'total' => NavtechAppointment::count(),
-                'new'   => NavtechAppointment::where('is_new', 1)->count()
+                'new' => NavtechAppointment::where('is_new', 1)->count()
             ],
             'medical' => [
                 'total' => CheckResult::count(),
-                'new'   => CheckResult::where('is_new', 1)->count()
+                'new' => CheckResult::where('is_new', 1)->count()
             ],
             'softskill' => [
                 'total' => SoftSkillCertificate::count(),
-                'new'   => SoftSkillCertificate::where('is_new', 1)->count()
+                'new' => SoftSkillCertificate::where('is_new', 1)->count()
             ],
             'contact' => [
                 'total' => ContactInquiry::count(),
-                'new'   => ContactInquiry::where('is_new', 1)->count()
+                'new' => ContactInquiry::where('is_new', 1)->count()
             ],
         ];
 
         // 2. Fetch Recent Wafid Appointments (e.g., last 5)
         $recent_appointments = Appointment::with('payment')
-                                ->orderBy('created_at', 'desc')
-                                ->take(5)
-                                ->get();
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
 
         return view('admin.dashboard', compact('stats', 'recent_appointments'));
     }
@@ -129,7 +129,7 @@ class AdminController extends Controller
             ->leftJoin('payments as p', 'appointments.id', '=', 'p.appointment_id')
             ->with('payment')
             ->select('appointments.*')
-            ->whereNull('appointments.deleted_at'); 
+            ->whereNull('appointments.deleted_at');
 
         // SEARCH
         if ($request->search['value']) {
@@ -186,7 +186,7 @@ class AdminController extends Controller
                 $a->passport_no,
                 $a->phone,
                 $a->country_traveling_to,
-                $a->payment ? 1 : 0,                
+                $a->payment ? 1 : 0,
                 '', // actions handled in JS render
                 $a->id, // hidden id for actions
                 $a->is_new,
@@ -378,7 +378,7 @@ class AdminController extends Controller
     {
         // 1. Match these exactly to your DB columns for sorting
         $columns = [
-            0 => 'appointment_no', 
+            0 => 'appointment_no',
             1 => 'first_name',
             2 => 'passport_no',
             3 => 'phone',
@@ -399,9 +399,9 @@ class AdminController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('special_appointments.first_name', 'like', "%$search%")
-                ->orWhere('special_appointments.last_name', 'like', "%$search%")
-                ->orWhere('special_appointments.passport_no', 'like', "%$search%")
-                ->orWhere('special_appointments.phone', 'like', "%$search%");
+                    ->orWhere('special_appointments.last_name', 'like', "%$search%")
+                    ->orWhere('special_appointments.passport_no', 'like', "%$search%")
+                    ->orWhere('special_appointments.phone', 'like', "%$search%");
             });
         }
 
@@ -542,7 +542,7 @@ class AdminController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('occupation', 'like', "%$search%")
-                ->orWhere('whatsapp_number', 'like', "%$search%");
+                    ->orWhere('whatsapp_number', 'like', "%$search%");
             });
         }
 
@@ -595,7 +595,7 @@ class AdminController extends Controller
     public function updateNavtechAppointment(Request $request, $id)
     {
         $appointment = NavtechAppointment::findOrFail($id);
-        
+
         $request->validate([
             'country' => 'required',
             'whatsapp_number' => 'required',
@@ -611,7 +611,7 @@ class AdminController extends Controller
     {
         // Find the record
         $appointment = NavtechAppointment::findOrFail($id);
-        
+
         $appointment->delete();
 
         return response()->json([
@@ -642,8 +642,8 @@ class AdminController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('embassy', 'like', "%$search%")
-                ->orWhere('etimad_center', 'like', "%$search%") // Added this
-                ->orWhere('whatsapp_number', 'like', "%$search%");
+                    ->orWhere('etimad_center', 'like', "%$search%") // Added this
+                    ->orWhere('whatsapp_number', 'like', "%$search%");
             });
         }
 
@@ -695,7 +695,7 @@ class AdminController extends Controller
     public function updateTasheerAppointment(Request $request, $id)
     {
         $appointment = TasheerAppointment::findOrFail($id);
-        
+
         $request->validate([
             'embassy' => 'required',
             'etimad_center' => 'required', // Added validation
@@ -748,7 +748,7 @@ class AdminController extends Controller
                 $a->whatsapp_number,
                 $a->payment ? 1 : 0,
                 $a->created_at->format('d M Y'),
-                '', 
+                '',
                 $a->id,
                 $a->is_new // Assuming you added this column in migration
             ];
@@ -765,8 +765,8 @@ class AdminController extends Controller
     public function editSoftSkillAppointment($id)
     {
         $appointment = SoftSkillCertificate::with('payment')->findOrFail($id);
-        if ($appointment->is_new) { 
-            $appointment->update(['is_new' => 0]); 
+        if ($appointment->is_new) {
+            $appointment->update(['is_new' => 0]);
         }
         return view('admin.softskill.edit', compact('appointment'));
     }
@@ -786,11 +786,13 @@ class AdminController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    public function allPaymentMethods() {
+    public function allPaymentMethods()
+    {
         return view('admin.paymentmethods.index');
     }
 
-    public function paymentMethodsData(Request $request) {
+    public function paymentMethodsData(Request $request)
+    {
         $query = PaymentMethod::query();
 
         // 1. Total records (before filtering)
@@ -799,10 +801,10 @@ class AdminController extends Controller
         // 2. Apply Search
         if ($request->has('search') && !empty($request->input('search')['value'])) {
             $searchValue = $request->input('search')['value'];
-            $query->where(function($q) use ($searchValue) {
+            $query->where(function ($q) use ($searchValue) {
                 $q->where('account_name', 'LIKE', "%{$searchValue}%")
-                ->orWhere('account_title', 'LIKE', "%{$searchValue}%")
-                ->orWhere('account_number', 'LIKE', "%{$searchValue}%");
+                    ->orWhere('account_title', 'LIKE', "%{$searchValue}%")
+                    ->orWhere('account_number', 'LIKE', "%{$searchValue}%");
             });
         }
 
@@ -814,7 +816,7 @@ class AdminController extends Controller
             $columns = ['id', 'account_name', 'account_title', 'account_number', 'status']; // Map columns to indices
             $columnIndex = $request->input('order')[0]['column'];
             $columnDir = $request->input('order')[0]['dir'];
-            if(isset($columns[$columnIndex])) {
+            if (isset($columns[$columnIndex])) {
                 $query->orderBy($columns[$columnIndex], $columnDir);
             }
         }
@@ -846,11 +848,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function createPaymentMethod() {
+    public function createPaymentMethod()
+    {
         return view('admin.paymentmethods.create');
     }
 
-    public function storePaymentMethod(Request $request) {
+    public function storePaymentMethod(Request $request)
+    {
         $data = $request->validate([
             'account_name' => 'required',
             'account_title' => 'required',
@@ -860,7 +864,7 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('qr_code')) {
-            $imageName = time().'.'.$request->qr_code->extension();
+            $imageName = time() . '.' . $request->qr_code->extension();
             $request->qr_code->move(public_path('uploads/qr'), $imageName);
             $data['qr_code'] = $imageName;
         }
@@ -869,14 +873,16 @@ class AdminController extends Controller
         return redirect()->route('admin.payment.methods.index')->with('success', 'Payment method added successfully!');
     }
 
-    public function editPaymentMethod($id) {
+    public function editPaymentMethod($id)
+    {
         $method = PaymentMethod::findOrFail($id);
         return view('admin.paymentmethods.edit', compact('method'));
     }
 
-    public function updatePaymentMethod(Request $request, $id) {
+    public function updatePaymentMethod(Request $request, $id)
+    {
         $method = PaymentMethod::findOrFail($id);
-        
+
         $data = $request->validate([
             'account_name' => 'required',
             'account_title' => 'required',
@@ -887,10 +893,10 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('qr_code')) {
-            if($method->qr_code && file_exists(public_path('uploads/qr/'.$method->qr_code))) {
-                unlink(public_path('uploads/qr/'.$method->qr_code));
+            if ($method->qr_code && file_exists(public_path('uploads/qr/' . $method->qr_code))) {
+                unlink(public_path('uploads/qr/' . $method->qr_code));
             }
-            $imageName = time().'.'.$request->qr_code->extension();
+            $imageName = time() . '.' . $request->qr_code->extension();
             $request->qr_code->move(public_path('uploads/qr'), $imageName);
             $data['qr_code'] = $imageName;
         }
@@ -899,9 +905,11 @@ class AdminController extends Controller
         return redirect()->route('admin.payment.methods.index')->with('success', 'Payment method updated successfully!');
     }
 
-    public function deletePaymentMethod($id) {
+    public function deletePaymentMethod($id)
+    {
         $method = PaymentMethod::findOrFail($id);
-        if($method->qr_code) File::delete(public_path('uploads/qr/'.$method->qr_code));
+        if ($method->qr_code)
+            File::delete(public_path('uploads/qr/' . $method->qr_code));
         $method->delete();
         return response()->json(['status' => 'success']);
     }
@@ -910,7 +918,7 @@ class AdminController extends Controller
     {
         // Fetch all fees keyed by their 'fee_key' for easy access in view
         $fees = AppointmentFee::all()->pluck('amount', 'fee_key');
-        
+
         return view('admin.fees.edit', compact('fees'));
     }
 
@@ -941,9 +949,9 @@ class AdminController extends Controller
         // 3. Search Logic
         // DataTables sends search value in $request->input('search')['value']
         if ($searchValue = $request->input('search.value')) {
-            $query->where(function($q) use ($searchValue) {
+            $query->where(function ($q) use ($searchValue) {
                 $q->where('question', 'LIKE', "%{$searchValue}%")
-                  ->orWhere('answer', 'LIKE', "%{$searchValue}%");
+                    ->orWhere('answer', 'LIKE', "%{$searchValue}%");
             });
         }
 
@@ -952,8 +960,8 @@ class AdminController extends Controller
 
         // 5. Sorting Logic
         // Map DataTables column index to Database column name
-        $columns = ['id', 'question', 'answer', 'status']; 
-        
+        $columns = ['id', 'question', 'answer', 'status'];
+
         if ($request->has('order')) {
             $orderColumnIndex = $request->input('order.0.column');
             $orderDirection = $request->input('order.0.dir'); // asc or desc
@@ -968,7 +976,7 @@ class AdminController extends Controller
         }
 
         // 6. Pagination Logic
-        $start  = $request->input('start');  // Offset
+        $start = $request->input('start');  // Offset
         $length = $request->input('length'); // Limit
 
         // Apply pagination only if length is valid (not -1 for "All")
@@ -981,12 +989,12 @@ class AdminController extends Controller
         // 7. Format Data for Display
         $data = [];
         foreach ($faqs as $faq) {
-            $statusBadge = $faq->status == 1 
-                ? '<span class="label label-light-success label-inline">Active</span>' 
+            $statusBadge = $faq->status == 1
+                ? '<span class="label label-light-success label-inline">Active</span>'
                 : '<span class="label label-light-danger label-inline">Inactive</span>';
 
-            $buttons = '<a href="'.route('admin.faqs.edit', $faq->id).'" class="btn btn-sm btn-clean btn-icon" title="Edit"><i class="la la-edit"></i></a>
-                        <button class="btn btn-sm btn-clean btn-icon delete-btn" data-id="'.$faq->id.'" title="Delete"><i class="la la-trash"></i></button>';
+            $buttons = '<a href="' . route('admin.faqs.edit', $faq->id) . '" class="btn btn-sm btn-clean btn-icon" title="Edit"><i class="la la-edit"></i></a>
+                        <button class="btn btn-sm btn-clean btn-icon delete-btn" data-id="' . $faq->id . '" title="Delete"><i class="la la-trash"></i></button>';
 
             $data[] = [
                 $faq->id,
@@ -999,10 +1007,10 @@ class AdminController extends Controller
 
         // 8. Return JSON
         return response()->json([
-            "draw"            => intval($request->input('draw')),
-            "recordsTotal"    => $totalRecords,
+            "draw" => intval($request->input('draw')),
+            "recordsTotal" => $totalRecords,
             "recordsFiltered" => $filteredRecords,
-            "data"            => $data
+            "data" => $data
         ]);
     }
 
@@ -1055,7 +1063,7 @@ class AdminController extends Controller
     public function removeFaqEntry($id)
     {
         $faq = Faq::find($id);
-        if($faq) {
+        if ($faq) {
             $faq->delete();
             return response()->json(['success' => 'Deleted successfully']);
         }
@@ -1075,8 +1083,8 @@ class AdminController extends Controller
         // 1. Handle "Info" Update
         if ($request->input('action') == 'info') {
             $request->validate([
-                'name'   => ['required', 'string', 'max:255'],
-                'email'  => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
                 'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             ]);
 
@@ -1106,7 +1114,7 @@ class AdminController extends Controller
 
             $user->password = Hash::make($request->password);
             $user->save();
-            
+
             return redirect()->back()->with('success', 'Password changed successfully!');
         }
 
@@ -1139,9 +1147,9 @@ class AdminController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%$search%")
-                  ->orWhere('email', 'like', "%$search%")
-                  ->orWhere('subject', 'like', "%$search%")
-                  ->orWhere('phone', 'like', "%$search%");
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('subject', 'like', "%$search%")
+                    ->orWhere('phone', 'like', "%$search%");
             });
         }
 
@@ -1160,7 +1168,7 @@ class AdminController extends Controller
         foreach ($contacts as $c) {
             // Add 'new-record' class if is_new == 1
             $rowClass = ($c->is_new == 1) ? 'new-record' : '';
-            
+
             $data[] = [
                 "DT_RowClass" => $rowClass,
                 "",
@@ -1187,7 +1195,7 @@ class AdminController extends Controller
     public function markContactAsRead($id)
     {
         $contact = ContactInquiry::find($id);
-        if($contact) {
+        if ($contact) {
             $contact->is_new = 0;
             $contact->save();
             return response()->json(['status' => 'success']);
@@ -1375,11 +1383,16 @@ class AdminController extends Controller
 
     public function storeBlog(Request $request)
     {
+        if (trim(strip_tags($request->input('content'))) == '') {
+            $request->merge(['content' => null]);
+        }
+
         $request->validate([
             'title' => 'required',
             'slug' => 'required|unique:blogs,slug',
+            'category_id' => 'required',
             'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->except('image');
@@ -1393,6 +1406,13 @@ class AdminController extends Controller
 
         Blog::create($data);
 
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Blog created successfully'
+            ]);
+        }
+
         return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully');
     }
 
@@ -1405,10 +1425,14 @@ class AdminController extends Controller
 
     public function updateBlog(Request $request, $id)
     {
+        if (trim(strip_tags($request->input('content'))) == '') {
+            $request->merge(['content' => null]);
+        }
         $blog = Blog::findOrFail($id);
         $request->validate([
             'title' => 'required',
             'slug' => 'required|unique:blogs,slug,' . $id,
+            'category_id' => 'required',
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -1426,6 +1450,13 @@ class AdminController extends Controller
         }
 
         $blog->update($data);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Blog updated successfully'
+            ]);
+        }
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully');
     }

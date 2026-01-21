@@ -14,8 +14,10 @@
         <link href="{{ asset('assets/admin/plugins/custom/datatables/datatables.bundle.css?v=7.0.6') }}" rel="stylesheet" type="text/css" />
 
         <!--begin::Global Theme Styles(used by all pages)-->
-        <link href="{{ asset('assets/admin/plugins/global/plugins.bundle.css?v=7.0.6') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('assets/admin/plugins/custom/prismjs/.bundle.css?v=7.0.6') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/plugins/global/plugins.bundle.css?v=7.0.6') }}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('assets/admin/plugins/custom/prismjs/prismjs.bundle.css?v=7.0.6') }}" rel="stylesheet"
+        type="text/css" />
         <link href="{{ asset('assets/admin/css/style.bundle.css?v=7.0.6') }}" rel="stylesheet" type="text/css" />
         <!--end::Global Theme Styles-->
 
@@ -27,6 +29,8 @@
         <!--end::Layout Themes-->
 
         <link rel="shortcut icon" href="{{ asset('assets/admin/media/logos/favicon.png') }}" />
+
+        @stack('styles')
     </head>
     <!--end::Head-->
 
