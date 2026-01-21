@@ -3,6 +3,9 @@
 @section('title', $blog->meta_title ?? $blog->title . ' - Gulf Medical Consultant')
 @section('meta_description', $blog->meta_description ?? Str::limit($blog->short_description, 160))
 @section('meta_keywords', $blog->meta_keywords)
+@if($blog->image)
+@section('og_image', asset($blog->image))
+@endif
 
 @section('content')
 
@@ -48,7 +51,8 @@
                     <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-muted">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('public.blogs') }}" class="text-muted">Blogs</a></li>
                     <li class="breadcrumb-item active text-theme font-weight-bold" aria-current="page">
-                        {{ Str::limit($blog->title, 40) }}</li>
+                        {{ Str::limit($blog->title, 40) }}
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -299,17 +303,21 @@
                 min-height: 300px !important;
                 padding: 40px 0 !important;
             }
+
             .article-hero h1 {
                 font-size: 1.75rem !important;
                 line-height: 1.3 !important;
             }
+
             .article-hero .py-5 {
                 padding-top: 1rem !important;
                 padding-bottom: 1rem !important;
             }
+
             .article-hero .d-flex.text-white-50 {
                 flex-direction: column;
             }
+
             .article-hero .mx-3 {
                 margin: 5px 0 !important;
             }

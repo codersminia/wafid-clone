@@ -12,17 +12,36 @@
     <meta name="keywords"
         content="@yield('meta_keywords', 'gamca appointment pakistan, wafid online booking, navttc saudi test, tasheer appointment check, gamca medical fee, gamca lahore, gamca karachi')">
 
+    {{-- Schema.org / Search Preview --}}
+    <meta itemprop="name" content="@yield('title')">
+    <meta itemprop="description" content="@yield('meta_description')">
+    <meta itemprop="image"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
+
     {{-- Geo-Tagging (Crucial for Local SEO in Pakistan/India) --}}
     <meta name="geo.region" content="PK" />
     <meta name="geo.position" content="30.3753;69.3451" />
     <meta name="ICBM" content="30.3753, 69.3451" />
 
     {{-- Open Graph for WhatsApp/Facebook Sharing --}}
-    <meta property="og:site_name" content="Gulf Medical Consultant">
+    <meta property="og:site_name" content="{{ $settings['site_name'] ?? 'Gulf Medical Consultant' }}">
     <meta property="og:title" content="@yield('title', 'Gulf Medical Consultant')">
     <meta property="og:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
+    <meta property="og:image:secure_url"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    {{-- Twitter Cards --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'Gulf Medical Consultant')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
+    <meta name="twitter:image"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
 
     {{-- Canonical Link (Prevents duplicate content issues) --}}
     <link rel="canonical" href="{{ url()->current() }}" />
