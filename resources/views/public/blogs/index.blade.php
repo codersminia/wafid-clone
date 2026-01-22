@@ -69,7 +69,7 @@
                                                 {{ Str::limit($blog->short_description, 120) }}
                                             </p>
                                             <a href="{{ route('public.blogs.details', $blog->slug) }}"
-                                                class="btn btn-link text-theme font-weight-bold p-0 text-decoration-none">
+                                                class="btn btn-link text-dark font-weight-bold p-0 text-decoration-none">
                                                 READ ARTICLE <i class="fas fa-long-arrow-alt-right ml-2"></i>
                                             </a>
                                         </div>
