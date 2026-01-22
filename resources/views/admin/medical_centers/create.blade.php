@@ -18,7 +18,8 @@
                         </div>
                     </div>
                     <!--begin::Form-->
-                    <form class="form" method="POST" action="{{ route('admin.medical_centers.store') }}">
+                    <form class="form" method="POST" action="{{ route('admin.medical_centers.store') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
@@ -81,6 +82,15 @@
                                     <input type="number" step="0.1" min="0" max="5" name="rating" class="form-control"
                                         placeholder="0.0" value="{{ old('rating', '0.0') }}" />
                                     @error('rating') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label>Center Image (Recommended: 800x600)</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*" />
+                                    <span class="form-text text-muted">Upload a photo of the clinic building or
+                                        interior.</span>
+                                    @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>

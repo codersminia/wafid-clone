@@ -1550,9 +1550,19 @@ class AdminController extends Controller
             'address_line_2' => 'nullable|string',
             'website' => 'nullable|url|max:255',
             'rating' => 'nullable|numeric|min:0|max:5',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        MedicalCenter::create($request->all());
+        $data = $request->except('image');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/medical_centers'), $imageName);
+            $data['image'] = 'uploads/medical_centers/' . $imageName;
+        }
+
+        MedicalCenter::create($data);
 
         return redirect()->route('admin.medical_centers.index')->with('success', 'Medical Center created successfully!');
     }
@@ -1577,9 +1587,24 @@ class AdminController extends Controller
             'address_line_2' => 'nullable|string',
             'website' => 'nullable|url|max:255',
             'rating' => 'nullable|numeric|min:0|max:5',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $center->update($request->all());
+        $data = $request->except('image');
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($center->image && File::exists(public_path($center->image))) {
+                File::delete(public_path($center->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/medical_centers'), $imageName);
+            $data['image'] = 'uploads/medical_centers/' . $imageName;
+        }
+
+        $center->update($data);
 
         return redirect()->route('admin.medical_centers.index')->with('success', 'Medical Center updated successfully!');
     }
@@ -1587,8 +1612,91 @@ class AdminController extends Controller
     public function deleteMedicalCenter($id)
     {
         $center = MedicalCenter::findOrFail($id);
+
+        if ($center->image && File::exists(public_path($center->image))) {
+            File::delete(public_path($center->image));
+        }
+
         $center->delete();
         return response()->json(['status' => 'success', 'message' => 'Medical Center deleted successfully']);
     }
 
+    // ==========================================
+    // City Media Management (Hero Images)
+    // ==========================================
+
+    public function cityMedia()
+    {
+        return view('admin.city_media.index');
+    }
+
+    public function cityMediaData(Request $request)
+    {
+        $query = \App\Models\CityMedia::query();
+        $recordsTotal = $query->count();
+        $recordsFiltered = $query->count();
+
+        $results = $query->orderBy('id', 'desc')->get();
+
+        $data = [];
+        foreach ($results as $row) {
+            $data[] = [
+                $row->id,
+                $row->city_name,
+                $row->hero_image ? '<img src="' . asset($row->hero_image) . '" class="rounded shadow-sm" style="max-height: 50px;">' : 'No Image',
+                $row->created_at->format('d M Y'),
+                '', // actions handled in JS
+                $row->id
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ]);
+    }
+
+    public function createCityMedia()
+    {
+        // Fetch unique cities from medical centers to help the user
+        $cities = MedicalCenter::distinct()->pluck('city')->sort();
+        return view('admin.city_media.create', compact('cities'));
+    }
+
+    public function storeCityMedia(Request $request)
+    {
+        $request->validate([
+            'city_name' => 'required|string|unique:city_media,city_name',
+            'hero_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'description' => 'nullable|string',
+        ]);
+
+        $data = $request->only(['city_name', 'description']);
+
+        if ($request->hasFile('hero_image')) {
+            $image = $request->file('hero_image');
+            $imageName = time() . '_' . Str::slug($request->city_name) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/cities'), $imageName);
+            $data['hero_image'] = 'uploads/cities/' . $imageName;
+        }
+
+        \App\Models\CityMedia::create($data);
+
+        return redirect()->route('admin.city_media.index')->with('success', 'City Media created successfully!');
+    }
+
+    public function deleteCityMedia($id)
+    {
+        $media = \App\Models\CityMedia::findOrFail($id);
+
+        if ($media->hero_image && File::exists(public_path($media->hero_image))) {
+            File::delete(public_path($media->hero_image));
+        }
+
+        $media->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'City Media deleted successfully']);
+    }
 }

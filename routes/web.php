@@ -191,4 +191,13 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
         Route::post('/{id}/update', [AdminController::class, 'updateMedicalCenter'])->name('update');
         Route::delete('/{id}', [AdminController::class, 'deleteMedicalCenter'])->name('delete');
     });
+
+    // City Media Management
+    Route::group(['prefix' => 'city-media', 'as' => 'city_media.'], function () {
+        Route::get('/', [AdminController::class, 'cityMedia'])->name('index');
+        Route::get('/data', [AdminController::class, 'cityMediaData'])->name('data');
+        Route::get('/create', [AdminController::class, 'createCityMedia'])->name('create');
+        Route::post('/store', [AdminController::class, 'storeCityMedia'])->name('store');
+        Route::delete('/{id}', [AdminController::class, 'deleteCityMedia'])->name('delete');
+    });
 });

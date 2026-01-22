@@ -7,7 +7,7 @@
 @section('content')
     <!-- Hero Section -->
     <section class="page-title-section py-5"
-        style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
+        style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ $cityMedia && $cityMedia->hero_image ? asset($cityMedia->hero_image) : asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
         <div class="container py-4">
             <div class="row align-items-center">
                 <div class="col-lg-8">
@@ -19,8 +19,9 @@
                         </ol>
                     </nav>
                     <h1 class="display-4 font-weight-bold text-white mb-3">Medical Centers in {{ $cityName }}</h1>
-                    <p class="lead text-white-50 mb-0">Authorized GAMCA / Wafid medical centers for GCC visa processing in
-                        {{ $cityName }}.</p>
+                    <p class="lead text-white-50 mb-0">
+                        {{ $cityMedia && $cityMedia->description ? $cityMedia->description : "Authorized GAMCA / Wafid medical centers for GCC visa processing in $cityName." }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -33,11 +34,16 @@
                 @foreach($centers as $center)
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="medical-card h-100 bg-white rounded-lg shadow-sm overflow-hidden border-0 transition-hover">
-                            <!-- Card Image (Thematic) -->
+                            <!-- Card Image (Dynamic or Placeholder) -->
                             <div class="medical-thumb position-relative">
-                                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800"
-                                    class="img-fluid" alt="{{ $center->medical_center }}"
-                                    style="height: 200px; width: 100%; object-fit: cover;">
+                                @if($center->image)
+                                    <img src="{{ asset($center->image) }}" class="img-fluid" alt="{{ $center->medical_center }}"
+                                        style="height: 200px; width: 100%; object-fit: cover;">
+                                @else
+                                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800"
+                                        class="img-fluid" alt="{{ $center->medical_center }}"
+                                        style="height: 200px; width: 100%; object-fit: cover;">
+                                @endif
                                 <div class="position-absolute p-3" style="top: 0; right: 0;">
                                     <span class="badge badge-theme px-3 py-2 shadow-sm font-weight-bold">WAFID APPROVED</span>
                                 </div>

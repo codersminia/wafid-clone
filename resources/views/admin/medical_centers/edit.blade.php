@@ -18,7 +18,8 @@
                         </div>
                     </div>
                     <!--begin::Form-->
-                    <form class="form" method="POST" action="{{ route('admin.medical_centers.update', $center->id) }}">
+                    <form class="form" method="POST" action="{{ route('admin.medical_centers.update', $center->id) }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
@@ -82,6 +83,21 @@
                                     <input type="number" step="0.1" min="0" max="5" name="rating" class="form-control"
                                         placeholder="0.0" value="{{ old('rating', $center->rating) }}" />
                                     @error('rating') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label>Center Image (Recommended: 800x600)</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*" />
+                                    @if($center->image)
+                                        <div class="mt-3">
+                                            <img src="{{ asset($center->image) }}" alt="Center Image" class="rounded shadow-sm"
+                                                style="max-height: 150px;">
+                                            <p class="text-muted small mt-1">Current Image</p>
+                                        </div>
+                                    @endif
+                                    <span class="form-text text-muted">Upload a new photo to replace the current one.</span>
+                                    @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>

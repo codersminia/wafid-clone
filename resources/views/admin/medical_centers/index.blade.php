@@ -22,10 +22,29 @@
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
+                            <a href="{{ route('admin.city_media.index') }}"
+                                class="btn btn-light-primary font-weight-bolder mr-2">
+                                <span class="svg-icon svg-icon-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
+                                        version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path
+                                                d="M2,13 L15,13 C15.5522847,13 16,13.4477153 16,14 L16,21 C16,21.5522847 15.5522847,22 15,22 L2,22 C1.44771525,22 1,21.5522847 1,21 L1,14 C1,13.4477153 1.44771525,13 2,13 Z M2,3 L15,3 C15.5522847,3 16,3.44771525 16,4 L16,11 C16,11.5522847 15.5522847,12 15,12 L2,12 C1.44771525,12 1,11.5522847 1,11 L1,4 C1,3.44771525 1.44771525,3 2,3 Z"
+                                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path
+                                                d="M11,17 L13,17 L13,19 L15,19 L15,21 L13,21 L13,23 L11,23 L11,21 L9,21 L9,19 L11,19 L11,17 Z"
+                                                fill="#000000" opacity="0.3" />
+                                            <path
+                                                d="M5,10 C6.65685425,10 8,8.65685425 8,7 C8,5.34314575 6.65685425,4 5,4 C3.34314575,4 2,5.34314575 2,7 C2,8.65685425 3.34314575,10 5,10 Z"
+                                                fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>City Hero Images</a>
+
                             <a href="{{ route('admin.medical_centers.create') }}"
                                 class="btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
-                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -36,7 +55,6 @@
                                                 fill="#000000" opacity="0.3" />
                                         </g>
                                     </svg>
-                                    <!--end::Svg Icon-->
                                 </span>New Medical Center</a>
                             <!--end::Button-->
                         </div>
@@ -83,11 +101,11 @@
                         type: 'GET',
                     },
                     columns: [
-                    {data: 0},
-                    {data: 1},
-                    {data: 2, responsivePriority: 1},
-                    {data: 3},
-                    {data: 4, responsivePriority: -1},
+                        { data: 0 },
+                        { data: 1 },
+                        { data: 2, responsivePriority: 1 },
+                        { data: 3 },
+                        { data: 4, responsivePriority: -1 },
                     ],
                     columnDefs: [
                         {
@@ -96,13 +114,13 @@
                             orderable: false,
                             render: function (data, type, full, meta) {
                                 return '\
-                                            <a href="/admin/medical-centers/' + data + '/edit" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
-                                                <i class="la la-edit"></i>\
-                                            </a>\
-                                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-center" data-id="' + data + '" title="Delete">\
-                                                <i class="la la-trash"></i>\
-                                            </a>\
-                                        ';
+                                                <a href="/admin/medical-centers/' + data + '/edit" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
+                                                    <i class="la la-edit"></i>\
+                                                </a>\
+                                                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-center" data-id="' + data + '" title="Delete">\
+                                                    <i class="la la-trash"></i>\
+                                                </a>\
+                                            ';
                             },
                         },
                     ],
@@ -158,6 +176,6 @@
                     text: "{{ session('success') }}",
                 });
             @endif
-            });
+                });
     </script>
 @endpush

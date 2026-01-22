@@ -897,7 +897,10 @@ class PublicController extends Controller
             abort(404);
         }
 
-        return view('public.medical_centers_city', compact('centers', 'cityName'));
+        // Fetch optional city-specific media (Hero image and description)
+        $cityMedia = \App\Models\CityMedia::where('city_name', $cityName)->first();
+
+        return view('public.medical_centers_city', compact('centers', 'cityName', 'cityMedia'));
     }
 
 }
