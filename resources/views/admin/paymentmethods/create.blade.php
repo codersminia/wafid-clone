@@ -37,7 +37,7 @@
                     <div class="col-lg-12">
                         <label class="d-block">QR Code Image:</label>
                         <!-- Metronic Image Input -->
-                        <div class="image-input image-input-empty image-input-outline" id="kt_image_qr" style="background-image: url({{ asset('assets/media/users/blank.png') }})">
+                        <div class="image-input image-input-empty image-input-outline" id="kt_image_qr" style="background-image: url({{ asset('assets/admin/media/bg/bg-3.jpg') }})">
                             <div class="image-input-wrapper"></div>
 
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="Change QR Code">

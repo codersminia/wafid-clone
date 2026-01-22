@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-head-custom table-checkable" id="kt_datatable">
+                        <table class="table table-striped table-head-custom" id="kt_datatable">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>ID</th>
@@ -47,16 +47,17 @@
     <script>
         $(document).ready(function () {
             var table = $('#kt_datatable').DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('admin.blogs.data') }}",
                 columns: [
                     { data: 0 },
-                    { data: 1 },
+                    { data: 1, responsivePriority: 1 },
                     { data: 2 },
                     { data: 3 },
                     { data: 4 },
-                    { data: 5, orderable: false, searchable: false }
+                    { data: 5, orderable: false, searchable: false, responsivePriority: -1 }
                 ],
                 order: [[0, "desc"]]
             });

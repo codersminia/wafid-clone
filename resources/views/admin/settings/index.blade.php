@@ -46,8 +46,8 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label">Site Logo</label>
                                     <div class="col-9">
-                                        <div class="image-input image-input-outline" id="kt_image_logo" style="background-image: url({{ asset('assets/media/users/blank.png') }})">
-                                            <div class="image-input-wrapper" style="background-image: url({{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/media/users/blank.png') }})"></div>
+                                        <div class="image-input image-input-outline" id="kt_image_logo">
+                                            <div class="image-input-wrapper" style="background-image: url({{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/admin/media/bg/bg-3.jpg') }})"></div>
 
                                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="Change Logo">
                                                 <i class="fa fa-pen icon-sm text-muted"></i>
@@ -63,14 +63,13 @@
                                                 <i class="ki ki-bold-close icon-xs text-muted"></i>
                                             </span>
                                         </div>
-                                        <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label">Favicon</label>
                                     <div class="col-9">
-                                        <div class="image-input image-input-outline" id="kt_image_favicon" style="background-image: url({{ asset('assets/media/users/blank.png') }})">
-                                            <div class="image-input-wrapper" style="background-image: url({{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/media/users/blank.png') }})"></div>
+                                        <div class="image-input image-input-outline" id="kt_image_favicon">
+                                            <div class="image-input-wrapper" style="background-image: url({{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/admin/media/bg/bg-3.jpg') }})"></div>
 
                                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="Change Favicon">
                                                 <i class="fa fa-pen icon-sm text-muted"></i>
@@ -85,8 +84,7 @@
                                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove Favicon">
                                                 <i class="ki ki-bold-close icon-xs text-muted"></i>
                                             </span>
-                                        </div>
-                                        <span class="form-text text-muted">Allowed file types: png, ico.</span>
+                                        </div>                                        
                                     </div>
                                 </div>
                                 <div class="form-group row">

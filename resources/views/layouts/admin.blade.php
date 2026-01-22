@@ -28,7 +28,7 @@
         <link href="{{ asset('assets/admin/css/themes/layout/aside/dark.css?v=7.0.6') }}" rel="stylesheet" type="text/css" />
         <!--end::Layout Themes-->
 
-        <link rel="shortcut icon" href="{{ asset('assets/admin/media/logos/favicon.png') }}" />
+        <link rel="shortcut icon" href="{{ asset('assets/public/images/favicon.png') }}" />
 
         @stack('styles')
     </head>
@@ -42,7 +42,7 @@
         <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
             <!--begin::Logo-->
             <a href="{{ route('admin.dashboard')}}">                        
-                <img alt="Logo" width="100px" src="{{ asset('assets/admin/media/logos/logo.png') }}" />
+                <img alt="Logo" width="130px" src="{{ asset('assets/public/images/gulf-medical-logo.png') }}" />
             </a>
             <!--end::Logo-->
 
@@ -86,7 +86,7 @@
                     <div class="brand flex-column-auto" id="kt_brand">
                         <!--begin::Logo-->
                         <a href="{{ route('admin.dashboard')}}" class="brand-logo">
-                            <img alt="Logo" width="130px" src="{{ asset('assets/admin/media/logos/logo.png') }}" />
+                            <img alt="Logo" width="150px" src="{{ asset('assets/public/images/gulf-medical-logo.png') }}" />
                         </a>
                         <!--end::Logo-->
 

@@ -45,10 +45,10 @@
                     <div class="col-lg-12">
                         <label class="d-block">QR Code Image:</label>
                         @php
-                            $bgImg = $method->qr_code ? asset('uploads/qr/' . $method->qr_code) : asset('assets/media/users/blank.png');
+                            $bgImg = $method->qr_code ? asset('uploads/qr/' . $method->qr_code) : asset('assets/admin/media/bg/bg-3.jpg');
                         @endphp
                         
-                        <div class="image-input image-input-outline" id="kt_image_qr" style="background-image: url({{ asset('assets/media/users/blank.png') }})">
+                        <div class="image-input image-input-outline" id="kt_image_qr" style="background-image: url({{ asset('assets/admin/media/bg/bg-3.jpg') }})">
                             <div class="image-input-wrapper" style="background-image: url({{ $bgImg }})"></div>
 
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="Change QR Code">

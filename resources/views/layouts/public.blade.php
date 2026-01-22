@@ -7,16 +7,13 @@
 
     {{-- Dynamic SEO Tags --}}
     <title>@yield('title', 'Gulf Medical Consultant - GCC Appointments & Services')</title>
-    <meta name="description"
-        content="@yield('meta_description', 'Secure online booking for Wafid (GAMCA) medical slips, NAVTTC Takamol skill tests, and Tasheer Saudi visa appointments. Pay via JazzCash/Easypaisa.')">
-    <meta name="keywords"
-        content="@yield('meta_keywords', 'gamca appointment pakistan, wafid online booking, navttc saudi test, tasheer appointment check, gamca medical fee, gamca lahore, gamca karachi')">
+    <meta name="description" content="@yield('meta_description', 'Secure online booking for Wafid (GAMCA) medical slips, NAVTTC Takamol skill tests, and Tasheer Saudi visa appointments. Pay via JazzCash/Easypaisa.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'gamca appointment pakistan, wafid online booking, navttc saudi test, tasheer appointment check, gamca medical fee, gamca lahore, gamca karachi')">
 
     {{-- Schema.org / Search Preview --}}
     <meta itemprop="name" content="@yield('title')">
     <meta itemprop="description" content="@yield('meta_description')">
-    <meta itemprop="image"
-        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
+    <meta itemprop="image" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
 
     {{-- Geo-Tagging (Crucial for Local SEO in Pakistan/India) --}}
     <meta name="geo.region" content="PK" />
@@ -29,10 +26,8 @@
     <meta property="og:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image"
-        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
-    <meta property="og:image:secure_url"
-        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
+    <meta property="og:image" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
+    <meta property="og:image:secure_url" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -40,11 +35,12 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('title', 'Gulf Medical Consultant')">
     <meta name="twitter:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
-    <meta name="twitter:image"
-        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg'))">
+    <meta name="twitter:image" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
 
     {{-- Canonical Link (Prevents duplicate content issues) --}}
     <link rel="canonical" href="{{ url()->current() }}" />
+
+    <link rel="shortcut icon" href="{{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/public/images/favicon.png') }}" />
 
     <!-- Bootstrap & CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -60,7 +56,7 @@
             "@type": "Organization",
             "name": "{{ $settings['site_name'] ?? 'Gulf Medical Consultant' }}",
             "url": "https://gamcawafidonline.com",
-            "logo": "{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg') }}",
+            "logo": "{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}",
             "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+923000000000",
@@ -98,8 +94,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 1050;">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/white-logo.svg') }}"
-                    alt="{{ $settings['site_name'] ?? 'Logo' }}" height="auto" width="150" class="mr-2">
+                <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
+                    alt="{{ $settings['site_name'] ?? 'Logo' }}" height="auto" width="200" class="mr-2">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
