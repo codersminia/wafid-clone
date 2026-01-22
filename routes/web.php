@@ -69,11 +69,12 @@ Route::get('soft-skill-confirmation', [PublicController::class, 'softSkillConfir
 Route::post('soft-skill-payment-upload', [PublicController::class, 'softSkillPaymentUpload'])->name('softskill.payment.upload');
 Route::get('soft-skill-thank-you', [PublicController::class, 'softSkillThankYou'])->name('softskill.thankyou');
 
-
-
 // Blogs Public Routes
 Route::get('/blogs', [PublicController::class, 'blogs'])->name('public.blogs');
 Route::get('/blogs/{slug}', [PublicController::class, 'blogDetails'])->name('public.blogs.details');
+
+// City-wise Medical Centers (SEO)
+Route::get('/medical-centers-in-{city}', [PublicController::class, 'medicalCentersByCity'])->name('public.medical.city');
 
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {

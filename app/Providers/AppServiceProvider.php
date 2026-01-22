@@ -12,6 +12,7 @@ use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\ContactInquiry;
 use App\Models\Setting;
+use App\Models\MedicalCenter;
 use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -53,6 +54,12 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $settings = Setting::pluck('value', 'key')->toArray();
             $view->with('settings', $settings);
+        });
+
+        // Share unique cities for public dropdown
+        View::composer('layouts.public', function ($view) {
+            $all_cities = MedicalCenter::distinct()->pluck('city')->sort();
+            $view->with('all_cities', $all_cities);
         });
     }
 }

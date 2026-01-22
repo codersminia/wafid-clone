@@ -884,4 +884,20 @@ class PublicController extends Controller
         return view('public.blogs.details', compact('blog', 'recentBlogs'));
     }
 
+    public function medicalCentersByCity($city)
+    {
+        // Replace dashes with spaces and title case for DB search
+        $cityName = ucwords(str_replace('-', ' ', $city));
+
+        $centers = MedicalCenter::where('city', 'like', $cityName)
+            ->orderBy('medical_center', 'asc')
+            ->get();
+
+        if ($centers->isEmpty()) {
+            abort(404);
+        }
+
+        return view('public.medical_centers_city', compact('centers', 'cityName'));
+    }
+
 }
