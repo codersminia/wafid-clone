@@ -1328,10 +1328,11 @@ class AdminController extends Controller
     {
         $columns = [
             0 => 'id',
-            1 => 'title',
-            2 => 'category_id',
-            3 => 'status',
-            4 => 'created_at',
+            1 => 'id', // Image column
+            2 => 'title',
+            3 => 'category_id',
+            4 => 'status',
+            5 => 'created_at',
         ];
 
         $query = Blog::with('category');
@@ -1362,6 +1363,7 @@ class AdminController extends Controller
         foreach ($blogs as $b) {
             $data[] = [
                 $b->id,
+                $b->image ? asset($b->image) : null,
                 $b->title,
                 $b->category ? $b->category->name : 'N/A',
                 '<span class="label label-lg font-weight-bold label-light-' . ($b->status == 'published' ? 'success' : 'warning') . ' label-inline">' . ucfirst($b->status) . '</span>',

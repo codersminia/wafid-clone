@@ -14,7 +14,7 @@
     <!-- Global Styles -->
     <link href="{{ asset('assets/admin/plugins/global/plugins.bundle.css?v=7.0.6') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/admin/css/style.bundle.css?v=7.0.6') }}" rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" href="{{ asset('assets/admin/media/logos/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ asset('assets/public/images/favicon.png') }}"/>
 </head>
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
@@ -29,7 +29,7 @@
                 <div class="d-flex flex-row-fluid flex-column justify-content-between">
                     <!-- Logo -->
                     <a href="{{ route('admin.dashboard') }}" class="flex-column-auto mt-5 pb-lg-0 pb-10">
-                        <img src="{{ asset('assets/admin/media/logos/logo.png') }}" width="150px" class="max-h-70px" alt="Logo"/>
+                        <img src="{{ asset('assets/public/images/gulf-medical-logo.png') }}" width="200px" class="max-h-70px" alt="Logo"/>
                     </a>
 
                     <!-- Welcome Text -->

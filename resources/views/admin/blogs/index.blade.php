@@ -25,6 +25,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>ID</th>
+                                    <th>Image</th>
                                     <th>Title</th>
                                     <th>Category</th>
                                     <th>Status</th>
@@ -53,11 +54,28 @@
                 ajax: "{{ route('admin.blogs.data') }}",
                 columns: [
                     { data: 0 },
-                    { data: 1, responsivePriority: 1 },
-                    { data: 2 },
+                    { data: 1 },
+                    { data: 2, responsivePriority: 1 },
                     { data: 3 },
                     { data: 4 },
-                    { data: 5, orderable: false, searchable: false, responsivePriority: -1 }
+                    { data: 5 },
+                    { data: 6, orderable: false, searchable: false, responsivePriority: -1 }
+                ],
+                columnDefs: [
+                    {
+                        targets: 1,
+                        render: function (data, type, full, meta) {
+                            if (data) {
+                                return '<div class="symbol symbol-50 symbol-light mr-4">\
+                                                <div class="symbol-label" style="background-image: url(\'' + data + '\'); background-size: cover; background-position: center;"></div>\
+                                            </div>';
+                            } else {
+                                return '<div class="symbol symbol-50 symbol-light mr-4">\
+                                                <div class="symbol-label">No Img</div>\
+                                            </div>';
+                            }
+                        },
+                    },
                 ],
                 order: [[0, "desc"]]
             });

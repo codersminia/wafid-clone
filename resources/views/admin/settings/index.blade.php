@@ -121,12 +121,6 @@
                                         <textarea class="form-control" name="site_address" rows="3">{{ $settings['site_address'] ?? '' }}</textarea>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label">Google Maps Embed URL (Main)</label>
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" name="site_map" value="{{ $settings['site_map'] ?? '' }}" placeholder="https://www.google.com/maps/embed?..." />
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- SOCIAL TAB -->
