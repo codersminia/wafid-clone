@@ -65,6 +65,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>ID</th>
+                                    <th>Image</th>
                                     <th>City</th>
                                     <th>Center Name</th>
                                     <th>Phone</th>
@@ -103,24 +104,41 @@
                     columns: [
                         { data: 0 },
                         { data: 1 },
-                        { data: 2, responsivePriority: 1 },
-                        { data: 3 },
-                        { data: 4, responsivePriority: -1 },
+                        { data: 2 },
+                        { data: 3, responsivePriority: 1 },
+                        { data: 4 },
+                        { data: 5, responsivePriority: -1 },
                     ],
                     columnDefs: [
+                        {
+                            targets: 1,
+                            title: 'Image',
+                            orderable: false,
+                            render: function (data, type, full, meta) {
+                                if (data) {
+                                    return '<div class="symbol symbol-50 symbol-light mr-4">\
+                                                        <div class="symbol-label" style="background-image: url(\'' + data + '\'); background-size: cover; background-position: center;"></div>\
+                                                    </div>';
+                                } else {
+                                    return '<div class="symbol symbol-50 symbol-light mr-4">\
+                                                        <div class="symbol-label">No Img</div>\
+                                                    </div>';
+                                }
+                            },
+                        },
                         {
                             targets: -1,
                             title: 'Actions',
                             orderable: false,
                             render: function (data, type, full, meta) {
                                 return '\
-                                                <a href="/admin/medical-centers/' + data + '/edit" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
-                                                    <i class="la la-edit"></i>\
-                                                </a>\
-                                                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-center" data-id="' + data + '" title="Delete">\
-                                                    <i class="la la-trash"></i>\
-                                                </a>\
-                                            ';
+                                                        <a href="/admin/medical-centers/' + data + '/edit" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
+                                                            <i class="la la-edit"></i>\
+                                                        </a>\
+                                                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-center" data-id="' + data + '" title="Delete">\
+                                                            <i class="la la-trash"></i>\
+                                                        </a>\
+                                                    ';
                             },
                         },
                     ],
@@ -176,6 +194,6 @@
                     text: "{{ session('success') }}",
                 });
             @endif
-                });
+                        });
     </script>
 @endpush

@@ -1481,10 +1481,11 @@ class AdminController extends Controller
     {
         $columns = [
             0 => 'id',
-            1 => 'city',
-            2 => 'medical_center',
-            3 => 'phone',
-            4 => 'created_at'
+            1 => 'id', // Image column
+            2 => 'city',
+            3 => 'medical_center',
+            4 => 'phone',
+            5 => 'id'   // Actions column
         ];
 
         $query = MedicalCenter::query();
@@ -1518,6 +1519,7 @@ class AdminController extends Controller
         foreach ($centers as $c) {
             $data[] = [
                 $c->id,
+                $c->image ? asset($c->image) : null,
                 $c->city,
                 $c->medical_center,
                 $c->phone,
@@ -1660,8 +1662,13 @@ class AdminController extends Controller
 
     public function createCityMedia()
     {
-        // Fetch unique cities from medical centers to help the user
-        $cities = MedicalCenter::distinct()->pluck('city')->sort();
+        // Fetch unique cities from medical centers that DON'T have media yet
+        $existingCities = \App\Models\CityMedia::pluck('city_name')->toArray();
+        $cities = MedicalCenter::whereNotIn('city', $existingCities)
+            ->distinct()
+            ->pluck('city')
+            ->sort();
+
         return view('admin.city_media.create', compact('cities'));
     }
 

@@ -316,7 +316,7 @@
                                 </li>
 
                                 <!-- Medical Centers -->
-                                <li class="menu-item {{ request()->routeIs('admin.medical_centers*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <li class="menu-item {{ (request()->routeIs('admin.medical_centers*') || request()->routeIs('admin.city_media*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                     <a href="{{ route('admin.medical_centers.index') }}" class="menu-link">
                                         <span class="svg-icon menu-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
