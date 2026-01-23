@@ -114,24 +114,24 @@
                             <a class="dropdown-item" href="{{ route('softskill.form')}}">Soft Skill Certificate</a>
                         </div>
                     </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="centersDropdown" role="button"
-                    data-toggle="dropdown">Medical Centers</a>
-                <div class="dropdown-menu" aria-labelledby="centersDropdown">
-                    @foreach($all_cities as $city)
-                        <a class="dropdown-item"
-                            href="{{ route('public.medical.city', ['city' => strtolower(str_replace(' ', '-', $city))]) }}">
-                            {{ $city }} Medical Centers
-                        </a>
-                    @endforeach
-                </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('public.blogs') }}">Blogs</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
-            </ul>
-        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="centersDropdown" role="button"
+                            data-toggle="dropdown">Medical Centers</a>
+                        <div class="dropdown-menu" aria-labelledby="centersDropdown">
+                            @foreach($all_cities as $city)
+                                <a class="dropdown-item"
+                                    href="{{ route('public.medical.city', ['city' => strtolower(str_replace(' ', '-', $city))]) }}">
+                                    {{ $city }} Medical Centers
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('public.blogs') }}">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -150,22 +150,47 @@
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('home') }}" class="text-white-50">Home</a></li>
+                        <li><a href="{{ route('public.blogs') }}" class="text-white-50">Blogs</a></li>
                         <li><a href="{{ route('faq') }}" class="text-white-50">FAQ</a></li>
                         <li><a href="{{ route('contact') }}" class="text-white-50">Contact</a></li>
+                        <li><a href="{{ route('about') }}" class="text-white-50">About</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-3">
                     <h5>Contact Info</h5>
-                    <p class="text-white-50">
-                        <i class="fas fa-phone"></i> {{ $settings['site_phone'] ?? '+966 XX XXX XXXX' }}<br>
-                        <i class="fas fa-envelope"></i> {{ $settings['site_email'] ?? 'info@wafid.com' }}
-                    </p>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($settings['site_address'] ?? '') }}" target="_blank">
+                            {{ $settings['site_address'] ?? 'Address not set' }}
+                        </a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:{{ preg_replace('/[^0-9+]/', '', $settings['site_phone'] ?? '') }}">
+                            {{ $settings['site_phone'] ?? '+966 XX XXX XXXX' }}
+                        </a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:{{ $settings['site_email'] ?? 'info@wafid.com' }}">
+                            {{ $settings['site_email'] ?? 'info@wafid.com' }}
+                        </a>
+                    </div>
+                    <div class="footer-cta-btns">
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '') }}" target="_blank" class="btn-footer-cta btn-whatsapp-footer">
+                            <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
+                        </a>
+                        <a href="{{ route('medicalExamination') }}" class="btn-footer-cta btn-book-footer">
+                            <i class="fas fa-calendar-check mr-2"></i> Book Appointment
+                        </a>
+                    </div>
                 </div>
             </div>
             <hr class="bg-white-50">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-white-50 mb-0">&copy; 2025 Wafid.com All rights reserved.</p>
+                    <p class="text-white-50 mb-0">&copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All
+                        rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-right">
                     @if(!empty($settings['social_facebook'])) <a href="{{ $settings['social_facebook'] }}"
@@ -184,7 +209,8 @@
                 <div class="col-12">
                     <div class="footer-disclaimer-box">
                         <p>
-                            <strong>Disclaimer:</strong> GamcaWafidOnline.com is a private consultancy service. We are
+                            <strong>Disclaimer:</strong> {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }} is a private
+                            consultancy service. We are
                             not the official Wafid, NAVTTC, or Tasheer government website. We charge a service fee to
                             assist users in booking appointments and processing paperwork. You can book directly on the
                             official websites if you possess the technical knowledge and payment methods.
