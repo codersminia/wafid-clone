@@ -87,7 +87,7 @@
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <label>Center Image (Recommended: 800x600)</label>
-                                    <input type="file" name="image" class="form-control" accept="image/*" />
+                                    <input type="file" name="image" class="dropify" data-height="200" accept="image/*" />
                                     <span class="form-text text-muted">Upload a photo of the clinic building or
                                         interior.</span>
                                     @error('image') <span class="text-danger">{{ $message }}</span> @enderror
@@ -110,3 +110,16 @@
     </div>
 
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" />
+@endpush
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.dropify').dropify();
+        });
+    </script>
+@endpush

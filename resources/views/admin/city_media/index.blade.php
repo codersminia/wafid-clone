@@ -26,9 +26,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
+                        <table class="table table-striped table-head-custom" id="kt_datatable">
                             <thead>
-                                <tr>
+                                <tr class="thead-dark">
                                     <th>ID</th>
                                     <th>City Name</th>
                                     <th>Hero Image</th>

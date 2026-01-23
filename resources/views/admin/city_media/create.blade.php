@@ -21,7 +21,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <label>City Name <span class="text-danger">*</span></label>
                                     <select name="city_name" class="form-control" required>
                                         <option value="">Select a City</option>
@@ -32,9 +32,12 @@
                                     <span class="form-text text-muted">Select city to set its header hero image</span>
                                     @error('city_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-lg-6">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
                                     <label>Hero Image <span class="text-danger">*</span></label>
-                                    <input type="file" name="hero_image" class="form-control" accept="image/*" required />
+                                    <input type="file" name="hero_image" class="dropify" data-height="200" accept="image/*"
+                                        required />
                                     <span class="form-text text-muted">Recommended: 1920x600 for high resolution</span>
                                     @error('hero_image') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
@@ -57,3 +60,16 @@
         </div>
     </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" />
+@endpush
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.dropify').dropify();
+        });
+    </script>
+@endpush

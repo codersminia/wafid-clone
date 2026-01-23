@@ -88,14 +88,8 @@
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <label>Center Image (Recommended: 800x600)</label>
-                                    <input type="file" name="image" class="form-control" accept="image/*" />
-                                    @if($center->image)
-                                        <div class="mt-3">
-                                            <img src="{{ asset($center->image) }}" alt="Center Image" class="rounded shadow-sm"
-                                                style="max-height: 150px;">
-                                            <p class="text-muted small mt-1">Current Image</p>
-                                        </div>
-                                    @endif
+                                    <input type="file" name="image" class="dropify" data-height="200" accept="image/*"
+                                        @if($center->image) data-default-file="{{ asset($center->image) }}" @endif />
                                     <span class="form-text text-muted">Upload a new photo to replace the current one.</span>
                                     @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
@@ -118,3 +112,16 @@
     </div>
 
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" />
+@endpush
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.dropify').dropify();
+        });
+    </script>
+@endpush
