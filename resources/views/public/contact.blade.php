@@ -38,7 +38,7 @@
 @section('content')
 
 <!-- Page Header -->
-<section class="page-header bg-dark text-white py-5">
+<section class="inner-page-hero" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
     <div class="container">
         <h1 class="font-weight-bold">Contact Our Experts</h1>
         <p class="lead">Having trouble booking? We are here to help you 24/7.</p>

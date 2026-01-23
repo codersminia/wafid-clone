@@ -1344,3 +1344,37 @@ html {
         margin-right: auto;
     }
 }
+
+/* ============================================
+   NEW: INNER PAGE HERO SECTION
+   ============================================ */
+.inner-page-hero {
+    position: relative;
+    padding: 80px 0;
+    color: white;
+    text-align: left;
+    overflow: hidden;
+}
+
+.inner-page-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.inner-page-hero .lead {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .inner-page-hero {
+        padding: 50px 0;
+        text-align: center;
+    }
+    
+    .inner-page-hero h1 {
+        font-size: 2.2rem;
+    }
+}

@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">                    
-                    <h1 class="hero-title">Gulf Medical Consultant</h1>
+                    <h1 class="hero-title">Gulf Medical Consultants</h1>
                     <p class="hero-subtitle mb-5">
                         We simplify the complex booking process for GCC countries. 
                         <strong>Wafid Medical</strong>, <strong>NAVTTC Tests</strong>, and <strong>Tasheer Appointments</strong> handled by experts.
