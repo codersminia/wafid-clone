@@ -126,7 +126,6 @@
                     @endforeach
                 </div>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('guidelines') }}">Guidelines</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('public.blogs') }}">Blogs</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
@@ -151,7 +150,6 @@
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('home') }}" class="text-white-50">Home</a></li>
-                        <li><a href="{{ route('guidelines') }}" class="text-white-50">Guidelines</a></li>
                         <li><a href="{{ route('faq') }}" class="text-white-50">FAQ</a></li>
                         <li><a href="{{ route('contact') }}" class="text-white-50">Contact</a></li>
                     </ul>

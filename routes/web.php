@@ -17,7 +17,6 @@ use App\Http\Controllers\SettingController;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
-Route::get('/guidelines', [PublicController::class, 'guidelines'])->name('guidelines');
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/about-us', [PublicController::class, 'about'])->name('about');
 

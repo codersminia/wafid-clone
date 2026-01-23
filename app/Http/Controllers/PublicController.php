@@ -38,11 +38,6 @@ class PublicController extends Controller
         return view('public.home');
     }
 
-    public function guidelines()
-    {
-        return view('public.guidelines');
-    }
-
     public function faq()
     {
         // Fetch active FAQs
