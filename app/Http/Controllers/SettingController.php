@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\Testimonial;
+use App\Models\PrivateFeedback;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
@@ -11,7 +13,10 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::pluck('value', 'key')->all();
-        return view('admin.settings.index', compact('settings'));
+        $testimonials = Testimonial::orderBy('created_at', 'desc')->get();
+        $feedbacks = PrivateFeedback::orderBy('created_at', 'desc')->get();
+
+        return view('admin.settings.index', compact('settings', 'testimonials', 'feedbacks'));
     }
 
     public function update(Request $request)
@@ -50,6 +55,73 @@ class SettingController extends Controller
         // Redirect back with success message and input (for active_tab)
         return redirect()->back()
             ->with('success', 'Settings updated successfully.')
-            ->withInput(); 
+            ->withInput();
+    }
+
+    public function storeTestimonial(Request $request)
+    {
+        $request->validate([
+            'client_name' => 'required|string|max:255',
+            'rating' => 'required|integer|min:1|max:5',
+            'content' => 'required|string',
+            'source' => 'required|in:manual,form,google',
+        ]);
+
+        $data = $request->all();
+
+        // Handle Featured/Homepage checkboxes as boolean
+        $data['is_featured'] = $request->has('is_featured');
+        $data['display_on_homepage'] = $request->has('display_on_homepage');
+
+        if ($request->hasFile('client_image')) {
+            $image = $request->file('client_image');
+            $name = 'testimonial_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/testimonials'), $name);
+            $data['client_image'] = 'uploads/testimonials/' . $name;
+        }
+
+        if ($request->id) {
+            $testimonial = Testimonial::findOrFail($request->id);
+            $testimonial->update($data);
+            $msg = 'Testimonial updated successfully.';
+        } else {
+            Testimonial::create($data);
+            $msg = 'Testimonial added successfully.';
+        }
+
+        return redirect()->back()
+            ->with('success', $msg)
+            ->with('active_tab', '#kt_tab_testimonials');
+    }
+
+    public function deleteTestimonial($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Testimonial deleted successfully'
+        ]);
+    }
+
+    public function markFeedbackRead($id)
+    {
+        $feedback = PrivateFeedback::findOrFail($id);
+        $feedback->is_read = 1;
+        $feedback->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function deleteFeedback($id)
+    {
+        $feedback = PrivateFeedback::findOrFail($id);
+        $feedback->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Feedback deleted successfully'
+        ]);
     }
 }

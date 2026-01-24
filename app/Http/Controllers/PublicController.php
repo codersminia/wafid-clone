@@ -27,6 +27,8 @@ use App\Mail\ContactInquiryMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Testimonial;
+use App\Models\PrivateFeedback;
 
 class PublicController extends Controller
 {
@@ -35,7 +37,15 @@ class PublicController extends Controller
     }
     public function index()
     {
-        return view('public.home');
+        // Fetch 3 testimonials for the homepage: Prioritize Google, then Featured, then Latest approved
+        $testimonials = Testimonial::approved()
+            ->orderByRaw("FIELD(source, 'google') DESC")
+            ->orderBy('is_featured', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('public.home', compact('testimonials'));
     }
 
     public function faq()
@@ -90,7 +100,29 @@ class PublicController extends Controller
         ]);
     }
 
-    public function about() {
+    public function storeFeedback(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'rating' => 'required|integer|min:1|max:5',
+            'message' => 'required|string|min:5',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
+        }
+
+        PrivateFeedback::create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Thank you for your feedback! It helps us improve our service.'
+        ]);
+    }
+
+    public function about()
+    {
         return view('public.about');
     }
 
@@ -302,7 +334,7 @@ class PublicController extends Controller
         CheckResult::create($validated);
 
         return response()->json([
-            'status'   => 'success',
+            'status' => 'success',
             'redirect' => route('ViewMedicalReport'),
         ]);
     }
@@ -432,15 +464,15 @@ class PublicController extends Controller
         // DYNAMIC FEE WITH CITY LOGIC
         // We fetch the values from DB first to ensure they are dynamic
         $gujranwalaFee = $this->getFee('special_gujranwala', 7000);
-        $lahoreFee     = $this->getFee('special_lahore', 12000);
-        $defaultFee    = $this->getFee('special_default', 4500);
+        $lahoreFee = $this->getFee('special_lahore', 12000);
+        $defaultFee = $this->getFee('special_default', 4500);
 
         $rawFee = match (strtolower($appointment->city)) {
             'gujranwala' => $gujranwalaFee,
-            'lahore'     => $lahoreFee,
-            default      => $defaultFee,
+            'lahore' => $lahoreFee,
+            default => $defaultFee,
         };
-        
+
         $fee = number_format($rawFee); // Optional formatting if view expects "7,000"
 
         // Pass $paymentMethods to the view
@@ -505,7 +537,8 @@ class PublicController extends Controller
         return view('public.specialappointments.thank-you', compact('appointment'));
     }
 
-    public function medicalCenters(){
+    public function medicalCenters()
+    {
         return view('public.ViewMedicalCenters');
     }
 
@@ -530,7 +563,7 @@ class PublicController extends Controller
 
         // Whitelist columns to prevent SQL injection
         $allowedColumns = ['medical_center', 'country', 'city', 'address_line_1', 'address_line_2', 'phone', 'email', 'website', 'rating'];
-        
+
         if (in_array($sortColumn, $allowedColumns)) {
             $query->orderBy($sortColumn, $sortOrder);
         } else {
@@ -546,7 +579,8 @@ class PublicController extends Controller
         ]);
     }
 
-    public function navtechform(){
+    public function navtechform()
+    {
         return view('public.navtechappointments.navtech-appointment-form');
     }
 
@@ -554,12 +588,12 @@ class PublicController extends Controller
     {
         // 1. Validation
         $validator = Validator::make($request->all(), [
-            'country'         => 'required|string',
+            'country' => 'required|string',
             'whatsapp_number' => 'required|string',
-            'occupation'      => 'required|string',
-            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
-            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120',
-            'user_pic'        => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'occupation' => 'required|string',
+            'passport_pic' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'id_card_front' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'user_pic' => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ], [
             'passport_pic.max' => 'Your passport photo is too large. Please use a smaller image (max 5MB).',
             'passport_pic.required' => 'Please upload your Passport scan.',
@@ -589,7 +623,7 @@ class PublicController extends Controller
                     $image->move(public_path('uploads/navtech'), $randomName);
                     $data[$field] = $randomName;
                 }
-            }            
+            }
 
             $appointment = NavtechAppointment::create($data);
             session(['navtech_appointment_id' => $appointment->id]);
@@ -604,7 +638,8 @@ class PublicController extends Controller
         }
     }
 
-    public function confirmNavtechAppointment() {
+    public function confirmNavtechAppointment()
+    {
         $id = session('navtech_appointment_id');
         if (!$id || !$appointment = NavtechAppointment::find($id)) {
             return redirect()->route('navtechform');
@@ -619,7 +654,8 @@ class PublicController extends Controller
         return view('public.navtechappointments.navtech-confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
 
-    public function uploadNavtechPaymentProof(Request $request) {
+    public function uploadNavtechPaymentProof(Request $request)
+    {
         $request->validate([
             'navtech_appointment_id' => 'required|exists:navtech_appointments,id',
             'whatsapp_number' => 'required',
@@ -648,7 +684,8 @@ class PublicController extends Controller
     }
 
     // 4. Final Thank You
-    public function navtechThankYou() {
+    public function navtechThankYou()
+    {
         $id = session('navtech_paid_id');
         if (!$id || !$appointment = NavtechAppointment::find($id)) {
             return redirect()->route('navtechform');
@@ -657,16 +694,18 @@ class PublicController extends Controller
         return view('public.navtechappointments.thank-you', compact('appointment'));
     }
 
-    public function tasheerForm() {
+    public function tasheerForm()
+    {
         return view('public.tasheerappointments.form');
     }
 
-    public function tasheerStore(Request $request) {
+    public function tasheerStore(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'embassy'         => 'required|string',
-            'etimad_center'   => 'required|string', // Added validation
+            'embassy' => 'required|string',
+            'etimad_center' => 'required|string', // Added validation
             'whatsapp_number' => 'required|string',
-            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'passport_pic' => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ], [
             'passport_pic.required' => 'Please upload a clear photo of the passport front page.'
         ]);
@@ -696,7 +735,8 @@ class PublicController extends Controller
         }
     }
 
-    public function confirmTasheerAppointment() {
+    public function confirmTasheerAppointment()
+    {
         $id = session('tasheer_appointment_id');
         if (!$id || !$appointment = TasheerAppointment::find($id)) {
             return redirect()->route('tasheer.form');
@@ -704,7 +744,7 @@ class PublicController extends Controller
 
         // NEW: Fetch active payment methods
         $paymentMethods = PaymentMethod::where('status', 1)->get();
-        
+
         // DYNAMIC FEE
         $fee = $this->getFee('tasheer_fee', 500);
 
@@ -712,7 +752,8 @@ class PublicController extends Controller
         return view('public.tasheerappointments.confirmation', compact('appointment', 'fee', 'paymentMethods'));
     }
 
-    public function uploadTasheerPaymentProof(Request $request) {
+    public function uploadTasheerPaymentProof(Request $request)
+    {
         $request->validate([
             'tasheer_appointment_id' => 'required|exists:tasheer_appointments,id',
             'whatsapp_number' => 'required',
@@ -736,22 +777,26 @@ class PublicController extends Controller
         return response()->json(['status' => 'success', 'redirect' => route('tasheer.thankyou')]);
     }
 
-    public function tasheerThankYou() {
+    public function tasheerThankYou()
+    {
         $id = session('tasheer_paid_id');
-        if (!$id || !$appointment = TasheerAppointment::find($id)) return redirect()->route('tasheer.form');
+        if (!$id || !$appointment = TasheerAppointment::find($id))
+            return redirect()->route('tasheer.form');
         session()->forget('tasheer_paid_id');
         return view('public.tasheerappointments.thank-you', compact('appointment'));
     }
 
-    public function softSkillForm() {
+    public function softSkillForm()
+    {
         return view('public.skillcertificates.form');
     }
 
-    public function softSkillStore(Request $request) {
+    public function softSkillStore(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'whatsapp_number' => 'required|string',
-            'id_card_front'   => 'required|image|mimes:jpeg,png,jpg|max:5120', 
-            'passport_pic'    => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'id_card_front' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'passport_pic' => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         if ($validator->fails()) {
@@ -760,11 +805,11 @@ class PublicController extends Controller
 
         try {
             $data = $request->only(['whatsapp_number']);
-            
+
             // Only processing ID Front and Passport now
             $fields = ['id_card_front', 'passport_pic'];
 
-            foreach($fields as $field) {
+            foreach ($fields as $field) {
                 if ($request->hasFile($field)) {
                     $image = $request->file($field);
                     $name = Str::random(20) . '_' . $field . '.' . $image->getClientOriginalExtension();
@@ -782,7 +827,8 @@ class PublicController extends Controller
         }
     }
 
-    public function softSkillConfirm() {
+    public function softSkillConfirm()
+    {
         $id = session('softskill_id');
         if (!$id || !$record = SoftSkillCertificate::find($id)) {
             return redirect()->route('softskill.form');
@@ -792,13 +838,14 @@ class PublicController extends Controller
         $paymentMethods = PaymentMethod::where('status', 1)->get();
 
         // DYNAMIC FEE
-        $fee = $this->getFee('softskill_fee', 1500); 
+        $fee = $this->getFee('softskill_fee', 1500);
 
         // Pass $paymentMethods to the view
         return view('public.skillcertificates.confirmation', compact('record', 'fee', 'paymentMethods'));
     }
 
-    public function softSkillPaymentUpload(Request $request) {
+    public function softSkillPaymentUpload(Request $request)
+    {
         $request->validate([
             'softskill_id'    => 'required|exists:soft_skill_certificates,id',
             'whatsapp_number' => 'required',

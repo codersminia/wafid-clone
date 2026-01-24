@@ -96,8 +96,14 @@
             <div class="col-lg-8">
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-4">
-                        <h3 class="card-title font-weight-bold mb-4">Send a Message</h3>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="card-title font-weight-bold m-0" id="formTitle">Send a Message</h3>
+                            <button type="button" id="toggleFormBtn" class="btn btn-sm btn-outline-primary font-weight-bold">
+                                <i class="fas fa-star mr-1"></i> Give Feedback
+                            </button>
+                        </div>
                         
+                        <!-- Contact Form -->
                         <form id="contactForm"> 
                             @csrf
                             <div class="row">
@@ -135,6 +141,40 @@
                             <button type="submit" id="submitBtn" class="btn btn-dark px-5 mt-2">
                                 <span id="btnText">Submit Query</span>
                                 <span id="btnLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </form>
+
+                        <!-- Feedback Form (Hidden by default) -->
+                        <form id="feedbackForm" class="d-none">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Your Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="font-weight-bold">Your Rating <span class="text-danger">*</span></label>
+                                <div class="rating-input d-flex text-warning fa-2x">
+                                    <i class="fas fa-star rating-star" data-rating="1"></i>
+                                    <i class="fas fa-star rating-star" data-rating="2"></i>
+                                    <i class="fas fa-star rating-star" data-rating="3"></i>
+                                    <i class="fas fa-star rating-star" data-rating="4"></i>
+                                    <i class="fas fa-star rating-star" data-rating="5"></i>
+                                    <input type="hidden" name="rating" id="ratingValue" value="5">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="font-weight-bold">Share Your Experience <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="message" rows="5" placeholder="How was your experience with us?" required></textarea>
+                            </div>
+                            <button type="submit" id="fbSubmitBtn" class="btn btn-dark px-5 mt-2">
+                                <span id="fbBtnText">Submit Feedback</span>
+                                <span id="fbBtnLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                             </button>
                         </form>
                     </div>
@@ -267,17 +307,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnLoader = document.getElementById('btnLoader');
 
     // Function to wipe away all red borders and error messages
-    function clearErrors() {
-        form.classList.remove('was-validated'); 
-        form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-        form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+    function clearFormErrors(f) {
+        f.classList.remove('was-validated'); 
+        f.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        f.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
     }
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         // 1. Clear old errors
-        clearErrors();
+        clearFormErrors(form);
 
         // UI Loading state
         submitBtn.disabled = true;
@@ -319,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 form.reset();      
-                clearErrors();    
+                clearFormErrors(form);    
             }
         } catch (err) {
             Swal.fire({
@@ -332,6 +372,91 @@ document.addEventListener('DOMContentLoaded', function () {
             submitBtn.disabled = false;
             btnText.innerText = "Submit Query";
             btnLoader.classList.add('d-none');
+        }
+    });
+
+    // --- FEEDBACK LOGIC ---
+    const feedbackForm = document.getElementById('feedbackForm');
+    const toggleBtn = document.getElementById('toggleFormBtn');
+    const formTitle = document.getElementById('formTitle');
+    const stars = document.querySelectorAll('.rating-star');
+    const ratingInput = document.getElementById('ratingValue');
+
+    // Toggle between forms
+    toggleBtn.addEventListener('click', function() {
+        if (feedbackForm.classList.contains('d-none')) {
+            // Switch to Feedback
+            form.classList.add('d-none');
+            feedbackForm.classList.remove('d-none');
+            formTitle.innerText = "What Our Clients Say";
+            toggleBtn.innerHTML = '<i class="fas fa-envelope mr-1"></i> Send Message';
+            toggleBtn.classList.replace('btn-outline-primary', 'btn-outline-dark');
+        } else {
+            // Switch to Contact
+            feedbackForm.classList.add('d-none');
+            form.classList.remove('d-none');
+            formTitle.innerText = "Send a Message";
+            toggleBtn.innerHTML = '<i class="fas fa-star mr-1"></i> Give Feedback';
+            toggleBtn.classList.replace('btn-outline-dark', 'btn-outline-primary');
+        }
+    });
+
+    // Star Rating Logic
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            ratingInput.value = rating;
+            stars.forEach(s => {
+                s.classList.toggle('fas', s.getAttribute('data-rating') <= rating);
+                s.classList.toggle('far', s.getAttribute('data-rating') > rating);
+            });
+        });
+    });
+
+    // Feedback Submit
+    feedbackForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const fbSubmitBtn = document.getElementById('fbSubmitBtn');
+        const fbBtnText = document.getElementById('fbBtnText');
+        const fbBtnLoader = document.getElementById('fbBtnLoader');
+
+        fbSubmitBtn.disabled = true;
+        fbBtnText.innerText = "Submitting...";
+        fbBtnLoader.classList.remove('d-none');
+
+        const formData = new FormData(feedbackForm);
+
+        try {
+            const response = await fetch("{{ route('feedback.store') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Accept": "application/json"
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.status === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thank You!',
+                    text: data.message,
+                    confirmButtonColor: '#007bff'
+                });
+                feedbackForm.reset();
+                clearFormErrors(feedbackForm);
+                // Reset stars to 5
+                stars.forEach(s => s.classList.replace('far', 'fas'));
+                ratingInput.value = 5;
+            }
+        } catch (err) {
+            Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!' });
+        } finally {
+            fbSubmitBtn.disabled = false;
+            fbBtnText.innerText = "Submit Feedback";
+            fbBtnLoader.classList.add('d-none');
         }
     });
 });

@@ -22,6 +22,7 @@ Route::get('/about-us', [PublicController::class, 'about'])->name('about');
 
 Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact');
 Route::post('/contact-us', [PublicController::class, 'storecontact'])->name('contact.store');
+Route::post('/feedback', [PublicController::class, 'storeFeedback'])->name('feedback.store');
 
 // Appointments
 Route::get('/wafid-appointment', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
@@ -136,6 +137,12 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     // Website Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+
+    // Testimonials & Feedback within Settings context
+    Route::post('/settings/testimonials', [SettingController::class, 'storeTestimonial'])->name('settings.testimonials.store');
+    Route::delete('/settings/testimonials/{id}', [SettingController::class, 'deleteTestimonial'])->name('settings.testimonials.delete');
+    Route::post('/settings/feedback/read/{id}', [SettingController::class, 'markFeedbackRead'])->name('settings.feedback.read');
+    Route::delete('/settings/feedback/{id}', [SettingController::class, 'deleteFeedback'])->name('settings.feedback.delete');
 
     Route::prefix('payment-methods')->name('payment.methods.')->group(function () {
         Route::get('/', [AdminController::class, 'allPaymentMethods'])->name('index');
