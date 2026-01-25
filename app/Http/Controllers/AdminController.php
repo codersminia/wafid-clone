@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use App\Models\ContactInquiry;
+use App\Models\PrivateFeedback;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\MedicalCenter;
@@ -86,6 +87,10 @@ class AdminController extends Controller
             'contact' => [
                 'total' => ContactInquiry::count(),
                 'new' => ContactInquiry::where('is_new', 1)->count()
+            ],
+            'feedback' => [
+                'total' => PrivateFeedback::count(),
+                'new' => PrivateFeedback::where('is_read', 0)->count()
             ],
         ];
 

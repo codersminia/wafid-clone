@@ -36,6 +36,11 @@
 
     <link rel="shortcut icon" href="{{ asset('assets/public/images/favicon.png') }}" />
 
+    <style>
+        #kt_wrapper {
+            padding-bottom: 60px !important;
+        }
+    </style>
     @stack('styles')
 </head>
 <!--end::Head-->

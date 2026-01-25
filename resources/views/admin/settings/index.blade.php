@@ -19,7 +19,7 @@
 
                             <!-- Tab Persistence -->
                             <input type="hidden" name="active_tab" id="active_tab"
-                                value="{{ session('active_tab', old('active_tab', '#kt_tab_general')) }}">
+                                value="{{ request('active_tab', session('active_tab', old('active_tab', '#kt_tab_general'))) }}">
 
                             <ul class="nav nav-tabs nav-tabs-line mb-5" role="tablist" id="settingsTabs">
                                 <li class="nav-item">
@@ -71,7 +71,8 @@
                                 <div class="tab-pane fade" id="kt_tab_general" role="tabpanel">
                                     <div class="mb-5">
                                         <h5 class="text-dark font-weight-bold mb-2">General Settings</h5>
-                                        <p class="text-muted mb-0">Configure your website's primary identity, branding, and metadata.</p>
+                                        <p class="text-muted mb-0">Configure your website's primary identity, branding, and
+                                            metadata.</p>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Site Name</label>
@@ -153,7 +154,8 @@
                                 <div class="tab-pane fade" id="kt_tab_contact" role="tabpanel">
                                     <div class="mb-5">
                                         <h5 class="text-dark font-weight-bold mb-2">Contact Information</h5>
-                                        <p class="text-muted mb-0">Update your primary contact details used in the header, footer, and contact page.</p>
+                                        <p class="text-muted mb-0">Update your primary contact details used in the header,
+                                            footer, and contact page.</p>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Support Email</label>
@@ -189,7 +191,8 @@
                                 <div class="tab-pane fade" id="kt_tab_social" role="tabpanel">
                                     <div class="mb-5">
                                         <h5 class="text-dark font-weight-bold mb-2">Social Media Links</h5>
-                                        <p class="text-muted mb-0">Manage the social media icons and links displayed across the website.</p>
+                                        <p class="text-muted mb-0">Manage the social media icons and links displayed across
+                                            the website.</p>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Facebook URL</label>
@@ -335,7 +338,8 @@
                                     <div class="d-flex justify-content-between align-items-start mb-5">
                                         <div>
                                             <h5 class="text-dark font-weight-bold mb-2">Client Testimonials</h5>
-                                            <p class="text-muted mb-0">Manage reviews and feedback that appear in the homepage slider.</p>
+                                            <p class="text-muted mb-0">Manage reviews and feedback that appear in the
+                                                homepage slider.</p>
                                         </div>
                                         <button type="button" class="btn btn-success font-weight-bold" data-toggle="modal"
                                             data-target="#modalTestimonial" onclick="resetTestimonialForm()">
@@ -430,7 +434,8 @@
                                 <div class="tab-pane fade" id="kt_tab_feedback" role="tabpanel">
                                     <div class="mb-5">
                                         <h5 class="text-dark font-weight-bold mb-2">Private Client Feedback</h5>
-                                        <p class="text-muted mb-0">View private ratings and internal feedback submitted by users via the contact form.</p>
+                                        <p class="text-muted mb-0">View private ratings and internal feedback submitted by
+                                            users via the contact form.</p>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-head-custom table-vertical-center" id="kt_feedback_table">
@@ -488,7 +493,7 @@
                                 </div>
                             </div>
 
-                            <div class="card-footer">
+                            <div class="card-footer" id="settings-footer">
                                 <button type="submit" class="btn btn-primary mr-2">Save Settings</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
@@ -659,16 +664,41 @@
         var avatar1 = new KTImageInput('kt_image_logo');
         var avatar2 = new KTImageInput('kt_image_favicon');
 
+        // Initialize DataTables
+        $('#kt_testimonials_table').DataTable({
+            responsive: true,
+            pageLength: 50,
+            lengthMenu: [50, 100, 200],
+            order: [[0, 'desc']] // Default sort? Actually Client name is first. Let's do nothing for now or sort by something hidden.
+        });
+
+        $('#kt_feedback_table').DataTable({
+            responsive: true,
+            pageLength: 50,
+            lengthMenu: [50, 100, 200],
+            order: [[0, 'desc']] // Sort by Date
+        });
+
         $(document).ready(function () {
+            function toggleFooter(target) {
+                if (target === '#kt_tab_testimonials' || target === '#kt_tab_feedback') {
+                    $('#settings-footer').hide();
+                } else {
+                    $('#settings-footer').show();
+                }
+            }
+
             // Tab Persistence
             var activeTab = $('#active_tab').val();
             if (activeTab) {
                 $('#settingsTabs a[href="' + activeTab + '"]').tab('show');
+                toggleFooter(activeTab);
             }
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var target = $(e.target).attr("href");
                 $('#active_tab').val(target);
+                toggleFooter(target);
             });
 
             // SweetAlert for Success
@@ -681,8 +711,8 @@
                 });
             @endif
 
-            // Office Locations Repeater
-            var container = $('#office-locations-container');
+                                // Office Locations Repeater
+                                var container = $('#office-locations-container');
             var template = $('#office-template').html();
 
             function reindexOffices() {
