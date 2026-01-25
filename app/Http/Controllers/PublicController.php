@@ -32,17 +32,19 @@ use App\Models\PrivateFeedback;
 
 class PublicController extends Controller
 {
-    private function getFee($key, $default = 0) {
+    private function getFee($key, $default = 0)
+    {
         return AppointmentFee::where('fee_key', $key)->value('amount') ?? $default;
     }
     public function index()
     {
-        // Fetch 3 testimonials for the homepage: Prioritize Google, then Featured, then Latest approved
+        // Fetch up to 12 testimonials for the carousel: Prioritize Google, then Featured, then Latest approved
         $testimonials = Testimonial::approved()
+            ->onHomepage()
             ->orderByRaw("FIELD(source, 'google') DESC")
             ->orderBy('is_featured', 'desc')
             ->orderBy('created_at', 'desc')
-            ->take(3)
+            ->take(12)
             ->get();
 
         return view('public.home', compact('testimonials'));
@@ -56,7 +58,8 @@ class PublicController extends Controller
         return view('public.faq', compact('faqs'));
     }
 
-    public function contactus(){
+    public function contactus()
+    {
         return view('public.contact');
     }
 
@@ -95,7 +98,7 @@ class PublicController extends Controller
         }
 
         return response()->json([
-            'status' => 'success', 
+            'status' => 'success',
             'message' => 'Thank you! Your inquiry has been sent successfully.'
         ]);
     }
@@ -126,7 +129,8 @@ class PublicController extends Controller
         return view('public.about');
     }
 
-    public function medicalExamination(){
+    public function medicalExamination()
+    {
         return view('public.appointments.medical-examination');
     }
 
@@ -225,7 +229,7 @@ class PublicController extends Controller
         $appointment->appointment_no = 'APT' . '-' . str_pad($appointment->id, 3, '0', STR_PAD_LEFT);
         $appointment->save();
 
-        
+
         // Store appointment ID in session
         session(['appointment_id' => $appointment->id]);
 
@@ -312,21 +316,24 @@ class PublicController extends Controller
         return view('public.appointments.thank-you', compact('appointment'));
     }
 
-    public function ViewMedicalReport(){
+    public function ViewMedicalReport()
+    {
         return view('public.appointments.ViewMedicalReport');
     }
 
     public function saveMedicalReport(Request $request)
     {
-        $validated = $request->validate([
-            'passport_no' => 'required|string|max:255',
-            'nationality' => 'required|string|max:255',
-            'phone'       => 'required|string|max:20',
-        ],
-        [
-            'passport_no.required' => 'Please enter your passport number',
-            'phone.required' => 'WhatsApp number is required to send the report'
-        ]);
+        $validated = $request->validate(
+            [
+                'passport_no' => 'required|string|max:255',
+                'nationality' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+            ],
+            [
+                'passport_no.required' => 'Please enter your passport number',
+                'phone.required' => 'WhatsApp number is required to send the report'
+            ]
+        );
 
         // Force Uppercase for Passport
         $validated['passport_no'] = strtoupper($request->passport_no);
@@ -847,11 +854,11 @@ class PublicController extends Controller
     public function softSkillPaymentUpload(Request $request)
     {
         $request->validate([
-            'softskill_id'    => 'required|exists:soft_skill_certificates,id',
+            'softskill_id' => 'required|exists:soft_skill_certificates,id',
             'whatsapp_number' => 'required',
-            'payment_method'  => 'required',
-            'proof_image'     => 'required|image|max:5120',
-            'agreeTerms'      => 'accepted',
+            'payment_method' => 'required',
+            'proof_image' => 'required|image|max:5120',
+            'agreeTerms' => 'accepted',
         ]);
 
         $image = $request->file('proof_image');
@@ -859,19 +866,21 @@ class PublicController extends Controller
         $image->move(public_path('uploads/payments'), $name);
 
         SoftSkillPayment::create([
-            'softskill_id'    => $request->softskill_id,
+            'softskill_id' => $request->softskill_id,
             'whatsapp_number' => $request->whatsapp_number,
-            'payment_method'  => $request->payment_method,
-            'proof_image'     => $name,
+            'payment_method' => $request->payment_method,
+            'proof_image' => $name,
         ]);
 
         session(['softskill_paid_id' => $request->softskill_id]);
         return response()->json(['status' => 'success', 'redirect' => route('softskill.thankyou')]);
     }
 
-    public function softSkillThankYou() {
+    public function softSkillThankYou()
+    {
         $id = session('softskill_paid_id');
-        if (!$id || !$record = SoftSkillCertificate::find($id)) return redirect()->route('softskill.form');
+        if (!$id || !$record = SoftSkillCertificate::find($id))
+            return redirect()->route('softskill.form');
         session()->forget('softskill_paid_id');
         return view('public.skillcertificates.thank-you', compact('record'));
     }

@@ -68,6 +68,7 @@ class SettingController extends Controller
         ]);
 
         $data = $request->all();
+        $data['status'] = 'approved';
 
         // Handle Featured/Homepage checkboxes as boolean
         $data['is_featured'] = $request->has('is_featured');

@@ -23,16 +23,28 @@
 
                             <ul class="nav nav-tabs nav-tabs-line mb-5" role="tablist" id="settingsTabs">
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_general">General</a>
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_general">
+                                        <span class="nav-icon"><i class="flaticon2-settings text-primary"></i></span>
+                                        <span class="nav-text">General</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_contact">Contact Info</a>
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_contact">
+                                        <span class="nav-icon"><i class="flaticon2-placeholder text-primary"></i></span>
+                                        <span class="nav-text">Contact Info</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_social">Social Media</a>
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_social">
+                                        <span class="nav-icon"><i class="flaticon2-world text-primary"></i></span>
+                                        <span class="nav-text">Social Media</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_office">Office Locations</a>
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_office">
+                                        <span class="nav-icon"><i class="flaticon-map-location text-primary"></i></span>
+                                        <span class="nav-text">Office Locations</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-success font-weight-bold" data-toggle="tab"
@@ -46,6 +58,10 @@
                                         href="#kt_tab_feedback">
                                         <span class="nav-icon"><i class="flaticon2-mail text-warning"></i></span>
                                         <span class="nav-text">Private Feedback</span>
+                                        @if($feedback_new > 0)
+                                            <span
+                                                class="label label-warning label-rounded label-inline ml-2 feedback-badge-count">{{ $feedback_new }}</span>
+                                        @endif
                                     </a>
                                 </li>
                             </ul>
@@ -53,6 +69,10 @@
                             <div class="tab-content mt-5" id="myTabContent">
                                 <!-- GENERAL TAB -->
                                 <div class="tab-pane fade" id="kt_tab_general" role="tabpanel">
+                                    <div class="mb-5">
+                                        <h5 class="text-dark font-weight-bold mb-2">General Settings</h5>
+                                        <p class="text-muted mb-0">Configure your website's primary identity, branding, and metadata.</p>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Site Name</label>
                                         <div class="col-9">
@@ -131,6 +151,10 @@
 
                                 <!-- CONTACT TAB -->
                                 <div class="tab-pane fade" id="kt_tab_contact" role="tabpanel">
+                                    <div class="mb-5">
+                                        <h5 class="text-dark font-weight-bold mb-2">Contact Information</h5>
+                                        <p class="text-muted mb-0">Update your primary contact details used in the header, footer, and contact page.</p>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Support Email</label>
                                         <div class="col-9">
@@ -163,6 +187,10 @@
 
                                 <!-- SOCIAL TAB -->
                                 <div class="tab-pane fade" id="kt_tab_social" role="tabpanel">
+                                    <div class="mb-5">
+                                        <h5 class="text-dark font-weight-bold mb-2">Social Media Links</h5>
+                                        <p class="text-muted mb-0">Manage the social media icons and links displayed across the website.</p>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Facebook URL</label>
                                         <div class="col-9">
@@ -227,10 +255,15 @@
 
                                 <!-- OFFICE LOCATIONS TAB -->
                                 <div class="tab-pane fade" id="kt_tab_office" role="tabpanel">
-                                    <div class="alert alert-custom alert-light-primary fade show mb-5" role="alert">
-                                        <div class="alert-icon"><i class="flaticon-map-location"></i></div>
-                                        <div class="alert-text">Add your office locations here to display on the "Visit Our
-                                            Offices" section of the website.</div>
+                                    <div class="d-flex justify-content-between align-items-start mb-5">
+                                        <div>
+                                            <h5 class="text-dark font-weight-bold mb-2">Office Locations</h5>
+                                            <p class="text-muted mb-0">Add your office locations here to display on the
+                                                "Visit Our Offices" section of the website.</p>
+                                        </div>
+                                        <a href="javascript:;" id="btn-add-office" class="btn btn-success font-weight-bold">
+                                            <i class="la la-plus"></i> Add New Office
+                                        </a>
                                     </div>
 
                                     <div id="office-locations-container">
@@ -295,17 +328,15 @@
                                         @endforeach
                                     </div>
 
-                                    <div class="mt-3">
-                                        <a href="javascript:;" id="btn-add-office"
-                                            class="btn btn-light-success font-weight-bold"><i class="la la-plus"></i> Add
-                                            New Office</a>
-                                    </div>
                                 </div>
 
                                 <!-- TESTIMONIALS TAB -->
                                 <div class="tab-pane fade" id="kt_tab_testimonials" role="tabpanel">
-                                    <div class="d-flex justify-content-between align-items-center mb-5">
-                                        <h5 class="text-dark font-weight-bold m-0">Client Testimonials</h5>
+                                    <div class="d-flex justify-content-between align-items-start mb-5">
+                                        <div>
+                                            <h5 class="text-dark font-weight-bold mb-2">Client Testimonials</h5>
+                                            <p class="text-muted mb-0">Manage reviews and feedback that appear in the homepage slider.</p>
+                                        </div>
                                         <button type="button" class="btn btn-success font-weight-bold" data-toggle="modal"
                                             data-target="#modalTestimonial" onclick="resetTestimonialForm()">
                                             <i class="la la-plus"></i> Add Testimonial
@@ -315,13 +346,12 @@
                                     <div class="table-responsive">
                                         <table class="table table-head-custom table-vertical-center"
                                             id="kt_testimonials_table">
-                                            <thead>
+                                            <thead class="thead-dark">
                                                 <tr class="text-left">
                                                     <th style="min-width: 150px">Client</th>
                                                     <th>Rating</th>
                                                     <th>Source</th>
-                                                    <th>Location</th>
-                                                    <th>Status</th>
+                                                    <th style="min-width: 200px">Content</th>
                                                     <th>Homepage</th>
                                                     <th class="text-right">Actions</th>
                                                 </tr>
@@ -363,12 +393,11 @@
                                                             <span
                                                                 class="label label-lg {{ $sourceClass }} label-inline font-weight-bold text-capitalize">{{ $tm->source }}</span>
                                                         </td>
-                                                        <td>{{ $tm->office_city ?? '-' }}</td>
                                                         <td>
-                                                            <span
-                                                                class="label label-inline label-{{ $tm->status == 'approved' ? 'success' : ($tm->status == 'rejected' ? 'danger' : 'warning') }} font-weight-bold">
-                                                                {{ ucfirst($tm->status) }}
-                                                            </span>
+                                                            <div class="text-dark-75 text-truncate" style="max-width: 200px;"
+                                                                title="{{ $tm->content }}">
+                                                                {{ Str::limit($tm->content, 100) }}
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <span class="switch switch-sm switch-icon">
@@ -399,11 +428,14 @@
 
                                 <!-- PRIVATE FEEDBACK TAB -->
                                 <div class="tab-pane fade" id="kt_tab_feedback" role="tabpanel">
-                                    <h5 class="text-dark font-weight-bold mb-5">Received Private Feedback</h5>
+                                    <div class="mb-5">
+                                        <h5 class="text-dark font-weight-bold mb-2">Private Client Feedback</h5>
+                                        <p class="text-muted mb-0">View private ratings and internal feedback submitted by users via the contact form.</p>
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table table-head-custom table-vertical-center" id="kt_feedback_table">
                                             <thead>
-                                                <tr>
+                                                <tr class="thead-dark">
                                                     <th>Date</th>
                                                     <th>Client</th>
                                                     <th>Rating</th>
@@ -435,12 +467,14 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            @if(!$fb->is_read)
-                                                                <button class="btn btn-sm btn-clean btn-icon mark-read"
-                                                                    data-id="{{ $fb->id }}" title="Mark as Read">
-                                                                    <i class="la la-eye text-primary"></i>
-                                                                </button>
-                                                            @endif
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-clean btn-icon view-feedback"
+                                                                data-id="{{ $fb->id }}" data-name="{{ $fb->name }}"
+                                                                data-email="{{ $fb->email }}" data-rating="{{ $fb->rating }}"
+                                                                data-message="{{ $fb->message }}" data-read="{{ $fb->is_read }}"
+                                                                title="View Message">
+                                                                <i class="la la-eye text-primary"></i>
+                                                            </button>
                                                             <button class="btn btn-sm btn-clean btn-icon delete-feedback"
                                                                 data-id="{{ $fb->id }}" title="Delete">
                                                                 <i class="la la-trash text-danger"></i>
@@ -507,96 +541,115 @@
         </div>
     </template>
 
-@endsection
+    <!-- Testimonial Modal -->
+    <div class="modal fade" id="modalTestimonial" tabindex="-1" role="dialog" aria-labelledby="modalTestimonialLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form action="{{ route('admin.settings.testimonials.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" id="testimonial_id">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTestimonialLabel">Add Testimonial</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Client Name <span class="text-danger">*</span></label>
+                                <input type="text" name="client_name" id="tm_name" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Client Position/City</label>
+                                <input type="text" name="client_position" id="tm_position" class="form-control"
+                                    placeholder="e.g. CEO, From Lahore">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Rating <span class="text-danger">*</span></label>
+                                <select name="rating" id="tm_rating" class="form-control" required>
+                                    <option value="5">5 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="1">1 Star</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Source <span class="text-danger">*</span></label>
+                                <select name="source" id="tm_source" class="form-control" required>
+                                    <option value="manual">Manual Entry</option>
+                                    <option value="google">Google Review</option>
+                                    <option value="form">Website Form</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Review Content <span class="text-danger">*</span></label>
+                                <textarea name="content" id="tm_content" class="form-control" rows="4" required></textarea>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Client Image</label>
+                                <input type="file" name="client_image" class="form-control p-2">
+                                <small class="text-muted">Recommended: Square image 100x100px</small>
+                            </div>
+                            <div class="col-md-6 form-group d-flex align-items-center mt-5">
+                                <label class="checkbox checkbox-outline checkbox-success mb-0">
+                                    <input type="checkbox" name="is_featured" id="tm_featured">
+                                    <span></span>&nbsp;Featured
+                                </label>
+                            </div>
+                            <div class="col-md-6 form-group d-flex align-items-center mt-5">
+                                <label class="checkbox checkbox-outline checkbox-primary mb-0">
+                                    <input type="checkbox" name="display_on_homepage" id="tm_homepage">
+                                    <span></span>&nbsp;Show on Homepage
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<!-- Testimonial Modal -->
-<div class="modal fade" id="modalTestimonial" tabindex="-1" role="dialog" aria-labelledby="modalTestimonialLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form action="{{ route('admin.settings.testimonials.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="id" id="testimonial_id">
+    <!-- Feedback View Modal -->
+    <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog" aria-labelledby="modalFeedbackLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTestimonialLabel">Add Testimonial</h5>
+                    <h5 class="modal-title" id="modalFeedbackLabel">Feedback from <span id="fb_name_display"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>Client Name <span class="text-danger">*</span></label>
-                            <input type="text" name="client_name" id="tm_name" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Client Position/City</label>
-                            <input type="text" name="client_position" id="tm_position" class="form-control"
-                                placeholder="e.g. CEO, From Lahore">
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <label>Rating <span class="text-danger">*</span></label>
-                            <select name="rating" id="tm_rating" class="form-control" required>
-                                <option value="5">5 Stars</option>
-                                <option value="4">4 Stars</option>
-                                <option value="3">3 Stars</option>
-                                <option value="2">2 Stars</option>
-                                <option value="1">1 Star</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <label>Source <span class="text-danger">*</span></label>
-                            <select name="source" id="tm_source" class="form-control" required>
-                                <option value="manual">Manual Entry</option>
-                                <option value="google">Google Review</option>
-                                <option value="form">Website Form</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <label>Office City</label>
-                            <input type="text" name="office_city" id="tm_city" class="form-control"
-                                placeholder="e.g. Lahore">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <label>Review Content <span class="text-danger">*</span></label>
-                            <textarea name="content" id="tm_content" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <label>Client Image</label>
-                            <input type="file" name="client_image" class="form-control border-0 px-0">
-                            <small class="text-muted">Recommended: Square image 100x100px</small>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <label>Status</label>
-                            <select name="status" id="tm_status" class="form-control">
-                                <option value="approved">Approved</option>
-                                <option value="pending">Pending</option>
-                                <option value="rejected">Rejected</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 form-group d-flex align-items-center mt-5">
-                            <label class="checkbox checkbox-outline checkbox-success mb-0">
-                                <input type="checkbox" name="is_featured" id="tm_featured">
-                                <span></span>&nbsp;Featured
-                            </label>
-                        </div>
-                        <div class="col-md-4 form-group d-flex align-items-center mt-5">
-                            <label class="checkbox checkbox-outline checkbox-primary mb-0">
-                                <input type="checkbox" name="display_on_homepage" id="tm_homepage">
-                                <span></span>&nbsp;Show on Homepage
-                            </label>
-                        </div>
+                    <div class="mb-5">
+                        <label class="font-weight-bold">Client:</label>
+                        <div id="fb_client_info"></div>
+                    </div>
+                    <div class="mb-5">
+                        <label class="font-weight-bold">Rating:</label>
+                        <div id="fb_rating_display" class="text-warning"></div>
+                    </div>
+                    <div class="mb-5">
+                        <label class="font-weight-bold">Message:</label>
+                        <div class="p-4 bg-light rounded" id="fb_message_display" style="white-space: pre-wrap;"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary font-weight-bold"
-                        data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+                    <button type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal">Close</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+
+@endsection
 
 @push('scripts')
     <script>
@@ -628,8 +681,8 @@
                 });
             @endif
 
-                // Office Locations Repeater
-                var container = $('#office-locations-container');
+                            // Office Locations Repeater
+                            var container = $('#office-locations-container');
             var template = $('#office-template').html();
 
             // Add Office
@@ -691,9 +744,7 @@
             $('#tm_position').val(tm.client_position);
             $('#tm_rating').val(tm.rating);
             $('#tm_source').val(tm.source);
-            $('#tm_city').val(tm.office_city);
             $('#tm_content').val(tm.content);
-            $('#tm_status').val(tm.status);
             $('#tm_featured').prop('checked', !!tm.is_featured);
             $('#tm_homepage').prop('checked', !!tm.display_on_homepage);
             $('#modalTestimonial').modal('show');
@@ -726,19 +777,62 @@
         });
 
         // Feedback Logic
-        $(document).on('click', '.mark-read', function () {
+        $(document).on('click', '.view-feedback', function () {
             var id = $(this).data('id');
+            var name = $(this).data('name');
+            var email = $(this).data('email');
+            var rating = $(this).data('rating');
+            var message = $(this).data('message');
+            var isRead = $(this).data('read');
             var btn = $(this);
-            $.ajax({
-                url: '{{ url("admin/settings/feedback/read") }}/' + id,
-                type: 'POST',
-                data: { _token: '{{ csrf_token() }}' },
-                success: function () {
-                    $('#fb-row-' + id).removeClass('bg-light-warning');
-                    btn.remove();
-                    toastr.success('Marked as read');
-                }
-            });
+
+            // Populate Modal
+            $('#fb_name_display').text(name);
+            $('#fb_client_info').html('<strong>' + name + '</strong> (' + email + ')');
+
+            var stars = '';
+            for (var i = 1; i <= 5; i++) {
+                stars += '<i class="' + (i <= rating ? 'fas' : 'far') + ' fa-star mr-1"></i>';
+            }
+            $('#fb_rating_display').html(stars);
+            $('#fb_message_display').text(message);
+
+            // Show Modal
+            $('#modalFeedback').modal('show');
+
+            // Mark as Read if unread
+            if (isRead == 0) {
+                $.ajax({
+                    url: '{{ url("admin/settings/feedback/read") }}/' + id,
+                    type: 'POST',
+                    data: { _token: '{{ csrf_token() }}' },
+                    success: function () {
+                        // Update UI
+                        $('#fb-row-' + id).removeClass('bg-light-warning');
+                        btn.data('read', 1);
+
+                        // Update Badges
+                        $('.feedback-badge-count').each(function () {
+                            var count = parseInt($(this).text()) - 1;
+                            if (count > 0) {
+                                $(this).text(count);
+                            } else {
+                                $(this).fadeOut();
+                            }
+                        });
+
+                        // Also update sidebar if it exists (assuming it uses the same class or we add it)
+                        $('.sidebar-feedback-badge').each(function () {
+                            var count = parseInt($(this).text()) - 1;
+                            if (count > 0) {
+                                $(this).text(count);
+                            } else {
+                                $(this).fadeOut();
+                            }
+                        });
+                    }
+                });
+            }
         });
 
         $(document).on('click', '.delete-feedback', function () {

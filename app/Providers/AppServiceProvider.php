@@ -11,6 +11,7 @@ use App\Models\NavtechAppointment;
 use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\ContactInquiry;
+use App\Models\PrivateFeedback;
 use App\Models\Setting;
 use App\Models\MedicalCenter;
 use Illuminate\Pagination\Paginator;
@@ -36,15 +37,16 @@ class AppServiceProvider extends ServiceProvider
         // Note: Replace 'admin.blade.php' with the actual path if it's in a folder, e.g., 'layouts.admin'
         // Using '*' shares it with ALL views, which is safest for the sidebar.
         View::composer('*', function ($view) {
-            
+
             $counts = [
-                'wafid_new'     => Appointment::where('is_new', 1)->count(),
-                'special_new'   => SpecialAppointment::where('is_new', 1)->count(),
-                'medical_new'   => CheckResult::where('is_new', 1)->count(),
-                'navtech_new'   => NavtechAppointment::where('is_new', 1)->count(),
-                'tasheer_new'   => TasheerAppointment::where('is_new', 1)->count(),
+                'wafid_new' => Appointment::where('is_new', 1)->count(),
+                'special_new' => SpecialAppointment::where('is_new', 1)->count(),
+                'medical_new' => CheckResult::where('is_new', 1)->count(),
+                'navtech_new' => NavtechAppointment::where('is_new', 1)->count(),
+                'tasheer_new' => TasheerAppointment::where('is_new', 1)->count(),
                 'softskill_new' => SoftSkillCertificate::where('is_new', 1)->count(),
-                'contact_new'   => ContactInquiry::where('is_new', 1)->count(),
+                'contact_new' => ContactInquiry::where('is_new', 1)->count(),
+                'feedback_new' => PrivateFeedback::where('is_read', 0)->count(),
             ];
 
             $view->with($counts);

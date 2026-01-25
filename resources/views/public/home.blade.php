@@ -30,7 +30,17 @@
     .custom-location-tabs .nav-link.active h5 {
         color: #fff !important;
     }
+    
+    /* Slick Carousel Custom Adjustments */
+    .testimonial-carousel .slick-track { display: flex; align-items: stretch; }
+    .testimonial-carousel .slick-slide { height: inherit; margin: 0 10px; }
+    .testimonial-carousel .testimonial-card { height: 100%; }
+    .slick-dots li button:before { font-size: 12px; color: #2c3e50; }
+    .slick-dots li.slick-active button:before { color: #e74c3c; }
+    .slick-prev:before, .slick-next:before { color: #2c3e50; }
 </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 @endpush
 
 @section('content')
@@ -335,14 +345,14 @@
             </div>
 
             @if(count($testimonials) > 0)
-                <div class="row">
+                <div class="testimonial-carousel mb-4">
                     @foreach($testimonials as $tm)
-                        <div class="col-md-4 mb-4">
+                        <div class="px-2 pb-4">
                             <div class="card border-0 shadow-sm h-100 testimonial-card">
                                 <div class="card-body p-4">
                                     @if($tm->source == 'google')
                                         <div class="google-badge mb-3 d-flex align-items-center">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo_Old.svg"
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
                                                 width="60" alt="Google" class="mr-2" style="opacity: 0.7;">
                                             <span class="badge badge-light text-muted small">Google Review</span>
                                         </div>
@@ -352,8 +362,8 @@
                                             <i class="{{ $i <= $tm->rating ? 'fas' : 'far' }} fa-star"></i>
                                         @endfor
                                     </div>
-                                    <p class="text-muted mb-4 italic">"{{ $tm->content }}"</p>
-                                    <div class="d-flex align-items-center">
+                                    <p class="text-muted mb-4 italic">"{{ Str::limit($tm->content, 150) }}"</p>
+                                    <div class="d-flex align-items-center mt-auto">
                                         <div class="symbol symbol-40 mr-3">
                                             @if($tm->client_image)
                                                 <img src="{{ asset($tm->client_image) }}" class="rounded-circle" width="40" height="40"
@@ -419,8 +429,8 @@
                         @if(!empty($office['google_review_url']))
                             @php $hasOfficeReviews = true; @endphp
                             <a href="{{ $office['google_review_url'] }}" target="_blank"
-                                class="btn btn-outline-dark m-2 shadow-sm border-secondary">
-                                <i class="fab fa-google mr-2 text-primary font-size-h6"></i>
+                                class="btn btn-outline-dark m-2 shadow-sm border-secondary d-flex align-items-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/960px-Google_Favicon_2025.svg.png" width="20" height="20" class="mr-2" alt="Google">
                                 <span class="font-weight-bold">Reviews: {{ $office['title'] ?? $office['city'] }}</span>
                             </a>
                         @endif
@@ -428,8 +438,9 @@
 
                     @if(!$hasOfficeReviews)
                         <a href="https://www.google.com/search?q=Gulf+Medical+Consultant" target="_blank"
-                            class="btn btn-outline-dark">
-                            <i class="fab fa-google mr-2 text-primary"></i> View all reviews on Google
+                            class="btn btn-outline-dark d-flex align-items-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/960px-Google_Favicon_2025.svg.png" width="20" height="20" class="mr-2" alt="Google">
+                             View all reviews on Google
                         </a>
                     @endif
                 </div>
@@ -530,3 +541,38 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.testimonial-carousel').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false
+                }
+            }
+        ]
+    });
+});
+</script>
+@endpush
