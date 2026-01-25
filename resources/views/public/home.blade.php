@@ -38,9 +38,63 @@
     .slick-dots li button:before { font-size: 12px; color: #2c3e50; }
     .slick-dots li.slick-active button:before { color: #e74c3c; }
     .slick-prev:before, .slick-next:before { color: #2c3e50; }
+
+    .stats-bar-wrapper {
+        position: relative;
+        z-index: 99;
+    }
+
+    /* Process Section Overhaul */
+    .process-container {
+        position: relative;
+        z-index: 1;
+    }
+    .process-line {
+        position: absolute;
+        top: 25%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: repeating-linear-gradient(to right, #eee 0, #eee 10px, transparent 10px, transparent 20px);
+        z-index: -1;
+        display: none;
+    }
+    @media (min-width: 992px) {
+        .process-line { display: block; }
+    }
+    .process-item {
+        background: #fff;
+        padding: 40px 30px;
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(0,0,0,0.05);
+        height: 100%;
+    }
+    .process-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border-color: #FFC654;
+    }
+    .process-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: #fdf2f1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        color: #FFC654;
+        transition: all 0.3s ease;
+    }
+    .process-item:hover .process-icon-wrapper {
+        background: #FFC654;
+        color: #fff;
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -74,25 +128,25 @@
     </section>
 
     <!-- Stats Bar (Updated Design) -->
-    <div class="container">
+    <div class="container stats-bar-wrapper" data-aos="fade-up">
         <div class="stats-bar py-4">
             <div class="row align-items-center">
 
                 <!-- Item 1 -->
                 <div class="col-4 stat-item text-center">
-                    <div class="stat-number">10k+</div>
+                    <div class="stat-number"><span class="counter" data-count="10000">0</span>+</div>
                     <p class="stat-label">Appointments</p>
                 </div>
 
                 <!-- Item 2 -->
                 <div class="col-4 stat-item text-center">
-                    <div class="stat-number">99%</div>
+                    <div class="stat-number"><span class="counter" data-count="99">0</span>%</div>
                     <p class="stat-label">Success</p>
                 </div>
 
                 <!-- Item 3 -->
                 <div class="col-4 stat-item text-center">
-                    <div class="stat-number">24/7</div>
+                    <div class="stat-number"><span class="counter" data-count="24">0</span>/7</div>
                     <p class="stat-label">Support</p>
                 </div>
 
@@ -100,41 +154,50 @@
         </div>
     </div>
 
-    <!-- How It Works (Theme Colors) -->
-    <section class="pt-5 bg-white">
+    <!-- Simple 3-Step Process (Premium Revamp) -->
+    <section class="py-5 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-accent-red font-weight-bold text-uppercase">Process</h6>
-                <h2 class="font-weight-bold text-dark">Simple 3-Step Process</h2>
+                <h6 class="text-accent-red font-weight-extrabold text-uppercase letter-spacing-2">How it works</h6>
+                <h2 class="font-weight-bold text-dark">Easy 3-Step Support</h2>
                 <div class="theme-divider"></div>
+                <p class="text-muted">We make Gulf medical and skill test bookings effortless for you.</p>
             </div>
 
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <div class="process-step">
-                        <div class="process-icon-circle">
-                            <i class="fas fa-edit fa-2x text-accent-red"></i>
+            <div class="process-container">
+                <div class="process-line"></div>
+                <div class="row">
+                    <!-- Step 1 -->
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <div class="process-item text-center">
+                            <div class="process-icon-wrapper">
+                                <i class="fas fa-file-contract fa-2x"></i>
+                            </div>
+                            <h3 class="h4 font-weight-bold text-dark mt-4">Provide Details</h3>
+                            <p class="text-muted mb-0">Simply fill out our short form with your basic passport information. Our team cross-checks everything for accuracy.</p>
                         </div>
-                        <h4 class="font-weight-bold text-dark">1. Fill Form</h4>
-                        <p class="text-muted">Enter your passport details in our simplified online forms.</p>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="process-step">
-                        <div class="process-icon-circle">
-                            <i class="fas fa-wallet fa-2x text-accent-red"></i>
+
+                    <!-- Step 2 -->
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <div class="process-item text-center">
+                            <div class="process-icon-wrapper">
+                                <i class="fas fa-money-check-alt fa-2x"></i>
+                            </div>
+                            <h3 class="h4 font-weight-bold text-dark mt-4">Easy Payment</h3>
+                            <p class="text-muted mb-0">Confirm your booking by paying via any local method (EasyPaisa, JazzCash, or Bank). Instant confirmation guaranteed.</p>
                         </div>
-                        <h4 class="font-weight-bold text-dark">2. Payment</h4>
-                        <p class="text-muted">Pay the fee easily via JazzCash, Easypaisa, or Bank Transfer.</p>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="process-step">
-                        <div class="process-icon-circle">
-                            <i class="fab fa-whatsapp fa-2x text-accent-red"></i>
+
+                    <!-- Step 3 -->
+                    <div class="col-lg-4 col-md-12 mb-5 mx-auto">
+                        <div class="process-item text-center">
+                            <div class="process-icon-wrapper">
+                                <i class="fab fa-whatsapp-square fa-2x"></i>
+                            </div>
+                            <h3 class="h4 font-weight-bold text-dark mt-4">Instant PDF</h3>
+                            <p class="text-muted mb-0">Your high-resolution official appointment slip is delivered directly to your WhatsApp as a ready-to-print PDF.</p>
                         </div>
-                        <h4 class="font-weight-bold text-dark">3. Get PDF</h4>
-                        <p class="text-muted">Receive your official appointment slip directly on WhatsApp.</p>
                     </div>
                 </div>
             </div>
@@ -142,7 +205,7 @@
     </section>
 
     <!-- Services Cards (Using your Buttons & Colors) -->
-    <section class="services-section py-5 bg-light-grey" id="services">
+    <section class="services-section py-5 bg-light-grey" id="services" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-bold text-uppercase">Services</h6>
@@ -285,7 +348,7 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="py-5 bg-white">
+    <section class="py-5 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
@@ -336,7 +399,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="py-5 bg-light-grey">
+    <section class="py-5 bg-light-grey" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-bold text-uppercase">Testimonials</h6>
@@ -544,8 +607,69 @@
 
 @push('scripts')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 $(document).ready(function(){
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
+    // Counter Animation Logic
+    const animateCounters = () => {
+        $('.counter').each(function() {
+            const $this = $(this);
+            const countTo = parseInt($this.attr('data-count'));
+            
+            $({ countNum: $this.text() }).animate({
+                countNum: countTo
+            }, {
+                duration: 2000,
+                easing: 'swing',
+                step: function() {
+                    let val = Math.floor(this.countNum);
+                    if (countTo >= 1000) {
+                        $this.text((val/1000).toFixed(0) + 'k');
+                    } else {
+                        $this.text(val);
+                    }
+                },
+                complete: function() {
+                    if (countTo >= 1000) {
+                        $this.text((this.countNum/1000).toFixed(0) + 'k');
+                    } else {
+                        $this.text(this.countNum);
+                    }
+                }
+            });
+        });
+    };
+
+    // Trigger counter when it enters viewport
+    let counterStarted = false;
+    const checkViewport = function() {
+        const statsSection = $('.stats-bar');
+        if (statsSection.length) {
+            const hT = statsSection.offset().top,
+                  hH = statsSection.outerHeight(),
+                  wH = $(window).height(),
+                  wS = $(window).scrollTop();
+            
+            // If the top of the stats bar is within the viewport
+            if (wS + wH > hT && !counterStarted){
+                animateCounters();
+                counterStarted = true;
+            }
+        }
+    };
+
+    $(window).on('scroll load', checkViewport);
+    
+    // Final check after short delay for dynamic layouts
+    setTimeout(checkViewport, 500);
+
     $('.testimonial-carousel').slick({
         dots: true,
         infinite: true,

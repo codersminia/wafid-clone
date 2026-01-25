@@ -430,37 +430,57 @@ body {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s ease;
-  z-index: 999;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  animation: wa-pulse 2s infinite;
+}
+
+.wa-label {
+    position: absolute;
+    right: 70px;
+    background: #fff;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    opacity: 1;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
 }
 
 .whatsapp-btn:hover {
-  background-color: #20ba5a;
-  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+  background-color: #25d366;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
   transform: scale(1.1);
+  text-decoration: none;
+  animation-play-state: paused;
 }
 
 .whatsapp-btn i {
   color: white;
-  font-size: 28px;
+  font-size: 32px;
 }
 
-.whatsapp-btn:hover i {
-  color: white;
+@keyframes wa-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
 /* WhatsApp button responsive */
 @media (max-width: 576px) {
   .whatsapp-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 55px;
-    height: 55px;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
   }
-
-  .whatsapp-btn i {
-    font-size: 24px;
+  .wa-label {
+      display: none;
   }
 }
 
@@ -1114,15 +1134,14 @@ html {
    ============================================ */
 
 .stats-bar {
-    background-color: #ffffff; /* White background is cleaner */
-    color: var(--text-dark);   /* Dark text for contrast */
+    background-color: #ffffff;
+    color: var(--text-dark);
     position: relative;
-    z-index: 10;
-    margin-top: -20px;         /* Pulls it up over the hero image */
-    border-radius: 8px;
-    /* Soft shadow to make it float */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
-    /* The Red Accent Line on top to keep your theme */
+    z-index: 100;
+    margin-top: -30px;         /* Slightly higher pull */
+    margin-bottom: 20px;       /* Added space for shadow */
+    border-radius: 12px;       /* Rounded a bit more */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Pronounced shadow */
     border-top: 4px solid var(--accent-red); 
     padding: 25px 15px;
 }
@@ -1376,5 +1395,29 @@ html {
     
     .inner-page-hero h1 {
         font-size: 2.2rem;
+    }
+}
+
+/* ============================================
+   ULTRA-WIDE SCREEN SUPPORT (Big Screens)
+   ============================================ */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1520px;
+    }
+    .hero-title {
+        font-size: 4.5rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1720px;
     }
 }

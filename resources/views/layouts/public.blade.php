@@ -7,13 +7,16 @@
 
     {{-- Dynamic SEO Tags --}}
     <title>@yield('title', 'Gulf Medical Consultant - GCC Appointments & Services')</title>
-    <meta name="description" content="@yield('meta_description', 'Secure online booking for Wafid (GAMCA) medical slips, NAVTTC Takamol skill tests, and Tasheer Saudi visa appointments. Pay via JazzCash/Easypaisa.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'gamca appointment pakistan, wafid online booking, navttc saudi test, tasheer appointment check, gamca medical fee, gamca lahore, gamca karachi')">
+    <meta name="description"
+        content="@yield('meta_description', 'Secure online booking for Wafid (GAMCA) medical slips, NAVTTC Takamol skill tests, and Tasheer Saudi visa appointments. Pay via JazzCash/Easypaisa.')">
+    <meta name="keywords"
+        content="@yield('meta_keywords', 'gamca appointment pakistan, wafid online booking, navttc saudi test, tasheer appointment check, gamca medical fee, gamca lahore, gamca karachi')">
 
     {{-- Schema.org / Search Preview --}}
     <meta itemprop="name" content="@yield('title')">
     <meta itemprop="description" content="@yield('meta_description')">
-    <meta itemprop="image" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
+    <meta itemprop="image"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
 
     {{-- Geo-Tagging (Crucial for Local SEO in Pakistan/India) --}}
     <meta name="geo.region" content="PK" />
@@ -26,8 +29,10 @@
     <meta property="og:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
-    <meta property="og:image:secure_url" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
+    <meta property="og:image"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
+    <meta property="og:image:secure_url"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -35,12 +40,14 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('title', 'Gulf Medical Consultant')">
     <meta name="twitter:description" content="@yield('meta_description', 'Book your medical appointments easily.')">
-    <meta name="twitter:image" content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
+    <meta name="twitter:image"
+        content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
 
     {{-- Canonical Link (Prevents duplicate content issues) --}}
     <link rel="canonical" href="{{ url()->current() }}" />
 
-    <link rel="shortcut icon" href="{{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/public/images/favicon.png') }}" />
+    <link rel="shortcut icon"
+        href="{{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/public/images/favicon.png') }}" />
 
     <!-- Bootstrap & CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -87,9 +94,15 @@
             ]
         }
     </script>
+    <style>
+        body,
+        html {
+            overflow-x: hidden !important;
+        }
+    </style>
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 1050;">
         <div class="container">
@@ -160,7 +173,8 @@
                     <h5>Contact Info</h5>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($settings['site_address'] ?? '') }}" target="_blank">
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($settings['site_address'] ?? '') }}"
+                            target="_blank">
                             {{ $settings['site_address'] ?? 'Address not set' }}
                         </a>
                     </div>
@@ -177,7 +191,8 @@
                         </a>
                     </div>
                     <div class="footer-cta-btns">
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '') }}" target="_blank" class="btn-footer-cta btn-whatsapp-footer">
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '') }}"
+                            target="_blank" class="btn-footer-cta btn-whatsapp-footer">
                             <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
                         </a>
                         <a href="{{ route('medicalExamination') }}" class="btn-footer-cta btn-book-footer">
@@ -189,8 +204,10 @@
             <hr class="bg-white-50">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-white-50 mb-0">&copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All
-                        rights reserved.</p>
+                    <p class="text-white-50 mb-0">&copy; {{ date('Y') }}
+                        {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All
+                        rights reserved.
+                    </p>
                 </div>
                 <div class="col-md-6 text-md-right">
                     @if(!empty($settings['social_facebook'])) <a href="{{ $settings['social_facebook'] }}"
@@ -209,7 +226,8 @@
                 <div class="col-12">
                     <div class="footer-disclaimer-box">
                         <p>
-                            <strong>Disclaimer:</strong> {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }} is a private
+                            <strong>Disclaimer:</strong> {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }} is a
+                            private
                             consultancy service. We are
                             not the official Wafid, NAVTTC, or Tasheer government website. We charge a service fee to
                             assist users in booking appointments and processing paperwork. You can book directly on the
@@ -231,8 +249,9 @@
     <script src="{{ asset('assets/public/js/script.js') }}"></script>
 
     <!-- WhatsApp floating button -->
-    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '966xxxxxxxxxx') }}"
+    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hello!%20I%20need%20assistance%20with%20an%20appointment."
         target="_blank" class="whatsapp-btn" title="Chat with us on WhatsApp">
+        <span class="wa-label">Need Help?</span>
         <i class="fab fa-whatsapp"></i>
     </a>
 
