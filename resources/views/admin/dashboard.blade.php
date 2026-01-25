@@ -175,7 +175,7 @@
 
                     <!-- Private Feedback -->
                     <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.settings.index') }}?active_tab=#kt_tab_feedback" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); border: none;">
+                        <a href="{{ route('admin.settings.index', ['active_tab' => '#kt_tab_feedback']) }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); border: none;">
                             <div class="card-body p-8">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="symbol symbol-50 symbol-light-white alpha-20">

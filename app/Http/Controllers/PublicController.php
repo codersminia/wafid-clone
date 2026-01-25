@@ -18,17 +18,17 @@ use App\Models\TasheerAppointment;
 use App\Models\TasheerPayment;
 use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
+use App\Models\Faq;
+use App\Models\ContactInquiry;
+use App\Models\PrivateFeedback;
+use App\Models\Blog;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactInquiryMail;
 use Illuminate\Support\Facades\DB;
 use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
-use App\Models\Faq;
-use App\Models\ContactInquiry;
-use App\Mail\ContactInquiryMail;
-use Illuminate\Support\Facades\Mail;
-use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Testimonial;
-use App\Models\PrivateFeedback;
 
 class PublicController extends Controller
 {
@@ -60,17 +60,18 @@ class PublicController extends Controller
 
     public function contactus()
     {
-        return view('public.contact');
+        $faqs = Faq::where('status', 1)->take(5)->get();
+        return view('public.contact', compact('faqs'));
     }
 
     public function storecontact(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
-            'subject' => 'required|string',
-            'message' => 'required|string|min:5',
+            'email' => 'required|email|max:100',
+            'subject' => 'required|string|max:100',
+            'message' => 'required|string|min:5|max:1000',
         ]);
 
         if ($validator->fails()) {
@@ -78,11 +79,11 @@ class PublicController extends Controller
         }
 
         $data = [
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'subject' => $request->subject,
-            'message' => $request->message,
+            'name' => strip_tags($request->name),
+            'phone' => strip_tags($request->phone),
+            'email' => strip_tags($request->email),
+            'subject' => strip_tags($request->subject),
+            'message' => strip_tags($request->message),
             'is_new' => 1,
         ];
 
@@ -106,17 +107,24 @@ class PublicController extends Controller
     public function storeFeedback(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:100',
             'rating' => 'required|integer|min:1|max:5',
-            'message' => 'required|string|min:5',
+            'message' => 'required|string|min:5|max:1000',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
         }
 
-        PrivateFeedback::create($request->all());
+        $sanitized = [
+            'name' => strip_tags($request->name),
+            'email' => strip_tags($request->email),
+            'rating' => $request->rating,
+            'message' => strip_tags($request->message),
+        ];
+
+        PrivateFeedback::create($sanitized);
 
         return response()->json([
             'status' => 'success',

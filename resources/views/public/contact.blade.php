@@ -32,6 +32,12 @@
     .custom-location-tabs .nav-link.active h5 {
         color: #fff !important;
     }
+    .faq-item a[aria-expanded="true"] .transition-icon {
+        transform: rotate(180deg);
+    }
+    .faq-item .transition-icon {
+        transition: transform 0.3s ease;
+    }
 </style>
 @endpush
 
@@ -109,7 +115,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="name" placeholder="As per passport" required>
+                                    <input type="text" class="form-control" name="name" placeholder="As per passport" maxlength="100" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Phone Number <span class="text-danger">*</span></label>
@@ -118,7 +124,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="font-weight-bold">Email Address</label>
-                                <input type="email" class="form-control" name="email" required>
+                                <input type="email" class="form-control" name="email" maxlength="100" required>
                             </div>
                             <div class="mb-3">
                                 <label class="font-weight-bold">Select Service Issue <span class="text-danger">*</span></label>
@@ -134,7 +140,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="font-weight-bold">Message Details <span class="text-danger">*</span></label>
-                                <textarea class="form-control" name="message" rows="5" placeholder="Please describe your issue..." required></textarea>
+                                <textarea class="form-control" name="message" rows="5" placeholder="Please describe your issue..." maxlength="1000" required></textarea>
                             </div>
                             
                             <!-- Improved Button with Spinner -->
@@ -150,11 +156,11 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Your Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="name" maxlength="100" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Email Address <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" name="email" required>
+                                    <input type="email" class="form-control" name="email" maxlength="100" required>
                                 </div>
                             </div>
                             <div class="mb-4">
@@ -170,7 +176,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="font-weight-bold">Share Your Experience <span class="text-danger">*</span></label>
-                                <textarea class="form-control" name="message" rows="5" placeholder="How was your experience with us?" required></textarea>
+                                <textarea class="form-control" name="message" rows="5" placeholder="How was your experience with us?" maxlength="1000" required></textarea>
                             </div>
                             <button type="submit" id="fbSubmitBtn" class="btn btn-dark px-5 mt-2">
                                 <span id="fbBtnText">Submit Feedback</span>
@@ -183,20 +189,60 @@
 
             <!-- Sidebar -->
             <div class="col-lg-4 mt-4 mt-lg-0">
-                <div class="card bg-white border-0 shadow-sm mb-4">
+                <!-- Dynamic Common Questions -->
+                <div class="card bg-white border-0 shadow-sm mb-4 overflow-hidden">
+                    <div class="card-header bg-white border-0 pt-6 pb-0">
+                        <h5 class="card-title font-weight-bold mb-0">
+                            <i class="far fa-question-circle text-primary mr-2"></i>Common Questions
+                        </h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Common Questions</h5>
-                        <ul class="list-unstyled mt-3">
-                            <li class="mb-3"><a href="#" class="text-dark d-flex justify-content-between align-items-center">How to pay via JazzCash? <i class="fas fa-chevron-right small"></i></a></li>
-                            <li class="mb-3"><a href="#" class="text-dark d-flex justify-content-between align-items-center">Can I change my Medical Center? <i class="fas fa-chevron-right small"></i></a></li>
+                        <ul class="list-unstyled mt-2" id="sidebarFaq">
+                            @forelse($faqs as $faq)
+                                <li class="border-bottom py-3">
+                                    <div class="faq-item">
+                                        <a href="#faq-collapse-{{ $faq->id }}" data-toggle="collapse" class="text-dark d-flex justify-content-between align-items-center text-decoration-none hover-primary collapsed" aria-expanded="false">
+                                            <span class="font-size-sm font-weight-semibold">{{ $faq->question }}</span>
+                                            <i class="fas fa-chevron-down font-size-xs text-muted transition-icon"></i>
+                                        </a>
+                                        <div class="collapse mt-2" id="faq-collapse-{{ $faq->id }}" data-parent="#sidebarFaq">
+                                            <div class="small text-muted leading-relaxed">
+                                                {!! $faq->answer !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @empty
+                                <li class="text-muted small">No frequent questions found.</li>
+                            @endforelse
                         </ul>
+                        <a href="{{ route('faq') }}" class="btn btn-link btn-sm p-0 mt-3 font-weight-bold">View all FAQs</a>
                     </div>
                 </div>
-                <div class="card bg-primary-dark text-white border-0 shadow-sm">
-                    <div class="card-body p-4">
-                        <h5 class="card-title"><i class="fas fa-shield-alt mr-2"></i> Secure Service</h5>
-                        <p class="small mb-0">We value your privacy. Your data is automatically deleted from our local records after 30 days.</p>
+
+                <!-- Improved Secure Service UI -->
+                <div class="card border-0 shadow-sm position-relative overflow-hidden" style="background: #1a237e;">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="symbol symbol-40 symbol-light-success mr-4" style="background: rgba(255,255,255,0.1); width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-shield-alt mr-2" style="color: white;"></i>
+                            </div>
+                            <h5 class="text-white font-weight-bolder mb-0">Secure Service</h5>
+                        </div>
+                        <p class="text-white-50 small mb-3 leading-relaxed">
+                            We value your privacy. All submissions are encrypted and data is automatically cleared from local records every 30 days.
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <span class="badge badge-pill badge-light px-3 py-2 mr-2">
+                                <i class="fas fa-lock font-size-xs mr-1"></i> SSL Protected
+                            </span>
+                            <span class="badge badge-pill badge-light px-3 py-2">
+                                <i class="fas fa-user-shield font-size-xs mr-1"></i> Data Private
+                            </span>
+                        </div>
                     </div>
+                    <!-- Decorative Svg icon -->
+                    <i class="fas fa-user-lock position-absolute" style="bottom: -20px; right: -20px; font-size: 8rem; color: rgba(255,255,255,0.03);"></i>
                 </div>
             </div>
         </div>
@@ -438,7 +484,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const data = await response.json();
 
-            if (data.status === 'success') {
+            if (response.status === 422) {
+                // Handle Validation Errors
+                Object.keys(data.errors).forEach(field => {
+                    const input = feedbackForm.querySelector(`[name="${field}"]`);
+                    if (input) {
+                        input.classList.add('is-invalid');
+                        const error = document.createElement('div');
+                        error.className = 'invalid-feedback';
+                        error.innerText = data.errors[field][0];
+                        input.parentNode.appendChild(error);
+                    }
+                });
+            } else if (data.status === 'success') {
                 Swal.fire({
                     icon: 'success',
                     title: 'Thank You!',
