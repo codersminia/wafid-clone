@@ -285,40 +285,40 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label>City Name</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control field-city"
                                                                 name="office_locations[{{ $index }}][city]"
                                                                 value="{{ $office['city'] ?? '' }}" placeholder="e.g. Lahore">
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label>Branch Title</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control field-title"
                                                                 name="office_locations[{{ $index }}][title]"
                                                                 value="{{ $office['title'] ?? '' }}"
                                                                 placeholder="e.g. Head Office">
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label>Phone</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control field-phone"
                                                                 name="office_locations[{{ $index }}][phone]"
                                                                 value="{{ $office['phone'] ?? '' }}">
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label>Map Embed URL (iframe src)</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control field-map"
                                                                 name="office_locations[{{ $index }}][map_url]"
                                                                 value="{{ $office['map_url'] ?? '' }}"
                                                                 placeholder="https://www.google.com/maps/embed?...">
                                                         </div>
                                                         <div class="col-md-12 mb-3">
                                                             <label>Google Review URL (Direct Link)</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control field-review"
                                                                 name="office_locations[{{ $index }}][google_review_url]"
                                                                 value="{{ $office['google_review_url'] ?? '' }}"
                                                                 placeholder="https://g.page/r/...">
                                                         </div>
                                                         <div class="col-md-12">
                                                             <label>Address</label>
-                                                            <textarea class="form-control"
+                                                            <textarea class="form-control field-address"
                                                                 name="office_locations[{{ $index }}][address]"
                                                                 rows="2">{{ $office['address'] ?? '' }}</textarea>
                                                         </div>
@@ -681,31 +681,36 @@
                 });
             @endif
 
-                            // Office Locations Repeater
-                            var container = $('#office-locations-container');
+            // Office Locations Repeater
+            var container = $('#office-locations-container');
             var template = $('#office-template').html();
+
+            function reindexOffices() {
+                container.find('.office-item').each(function (index) {
+                    $(this).find('.card-title').text('Office #' + (index + 1));
+                    // Optional: Update name attributes if strict order is desired on submission
+                    // But usually PHP handles associative arrays or gap-filled arrays fine.
+                    // For safety and consistency:
+                    $(this).find('.field-city').attr('name', 'office_locations[' + index + '][city]');
+                    $(this).find('.field-title').attr('name', 'office_locations[' + index + '][title]');
+                    $(this).find('.field-phone').attr('name', 'office_locations[' + index + '][phone]');
+                    $(this).find('.field-map').attr('name', 'office_locations[' + index + '][map_url]');
+                    $(this).find('.field-review').attr('name', 'office_locations[' + index + '][google_review_url]');
+                    $(this).find('.field-address').attr('name', 'office_locations[' + index + '][address]');
+                });
+            }
 
             // Add Office
             $('#btn-add-office').on('click', function () {
-                var index = container.find('.office-item').length;
                 var $newItem = $(template);
-
-                // Set Names with Index
-                $newItem.find('.field-city').attr('name', 'office_locations[' + index + '][city]');
-                $newItem.find('.field-title').attr('name', 'office_locations[' + index + '][title]');
-                $newItem.find('.field-phone').attr('name', 'office_locations[' + index + '][phone]');
-                $newItem.find('.field-map').attr('name', 'office_locations[' + index + '][map_url]');
-                $newItem.find('.field-review').attr('name', 'office_locations[' + index + '][google_review_url]');
-                $newItem.find('.field-address').attr('name', 'office_locations[' + index + '][address]');
-
-                $newItem.find('.card-title').text('Office #' + (index + 1));
-
-                container.append($newItem);
+                container.prepend($newItem);
+                reindexOffices();
             });
 
             // Remove Office
             $(document).on('click', '.btn-remove-office', function () {
                 $(this).closest('.office-item').remove();
+                reindexOffices();
             });
 
             // Auto-extract Iframe SRC for Map inputs
