@@ -480,7 +480,8 @@
                                                                 title="View Message">
                                                                 <i class="la la-eye text-primary"></i>
                                                             </button>
-                                                            <button class="btn btn-sm btn-clean btn-icon delete-feedback"
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-clean btn-icon delete-feedback"
                                                                 data-id="{{ $fb->id }}" title="Delete">
                                                                 <i class="la la-trash text-danger"></i>
                                                             </button>
@@ -711,8 +712,8 @@
                 });
             @endif
 
-                                // Office Locations Repeater
-                                var container = $('#office-locations-container');
+                                        // Office Locations Repeater
+                                        var container = $('#office-locations-container');
             var template = $('#office-template').html();
 
             function reindexOffices() {
@@ -873,17 +874,33 @@
         $(document).on('click', '.delete-feedback', function () {
             var id = $(this).data('id');
             var btn = $(this);
-            if (confirm('Delete this feedback?')) {
-                $.ajax({
-                    url: '{{ url("admin/settings/feedback") }}/' + id,
-                    type: 'DELETE',
-                    data: { _token: '{{ csrf_token() }}' },
-                    success: function (res) {
-                        btn.closest('tr').fadeOut();
-                        toastr.error(res.message);
-                    }
-                });
-            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Delete this feedback permanently?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ url("admin/settings/feedback") }}/' + id,
+                        type: 'DELETE',
+                        data: { _token: '{{ csrf_token() }}' },
+                        success: function (res) {
+                            btn.closest('tr').fadeOut(function () {
+                                $(this).remove();
+                            });
+                            Swal.fire('Deleted!', res.message, 'success');
+                        },
+                        error: function () {
+                            Swal.fire('Error!', 'Something went wrong.', 'error');
+                        }
+                    });
+                }
+            });
         });
 
     </script>

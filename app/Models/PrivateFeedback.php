@@ -16,8 +16,6 @@ class PrivateFeedback extends Model
     protected $fillable = [
         'name',
         'email',
-        'phone',
-        'office_city',
         'rating',
         'message',
         'is_read'

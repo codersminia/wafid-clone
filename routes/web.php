@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::get('/about-us', [PublicController::class, 'about'])->name('about');
 Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact');
 Route::post('/contact-us', [PublicController::class, 'storecontact'])->name('contact.store');
 Route::post('/feedback', [PublicController::class, 'storeFeedback'])->name('feedback.store');
+Route::post('/track-whatsapp', [PublicController::class, 'trackWhatsapp'])->name('track.whatsapp');
+Route::post('/track-visitor', [PublicController::class, 'trackVisitor'])->name('track.visitor');
 
 // Appointments
 Route::get('/wafid-appointment', [PublicController::class, 'medicalExamination'])->name('medicalExamination');
@@ -86,6 +89,8 @@ Route::middleware('guest')->group(function () {
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 
     // appointments
     Route::get('/appointments', [AdminController::class, 'allAppointments'])->name('appointments');

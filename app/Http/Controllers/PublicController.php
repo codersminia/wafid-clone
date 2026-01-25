@@ -29,9 +29,74 @@ use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
 use App\Models\BlogCategory;
 use App\Models\Testimonial;
+use App\Models\WhatsappTrack;
+use App\Models\VisitorLog;
 
 class PublicController extends Controller
 {
+    private function getGeoLocation($ip)
+    {
+        // Skip localhost IPs
+        if ($ip == '127.0.0.1' || $ip == '::1') {
+            return ['country' => 'Localhost', 'region' => 'Local', 'city' => 'Local'];
+        }
+
+        try {
+            $response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country,regionName,city");
+            if ($response) {
+                $data = json_decode($response, true);
+                return [
+                    'country' => $data['country'] ?? null,
+                    'region' => $data['regionName'] ?? null,
+                    'city' => $data['city'] ?? null,
+                ];
+            }
+        } catch (\Exception $e) {
+            // Fail silently
+        }
+
+        return ['country' => null, 'region' => null, 'city' => null];
+    }
+
+    public function trackWhatsapp(Request $request)
+    {
+        $ip = $request->ip();
+        $location = $this->getGeoLocation($ip);
+
+        WhatsappTrack::create([
+            'ip_address' => $ip,
+            'user_agent' => $request->header('User-Agent'),
+            'page_url' => $request->headers->get('referer'),
+            'country' => $location['country'],
+            'region' => $location['region'],
+            'city' => $location['city'],
+        ]);
+
+        return response()->json(['status' => 'tracked']);
+    }
+
+    public function trackVisitor(Request $request)
+    {
+        // Don't track if the user is already logged in as admin to keep data clean
+        if (auth()->check()) {
+            return response()->json(['status' => 'admin_ignored']);
+        }
+
+        $ip = $request->ip();
+        $location = $this->getGeoLocation($ip);
+
+        VisitorLog::create([
+            'ip_address' => $ip,
+            'user_agent' => $request->header('User-Agent'),
+            'page_url' => $request->input('page_url') ?? $request->headers->get('referer') ?? url()->current(),
+            'referrer' => $request->input('referrer'),
+            'country' => $location['country'],
+            'region' => $location['region'],
+            'city' => $location['city'],
+        ]);
+
+        return response()->json(['status' => 'tracked']);
+    }
     private function getFee($key, $default = 0)
     {
         return AppointmentFee::where('fee_key', $key)->value('amount') ?? $default;

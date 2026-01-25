@@ -250,10 +250,41 @@
 
     <!-- WhatsApp floating button -->
     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hello!%20I%20need%20assistance%20with%20an%20appointment."
-        target="_blank" class="whatsapp-btn" title="Chat with us on WhatsApp">
+        target="_blank" class="whatsapp-btn" id="waTrackingBtn" title="Chat with us on WhatsApp">
         <span class="wa-label">Need Help?</span>
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <script>
+        // 1. WhatsApp Tracking
+        document.getElementById('waTrackingBtn').addEventListener('click', function () {
+            fetch("{{ route('track.whatsapp') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Accept": "application/json"
+                }
+            });
+        });
+
+        // 2. Visitor Tracking (Trigger on load after a short delay)
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                fetch("{{ route('track.visitor') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        page_url: window.location.href,
+                        referrer: document.referrer
+                    })
+                });
+            }, 1000); // 1s delay to ensure accurate metrics
+        });
+    </script>
 
     @stack('scripts')
 </body>
