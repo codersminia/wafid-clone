@@ -34,25 +34,27 @@
                     </div>
                     <div class="card-body">
                         <!--begin: Datatable-->
-                        <table class="table table-striped table-head-custom table-checkable" id="kt_datatable">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Passport No</th>
-                                    <th>Mobile</th>
-                                    <th>City</th>
-                                    <th>Medical Center</th>
-                                    <th>Traveling Country</th>
-                                    <th>Payment Status</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Leave empty; DataTables will populate via AJAX -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-head-custom table-checkable" id="kt_datatable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Passport No</th>
+                                        <th>Mobile</th>
+                                        <th>City</th>
+                                        <th>Medical Center</th>
+                                        <th>Traveling Country</th>
+                                        <th>Payment Status</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Leave empty; DataTables will populate via AJAX -->
+                                </tbody>
+                            </table>
+                        </div>
                         <!--end: Datatable-->
                     </div>
                 </div>

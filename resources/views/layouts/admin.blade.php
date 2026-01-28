@@ -40,6 +40,17 @@
         #kt_wrapper {
             padding-bottom: 60px !important;
         }
+
+        /* Prevent horizontal overflow that reveals the offcanvas sidebar */
+        html,
+        body {
+            overflow-x: hidden !important;
+            position: relative;
+        }
+
+        .flex-root {
+            overflow-x: hidden !important;
+        }
     </style>
     @stack('styles')
 </head>
