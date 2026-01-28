@@ -136,6 +136,7 @@
                 responsive: true,
                 processing: true,
                 serverSide: true,
+                autoWidth: false,
                 ajax: "{{ route('admin.analytics.visitors.data') }}",
                 order: [[0, 'desc']],
                 columns: [
@@ -157,6 +158,7 @@
                 responsive: true,
                 processing: true,
                 serverSide: true,
+                autoWidth: false,
                 ajax: "{{ route('admin.analytics.whatsapp.data') }}",
                 order: [[0, 'desc']],
                 columns: [
