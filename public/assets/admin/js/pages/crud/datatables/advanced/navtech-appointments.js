@@ -7,6 +7,7 @@ var NavtechTable = function () {
             serverSide: true,
             ajax: { url: "/admin/navttc-appointments/data", type: "GET" },
             order: [[0, 'desc']],
+            responsive: true,
             columns: [
                 { data: 0 }, // ID
                 { data: 1 }, // Occupation

@@ -2,7 +2,16 @@
 @section('title', 'Navtech Appointments')
 
 @section('content')
-<style>.new-record { background-color: #a9d3ff8a !important; }</style>
+<style>
+    .new-record { background-color: #a9d3ff8a !important; }
+    
+    /* Add top spacing on mobile to prevent card from touching header */
+    @media (max-width: 991px) {
+        .container {
+            padding-top: 1.5rem !important;
+        }
+    }
+</style>
 
 <div class="content d-flex flex-column flex-column-fluid">
     <div class="d-flex flex-column-fluid">
