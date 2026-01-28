@@ -91,6 +91,8 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
+    Route::get('/analytics/visitors/data', [AnalyticsController::class, 'visitorsData'])->name('analytics.visitors.data');
+    Route::get('/analytics/whatsapp/data', [AnalyticsController::class, 'whatsappData'])->name('analytics.whatsapp.data');
 
     // appointments
     Route::get('/appointments', [AdminController::class, 'allAppointments'])->name('appointments');

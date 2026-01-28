@@ -1,9 +1,19 @@
 @extends('layouts.admin')
 
 @section('content')
+    <style>
+        /* Add top spacing on mobile to prevent card from touching header */
+        @media (max-width: 991px) {
+            .analytics-container {
+                padding-top: 1.5rem !important;
+            }
+        }
+    </style>
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
-            <div class="container">
+            <!--begin::Container-->
+            <div class="container analytics-container">
                 <!-- Stats Overview -->
                 <div class="row mb-5">
                     <div class="col-xl-3 col-md-6">
@@ -79,116 +89,94 @@
                         <div class="tab-content">
                             <!-- Visitors Tab -->
                             <div class="tab-pane fade show active" id="kt_tab_visitors" role="tabpanel">
-                                <div class="table-responsive">
-                                    <table class="table table-head-custom table-vertical-center">
-                                        <thead>
-                                            <tr class="text-left">
-                                                <th style="min-width: 150px">Date & Time</th>
-                                                <th style="min-width: 200px">Page Viewed</th>
-                                                <th>Location/IP</th>
-                                                <th style="min-width: 150px">Referrer</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse($visitor_logs as $log)
-                                                <tr>
-                                                    <td><span
-                                                            class="text-dark-75 font-weight-bolder">{{ $log->created_at->format('d M, h:i A') }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ $log->page_url }}" target="_blank"
-                                                            class="text-primary small text-truncate d-block"
-                                                            style="max-width: 250px;">
-                                                            {{ str_replace(url('/'), '', $log->page_url) ?: '/' }}
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        @if($log->country)
-                                                            <div class="text-dark-75 font-weight-bold">{{ $log->city }}, {{ $log->region }}</div>
-                                                            <div class="text-muted small">{{ $log->country }}</div>
-                                                        @else
-                                                            <span class="text-muted small">Location Unknown</span>
-                                                        @endif
-                                                        <span class="label label-light-info label-inline font-weight-bold mt-1">{{ $log->ip_address }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="text-muted small text-truncate d-block"
-                                                            style="max-width: 150px;" title="{{ $log->referrer }}">
-                                                            {{ $log->referrer ?: 'Direct' }}
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="4" class="text-center py-5">No visitor data found.</td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="d-flex justify-content-center mt-4">
-                                    {{ $visitor_logs->links() }}
-                                </div>
+                                <table class="table table-head-custom table-vertical-center" id="visitors_datatable"
+                                    style="width:100%">
+                                    <thead class="thead-dark">
+                                        <tr class="text-left">
+                                            <th>Date & Time</th>
+                                            <th>Page Viewed</th>
+                                            <th>Location/IP</th>
+                                            <th>Referrer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
 
                             <!-- WhatsApp Tab -->
                             <div class="tab-pane fade" id="kt_tab_whatsapp" role="tabpanel">
-                                <div class="table-responsive">
-                                    <table class="table table-head-custom table-vertical-center">
-                                        <thead>
-                                            <tr class="text-left">
-                                                <th style="min-width: 150px">Click Time</th>
-                                                <th style="min-width: 200px">Source Page</th>
-                                                <th>Location/IP</th>
-                                                <th>Device (User Agent)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse($whatsapp_tracks as $track)
-                                                <tr>
-                                                    <td><span
-                                                            class="text-dark-75 font-weight-bolder text-info">{{ $track->created_at->format('d M, h:i A') }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ $track->page_url }}" target="_blank"
-                                                            class="text-primary small text-truncate d-block"
-                                                            style="max-width: 250px;">
-                                                            {{ str_replace(url('/'), '', $track->page_url) ?: '/' }}
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        @if($track->country)
-                                                            <div class="text-dark-75 font-weight-bold">{{ $track->city }}, {{ $track->region }}</div>
-                                                            <div class="text-muted small">{{ $track->country }}</div>
-                                                        @else
-                                                            <span class="text-muted small">Location Unknown</span>
-                                                        @endif
-                                                        <span class="label label-light-dark label-inline font-weight-bold mt-1">{{ $track->ip_address }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="text-muted small text-truncate d-block"
-                                                            style="max-width: 200px;" title="{{ $track->user_agent }}">
-                                                            {{ $track->user_agent }}
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="4" class="text-center py-5">No WhatsApp tracking data
-                                                        available.</td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="d-flex justify-content-center mt-4">
-                                    {{ $whatsapp_tracks->links() }}
-                                </div>
+                                <table class="table table-head-custom table-vertical-center" id="whatsapp_datatable"
+                                    style="width:100%">
+                                    <thead class="thead-dark">
+                                        <tr class="text-left">
+                                            <th>Click Time</th>
+                                            <th>Source Page</th>
+                                            <th>Location/IP</th>
+                                            <th>Device (User Agent)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--end::Container-->
             </div>
+            <!--end::Entry-->
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            // Visitors Table
+            $('#visitors_datatable').DataTable({
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.analytics.visitors.data') }}",
+                order: [[0, 'desc']],
+                columns: [
+                    { data: 0, responsivePriority: 3 },
+                    { data: 1, responsivePriority: 1 },
+                    { data: 2, responsivePriority: 2 },
+                    { data: 3, responsivePriority: 4 }
+                ],
+                language: {
+                    'paginate': {
+                        'previous': '<i class="la la-angle-left"></i>',
+                        'next': '<i class="la la-angle-right"></i>'
+                    }
+                }
+            });
+
+            // WhatsApp Table
+            $('#whatsapp_datatable').DataTable({
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.analytics.whatsapp.data') }}",
+                order: [[0, 'desc']],
+                columns: [
+                    { data: 0, responsivePriority: 3 },
+                    { data: 1, responsivePriority: 1 },
+                    { data: 2, responsivePriority: 2 },
+                    { data: 3, responsivePriority: 4 }
+                ],
+                language: {
+                    'paginate': {
+                        'previous': '<i class="la la-angle-left"></i>',
+                        'next': '<i class="la la-angle-right"></i>'
+                    }
+                }
+            });
+
+            // Adjust columns on tab switch
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                $($.fn.dataTable.tables(true)).DataTable().columns.adjust().responsive.recalc();
+            });
+        });
+    </script>
+@endpush
