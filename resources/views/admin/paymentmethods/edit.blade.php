@@ -2,15 +2,23 @@
 @section('title', 'Edit Payment Method')
 
 @section('content')
-<div class="container">
+    <style>
+        /* Add top spacing on mobile to prevent card from touching header */
+        @media (max-width: 991px) {
+            .payment-methods-container {
+                padding-top: 1.5rem !important;
+            }
+        }
+    </style>
+<div class="container payment-methods-container">
     <div class="card card-custom">
         <div class="card-header"><h3 class="card-title">Edit Method: {{ $method->account_name }}</h3></div>
         
         <form method="POST" action="{{ route('admin.payment.methods.update', $method->id) }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-                <div class="form-group row">
-                    <div class="col-lg-6">
+                <div class="form-group row mb-lg-4">
+                    <div class="col-lg-6 mb-3 mb-lg-0">
                         <label>Account Name:</label>
                         <input type="text" name="account_name" class="form-control" value="{{ $method->account_name }}" required>
                     </div>
@@ -20,8 +28,8 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-lg-6">
+                <div class="form-group row mb-lg-4">
+                    <div class="col-lg-6 mb-3 mb-lg-0">
                         <label>Account Number:</label>
                         <input type="text" name="account_number" class="form-control" value="{{ $method->account_number }}" required>
                     </div>
@@ -31,8 +39,8 @@
                     </div>                   
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-lg-6">
+                <div class="form-group row mb-lg-4">
+                    <div class="col-lg-6 mb-3 mb-lg-0">
                         <label>Status:</label>
                         <select name="status" class="form-control">
                             <option value="1" {{ $method->status == 1 ? 'selected' : '' }}>Active</option>
