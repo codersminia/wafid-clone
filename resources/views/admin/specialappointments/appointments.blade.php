@@ -4,79 +4,87 @@
 
 @section('content')
 
-<style>
-    .new-record {
-        background-color: #a9d3ff8a !important; /* light blue */
-    }
-</style>
+    <style>
+        .new-record {
+            background-color: #a9d3ff8a !important;
+            /* light blue */
+        }
 
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class=" container ">
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-header flex-wrap py-5">
-                    <div class="card-title">
-                        <h3 class="card-label">
-                            Special Appointments
-                        </h3>
-                    </div>                    
+        /* Add top spacing on mobile to prevent card from touching header */
+        @media (max-width: 991px) {
+            .d-flex.flex-column-fluid {
+                padding-top: 1.5rem !important;
+            }
+        }
+    </style>
+
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class=" container ">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header flex-wrap py-5">
+                        <div class="card-title">
+                            <h3 class="card-label">
+                                Special Appointments
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!--begin: Datatable-->
+                        <table class="table table-striped table-head-custom table-checkable" id="kt_datatable">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Passport No</th>
+                                    <th>Mobile</th>
+                                    <th>City</th>
+                                    <th>Medical Center</th>
+                                    <th>Traveling Country</th>
+                                    <th>Payment Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Leave empty; DataTables will populate via AJAX -->
+                            </tbody>
+                        </table>
+                        <!--end: Datatable-->
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!--begin: Datatable-->
-                    <table class="table table-striped table-head-custom table-checkable" id="kt_datatable">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Passport No</th>
-                                <th>Mobile</th>
-                                <th>City</th>
-                                <th>Medical Center</th>
-                                <th>Traveling Country</th>
-                                <th>Payment Status</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Leave empty; DataTables will populate via AJAX -->
-                        </tbody>
-                    </table>
-                    <!--end: Datatable-->
-                </div>
+                <!--end::Card-->
             </div>
-            <!--end::Card-->
+            <!--end::Container-->
         </div>
-        <!--end::Container-->
+        <!--end::Entry-->
     </div>
-    <!--end::Entry-->
-</div>
-<!--end::Content-->
+    <!--end::Content-->
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/admin/js/pages/crud/datatables/advanced/special-appointments.js?v=7.0.6') }}"></script>
+    <script src="{{ asset('assets/admin/js/pages/crud/datatables/advanced/special-appointments.js?v=7.0.6') }}"></script>
 
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Updated Successfully!',
-        text: "{{ session('success') }}",
-        timer: 2000,
-        showConfirmButton: false,
-        position: 'center', 
-        customClass: {
-            popup: 'swal2-border-radius' 
-        },
-        didOpen: () => {
-            const icon = Swal.getIcon();
-            if(icon) icon.style.margin = '0 auto';
-        }
-    });
-</script>
-@endif
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Updated Successfully!',
+                text: "{{ session('success') }}",
+                timer: 2000,
+                showConfirmButton: false,
+                position: 'center',
+                customClass: {
+                    popup: 'swal2-border-radius'
+                },
+                didOpen: () => {
+                    const icon = Swal.getIcon();
+                    if (icon) icon.style.margin = '0 auto';
+                }
+            });
+        </script>
+    @endif
 @endpush

@@ -4,6 +4,20 @@
 
 @section('content')
 
+<style>
+    /* Reduce spacing between form rows on mobile devices */
+    @media (max-width: 991px) {
+        .form-group.row {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        /* Add top spacing on mobile to prevent card from touching header */
+        .d-flex.flex-column-fluid {
+            padding-top: 1.5rem !important;
+        }
+    }
+</style>
+
 @php
     $cities = ['Gujranwala', 'Lahore']; // Capitalized to match JS keys
 @endphp
@@ -27,7 +41,7 @@
                         <div class="card-body">
 
                             <div class="form-group row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Country:</label>
                                     <select class="form-control" id="country" name="country" required>
                                         <option value="Pakistan" {{ old('country', $appointment->country) == 'Pakistan' ? 'selected' : '' }}>Pakistan</option>
@@ -37,7 +51,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>City:</label>
                                     <select name="city" class="form-control" id="city" required>
                                         @foreach($cities as $city)
@@ -51,7 +65,7 @@
                                     @enderror
                                 </div>
                                 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Medical Center:</label>
                                     <select name="medical_center" id="medical_center" class="form-control" required>
                                         <!-- Options will be populated via JS -->
@@ -64,7 +78,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Traveling To:</label>
                                     <select name="country_traveling_to" class="form-control" required>
                                         <option value="saudi-arabia" 
@@ -105,7 +119,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>First Name:</label>
                                     <input type="text" name="first_name" class="form-control"
                                         value="{{ old('first_name', $appointment->first_name) }}" required>
@@ -114,7 +128,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Last Name:</label>
                                     <input type="text" name="last_name" class="form-control"
                                         value="{{ old('last_name', $appointment->last_name) }}" required>
@@ -123,7 +137,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Date of Birth:</label>
                                     <input type="date" name="date_of_birth" class="form-control"
                                         value="{{ old('date_of_birth', $appointment->date_of_birth) }}" required>
@@ -136,7 +150,7 @@
 
                             <div class="form-group row">                        
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Nationality:</label>
                                     <select class="form-control" name="nationality" id="nationality" required>
                                         <option value="Pakistan" {{ old('nationality', $appointment->nationality) == 'Pakistan' ? 'selected' : '' }}>Pakistan</option>
@@ -146,7 +160,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Gender:</label>
                                     <select name="gender" class="form-control">
                                         <option {{ old('gender', $appointment->gender) == 'Male' ? 'selected':'' }}>Male</option>
@@ -157,7 +171,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Marital Status:</label>
                                     <select name="marital_status" class="form-control" required>
                                         <option value="Single" {{ old('marital_status', $appointment->marital_status) == 'Single' ? 'selected' : '' }}>Single</option>
@@ -170,7 +184,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Passport No:</label>
                                     <input type="text" name="passport_no" class="form-control"
                                         value="{{ old('passport_no', $appointment->passport_no) }}" required>
@@ -179,7 +193,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Confirm Passport No:</label>
                                     <input type="text" name="confirm_passport_no" class="form-control"
                                         value="{{ old('confirm_passport_no', $appointment->confirm_passport_no) }}" required>
@@ -188,7 +202,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Passport Issue Date:</label>
                                     <input type="date" name="passport_issue_date" class="form-control"
                                         value="{{ old('passport_issue_date', $appointment->passport_issue_date) }}" required>
@@ -201,7 +215,7 @@
 
                             <div class="form-group row">
                                 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Passport Issue Place:</label>
                                     <input type="text" name="passport_issue_place" class="form-control"
                                         value="{{ old('passport_issue_place', $appointment->passport_issue_place) }}" required>
@@ -210,7 +224,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Passport Expiry Date:</label>
                                     <input type="date" name="passport_expiry_date" class="form-control"
                                         value="{{ old('passport_expiry_date', $appointment->passport_expiry_date) }}" required>
@@ -219,7 +233,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Visa Type:</label>
                                     <select name="visa_type" class="form-control">
                                         <option value="work-visa" {{ old('visa_type', $appointment->visa_type) == 'work-visa' ? 'selected' : '' }}>
@@ -238,7 +252,7 @@
 
                             <div class="form-group row">    
                                 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Email:</label>
                                     <input type="email" name="email" class="form-control"
                                         value="{{ old('email', $appointment->email) }}" required>
@@ -247,7 +261,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>Phone:</label>
                                     <input type="text" name="phone" class="form-control"
                                         value="{{ old('phone', $appointment->phone) }}" required>
@@ -256,7 +270,7 @@
                                     @enderror
                                 </div>                        
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mb-3 mb-lg-0">
                                     <label>National ID:</label>
                                     <input type="text" name="national_id" class="form-control"
                                         value="{{ old('national_id', $appointment->national_id) }}" required>
@@ -268,7 +282,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 mb-3 mb-lg-0">
                                     <label>Position Applied:</label>
 
                                     @php
@@ -376,7 +390,7 @@
                                     @enderror                            
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 mb-3 mb-lg-0">
                                     <label></label>
                                     <input type="text" id="otherPosition" name="other_position" class="form-control mt-2"
                                         placeholder="Enter position"
@@ -414,19 +428,19 @@
 
                                 <div class="row bg-light p-4 rounded align-items-center border">
                                     <!-- Method -->
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mb-3 mb-md-0">
                                         <label class="font-weight-bold text-muted text-uppercase small">Method:</label>
                                         <div class="font-weight-bolder text-dark">{{ ucfirst($appointment->specialPayment->payment_method) }}</div>
                                     </div>
 
                                     <!-- Passport No -->
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mb-3 mb-md-0">
                                         <label class="font-weight-bold text-muted text-uppercase small">Passport No:</label>
                                         <div class="font-weight-bolder text-danger">{{ $appointment->specialPayment->passport_no }}</div>
                                     </div>
 
                                     <!-- WhatsApp -->
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mb-3 mb-md-0">
                                         <label class="font-weight-bold text-muted text-uppercase small">Mobile/WhatsApp:</label>
                                         <div class="font-weight-bolder">
                                             @php
@@ -445,7 +459,7 @@
                                     </div>
 
                                     <!-- Action Button -->
-                                    <div class="col-md-3 text-center">
+                                    <div class="col-md-3 text-md-left">
                                         @if($appointment->specialPayment->proof_image)
                                             <button type="button" class="btn btn-info font-weight-bold px-6" data-toggle="modal" data-target="#receiptModal">
                                                 <i class="flaticon-eye"></i> View Receipt
