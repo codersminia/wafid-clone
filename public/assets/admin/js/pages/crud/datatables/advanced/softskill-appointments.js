@@ -7,6 +7,7 @@ var SoftSkillTable = function () {
             serverSide: true,
             ajax: { url: "/admin/softskill-appointments/data", type: "GET" },
             order: [[0, 'desc']],
+            responsive: true,
             columns: [
                 { data: 0 }, { data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, 
                 { data: 5, visible: false }, { data: 6, visible: false }
