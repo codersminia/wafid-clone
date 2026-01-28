@@ -632,15 +632,23 @@
                     <div class="container-fluid d-flex align-items-stretch justify-content-between">
 
                         <!-- START: Global Greeting Message -->
-                        <div class="d-flex align-items-center mr-4 d-none d-md-flex">
+                        <div class="align-items-center mr-4 d-none d-sm-none d-md-flex" style="display: none;">
                             <span class="text-dark-75 font-weight-bolder font-size-h5">
                                 @php
+                                    date_default_timezone_set('Asia/Karachi');
                                     $hour = date('H');
                                     $greeting = ($hour < 12) ? 'Good Morning' : (($hour < 18) ? 'Good Afternoon' : 'Good Evening');
                                 @endphp
                                 {{ $greeting }}, {{ Auth::user()->name }}
                             </span>
                         </div>
+                        <style>
+                            @media (min-width: 768px) {
+                                .d-md-flex[style*="display: none"] {
+                                    display: flex !important;
+                                }
+                            }
+                        </style>
 
                         <!--begin::Topbar-->
                         <div class="topbar">
