@@ -1,5 +1,19 @@
 @extends('layouts.admin')
 @section('content')
+
+<style>
+    /* Reduce spacing between form rows on mobile devices */
+    @media (max-width: 991px) {
+        .form-group.row, .row.bg-light {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        /* Add top spacing on mobile to prevent card from touching header */
+        .container {
+            padding-top: 1.5rem !important;
+        }
+    }
+</style>
 <div class="container">
     <div class="card card-custom">
         <div class="card-header">
@@ -10,7 +24,7 @@
             <div class="card-body">
                 <!-- General Information -->
                 <div class="form-group row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 mb-3 mb-lg-0">
                         <label for="embassy">Embassy Center:</label>
                         <select required name="embassy" class="form-control" id="embassy">
                             <option value="">Select Center</option>
@@ -20,7 +34,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 mb-3 mb-lg-0">
                         <label for="etimad_center">Etimad Center:</label>
                         <select required name="etimad_center" class="form-control" id="etimad_center">
                             <option value="">Select Center</option>
@@ -30,7 +44,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 mb-3 mb-lg-0">
                         <label for="whatsapp_number">WhatsApp Number:</label>
                         <input required type="tel" name="whatsapp_number" class="form-control" id="whatsapp_number" 
                             value="{{ $appointment->whatsapp_number }}">
@@ -61,11 +75,11 @@
                     <div class="mt-4">
                         <h5 class="mb-3">Payment Information</h5>
                         <div class="row bg-light p-4 rounded">
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3 mb-md-0">
                                 <p class="mb-1 text-muted">Payment Method</p>
                                 <h6 class="font-weight-bold">{{ $appointment->payment->payment_method }}</h6>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3 mb-md-0">
                                 <label class="font-weight-bold text-muted text-uppercase small">Mobile/WhatsApp:</label>
                                 <div class="font-weight-bolder">
                                     @php
@@ -81,7 +95,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3 mb-md-0">
                                 <p class="mb-1 text-muted">Payment Proof</p>
                                 @if($appointment->payment->proof_image)
                                     <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#paymentProofModal">

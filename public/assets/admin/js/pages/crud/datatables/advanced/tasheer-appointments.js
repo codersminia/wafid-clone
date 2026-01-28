@@ -7,6 +7,7 @@ var TasheerTable = function () {
             serverSide: true,
             ajax: { url: "/admin/tasheer-appointments/data", type: "GET" },
             order: [[0, 'desc']],
+            responsive: true,
             columns: [
                 { data: 0 }, { data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, { data: 5 }, { data: 6 }, 
                 { data: 7, visible: false }, { data: 8, visible: false } // Shifted hidden indices
