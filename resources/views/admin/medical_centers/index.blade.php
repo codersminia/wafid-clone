@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <style>
+        /* Add top spacing on mobile to prevent card from touching header */
+        @media (max-width: 991px) {
+            .container {
+                padding-top: 1.5rem !important;
+            }
+        }
+    </style>
+
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
@@ -117,12 +126,12 @@
                             render: function (data, type, full, meta) {
                                 if (data) {
                                     return '<div class="symbol symbol-50 symbol-light mr-4">\
-                                                        <div class="symbol-label" style="background-image: url(\'' + data + '\'); background-size: cover; background-position: center;"></div>\
-                                                    </div>';
+                                                            <div class="symbol-label" style="background-image: url(\'' + data + '\'); background-size: cover; background-position: center;"></div>\
+                                                        </div>';
                                 } else {
                                     return '<div class="symbol symbol-50 symbol-light mr-4">\
-                                                        <div class="symbol-label">No Img</div>\
-                                                    </div>';
+                                                            <div class="symbol-label">No Img</div>\
+                                                        </div>';
                                 }
                             },
                         },
@@ -132,13 +141,13 @@
                             orderable: false,
                             render: function (data, type, full, meta) {
                                 return '\
-                                                        <a href="/admin/medical-centers/' + data + '/edit" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
-                                                            <i class="la la-edit"></i>\
-                                                        </a>\
-                                                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-center" data-id="' + data + '" title="Delete">\
-                                                            <i class="la la-trash"></i>\
-                                                        </a>\
-                                                    ';
+                                                            <a href="/admin/medical-centers/' + data + '/edit" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
+                                                                <i class="la la-edit"></i>\
+                                                            </a>\
+                                                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-center" data-id="' + data + '" title="Delete">\
+                                                                <i class="la la-trash"></i>\
+                                                            </a>\
+                                                        ';
                             },
                         },
                     ],
@@ -194,6 +203,6 @@
                     text: "{{ session('success') }}",
                 });
             @endif
-                        });
+                            });
     </script>
 @endpush
