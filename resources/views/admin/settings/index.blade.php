@@ -162,6 +162,19 @@
                                         <div class="col-9">
                                             <input class="form-control" type="email" name="site_email"
                                                 value="{{ $settings['site_email'] ?? '' }}" />
+                                            <span class="form-text text-muted">This email is displayed publicly on the
+                                                website.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3 col-form-label">Notification Emails</label>
+                                        <div class="col-9">
+                                            <input class="form-control" type="text" name="notification_emails"
+                                                value="{{ $settings['notification_emails'] ?? '' }}"
+                                                placeholder="email1@example.com, email2@example.com" />
+                                            <span class="form-text text-muted">Enter one or more email addresses separated
+                                                by commas. These emails will receive notifications when a new appointment is
+                                                booked.</span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -712,8 +725,8 @@
                 });
             @endif
 
-                                        // Office Locations Repeater
-                                        var container = $('#office-locations-container');
+                                            // Office Locations Repeater
+                                            var container = $('#office-locations-container');
             var template = $('#office-template').html();
 
             function reindexOffices() {
