@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Admin Login</title>
+    <title>Admin Login - Gulf Medical Consultants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Fonts -->
@@ -92,10 +92,10 @@
                             </div>
 
                             <!-- Actions (Remember Me & Forgot Password) -->
-                            <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
-                                <a href="javascript:;" class="text-dark-50 text-hover-primary my-3 mr-2" id="kt_login_forgot">
+                            <div class="form-group d-flex flex-wrap justify-content-end align-items-center">
+                                <!-- <a href="javascript:;" class="text-dark-50 text-hover-primary my-3 mr-2" id="kt_login_forgot">
                                     Forgot Password ?
-                                </a>
+                                </a> -->
                                 <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3">Sign In</button>
                             </div>
 

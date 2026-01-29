@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'Settings')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="d-flex flex-column-fluid">

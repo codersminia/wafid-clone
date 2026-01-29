@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Wafid - Appointments')
+@section('title', 'Special Wafid Appointments')
 
 @section('content')
 

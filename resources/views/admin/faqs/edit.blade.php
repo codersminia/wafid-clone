@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Edit FAQ')
+@section('title', 'FAQs')
 
 @section('content')
     <style>

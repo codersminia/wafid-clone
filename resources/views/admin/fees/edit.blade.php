@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'Manage Appointment Fees')
 @section('content')
     <style>
         /* Add top spacing on mobile to prevent card from touching header */

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Wafid - Add Medical Center')
+@section('title', 'Medical Centers')
 
 @section('content')
 

@@ -5,7 +5,7 @@
 <head>
     <base href="" />
     <meta charset="utf-8" />
-    <title>Metronic | Dashboard</title>
+    <title>@yield('title', 'Admin Dashboard') - Gulf Medical Consultants</title>
     <meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -500,10 +500,12 @@
                                 aria-haspopup="true">
                                 <a href="{{ route('admin.analytics') }}" class="menu-link">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                            viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
-                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"></rect>
+                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16"
+                                                    rx="1.5"></rect>
                                                 <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"></rect>
                                                 <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"></rect>
                                                 <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"></rect>

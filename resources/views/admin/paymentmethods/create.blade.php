@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Add Payment Method')
+@section('title', 'Payment Methods')
 
 @section('content')
     <style>

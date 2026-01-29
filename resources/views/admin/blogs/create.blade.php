@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add New Blog')
+@section('title', 'Blogs')
 
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">

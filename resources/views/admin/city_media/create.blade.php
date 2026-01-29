@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Wafid - Add City Media')
+@section('title', 'City Media Management')
 
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">

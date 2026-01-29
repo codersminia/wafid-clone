@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Tasheer Appointments')
 @section('content')
 
 <style>

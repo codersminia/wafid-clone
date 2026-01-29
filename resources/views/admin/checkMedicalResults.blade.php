@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Wafid - Check Results')
+@section('title', 'Check Results')
 
 @section('content')
 

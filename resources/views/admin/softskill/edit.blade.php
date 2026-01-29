@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'Soft Skill Certificates')
 @section('content')
 
     <style>

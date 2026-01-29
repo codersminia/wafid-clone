@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Navtech Appointments')
 @section('content')
 
     <style>
