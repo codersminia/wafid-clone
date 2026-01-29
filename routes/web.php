@@ -32,6 +32,7 @@ Route::get('/wafid-appointment', [PublicController::class, 'medicalExamination']
 Route::post('/appointment/store', [PublicController::class, 'storeAppointment'])->name('appointment.store');
 Route::get('/wafid-appointment/confirmation', [PublicController::class, 'confirmAppointment'])->name('appointment.confirmation');
 Route::post('/payment/upload-proof', [PublicController::class, 'uploadPaymentProof'])->name('payment.uploadProof');
+Route::get('/wafid-appointment/pay-later', [PublicController::class, 'payLater'])->name('appointment.payLater');
 Route::get('/wafid-appointment/thank-you', [PublicController::class, 'thankYou'])->name('thank.you');
 
 
@@ -42,6 +43,7 @@ Route::post('medical-results/save', [PublicController::class, 'saveMedicalReport
 Route::get('/wafid-special-appointment', [PublicController::class, 'specialAppointmentForm'])->name('special.appointment');
 Route::post('/special-appointment/store', [PublicController::class, 'storeSpecialAppointment'])->name('special.store');
 Route::get('/wafid-special-appointment/confirmation', [PublicController::class, 'confirmSpecialAppointment'])->name('special.confirm');
+Route::get('/wafid-special-appointment/pay-later', [PublicController::class, 'payLaterSpecial'])->name('special.payLater');
 Route::post('/special-payment/upload-proof', [PublicController::class, 'uploadSpecialPaymentProof'])->name('special.payment.upload');
 Route::get('/wafid-special-appointment/thank-you', [PublicController::class, 'specialThankYou'])->name('special.thankyou');
 
@@ -56,12 +58,14 @@ Route::post('navttc-appointment', [PublicController::class, 'navtechstore'])->na
 Route::get('navttc-thank-you', [PublicController::class, 'navtechThankYou'])->name('navtech.thankyou');
 
 Route::get('navttc-confirmation', [PublicController::class, 'confirmNavtechAppointment'])->name('navtech.confirm');
+Route::get('navttc-pay-later', [PublicController::class, 'payLaterNavtech'])->name('navtech.payLater');
 Route::post('navtech-payment-upload', [PublicController::class, 'uploadNavtechPaymentProof'])->name('navtech.payment.upload');
 
 // Tasheer Appointment Routes
 Route::get('tasheer-saudi-visa-appointment', [PublicController::class, 'tasheerForm'])->name('tasheer.form');
 Route::post('tasheer-appointment', [PublicController::class, 'tasheerStore'])->name('tasheer.store');
 Route::get('tasheer-confirmation', [PublicController::class, 'confirmTasheerAppointment'])->name('tasheer.confirm');
+Route::get('tasheer-pay-later', [PublicController::class, 'payLaterTasheer'])->name('tasheer.payLater');
 Route::post('tasheer-payment-upload', [PublicController::class, 'uploadTasheerPaymentProof'])->name('tasheer.payment.upload');
 Route::get('tasheer-thank-you', [PublicController::class, 'tasheerThankYou'])->name('tasheer.thankyou');
 
@@ -69,6 +73,7 @@ Route::get('tasheer-thank-you', [PublicController::class, 'tasheerThankYou'])->n
 Route::get('soft-skill-certificate', [PublicController::class, 'softSkillForm'])->name('softskill.form');
 Route::post('soft-skill-certificate', [PublicController::class, 'softSkillStore'])->name('softskill.store');
 Route::get('soft-skill-confirmation', [PublicController::class, 'softSkillConfirm'])->name('softskill.confirm');
+Route::get('soft-skill-pay-later', [PublicController::class, 'payLaterSoftSkill'])->name('softskill.payLater');
 Route::post('soft-skill-payment-upload', [PublicController::class, 'softSkillPaymentUpload'])->name('softskill.payment.upload');
 Route::get('soft-skill-thank-you', [PublicController::class, 'softSkillThankYou'])->name('softskill.thankyou');
 

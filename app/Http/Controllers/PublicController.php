@@ -31,9 +31,16 @@ use App\Models\BlogCategory;
 use App\Models\Testimonial;
 use App\Models\WhatsappTrack;
 use App\Models\VisitorLog;
+use App\Services\NotificationService;
 
 class PublicController extends Controller
 {
+    protected $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
     private function getGeoLocation($ip)
     {
         // Skip localhost IPs
@@ -302,6 +309,9 @@ class PublicController extends Controller
         $appointment->appointment_no = 'APT' . '-' . str_pad($appointment->id, 3, '0', STR_PAD_LEFT);
         $appointment->save();
 
+        // Send Admin Notification
+        $this->notificationService->notifyAdmin('Wafid', $appointment);
+
 
         // Store appointment ID in session
         session(['appointment_id' => $appointment->id]);
@@ -373,6 +383,23 @@ class PublicController extends Controller
             'status' => 'success',
             'redirect' => route('thank.you') // no ID in URL
         ]);
+    }
+
+    public function payLater(Request $request)
+    {
+        $appointment_id = session('appointment_id');
+
+        if (!$appointment_id || !$appointment = Appointment::find($appointment_id)) {
+            return redirect()->route('home')->with('error', 'Unauthorized access.');
+        }
+
+        // Store appointment ID in session for Thank You page
+        session(['appointment_paid_id' => $appointment_id]);
+
+        // Forget the old session for confirmation page
+        session()->forget('appointment_id');
+
+        return redirect()->route('thank.you');
     }
 
     public function thankYou(Request $request)
@@ -521,6 +548,9 @@ class PublicController extends Controller
         $appointment->appointment_no = 'SP' . '-' . str_pad($appointment->id, 3, '0', STR_PAD_LEFT);
         $appointment->save();
 
+        // Send Admin Notification
+        $this->notificationService->notifyAdmin('Special', $appointment);
+
         // Store appointment ID in session
         session(['special_appointment_id' => $appointment->id]);
 
@@ -598,6 +628,19 @@ class PublicController extends Controller
             'status' => 'success',
             'redirect' => route('special.thankyou'),
         ]);
+    }
+
+    public function payLaterSpecial(Request $request)
+    {
+        $id = session('special_appointment_id');
+        if (!$id || !SpecialAppointment::find($id)) {
+            return redirect()->route('home')->with('error', 'Unauthorized access.');
+        }
+
+        session(['special_appointment_paid_id' => $id]);
+        session()->forget('special_appointment_id');
+
+        return redirect()->route('special.thankyou');
     }
 
     public function specialThankYou(Request $request)
@@ -706,6 +749,10 @@ class PublicController extends Controller
             }
 
             $appointment = NavtechAppointment::create($data);
+
+            // Send Admin Notification
+            $this->notificationService->notifyAdmin('Navtech', $appointment);
+
             session(['navtech_appointment_id' => $appointment->id]);
 
             return response()->json([
@@ -763,6 +810,19 @@ class PublicController extends Controller
         ]);
     }
 
+    public function payLaterNavtech(Request $request)
+    {
+        $id = session('navtech_appointment_id');
+        if (!$id || !NavtechAppointment::find($id)) {
+            return redirect()->route('navtechform')->with('error', 'Unauthorized access.');
+        }
+
+        session(['navtech_paid_id' => $id]);
+        session()->forget('navtech_appointment_id');
+
+        return redirect()->route('navtech.thankyou');
+    }
+
     // 4. Final Thank You
     public function navtechThankYou()
     {
@@ -807,6 +867,10 @@ class PublicController extends Controller
             }
 
             $appointment = TasheerAppointment::create($data);
+
+            // Send Admin Notification
+            $this->notificationService->notifyAdmin('Tasheer', $appointment);
+
             session(['tasheer_appointment_id' => $appointment->id]);
 
             return response()->json(['status' => 'success', 'redirect' => route('tasheer.confirm')]);
@@ -857,6 +921,19 @@ class PublicController extends Controller
         return response()->json(['status' => 'success', 'redirect' => route('tasheer.thankyou')]);
     }
 
+    public function payLaterTasheer(Request $request)
+    {
+        $id = session('tasheer_appointment_id');
+        if (!$id || !TasheerAppointment::find($id)) {
+            return redirect()->route('tasheer.form')->with('error', 'Unauthorized access.');
+        }
+
+        session(['tasheer_paid_id' => $id]);
+        session()->forget('tasheer_appointment_id');
+
+        return redirect()->route('tasheer.thankyou');
+    }
+
     public function tasheerThankYou()
     {
         $id = session('tasheer_paid_id');
@@ -899,6 +976,10 @@ class PublicController extends Controller
             }
 
             $appointment = SoftSkillCertificate::create($data);
+
+            // Send Admin Notification
+            $this->notificationService->notifyAdmin('Soft Skill', $appointment);
+
             session(['softskill_id' => $appointment->id]);
 
             return response()->json(['status' => 'success', 'redirect' => route('softskill.confirm')]);
@@ -947,6 +1028,19 @@ class PublicController extends Controller
 
         session(['softskill_paid_id' => $request->softskill_id]);
         return response()->json(['status' => 'success', 'redirect' => route('softskill.thankyou')]);
+    }
+
+    public function payLaterSoftSkill(Request $request)
+    {
+        $id = session('softskill_id');
+        if (!$id || !SoftSkillCertificate::find($id)) {
+            return redirect()->route('softskill.form')->with('error', 'Unauthorized access.');
+        }
+
+        session(['softskill_paid_id' => $id]);
+        session()->forget('softskill_id');
+
+        return redirect()->route('softskill.thankyou');
     }
 
     public function softSkillThankYou()
