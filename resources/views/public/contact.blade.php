@@ -5,6 +5,14 @@
 @section('meta_description', 'Need help with GAMCA Wafid appointments, NAVTTC tests, or Tasheer bookings? Contact our support team in Pakistan via WhatsApp or Email.')
 @section('meta_keywords', 'contact gamca consultant, wafid support number, navttc helpline pakistan, gamca appointment complaint, gulf visa medical help')
 
+@push('schema')
+    ,{
+      "@type": "ContactPage",
+      "@id": "{{ url()->current() }}#contact",
+      "mainEntity": { "@id": "{{ url('/') }}#organization" }
+    }
+@endpush
+
 @push('head')
 <style>
     .custom-location-tabs .nav-link { 
@@ -46,8 +54,8 @@
 <!-- Page Header -->
 <section class="inner-page-hero" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
     <div class="container">
-        <h1 class="font-weight-bold">Contact Our Experts</h1>
-        <p class="lead">Having trouble booking? We are here to help you 24/7.</p>
+        <h1 class="font-weight-bold">Contact Gulf Medical Consultant Experts</h1>
+        <p class="lead">Having trouble with your Wafid or Saudi Visa booking? We are here to help you 24/7.</p>
     </div>
 </section>
 

@@ -56,7 +56,26 @@
                     </div>
                 </div>
             </div>
-        </div>
+            @push('schema')
+                @if(count($faqs) > 0)
+                    ,{
+                    "@type": "FAQPage",
+                    "@id": "{{ url()->current() }}#faq",
+                    "mainEntity": [
+                    @foreach($faqs as $index => $faq)
+                        {
+                        "@type": "Question",
+                        "name": "{{ $faq->question }}",
+                        "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "{{ strip_tags($faq->answer) }}"
+                        }
+                        }{{ $index < count($faqs) - 1 ? ',' : '' }}
+                    @endforeach
+                    ]
+                    }
+                @endif
+            @endpush
     </section>
 
 @endsection

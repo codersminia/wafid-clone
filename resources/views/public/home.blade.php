@@ -104,7 +104,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <h1 class="hero-title">Gulf Medical Consultants</h1>
+                    <h1 class="hero-title">Wafid (GAMCA) Medical & Saudi Visa Appointment Services</h1>
                     <p class="hero-subtitle mb-5">
                         We simplify the complex booking process for GCC countries.
                         <strong>Wafid Medical</strong>, <strong>NAVTTC Tests</strong>, and <strong>Tasheer
@@ -221,7 +221,7 @@
                         <div class="d-flex align-items-center mb-4">
                             <div class="service-logo-box">
                                 {{-- Replace with asset('assets/public/images/wafid-logo.png') --}}
-                                <img src="{{asset('assets/public/images/wafid-logo.svg')}}" alt="Wafid" class="img-fluid">
+                                <img src="{{asset('assets/public/images/wafid-logo.svg')}}" alt="Wafid GAMCA Medical Slip Logo" class="img-fluid">
                             </div>
                             <div>
                                 <h4 class="font-weight-bold mb-1 text-dark">Wafid (GAMCA) Medical</h4>
@@ -254,7 +254,7 @@
                         <div class="d-flex align-items-center mb-4">
                             <div class="service-logo-box">
                                 {{-- Replace with asset('assets/public/images/wafid-logo.png') --}}
-                                <img src="{{asset('assets/public/images/wafid-logo.svg')}}" alt="Wafid Special"
+                                <img src="{{asset('assets/public/images/wafid-logo.svg')}}" alt="Wafid Choice Medical Center Selection"
                                     class="img-fluid">
                             </div>
                             <div>
@@ -288,7 +288,7 @@
                         <div class="d-flex align-items-center mb-4">
                             <div class="service-logo-box">
                                 {{-- Replace with asset('assets/public/images/navttc-logo.png') --}}
-                                <img src="{{asset('assets/public/images/navttc-logo.png')}}" alt="NAVTTC" class="img-fluid">
+                                <img src="{{asset('assets/public/images/navttc-logo.png')}}" alt="NAVTTC Takamol Skill Verification" class="img-fluid">
                             </div>
                             <div>
                                 <h4 class="font-weight-bold mb-1 text-dark">NAVTTC / Takamol Appointment</h4>
@@ -308,7 +308,7 @@
                     <div class="service-card h-100 bg-white p-4 rounded shadow-sm">
                         <div class="d-flex align-items-center mb-4">
                             <div class="service-logo-box">
-                                <img src="{{asset('assets/public/images/tasheer-logo.png')}}" alt="Tasheer"
+                                <img src="{{asset('assets/public/images/tasheer-logo.png')}}" alt="Tasheer Saudi Visa Biometric Appointment"
                                     class="img-fluid">
                             </div>
                             <div>
@@ -329,7 +329,7 @@
                     <div class="service-card h-100 bg-white p-4 rounded shadow-sm">
                         <div class="d-flex align-items-center mb-4">
                             <div class="service-logo-box">
-                                <img src="{{asset('assets/public/images/soft-skill-logo.png')}}" alt="Certificate"
+                                <img src="{{asset('assets/public/images/soft-skill-logo.png')}}" alt="Gulf Employment Soft Skill Certificate"
                                     class="img-fluid">
                             </div>
                             <div>
@@ -450,35 +450,35 @@
                     @endforeach
                 </div>
 
-                <!-- Review Schema (JSON-LD) -->
-                <script type="application/ld+json">
-                            {
-                              "@context": "https://schema.org/",
-                              "@type": "Product",
-                              "name": "Gulf Medical Consultancy Services",
-                              "aggregateRating": {
-                                "@type": "AggregateRating",
-                                "ratingValue": "4.9",
-                                "reviewCount": "1500"
-                              },
-                              "review": [
-                                @foreach($testimonials as $index => $tm)
-                                    {
-                                      "@type": "Review",
-                                      "reviewRating": {
-                                        "@type": "Rating",
-                                        "ratingValue": "{{ $tm->rating }}"
-                                      },
-                                      "author": {
-                                        "@type": "Person",
-                                        "name": "{{ $tm->client_name }}"
-                                      },
-                                      "reviewBody": "{{ Str::limit($tm->content, 150) }}"
-                                    }{{ $index < count($testimonials) - 1 ? ',' : '' }}
-                                @endforeach
-                              ]
-                            }
-                            </script>
+@push('schema')
+            ,{
+              "@type": "Product",
+              "@id": "{{ url('/') }}#product",
+              "name": "Gulf Medical Consultancy Services",
+              "mainEntityOfPage": { "@id": "{{ url('/') }}#website" },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "1500"
+              },
+              "review": [
+                @foreach($testimonials as $index => $tm)
+                    {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "{{ $tm->rating }}"
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": "{{ $tm->client_name }}"
+                      },
+                      "reviewBody": "{{ Str::limit($tm->content, 150) }}"
+                    }{{ $index < count($testimonials) - 1 ? ',' : '' }}
+                @endforeach
+              ]
+            }
+@endpush
             @endif
 
             @php

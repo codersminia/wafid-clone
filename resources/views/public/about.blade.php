@@ -3,13 +3,22 @@
 @section('title', 'About Us - Gulf Medical Consultant')
 @section('meta_description', 'Learn about Gulf Medical Consultant. We are Pakistan\'s leading agency for GAMCA/Wafid medical appointments, NAVTTC registration, and Visa assistance.')
 
+@push('schema')
+    ,{
+    "@type": "AboutPage",
+    "@id": "{{ url()->current() }}#about",
+    "mainEntity": { "@id": "{{ url('/') }}#organization" }
+    }
+@endpush
+
 @section('content')
 
     <!-- Page Header -->
-    <section class="inner-page-hero" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
+    <section class="inner-page-hero"
+        style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
         <div class="container">
-            <h1 class="font-weight-bold">About Gulf Medical Consultants</h1>
-            <p class="lead">Simplifying GCC Visa Medicals & Skill Tests since 2018.</p>
+            <h1 class="font-weight-bold">About Gulf Medical Consultant - Pakistan</h1>
+            <p class="lead">Simplifying Wafid (GAMCA) Medicals & GCC Skill Tests since 2018.</p>
         </div>
     </section>
 
@@ -19,7 +28,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                        alt="Our Team" class="img-fluid rounded shadow-lg">
+                        alt="Gulf Medical Consultant Team Pakistan" class="img-fluid rounded shadow-lg">
                 </div>
                 <div class="col-lg-6 pl-lg-5">
                     <h6 class="text-accent-red font-weight-bold text-uppercase">Who We Are</h6>
@@ -38,11 +47,11 @@
 
                     <div class="row mt-4">
                         <div class="col-6">
-                            <h2 class="font-weight-bold text-primary">4+</h2>
+                            <h2 class="font-weight-bold text-dark">4+</h2>
                             <p class="small text-muted text-uppercase">Physical Offices</p>
                         </div>
                         <div class="col-6">
-                            <h2 class="font-weight-bold text-primary">50k+</h2>
+                            <h2 class="font-weight-bold text-dark">50k+</h2>
                             <p class="small text-muted text-uppercase">Happy Clients</p>
                         </div>
                     </div>

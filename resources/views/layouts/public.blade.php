@@ -56,43 +56,55 @@
 
     @stack('head')
 
-    {{-- Add Schema Markup for Local Business --}}
+    {{-- Global Schema Markup (Organization & WebSite) --}}
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "{{ $settings['site_name'] ?? 'Gulf Medical Consultant' }}",
-            "url": "https://gamcawafidonline.com",
-            "logo": "{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}",
-            "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+923000000000",
-                "contactType": "customer service"
-            },
-            "department": [
-                {
-                    "@type": "ProfessionalService",
-                    "name": "Gulf Medical Consultant - Lahore",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "streetAddress": "Office 123, Ferozepur Road",
-                        "addressLocality": "Lahore",
-                        "addressCountry": "PK"
-                    }
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "{{ url('/') }}#organization",
+                "name": "{{ $settings['site_name'] ?? 'Gulf Medical Consultant' }}",
+                "url": "{{ url('/') }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
                 },
-                {
-                    "@type": "ProfessionalService",
-                    "name": "Gulf Medical Consultant - Karachi",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "streetAddress": "Suite 405, Shahrah-e-Faisal",
-                        "addressLocality": "Karachi",
-                        "addressCountry": "PK"
-                    }
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "{{ $settings['site_phone'] ?? '' }}",
+                    "contactType": "customer service"
                 }
-                // Add other 2 locations here...
-            ]
-        }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "{{ url('/') }}#website",
+                "url": "{{ url('/') }}",
+                "name": "{{ $settings['site_name'] ?? 'Gulf Medical Consultant' }}",
+                "publisher": { "@id": "{{ url('/') }}#organization" }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "{{ url()->current() }}#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "{{ url('/') }}"
+                    }
+                    @if(url()->current() != url('/'))
+                    ,{
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "@yield('title')"
+                    }
+                    @endif
+                ]
+            }
+            @stack('schema')
+        ]
+    }
     </script>
     <style>
         body,

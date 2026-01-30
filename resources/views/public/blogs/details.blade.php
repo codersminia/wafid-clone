@@ -9,6 +9,19 @@
 
 @section('content')
 
+    @push('schema')
+        ,{
+        "@type": "BlogPosting",
+        "@id": "{{ url()->current() }}#blog",
+        "headline": "{{ $blog->title }}",
+        "image": "{{ $blog->image ? asset($blog->image) : asset('assets/public/images/hero-bg.jpg') }}",
+        "author": { "@id": "{{ url('/') }}#organization" },
+        "publisher": { "@id": "{{ url('/') }}#organization" },
+        "datePublished": "{{ $blog->published_at->toIso8601String() }}",
+        "description": "{{ $blog->meta_description ?? Str::limit($blog->short_description, 160) }}"
+        }
+    @endpush
+
     <!-- Article Header -->
     <section class="article-hero py-5 position-relative bg-dark" style="min-height: 400px;">
         @if($blog->image)

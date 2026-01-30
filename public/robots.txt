@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
-Disallow: /admin
+
+# Sitemaps
 Sitemap: https://gamcawafidonline.com/sitemap.xml
+
+# Disallow admin and private folders
+Disallow: /admin
+Disallow: /admin/
+Disallow: /.env
+Disallow: /storage/
+Disallow: /vendor/
