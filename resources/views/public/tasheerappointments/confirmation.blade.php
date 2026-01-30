@@ -144,10 +144,8 @@
                             </label>
                         </div>
 
-                        <div class="form-buttons d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-dark px-5">Submit Payment</button>
-                            <span class="text-muted mx-3">OR</span>
-                            <a href="{{ route('tasheer.payLater') }}" class="btn btn-outline-secondary px-5">Pay Later</a>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-dark">Submit Payment</button>
                         </div>
                     </form>
                 </div>
