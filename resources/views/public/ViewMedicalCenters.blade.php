@@ -6,12 +6,12 @@
 
 @push('schema')
     ,{
-    "@type": "WebPage",
-    "@id": "{{ url()->current() }}#webpage",
-    "name": "Approved Wafid (GAMCA) Medical Centers List 2026 | Pakistan",
-    "description": "Find the address and contact details of all approved Wafid (GAMCA) medical centers in Pakistan. View
-    ratings and locations.",
-    "publisher": { "@id": "{{ url('/') }}#organization" }
+        "@type": "WebPage",
+        "@id": "{{ url()->current() }}#webpage",
+        "name": "Approved Wafid (GAMCA) Medical Centers List 2026 | Pakistan",
+        "description": "Find the address and contact details of all approved Wafid (GAMCA) medical centers in Pakistan. View
+        ratings and locations.",
+        "publisher": { "@id": "{{ url('/') }}#organization" }
     }
 @endpush
 

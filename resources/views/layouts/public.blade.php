@@ -68,7 +68,7 @@
                 "url": "{{ url('/') }}",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
+                    "url": "{{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/public/images/favicon.png') }}"
                 },
                 "contactPoint": {
                     "@type": "ContactPoint",
@@ -94,11 +94,11 @@
                         "item": "{{ url('/') }}"
                     }
                     @if(url()->current() != url('/'))
-                    ,{
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "@yield('title')"
-                    }
+                        ,{
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "@yield('title')"
+                        }
                     @endif
                 ]
             }

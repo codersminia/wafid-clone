@@ -104,7 +104,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <h1 class="hero-title">Wafid (GAMCA) Medical & Saudi Visa Appointment Services</h1>
+                    <h1 class="hero-title">Gulf Medical Consultants</h1>
                     <p class="hero-subtitle mb-5">
                         We simplify the complex booking process for GCC countries.
                         <strong>Wafid Medical</strong>, <strong>NAVTTC Tests</strong>, and <strong>Tasheer
@@ -454,7 +454,7 @@
             ,{
               "@type": "Product",
               "@id": "{{ url('/') }}#product",
-              "name": "Gulf Medical Consultancy Services",
+              "name": "Gulf Medical Consultants",
               "mainEntityOfPage": { "@id": "{{ url('/') }}#website" },
               "aggregateRating": {
                 "@type": "AggregateRating",
