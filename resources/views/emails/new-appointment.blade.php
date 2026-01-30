@@ -9,15 +9,14 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f7f9fc;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         .wrapper {
             width: 100%;
-            table-layout: fixed;
-            background-color: #f4f7f6;
-            padding: 40px 0;
+            background-color: #f7f9fc;
+            padding: 40px 10px;
         }
 
         .main-table {
@@ -26,93 +25,134 @@
             width: 100%;
             max-width: 600px;
             border-spacing: 0;
-            color: #333333;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-accent {
+            height: 8px;
+            background-color: #FFC654;
         }
 
         .header {
-            padding: 30px;
+            padding: 40px 30px;
             text-align: center;
-            background-color: #ffffff;
-            border-bottom: 4px solid #FFC654;
+            background-color: #1a1a1a;
         }
 
         .logo {
-            max-width: 180px;
+            max-width: 200px;
             height: auto;
-            margin-bottom: 15px;
-        }
-
-        .type-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            background-color: #FFC654;
-            color: #000;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-
-        .content {
-            padding: 40px 30px;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #1a1a1a;
             margin-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+            filter: brightness(0) invert(1);
         }
 
-        .data-table {
+        .title-box {
+            padding: 0 30px 40px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .content-card {
+            padding: 0 30px 40px;
+        }
+
+        .info-panel {
+            background-color: #fffaf0;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .data-list {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .data-row td {
-            padding: 12px 0;
-            border-bottom: 1px solid #f8f8f8;
-            font-size: 15px;
+        .data-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         .label {
+            font-size: 13px;
             font-weight: 600;
-            color: #666;
-            width: 150px;
+            color: #555;
+            width: 140px;
+            vertical-align: top;
         }
 
         .value {
-            color: #1a1a1a;
+            font-size: 14px;
+            color: #111;
+            font-weight: 500;
         }
 
         .footer {
             text-align: center;
             padding: 30px;
-            font-size: 13px;
-            color: #888;
-            background-color: #fdfdfd;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .footer-logo {
+            max-width: 120px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
         }
 
         .btn-container {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 10px;
         }
 
         .button {
             display: inline-block;
-            padding: 14px 35px;
-            background-color: #2b2b2b;
-            color: #ffffff !important;
+            padding: 16px 45px;
+            background-color: #FFC654;
+            color: #1a1a1a !important;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background 0.3s;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 4px 12px rgba(255, 198, 84, 0.3);
+            transition: transform 0.2s;
         }
     </style>
 </head>
@@ -120,70 +160,94 @@
 <body>
     <center class="wrapper">
         <table class="main-table" width="100%">
+            <tr>
+                <td class="top-accent"></td>
+            </tr>
             <!-- Header -->
             <tr>
                 <td class="header">
                     @if($logo)
                         <img src="{{ $logo }}" alt="Site Logo" class="logo">
-                    @else
-                        <h1 style="margin:0; color:#1a1a1a;">GAMCA WAFID</h1>
                     @endif
-                    <div class="type-badge">New {{ $type }} Appointment</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="title-box">
+                    <h1 class="title">New Appointment</h1>
+                    <div class="subtitle">{{ $type }} Module</div>
                 </td>
             </tr>
 
             <!-- Content -->
             <tr>
-                <td class="content">
-                    <p style="margin-top: 0; font-size: 16px; line-height: 1.6;">Hello Admin, you have received a new
-                        <strong>{{ $type }}</strong> appointment booking. Below are the details:</p>
+                <td class="content-card">
+                    <div class="info-panel">
+                        <div class="section-header">Summary</div>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #333;">
+                            A new registration has been received for the <strong>{{ $type }}</strong> module. Please
+                            review the applicant's details below and proceed with verification.
+                        </p>
+                    </div>
 
-                    <div class="section-title">Appointment Details</div>
-                    <table class="data-table">
+                    <div class="section-header">Applicant Data</div>
+                    <table class="data-list" width="100%">
                         @php
                             $fields = [
-                                'appointment_no' => 'Appointment No',
+                                'appointment_no' => 'Reference No',
                                 'first_name' => 'First Name',
                                 'last_name' => 'Last Name',
-                                'passport_no' => 'Passport No',
-                                'phone' => 'Phone',
-                                'whatsapp_number' => 'WhatsApp',
-                                'email' => 'Email',
+                                'passport_no' => 'Passport Number',
+                                'phone' => 'Mobile Phone',
+                                'whatsapp_number' => 'WhatsApp ID',
+                                'email' => 'Email Address',
                                 'country' => 'Country',
                                 'city' => 'City',
                                 'occupation' => 'Occupation',
-                                'visa_type' => 'Visa Type',
-                                'medical_center' => 'Medical Center',
+                                'visa_type' => 'Service Type',
+                                'medical_center' => 'Selected Center',
                                 'nationality' => 'Nationality',
                                 'gender' => 'Gender',
-                                'marital_status' => 'Marital Status',
+                                'marital_status' => 'Status',
                             ];
                         @endphp
 
                         @foreach($fields as $key => $label)
                             @if(isset($appointment->$key) && !empty($appointment->$key))
-                                <tr class="data-row">
-                                    <td class="label">{{ $label }}:</td>
-                                    <td class="value">
-                                        @if($key === 'email')
-                                            <a href="mailto:{{ $appointment->$key }}"
-                                                style="color: #0066cc;">{{ $appointment->$key }}</a>
-                                        @else
-                                            {{ $appointment->$key }}
-                                        @endif
+                                <tr>
+                                    <td class="data-item">
+                                        <table width="100%">
+                                            <tr>
+                                                <td class="label">{{ $label }}</td>
+                                                <td class="value">
+                                                    @if($key === 'email')
+                                                        <a href="mailto:{{ $appointment->$key }}"
+                                                            style="color: #1a1a1a; text-decoration: underline;">{{ $appointment->$key }}</a>
+                                                    @else
+                                                        {{ $appointment->$key }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             @endif
                         @endforeach
 
-                        <tr class="data-row">
-                            <td class="label">Booked At:</td>
-                            <td class="value">{{ now()->format('d M Y, h:i A') }}</td>
+                        <tr>
+                            <td class="data-item" style="border-bottom:none;">
+                                <table width="100%">
+                                    <tr>
+                                        <td class="label">Date Received</td>
+                                        <td class="value">{{ now()->format('d M Y, h:i A') }}</td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                     </table>
 
                     <div class="btn-container">
-                        <a href="{{ $adminLink }}" class="button">Login to Admin Panel</a>
+                        <a href="{{ $adminLink }}" class="button">MANAGE APPOINTMENT</a>
                     </div>
                 </td>
             </tr>
@@ -191,8 +255,12 @@
             <!-- Footer -->
             <tr>
                 <td class="footer">
-                    &copy; {{ date('Y') }} Gamca Wafid Online. All rights reserved.<br>
-                    This is an automated notification. Please do not reply to this email.
+                    @if($logo)
+                        <img src="{{ $logo }}" alt="Logo" class="footer-logo">
+                    @endif
+                    <p style="font-weight: bold; opacity: 1;">Gamca Wafid Online</p>
+                    <p>&copy; {{ date('Y') }} All Rights Reserved.</p>
+                    <p>This is an internal administrative alert. Please do not share these details.</p>
                 </td>
             </tr>
         </table>
