@@ -162,13 +162,8 @@ class PublicController extends Controller
         // 1. Save to Database
         ContactInquiry::create(array_merge($data, ['ip_address' => $request->ip()]));
 
-        // 2. Send Email (Update 'admin@example.com' to your email)
-        try {
-            Mail::to('admin@yourdomain.com')->send(new ContactInquiryMail($data));
-        } catch (\Exception $e) {
-            // Log error but continue so the user knows their data was saved
-            \Log::error("Mail failed: " . $e->getMessage());
-        }
+        // 2. Send Email
+        $this->notificationService->notifyContactInquiry($data);
 
         return response()->json([
             'status' => 'success',
@@ -310,7 +305,7 @@ class PublicController extends Controller
         $appointment->save();
 
         // Send Admin Notification
-        $this->notificationService->notifyAdmin('Wafid', $appointment);
+        $this->notificationService->notifyAppointment('Wafid', $appointment);
 
 
         // Store appointment ID in session
@@ -549,7 +544,7 @@ class PublicController extends Controller
         $appointment->save();
 
         // Send Admin Notification
-        $this->notificationService->notifyAdmin('Special', $appointment);
+        $this->notificationService->notifyAppointment('Special', $appointment);
 
         // Store appointment ID in session
         session(['special_appointment_id' => $appointment->id]);
@@ -751,7 +746,7 @@ class PublicController extends Controller
             $appointment = NavtechAppointment::create($data);
 
             // Send Admin Notification
-            $this->notificationService->notifyAdmin('Navtech', $appointment);
+            $this->notificationService->notifyAppointment('Navtech', $appointment);
 
             session(['navtech_appointment_id' => $appointment->id]);
 
@@ -869,7 +864,7 @@ class PublicController extends Controller
             $appointment = TasheerAppointment::create($data);
 
             // Send Admin Notification
-            $this->notificationService->notifyAdmin('Tasheer', $appointment);
+            $this->notificationService->notifyAppointment('Tasheer', $appointment);
 
             session(['tasheer_appointment_id' => $appointment->id]);
 
@@ -978,7 +973,7 @@ class PublicController extends Controller
             $appointment = SoftSkillCertificate::create($data);
 
             // Send Admin Notification
-            $this->notificationService->notifyAdmin('Soft Skill', $appointment);
+            $this->notificationService->notifyAppointment('Soft Skill', $appointment);
 
             session(['softskill_id' => $appointment->id]);
 

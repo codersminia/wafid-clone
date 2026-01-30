@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Setting;
 
 class NewAppointmentMail extends Mailable
 {
@@ -12,6 +13,8 @@ class NewAppointmentMail extends Mailable
 
     public $type;
     public $appointment;
+    public $logo;
+    public $adminLink;
 
     /**
      * Create a new message instance.
@@ -20,6 +23,11 @@ class NewAppointmentMail extends Mailable
     {
         $this->type = $type;
         $this->appointment = $appointment;
+
+        // Fetch logo and prepare admin link
+        $logoPath = Setting::get('logo');
+        $this->logo = $logoPath ? asset($logoPath) : null;
+        $this->adminLink = 'https://gamcawafidonline.com/admin/login';
     }
 
     /**
