@@ -24,7 +24,7 @@
             <!-- Fee Alert -->
             <div class="alert alert-warning border-0 mb-4" style="background-color: #fff3cd;">
                 <div class="row align-items-center">
-                    <div class="col-12">
+                    <div class="col-md-8">
                         <h5 class="alert-heading mb-2">
                             <i class="fas fa-exclamation-triangle"></i> Appointment Fee
                         </h5>
@@ -35,6 +35,11 @@
                             - Payment is required to confirm your appointment.
                             Please proceed with payment using the account details below.
                         </p>
+                    </div>
+                    <div class="col-md-4 text-md-right mt-3 mt-md-0">
+                        <a href="{{ route('special.payLater') }}" class="btn btn-outline-dark font-weight-bold">
+                            <i class="fas fa-clock"></i> Skip & Pay Later
+                        </a>
                     </div>
                 </div>
             </div>
