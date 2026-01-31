@@ -37,7 +37,7 @@
                         $msg = "Hello, I applied for SVP Test.\nID: SVP-".$appointment->id."\nTrade: ".$appointment->occupation."\nPlease verify payment.";
                     @endphp
 
-                    <a href="https://wa.me/923000000000?text={{ urlencode($msg) }}" class="btn btn-success btn-lg rounded-pill px-5 shadow">
+                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text={{ urlencode($msg) }}" target="_blank" class="btn btn-success btn-lg rounded-pill px-5 shadow">
                         <i class="fab fa-whatsapp mr-2"></i> Chat with Agent
                     </a>
 

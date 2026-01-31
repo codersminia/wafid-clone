@@ -69,7 +69,7 @@
                                  "Proof attached. Please process ASAP.";
                 @endphp
 
-                <a href="https://wa.me/923000000000?text={{ urlencode($wa_message) }}" class="btn btn-success btn-lg rounded-pill px-5 shadow" style="background-color: #25d366; border:none;">
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text={{ urlencode($wa_message) }}" target="_blank" class="btn btn-success btn-lg rounded-pill px-5 shadow" style="background-color: #25d366; border:none;">
                     <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
                 </a>
                 

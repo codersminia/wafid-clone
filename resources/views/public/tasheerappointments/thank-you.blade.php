@@ -39,7 +39,7 @@
                     $msg = "Hi, I requested Tasheer Appointment.\nID: TSH-".$appointment->id."\nCenter: ".$appointment->etimad_center."\nPlease update me.";
                 @endphp
 
-                <a href="https://wa.me/923000000000?text={{ urlencode($msg) }}" class="btn btn-success btn-lg rounded-pill px-5 shadow">
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text={{ urlencode($msg) }}" target="_blank" class="btn btn-success btn-lg rounded-pill px-5 shadow">
                     <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
                 </a>
 
