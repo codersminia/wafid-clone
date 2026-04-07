@@ -96,6 +96,30 @@
     #heroBannerCarousel .hero-section {
         min-height: 65vh;
     }
+
+    /* SEO Intro Section */
+    .seo-intro-section { background-color: #f8f9fa; }
+    .seo-img-wrapper { position: relative; }
+    .seo-img-wrapper img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    .seo-intro-heading { font-size: 1.65rem; line-height: 1.35; }
+    .btn-seo-cta {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        transition: background 0.25s ease;
+        display: inline-block;
+    }
+    .btn-seo-cta:hover { background-color: #c0392b; color: #fff; text-decoration: none; }
+    @media (max-width: 767px) {
+        .seo-intro-heading { font-size: 1.35rem; }
+        .btn-seo-cta { width: 100%; text-align: center; }
+    }
     #heroBannerCarousel .carousel-control-prev,
     #heroBannerCarousel .carousel-control-next {
         width: 50px;
@@ -233,6 +257,53 @@
             </div>
         </div>
     </div>
+
+    <!-- SEO Content Section -->
+    <section class="seo-intro-section py-5 bg-light" data-aos="fade-up">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Left: Image -->
+                <div class="col-lg-5 col-md-5 mb-4 mb-md-0">
+                    <div class="seo-img-wrapper">
+                        <img
+                            src="{{ asset('assets/public/images/gamca-medical-appointment-new.jpg') }}"
+                            alt="GAMCA Medical Appointment Pakistan"
+                            class="img-fluid rounded shadow"
+                            loading="lazy"
+                            width="540"
+                            height="400"
+                            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=540&q=80';"
+                        >
+                    </div>
+                </div>
+
+                <!-- Right: SEO Text -->
+                <div class="col-lg-7 col-md-7">
+                    <h2 class="seo-intro-heading font-weight-bold text-dark mb-3">
+                        Book GAMCA Medical Appointment Online with Trusted Experts
+                    </h2>
+
+                    <p class="text-muted mb-3">
+                        Welcome to <strong>GAMCA Medical Appointments</strong>, your reliable source for GAMCA (WAFID) medical registration in Pakistan. If you are searching for a secure and genuine platform to book your GCC medical test online, you're in the right place.
+                    </p>
+
+                    <p class="text-muted mb-3">
+                        Planning to travel to GCC countries like <strong>Saudi Arabia, UAE, Qatar, or Oman</strong>? A valid GAMCA medical fitness certificate is mandatory for your visa approval. This test confirms that you are medically fit and free from infectious diseases as required by GCC authorities.
+                    </p>
+
+                    <p class="text-muted mb-4">
+                        Don't stress about the process — we make it simple and fast. Just fill out our online GAMCA registration form, and we will handle your appointment with authorized GAMCA-approved medical centers. Start your journey with confidence and avoid unnecessary delays in your visa process.
+                    </p>
+
+                    <a href="{{ route('medicalExamination') }}" class="btn btn-dark px-5 py-3 font-weight-bold">
+                        Book Your GAMCA Medical Appointment Online Today
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- Simple 3-Step Process (Premium Revamp) -->
     <section class="py-5 bg-white" data-aos="fade-up">
