@@ -91,6 +91,35 @@
         background: #FFC654;
         color: #fff;
     }
+
+    /* Banner Carousel */
+    #heroBannerCarousel .hero-section {
+        min-height: 65vh;
+    }
+    #heroBannerCarousel .carousel-control-prev,
+    #heroBannerCarousel .carousel-control-next {
+        width: 50px;
+        height: 50px;
+        background: rgba(0,0,0,0.4);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        bottom: auto;
+        border: none;
+        cursor: pointer;
+    }
+    #heroBannerCarousel .carousel-control-prev { left: 15px; }
+    #heroBannerCarousel .carousel-control-next { right: 15px; }
+    #heroBannerCarousel .carousel-indicators li {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 4px;
+    }
+    @media (max-width: 767px) {
+        #heroBannerCarousel .carousel-control-prev,
+        #heroBannerCarousel .carousel-control-next { width: 36px; height: 36px; }
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -98,7 +127,61 @@
 @endpush
 
 @section('content')
-    <!-- Hero Section (Matches your css .hero-section) -->
+    <!-- Hero Banner Carousel -->
+    @if($banners->count() > 0)
+    <div id="heroBannerCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover">
+        @if($banners->count() > 1)
+        <ol class="carousel-indicators">
+            @foreach($banners as $i => $banner)
+            <li data-target="#heroBannerCarousel" data-slide-to="{{ $i }}" class="{{ $i === 0 ? 'active' : '' }}"></li>
+            @endforeach
+        </ol>
+        @endif
+
+        <div class="carousel-inner">
+            @foreach($banners as $i => $banner)
+            <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
+                <div class="hero-section text-center" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ asset($banner->image) }}') center/cover no-repeat; will-change: transform;">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                @if($banner->title)
+                                    <h1 class="hero-title">{{ $banner->title }}</h1>
+                                @endif
+                                @if($banner->subtitle)
+                                    <p class="hero-subtitle mb-5">{{ $banner->subtitle }}</p>
+                                @endif
+                                <div class="hero-buttons d-flex flex-column flex-md-row justify-content-center align-items-center">
+                                    @if($banner->button_text && $banner->button_url)
+                                    <a href="{{ $banner->button_url }}" class="btn btn-light text-dark font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow">
+                                        {{ $banner->button_text }}
+                                    </a>
+                                    @endif
+                                    <a href="{{ route('contact') }}" class="btn btn-outline-light font-weight-bold px-5 py-3">
+                                        Contact Support
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        @if($banners->count() > 1)
+        <button class="carousel-control-prev" type="button" data-target="#heroBannerCarousel" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-target="#heroBannerCarousel" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </button>
+        @endif
+    </div>
+    @else
+    <!-- Fallback static hero if no banners -->
     <section class="hero-section text-center"
         style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) , url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
         <div class="container">
@@ -111,13 +194,9 @@
                             Appointments</strong> handled by experts.
                     </p>
                     <div class="hero-buttons d-flex flex-column flex-md-row justify-content-center align-items-center">
-                        {{-- Button 1: Added mb-3 (margin bottom) for mobile, removed on desktop (mb-md-0) --}}
-                        <a href="#services"
-                            class="btn btn-light text-dark font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow">
+                        <a href="#services" class="btn btn-light text-dark font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow">
                             Book Appointment
                         </a>
-
-                        {{-- Button 2: Transparent outline --}}
                         <a href="{{ route('contact') }}" class="btn btn-outline-light font-weight-bold px-5 py-3">
                             Contact Support
                         </a>
@@ -126,6 +205,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Stats Bar (Updated Design) -->
     <div class="container stats-bar-wrapper" data-aos="fade-up">

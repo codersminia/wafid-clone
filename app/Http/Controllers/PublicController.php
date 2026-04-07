@@ -119,7 +119,12 @@ class PublicController extends Controller
             ->take(12)
             ->get();
 
-        return view('public.home', compact('testimonials'));
+        $banners = \App\Models\Banner::where('is_active', 1)
+            ->orderBy('sort_order')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('public.home', compact('testimonials', 'banners'));
     }
 
     public function faq()

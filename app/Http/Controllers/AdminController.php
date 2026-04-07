@@ -1713,4 +1713,102 @@ class AdminController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'City Media deleted successfully']);
     }
+
+    // ==========================================
+    // BANNERS
+    // ==========================================
+
+    public function banners()
+    {
+        $banners = \App\Models\Banner::orderBy('sort_order')->orderBy('id', 'desc')->get();
+        return view('admin.banners.index', compact('banners'));
+    }
+
+    public function createBanner()
+    {
+        return view('admin.banners.create');
+    }
+
+    public function storeBanner(Request $request)
+    {
+        $request->validate([
+            'image'       => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'title'       => 'nullable|string|max:255',
+            'subtitle'    => 'nullable|string|max:255',
+            'button_text' => 'nullable|string|max:100',
+            'button_url'  => 'nullable|string|max:255',
+            'sort_order'  => 'nullable|integer',
+        ]);
+
+        $imageName = Str::random(40) . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move(public_path('uploads/banners'), $imageName);
+
+        \App\Models\Banner::create([
+            'title'       => $request->title,
+            'subtitle'    => $request->subtitle,
+            'image'       => 'uploads/banners/' . $imageName,
+            'button_text' => $request->button_text,
+            'button_url'  => $request->button_url,
+            'is_active'   => $request->has('is_active') ? 1 : 0,
+            'sort_order'  => $request->sort_order ?? 0,
+        ]);
+
+        return redirect()->route('admin.banners.index')->with('success', 'Banner added successfully!');
+    }
+
+    public function editBanner($id)
+    {
+        $banner = \App\Models\Banner::findOrFail($id);
+        return view('admin.banners.edit', compact('banner'));
+    }
+
+    public function updateBanner(Request $request, $id)
+    {
+        $banner = \App\Models\Banner::findOrFail($id);
+
+        $request->validate([
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'title'       => 'nullable|string|max:255',
+            'subtitle'    => 'nullable|string|max:255',
+            'button_text' => 'nullable|string|max:100',
+            'button_url'  => 'nullable|string|max:255',
+            'sort_order'  => 'nullable|integer',
+        ]);
+
+        $data = [
+            'title'       => $request->title,
+            'subtitle'    => $request->subtitle,
+            'button_text' => $request->button_text,
+            'button_url'  => $request->button_url,
+            'is_active'   => $request->has('is_active') ? 1 : 0,
+            'sort_order'  => $request->sort_order ?? 0,
+        ];
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($banner->image && File::exists(public_path($banner->image))) {
+                File::delete(public_path($banner->image));
+            }
+            $imageName = Str::random(40) . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('uploads/banners'), $imageName);
+            $data['image'] = 'uploads/banners/' . $imageName;
+        }
+
+        $banner->update($data);
+
+        return redirect()->route('admin.banners.index')->with('success', 'Banner updated successfully!');
+    }
+
+    public function deleteBanner($id)
+    {
+        $banner = \App\Models\Banner::findOrFail($id);
+
+        if ($banner->image && File::exists(public_path($banner->image))) {
+            File::delete(public_path($banner->image));
+        }
+
+        $banner->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'Banner deleted successfully']);
+    }
 }

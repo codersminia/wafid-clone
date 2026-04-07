@@ -467,6 +467,24 @@
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
 
+                            <!-- Banners -->
+                            <li class="menu-item {{ request()->routeIs('admin.banners*') ? 'menu-item-active' : '' }}"
+                                aria-haspopup="true">
+                                <a href="{{ route('admin.banners.index') }}" class="menu-link">
+                                    <span class="svg-icon menu-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <rect fill="#000000" opacity="0.3" x="2" y="6" width="20" height="12" rx="2"/>
+                                                <rect fill="#000000" x="6" y="10" width="8" height="2" rx="1"/>
+                                                <rect fill="#000000" x="6" y="13" width="5" height="1.5" rx="0.75"/>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span class="menu-text">Banners</span>
+                                </a>
+                            </li>
+
                             <!-- Website Settings -->
                             <li class="menu-item {{ request()->routeIs('admin.settings*') ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">

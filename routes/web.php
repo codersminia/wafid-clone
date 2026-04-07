@@ -218,4 +218,14 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
         Route::post('/store', [AdminController::class, 'storeCityMedia'])->name('store');
         Route::delete('/{id}', [AdminController::class, 'deleteCityMedia'])->name('delete');
     });
+
+    // Banners
+    Route::prefix('banners')->name('banners.')->group(function () {
+        Route::get('/', [AdminController::class, 'banners'])->name('index');
+        Route::get('/create', [AdminController::class, 'createBanner'])->name('create');
+        Route::post('/store', [AdminController::class, 'storeBanner'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'editBanner'])->name('edit');
+        Route::post('/{id}/update', [AdminController::class, 'updateBanner'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'deleteBanner'])->name('delete');
+    });
 });
