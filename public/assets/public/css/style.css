@@ -1421,3 +1421,95 @@ html {
         max-width: 1720px;
     }
 }
+
+/* ============================================
+   GCC COUNTRIES SECTION
+   ============================================ */
+.gcc-countries-section {
+    background-color: #1a252f;
+}
+
+.gcc-subtitle {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.gcc-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 220px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gcc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gcc-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gcc-card:hover img {
+    transform: scale(1.05);
+}
+
+.gcc-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 18px 20px;
+}
+
+.gcc-card-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    line-height: 1.2;
+}
+
+.gcc-card-cities {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.8rem;
+    margin: 0 0 10px;
+}
+
+.gcc-card-link {
+    color: #FFC654;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.gcc-card-link:hover {
+    color: #ffd980;
+    gap: 8px;
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    .gcc-card {
+        height: 190px;
+    }
+    .gcc-card-title {
+        font-size: 1.05rem;
+    }
+}
