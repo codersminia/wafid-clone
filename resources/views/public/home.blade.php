@@ -389,9 +389,9 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-extrabold text-uppercase letter-spacing-2">How it works</h6>
-                <h2 class="font-weight-bold text-dark">Easy 3-Step Support</h2>
+                <h2 class="font-weight-bold text-dark">Book GAMCA Medical Appointment in 3 Easy Steps</h2>
                 <div class="theme-divider"></div>
-                <p class="text-muted">We make Gulf medical and skill test bookings effortless for you.</p>
+                <p class="text-muted">We make your GAMCA medical appointment booking in Pakistan quick, secure, and stress-free. Follow these 3 simple steps to complete your GCC medical registration online without any confusion.</p>
             </div>
 
             <div class="process-container">
@@ -403,8 +403,8 @@
                             <div class="process-icon-wrapper">
                                 <i class="fas fa-file-contract fa-2x"></i>
                             </div>
-                            <h3 class="h4 font-weight-bold text-dark mt-4">Provide Details</h3>
-                            <p class="text-muted mb-0">Simply fill out our short form with your basic passport information. Our team cross-checks everything for accuracy.</p>
+                            <h3 class="h4 font-weight-bold text-dark mt-4">Step 1: Provide Your Details</h3>
+                            <p class="text-muted mb-0">Fill out our quick online form with your passport information and personal details. Our team carefully reviews and verifies your data to ensure accurate GAMCA (WAFID) registration and avoid any errors.</p>
                         </div>
                     </div>
 
@@ -414,8 +414,13 @@
                             <div class="process-icon-wrapper">
                                 <i class="fas fa-money-check-alt fa-2x"></i>
                             </div>
-                            <h3 class="h4 font-weight-bold text-dark mt-4">Easy Payment</h3>
-                            <p class="text-muted mb-0">Confirm your booking by paying via any local method (EasyPaisa, JazzCash, or Bank). Instant confirmation guaranteed.</p>
+                            <h3 class="h4 font-weight-bold text-dark mt-4">Step 2: Easy & Secure Payment</h3>
+                            <p class="text-muted mb-2">Confirm your GAMCA medical booking by paying through convenient local options. Your payment is processed securely and your appointment is confirmed instantly.</p>
+                            <div class="d-flex flex-wrap justify-content-center" style="gap:6px;">
+                                <span class="badge badge-light border px-2 py-1 small"><i class="fas fa-mobile-alt mr-1 text-warning"></i>Easypaisa</span>
+                                <span class="badge badge-light border px-2 py-1 small"><i class="fas fa-mobile-alt mr-1 text-success"></i>JazzCash</span>
+                                <span class="badge badge-light border px-2 py-1 small"><i class="fas fa-university mr-1 text-primary"></i>Bank Transfer</span>
+                            </div>
                         </div>
                     </div>
 
@@ -425,8 +430,8 @@
                             <div class="process-icon-wrapper">
                                 <i class="fab fa-whatsapp-square fa-2x"></i>
                             </div>
-                            <h3 class="h4 font-weight-bold text-dark mt-4">Instant PDF</h3>
-                            <p class="text-muted mb-0">Your high-resolution official appointment slip is delivered directly to your WhatsApp as a ready-to-print PDF.</p>
+                            <h3 class="h4 font-weight-bold text-dark mt-4">Step 3: Get Your Appointment Slip</h3>
+                            <p class="text-muted mb-0">Once confirmed, you'll receive your official GAMCA medical appointment slip as a high-quality PDF directly on your WhatsApp. Simply download and print it for your visit to the GAMCA-approved medical center.</p>
                         </div>
                     </div>
                 </div>
@@ -580,47 +585,52 @@
     <!-- Why Choose Us -->
     <section class="py-5 bg-white" data-aos="fade-up">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="bg-light-grey rounded text-center">
-                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                            alt="Consultancy" class="img-fluid rounded shadow-lg">
-                    </div>
+            <div class="row align-items-stretch">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                        alt="GAMCA Medical Appointment Pakistan"
+                        class="img-fluid rounded shadow-lg w-100 h-100"
+                        style="object-fit: cover; min-height: 400px;"
+                        loading="lazy">
                 </div>
-                <div class="col-lg-6 pl-lg-5">
+                <div class="col-lg-7 pl-lg-5">
                     <h6 class="text-accent-red font-weight-bold text-uppercase">Why Choose Us</h6>
-                    <h2 class="font-weight-bold mb-4 text-dark">We Make It Easy & Secure</h2>
-                    <div class="theme-divider mx-0 mb-4"></div>
+                    <h2 class="font-weight-bold mb-2 text-dark">Why Choose Us for GAMCA Medical Appointment in Pakistan</h2>
+                    <p class="text-muted mb-3">Booking your GAMCA (WAFID) medical appointment can be confusing — we simplify the entire process to make it smooth, secure, and hassle-free.</p>
+                    <div class="theme-divider mx-0 mb-3"></div>
 
-                    <div class="media mb-4">
-                        <div class="icon-circle bg-light-grey text-accent-red mr-3 p-3 rounded-circle">
+                    <div class="media mb-3">
+                        <div class="icon-circle bg-light-grey text-accent-red mr-3 p-3 rounded-circle flex-shrink-0">
                             <i class="fas fa-bolt fa-lg"></i>
                         </div>
                         <div class="media-body">
-                            <h5 class="mt-0 font-weight-bold text-dark">Fast Processing</h5>
-                            <p class="text-muted">We process most applications within 1-2 hours of payment confirmation.</p>
+                            <h5 class="mt-0 font-weight-bold text-dark">Fast GAMCA Appointment Processing</h5>
+                            <p class="text-muted mb-0 small">Most GAMCA registrations processed within <strong>1–2 hours</strong> after payment — no delays in your visa process.</p>
                         </div>
                     </div>
 
-                    <div class="media mb-4">
-                        <div class="icon-circle bg-light-grey text-accent-green mr-3 p-3 rounded-circle">
+                    <div class="media mb-3">
+                        <div class="icon-circle bg-light-grey text-accent-green mr-3 p-3 rounded-circle flex-shrink-0">
                             <i class="fas fa-wallet fa-lg"></i>
                         </div>
                         <div class="media-body">
-                            <h5 class="mt-0 font-weight-bold text-dark">Local Payment Methods</h5>
-                            <p class="text-muted">No credit card? No problem. Pay via JazzCash, Easypaisa, or local Bank
-                                Transfer.</p>
+                            <h5 class="mt-0 font-weight-bold text-dark">Easy Local Payment Options</h5>
+                            <p class="text-muted mb-2 small">No international card needed. Pay via local methods accessible to everyone in Pakistan.</p>
+                            <div class="d-flex flex-wrap" style="gap: 6px;">
+                                <span class="badge badge-light border px-2 py-1 small"><i class="fas fa-mobile-alt mr-1 text-success"></i>JazzCash</span>
+                                <span class="badge badge-light border px-2 py-1 small"><i class="fas fa-mobile-alt mr-1 text-warning"></i>Easypaisa</span>
+                                <span class="badge badge-light border px-2 py-1 small"><i class="fas fa-university mr-1 text-primary"></i>Bank Transfer</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="media">
-                        <div class="icon-circle bg-light-grey text-primary-dark mr-3 p-3 rounded-circle">
-                            <i class="fas fa-headset fa-lg"></i>
+                        <div class="icon-circle bg-light-grey text-primary-dark mr-3 p-3 rounded-circle flex-shrink-0">
+                            <i class="fas fa-shield-alt fa-lg"></i>
                         </div>
                         <div class="media-body">
-                            <h5 class="mt-0 font-weight-bold text-dark">Manual Verification</h5>
-                            <p class="text-muted">Our experts check your documents before applying to avoid rejection
-                                errors.</p>
+                            <h5 class="mt-0 font-weight-bold text-dark">Manual Verification by Experts</h5>
+                            <p class="text-muted mb-0 small">Our team carefully reviews your details before submitting your GAMCA / WAFID application — reducing errors and preventing rejection.</p>
                         </div>
                     </div>
                 </div>
@@ -873,6 +883,46 @@
                 <a href="{{ route('public.blogs') }}" class="btn btn-outline-dark px-5 py-2 font-weight-bold">
                     View All Posts
                 </a>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- FAQ Section -->
+    @if($homeFaqs->count() > 0)
+    <section class="home-faq-section py-5 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="home-faq-left">
+                        <h6 class="text-accent-red font-weight-bold text-uppercase">FAQ</h6>
+                        <h2 class="font-weight-bold text-dark mb-3">Frequently Asked Questions</h2>
+                        <p class="text-muted mb-4">Everything you need to know about GAMCA medical appointments, WAFID registration, and our booking process.</p>
+                        <a href="{{ route('faq') }}" class="btn btn-dark px-4 py-2 font-weight-bold">
+                            View All FAQs <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="accordion home-faq-accordion" id="homeFaqAccordion">
+                        @foreach($homeFaqs as $i => $faq)
+                        <div class="home-faq-item">
+                            <div class="home-faq-question {{ $i === 0 ? '' : 'collapsed' }}"
+                                data-toggle="collapse"
+                                data-target="#faq{{ $faq->id }}"
+                                aria-expanded="{{ $i === 0 ? 'true' : 'false' }}">
+                                <span>{{ $faq->question }}</span>
+                                <i class="fas fa-chevron-down home-faq-icon"></i>
+                            </div>
+                            <div id="faq{{ $faq->id }}"
+                                class="collapse {{ $i === 0 ? 'show' : '' }}"
+                                data-parent="#homeFaqAccordion">
+                                <div class="home-faq-answer">{{ $faq->answer }}</div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -130,7 +130,9 @@ class PublicController extends Controller
             ->take(3)
             ->get();
 
-        return view('public.home', compact('testimonials', 'banners', 'latestBlogs'));
+        $homeFaqs = \App\Models\Faq::where('status', 1)->take(8)->get();
+
+        return view('public.home', compact('testimonials', 'banners', 'latestBlogs', 'homeFaqs'));
     }
 
     public function faq()
