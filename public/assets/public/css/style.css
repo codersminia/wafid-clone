@@ -1513,3 +1513,119 @@ html {
         font-size: 1.05rem;
     }
 }
+
+/* ============================================
+   BLOG HOME SECTION
+   ============================================ */
+.blog-home-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-home-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+.blog-home-img-link {
+    display: block;
+    overflow: hidden;
+    height: 210px;
+    flex-shrink: 0;
+}
+
+.blog-home-img-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.blog-home-card:hover .blog-home-img-link img {
+    transform: scale(1.04);
+}
+
+.blog-home-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.blog-home-category {
+    display: inline-block;
+    background: #fdf2f1;
+    color: var(--accent-red);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.blog-home-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 10px;
+}
+
+.blog-home-title a {
+    color: #1a252f;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.blog-home-title a:hover {
+    color: var(--accent-red);
+}
+
+.blog-home-excerpt {
+    font-size: 0.875rem;
+    color: #6c757d;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.blog-home-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 12px;
+    margin-top: auto;
+}
+
+.blog-home-date {
+    font-size: 0.78rem;
+    color: #aaa;
+}
+
+.blog-home-read-more {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-red);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s ease;
+}
+
+.blog-home-read-more:hover {
+    color: #c0392b;
+    gap: 7px;
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    .blog-home-img-link { height: 180px; }
+}

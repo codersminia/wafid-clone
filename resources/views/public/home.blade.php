@@ -824,6 +824,60 @@
         </div>
     </section>
 
+    <!-- Latest Blog Posts -->
+    @if($latestBlogs->count() > 0)
+    <section class="blog-home-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-accent-red font-weight-bold text-uppercase">Our Blog</h6>
+                <h2 class="font-weight-bold text-dark">Latest News & Updates</h2>
+                <div class="theme-divider"></div>
+                <p class="text-muted">Stay informed with the latest updates on GAMCA, WAFID, and Gulf visa processes.</p>
+            </div>
+            <div class="row">
+                @foreach($latestBlogs as $blog)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <article class="blog-home-card h-100">
+                        <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-home-img-link">
+                            @if($blog->image)
+                                <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" loading="lazy" width="400" height="220">
+                            @else
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=70" alt="{{ $blog->title }}" loading="lazy" width="400" height="220">
+                            @endif
+                        </a>
+                        <div class="blog-home-body">
+                            @if($blog->category)
+                                <span class="blog-home-category">{{ $blog->category->name }}</span>
+                            @endif
+                            <h3 class="blog-home-title">
+                                <a href="{{ route('public.blogs.details', $blog->slug) }}">{{ $blog->title }}</a>
+                            </h3>
+                            @if($blog->short_description)
+                                <p class="blog-home-excerpt">{{ Str::limit($blog->short_description, 100) }}</p>
+                            @endif
+                            <div class="blog-home-footer">
+                                <span class="blog-home-date">
+                                    <i class="far fa-calendar-alt mr-1"></i>
+                                    {{ $blog->published_at ? $blog->published_at->format('d M Y') : $blog->created_at->format('d M Y') }}
+                                </span>
+                                <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-home-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-3">
+                <a href="{{ route('public.blogs') }}" class="btn btn-outline-dark px-5 py-2 font-weight-bold">
+                    View All Posts
+                </a>
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!-- Call to Action -->
     <section class="py-5 bg-primary-dark text-white text-center">
         <div class="container">
@@ -842,9 +896,9 @@
 $(document).ready(function(){
     // Initialize AOS
     AOS.init({
-        duration: 1000,
+        duration: 800,
         once: true,
-        offset: 100
+        offset: 50
     });
 
     // Counter Animation Logic

@@ -124,7 +124,13 @@ class PublicController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('public.home', compact('testimonials', 'banners'));
+        $latestBlogs = \App\Models\Blog::with('category')
+            ->where('status', 1)
+            ->orderBy('published_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('public.home', compact('testimonials', 'banners', 'latestBlogs'));
     }
 
     public function faq()
