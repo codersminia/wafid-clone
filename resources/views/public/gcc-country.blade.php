@@ -2,7 +2,7 @@
 
 @section('title', $data['title'])
 @section('meta_description', $data['meta_desc'])
-@section('meta_keywords', 'GAMCA medical ' . $data['name'] . ', Wafid ' . $data['name'] . ', GCC medical appointment ' . $data['name'] . ', GAMCA slip ' . $data['name'] . ', Gulf medical test Pakistan')
+@section('meta_keywords', $data['name'] . ' GAMCA medical Pakistan, WAFID ' . $data['name'] . ', ' . $data['name'] . ' medical appointment Pakistan, GAMCA slip ' . $data['name'] . ', WAFID token ' . $data['name'] . ', Gulf medical test Pakistan 2026')
 
 @push('schema')
 ,{
@@ -19,6 +19,18 @@
         }{{ $i < count($data['faqs']) - 1 ? ',' : '' }}
         @endforeach
     ]
+},
+{
+    "@type": "Service",
+    "@id": "{{ url()->current() }}#service",
+    "name": "{{ $data['name'] }} GAMCA Medical Appointment Booking",
+    "description": "{{ $data['meta_desc'] }}",
+    "provider": { "@id": "{{ url('/') }}#organization" },
+    "areaServed": {
+        "@type": "Country",
+        "name": "Pakistan"
+    },
+    "serviceType": "Medical Appointment Booking"
 }
 @endpush
 
@@ -277,12 +289,11 @@
 </div>
 
 {{-- ── WHAT IS GAMCA ── --}}
-<section class="gcc-intro-section py-5">
-    <div class="container">
+<section class="gcc-intro-section py-5">    <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <h6 class="text-uppercase font-weight-bold" style="color:var(--accent-gold);letter-spacing:1px;">About GAMCA for {{ $data['name'] }}</h6>
-                <h2 class="font-weight-bold text-dark mb-3">What is GAMCA (Wafid) Medical Test?</h2>
+                <h2 class="font-weight-bold text-dark mb-3">What is {{ $data['name'] }} GAMCA (Wafid) Medical Test?</h2>
                 <p class="text-muted">GAMCA stands for <strong>Gulf Approved Medical Centers Association</strong>. It is the official body that manages medical fitness testing for workers traveling to GCC countries including {{ $data['name'] }}. The test is mandatory for all employment and residency visa applicants.</p>
                 <p class="text-muted">The medical examination checks for infectious diseases such as tuberculosis, hepatitis, HIV, and other conditions that could affect public health in {{ $data['name'] }}. A clean medical report is required before your visa can be processed.</p>
                 <p class="text-muted mb-4">At Gulf Medical Consultants, we simplify the entire GAMCA booking process. You fill out our form online, we assign you to the nearest authorized center, and you receive your appointment slip on WhatsApp — ready to print and use.</p>
@@ -379,7 +390,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h6 class="text-uppercase font-weight-bold" style="color:var(--accent-gold);letter-spacing:1px;">Simple Process</h6>
-            <h2 class="font-weight-bold text-dark">How to Book GAMCA for {{ $data['name'] }}</h2>
+            <h2 class="font-weight-bold text-dark">{{ $data['name'] }} GAMCA Medical Process – Step by Step</h2>
             <div class="theme-divider"></div>
         </div>
 
@@ -527,7 +538,7 @@
 </section>
 @endif
 
-{{-- ── WHY CHOOSE US (Saudi-specific) ── --}}
+{{-- ── WHY CHOOSE US ── --}}
 @if(!empty($data['why_us']))
 <section class="py-5" style="background:#fff;">
     <div class="container">
@@ -565,7 +576,7 @@
     <div class="container">
         <div class="text-center mb-4">
             <h6 class="text-uppercase font-weight-bold" style="color:var(--accent-gold);letter-spacing:1px;">Authorized Centers</h6>
-            <h2 class="font-weight-bold text-dark">GAMCA Medical Centers for {{ $data['name'] }}</h2>
+            <h2 class="font-weight-bold text-dark">{{ $data['name'] }} GAMCA Medical Centers in Pakistan</h2>
             <p class="text-muted">These are the authorized GAMCA-approved medical centers in Pakistan that process {{ $data['name'] }} visa medical tests.</p>
         </div>
         <div class="table-responsive">
@@ -601,6 +612,27 @@
 </section>
 @endif
 
+{{-- ── MID-PAGE WHATSAPP CTA ── --}}
+<section class="py-4" style="background:var(--accent-gold);">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between" style="gap:16px;">
+            <div>
+                <p class="font-weight-bold mb-0" style="color:#0f1923;font-size:1.05rem;">
+                    <i class="fab fa-whatsapp mr-2" style="font-size:1.3rem;"></i>
+                    Book Your {{ $data['name'] }} GAMCA Medical on WhatsApp – Instant Response
+                </p>
+                <p class="mb-0 small" style="color:#1a252f;">Fast booking · WhatsApp slip delivery · 99% success rate · Trusted by 10,000+ workers</p>
+            </div>
+            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hi%2C+I+want+to+book+{{ urlencode($data['name']) }}+GAMCA+medical+appointment."
+               target="_blank"
+               class="btn font-weight-bold px-4 py-2 flex-shrink-0"
+               style="background:#0f1923;color:#fff;border-radius:8px;white-space:nowrap;">
+                <i class="fab fa-whatsapp mr-2"></i>Book Now on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
 {{-- ── FAQ ── --}}
 <section class="py-5" style="background:#fff;">
     <div class="container">
@@ -608,7 +640,7 @@
             <div class="col-lg-8">
                 <div class="text-center mb-5">
                     <h6 class="text-uppercase font-weight-bold" style="color:var(--accent-gold);letter-spacing:1px;">FAQ</h6>
-                    <h2 class="font-weight-bold text-dark">Frequently Asked Questions</h2>
+                    <h2 class="font-weight-bold text-dark">{{ $data['name'] }} GAMCA Medical – Frequently Asked Questions</h2>
                     <p class="text-muted">Common questions about GAMCA medical appointments for {{ $data['name'] }}.</p>
                 </div>
                 <div class="gcc-faq" id="gccFaqAccordion">
@@ -689,12 +721,13 @@
 </section>
 @endif
 
-{{-- ── OTHER COUNTRIES ── --}}
+{{-- ── OTHER COUNTRIES (Internal Linking) ── --}}
 <section class="py-5" style="background:#f7f8fc;">
     <div class="container">
         <div class="text-center mb-4">
-            <h6 class="text-uppercase font-weight-bold" style="color:var(--accent-gold);letter-spacing:1px;">Explore More</h6>
-            <h2 class="font-weight-bold text-dark">Other GCC Countries We Support</h2>
+            <h6 class="text-uppercase font-weight-bold" style="color:var(--accent-gold);letter-spacing:1px;">Also Check</h6>
+            <h2 class="font-weight-bold text-dark">Other GCC Country GAMCA Medical Guides</h2>
+            <p class="text-muted">We cover GAMCA and WAFID medical booking for all GCC countries. Explore our complete guides:</p>
         </div>
         <div class="row">
             @foreach($otherCountries as $slug => $country)
@@ -702,8 +735,11 @@
                 <a href="{{ route('public.gcc.country', $slug) }}" class="other-country-card">
                     <span class="other-country-flag">{{ $country['flag'] }}</span>
                     <div>
-                        <div class="other-country-name">{{ $country['name'] }}</div>
-                        <div class="other-country-cities">{{ implode(', ', array_slice($country['cities'], 0, 2)) }}</div>
+                        <div class="other-country-name">{{ $country['name'] }} GAMCA Medical Guide</div>
+                        <div class="other-country-cities">
+                            <i class="fas fa-map-marker-alt mr-1" style="color:var(--accent-gold)"></i>
+                            {{ implode(', ', array_slice($country['cities'], 0, 2)) }}
+                        </div>
                     </div>
                     <i class="fas fa-arrow-right ml-auto" style="color:var(--accent-gold)"></i>
                 </a>
