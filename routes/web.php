@@ -19,6 +19,8 @@ use App\Http\Controllers\AnalyticsController;
 
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy'])->name('privacy.policy');
 Route::get('/terms-and-conditions', [PublicController::class, 'termsConditions'])->name('terms.conditions');
+Route::get('/refund-policy', [PublicController::class, 'refundPolicy'])->name('refund.policy');
+Route::get('/disclaimer', [PublicController::class, 'disclaimer'])->name('disclaimer');
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
 Route::get('/about-us', [PublicController::class, 'about'])->name('about');

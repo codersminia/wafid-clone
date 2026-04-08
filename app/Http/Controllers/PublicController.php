@@ -118,6 +118,16 @@ class PublicController extends Controller
         return view('public.terms-conditions');
     }
 
+    public function refundPolicy()
+    {
+        return view('public.refund-policy');
+    }
+
+    public function disclaimer()
+    {
+        return view('public.disclaimer');
+    }
+
     public function index()
     {
         // Fetch up to 12 testimonials for the carousel: Prioritize Google, then Featured, then Latest approved

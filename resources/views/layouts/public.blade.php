@@ -243,6 +243,8 @@
                             <li><a href="{{ route('ViewMedicalReport') }}">Check Status</a></li>
                             <li><a href="{{ route('privacy.policy') }}">Privacy Policy</a></li>
                             <li><a href="{{ route('terms.conditions') }}">Terms &amp; Conditions</a></li>
+                            <li><a href="{{ route('refund.policy') }}">Refund Policy</a></li>
+                            <li><a href="{{ route('disclaimer') }}">Disclaimer</a></li>
                         </ul>
                     </div>
 
@@ -293,6 +295,10 @@
                     <a href="{{ route('privacy.policy') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Privacy Policy</a>
                     <span class="mx-2">·</span>
                     <a href="{{ route('terms.conditions') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Terms &amp; Conditions</a>
+                    <span class="mx-2">·</span>
+                    <a href="{{ route('refund.policy') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Refund Policy</a>
+                    <span class="mx-2">·</span>
+                    <a href="{{ route('disclaimer') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Disclaimer</a>
                 </div>
             </div>
         </div>
