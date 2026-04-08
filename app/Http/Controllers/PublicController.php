@@ -108,6 +108,11 @@ class PublicController extends Controller
     {
         return AppointmentFee::where('fee_key', $key)->value('amount') ?? $default;
     }
+    public function privacyPolicy()
+    {
+        return view('public.privacy-policy');
+    }
+
     public function index()
     {
         // Fetch up to 12 testimonials for the carousel: Prioritize Google, then Featured, then Latest approved
