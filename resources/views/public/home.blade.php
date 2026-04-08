@@ -259,7 +259,7 @@
     </div>
 
     <!-- SEO Content Section -->
-    <section class="seo-intro-section py-5 bg-light" data-aos="fade-up">
+    <section class="seo-intro-section py-5 sec-bg-white-clean" data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center">
 
@@ -385,7 +385,7 @@
     </section>
 
     <!-- Simple 3-Step Process (Premium Revamp) -->
-    <section class="py-5 bg-white" data-aos="fade-up">
+    <section class="py-5 sec-bg-white-clean" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-extrabold text-uppercase letter-spacing-2">How it works</h6>
@@ -440,7 +440,7 @@
     </section>
 
     <!-- Services Section -->
-    <section class="services-section py-5 bg-light-grey" id="services" data-aos="fade-up">
+    <section class="services-section py-5 sec-bg-light-warm" id="services" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-bold text-uppercase">Our Services</h6>
@@ -568,7 +568,7 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="py-5 bg-white" data-aos="fade-up">
+    <section class="py-5 sec-bg-why-us" data-aos="fade-up">
         <div class="container">
             <div class="row align-items-stretch">
                 <div class="col-lg-5 mb-4 mb-lg-0">
@@ -624,7 +624,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="py-5 bg-light-grey" data-aos="fade-up">
+    <section class="py-5 sec-bg-testimonials" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-bold text-uppercase">Testimonials</h6>
@@ -737,7 +737,7 @@
     </section>
 
     <!-- Office Locations Section -->
-    <section class="py-5 bg-white" id="locations">
+    <section class="py-5 sec-bg-white-clean" id="locations">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-bold text-uppercase">Find Us</h6>
@@ -821,7 +821,7 @@
 
     <!-- Latest Blog Posts -->
     @if($latestBlogs->count() > 0)
-    <section class="blog-home-section py-5 bg-light">
+    <section class="blog-home-section py-5 sec-bg-light-warm">
         <div class="container">
             <div class="text-center mb-5">
                 <h6 class="text-accent-red font-weight-bold text-uppercase">Our Blog</h6>
@@ -875,15 +875,15 @@
 
     <!-- FAQ Section -->
     @if($homeFaqs->count() > 0)
-    <section class="home-faq-section py-5 bg-white">
+    <section class="home-faq-section py-5 sec-bg-gradient-blue">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="home-faq-left">
                         <h6 class="text-accent-red font-weight-bold text-uppercase">FAQ</h6>
-                        <h2 class="font-weight-bold text-dark mb-3">Frequently Asked Questions</h2>
-                        <p class="text-muted mb-4">Everything you need to know about GAMCA medical appointments, WAFID registration, and our booking process.</p>
-                        <a href="{{ route('faq') }}" class="btn btn-dark px-4 py-2 font-weight-bold">
+                        <h2 class="font-weight-bold text-white mb-3">Frequently Asked Questions</h2>
+                        <p style="color:rgba(255,255,255,0.75);" class="mb-4">Everything you need to know about GAMCA medical appointments, WAFID registration, and our booking process.</p>
+                        <a href="{{ route('faq') }}" class="btn btn-light px-4 py-2 font-weight-bold text-dark">
                             View All FAQs <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -914,12 +914,11 @@
     @endif
 
     <!-- Call to Action -->
-    <section class="py-5 bg-primary-dark text-white text-center">
+    <section class="sec-cta-section py-5 text-center">
         <div class="container">
-            <h2 class="font-weight-bold mb-3">Ready to Start Your Journey?</h2>
-            <p class="lead mb-4" style="opacity: 0.8">Don't let technical issues delay your visa. Let us handle the
-                appointments for you.</p>
-            <a href="{{ route('medicalExamination')}}" class="btn btn-outline-light btn-lg px-5">Book Appointment Now</a>
+            <h2 class="font-weight-bold mb-3 text-dark">Ready to Start Your Journey?</h2>
+            <p class="lead mb-4 text-muted">Don't let technical issues delay your visa. Let us handle the appointments for you.</p>
+            <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-lg px-5">Book Appointment Now</a>
         </div>
     </section>
 @endsection

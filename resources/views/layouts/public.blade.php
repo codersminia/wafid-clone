@@ -131,7 +131,7 @@
     <!-- End Google Tag Manager (noscript) -->
      
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 1050;">
+    <nav class="navbar navbar-expand-lg navbar-dark site-navbar sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
@@ -141,35 +141,47 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
-                            data-toggle="dropdown">Services</a>
-                        <div class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <a class="dropdown-item" href="{{ route('medicalExamination')}}">Wafid (GAMCA) Medical</a>
-                            <a class="dropdown-item" href="{{ route('special.appointment')}}">Wafid Choice Center</a>
-                            <a class="dropdown-item" href="{{ route('navtechform')}}">NAVTTC / Takamol Appointment</a>
-                            <a class="dropdown-item" href="{{ route('tasheer.form')}}">Tasheer Appointment</a>
-                            <a class="dropdown-item" href="{{ route('softskill.form')}}">Soft Skill Certificate</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown">Services</a>
+                        <div class="dropdown-menu site-dropdown" aria-labelledby="servicesDropdown">
+                            <a class="dropdown-item" href="{{ route('medicalExamination') }}">
+                                <i class="fas fa-file-medical mr-2 text-accent"></i>Wafid (GAMCA) Medical
+                            </a>
+                            <a class="dropdown-item" href="{{ route('special.appointment') }}">
+                                <i class="fas fa-hospital mr-2 text-accent"></i>Wafid Choice Center
+                            </a>
+                            <a class="dropdown-item" href="{{ route('navtechform') }}">
+                                <i class="fas fa-tools mr-2 text-accent"></i>NAVTTC / Takamol
+                            </a>
+                            <a class="dropdown-item" href="{{ route('tasheer.form') }}">
+                                <i class="fas fa-passport mr-2 text-accent"></i>Tasheer Appointment
+                            </a>
+                            <a class="dropdown-item" href="{{ route('softskill.form') }}">
+                                <i class="fas fa-certificate mr-2 text-accent"></i>Soft Skill Certificate
+                            </a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="centersDropdown" role="button"
-                            data-toggle="dropdown">Medical Centers</a>
-                        <div class="dropdown-menu" aria-labelledby="centersDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="centersDropdown" role="button" data-toggle="dropdown">Medical Centers</a>
+                        <div class="dropdown-menu site-dropdown" aria-labelledby="centersDropdown">
                             @foreach($all_cities as $city)
-                                <a class="dropdown-item"
-                                    href="{{ route('public.medical.city', ['city' => strtolower(str_replace(' ', '-', $city))]) }}">
-                                    {{ $city }} Medical Centers
+                                <a class="dropdown-item" href="{{ route('public.medical.city', ['city' => strtolower(str_replace(' ', '-', $city))]) }}">
+                                    <i class="fas fa-map-marker-alt mr-2 text-accent"></i>{{ $city }}
                                 </a>
                             @endforeach
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('public.blogs') }}">Blogs</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+                    <li class="nav-item ml-lg-3">
+                        <a class="nav-link nav-cta-btn" href="{{ route('medicalExamination') }}">
+                            <i class="fas fa-calendar-check mr-1"></i> Book Now
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -178,89 +190,103 @@
     @yield('content')
 
     <!-- Footer -->
-    <footer class="footer bg-dark text-white py-5">
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col-md-4 mb-3">
-                    <h5>About {{ $settings['site_name'] ?? 'Wafid' }}</h5>
-                    <p>{{ $settings['footer_text'] ?? 'Providing employment and residency services for Gulf Cooperation Council States.' }}
-                    </p>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('home') }}" class="text-white-50">Home</a></li>
-                        <li><a href="{{ route('public.blogs') }}" class="text-white-50">Blogs</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-white-50">FAQ</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-white-50">Contact</a></li>
-                        <li><a href="{{ route('about') }}" class="text-white-50">About</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Contact Info</h5>
-                    <div class="footer-contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($settings['site_address'] ?? '') }}"
-                            target="_blank">
-                            {{ $settings['site_address'] ?? 'Address not set' }}
-                        </a>
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <!-- Brand -->
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
+                            alt="{{ $settings['site_name'] ?? 'Gulf Medical' }}" height="50" class="mb-4">
+                        <p class="footer-about">{{ $settings['footer_text'] ?? 'Providing employment and residency services for Gulf Cooperation Council States.' }}</p>
+                        <div class="footer-socials mt-4">
+                            @if(!empty($settings['social_facebook']))
+                                <a href="{{ $settings['social_facebook'] }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            @endif
+                            @if(!empty($settings['social_twitter']))
+                                <a href="{{ $settings['social_twitter'] }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            @endif
+                            @if(!empty($settings['social_instagram']))
+                                <a href="{{ $settings['social_instagram'] }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            @endif
+                            @if(!empty($settings['social_linkedin']))
+                                <a href="{{ $settings['social_linkedin'] }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            @endif
+                            @if(!empty($settings['social_tiktok']))
+                                <a href="{{ $settings['social_tiktok'] }}" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                            @endif
+                        </div>
                     </div>
-                    <div class="footer-contact-item">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:{{ preg_replace('/[^0-9+]/', '', $settings['site_phone'] ?? '') }}">
-                            {{ $settings['site_phone'] ?? '+966 XX XXX XXXX' }}
-                        </a>
+
+                    <!-- Quick Links -->
+                    <div class="col-lg-2 col-md-6 mb-5">
+                        <h6 class="footer-heading">Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('home') }}">Home</a></li>
+                            <li><a href="{{ route('medicalExamination') }}">GAMCA Medical</a></li>
+                            <li><a href="{{ route('special.appointment') }}">Wafid Choice</a></li>
+                            <li><a href="{{ route('navtechform') }}">NAVTTC Test</a></li>
+                            <li><a href="{{ route('tasheer.form') }}">Tasheer Visa</a></li>
+                            <li><a href="{{ route('softskill.form') }}">Soft Skills</a></li>
+                        </ul>
                     </div>
-                    <div class="footer-contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:{{ $settings['site_email'] ?? 'info@wafid.com' }}">
-                            {{ $settings['site_email'] ?? 'info@wafid.com' }}
-                        </a>
+
+                    <!-- Info Links -->
+                    <div class="col-lg-2 col-md-6 mb-5">
+                        <h6 class="footer-heading">Information</h6>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('about') }}">About Us</a></li>
+                            <li><a href="{{ route('public.blogs') }}">Blog</a></li>
+                            <li><a href="{{ route('faq') }}">FAQ</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
+                            <li><a href="{{ route('ViewMedicalCenters') }}">Medical Centers</a></li>
+                            <li><a href="{{ route('ViewMedicalReport') }}">Check Status</a></li>
+                        </ul>
                     </div>
-                    <div class="footer-cta-btns">
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '') }}"
-                            target="_blank" class="btn-footer-cta btn-whatsapp-footer">
-                            <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
-                        </a>
-                        <a href="{{ route('medicalExamination') }}" class="btn-footer-cta btn-book-footer">
-                            <i class="fas fa-calendar-check mr-2"></i> Book Appointment
-                        </a>
+
+                    <!-- Contact -->
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <h6 class="footer-heading">Get In Touch</h6>
+                        <ul class="footer-contact-list">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($settings['site_address'] ?? '') }}" target="_blank">
+                                    {{ $settings['site_address'] ?? 'Address not set' }}
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $settings['site_phone'] ?? '') }}">
+                                    {{ $settings['site_phone'] ?? '+92 XXX XXXXXXX' }}
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:{{ $settings['site_email'] ?? 'info@wafid.com' }}">
+                                    {{ $settings['site_email'] ?? 'info@wafid.com' }}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="footer-action-btns mt-4">
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '') }}" target="_blank" class="footer-btn footer-btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp Us
+                            </a>
+                            <a href="{{ route('medicalExamination') }}" class="footer-btn footer-btn-book">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <hr class="bg-white-50">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="text-white-50 mb-0">&copy; {{ date('Y') }}
-                        {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All
-                        rights reserved.
-                    </p>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-disclaimer">
+                    <strong>Disclaimer:</strong> {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }} is a private consultancy service. We are not the official Wafid, NAVTTC, or Tasheer government website. We charge a service fee to assist users in booking appointments and processing paperwork.
                 </div>
-                <div class="col-md-6 text-md-right">
-                    @if(!empty($settings['social_facebook'])) <a href="{{ $settings['social_facebook'] }}"
-                    target="_blank" class="text-white-50 mr-3"><i class="fab fa-facebook"></i></a> @endif
-                    @if(!empty($settings['social_twitter'])) <a href="{{ $settings['social_twitter'] }}" target="_blank"
-                    class="text-white-50 mr-3"><i class="fab fa-twitter"></i></a> @endif
-                    @if(!empty($settings['social_linkedin'])) <a href="{{ $settings['social_linkedin'] }}"
-                    target="_blank" class="text-white-50 mr-3"><i class="fab fa-linkedin"></i></a> @endif
-                    @if(!empty($settings['social_instagram'])) <a href="{{ $settings['social_instagram'] }}"
-                    target="_blank" class="text-white-50 mr-3"><i class="fab fa-instagram"></i></a> @endif
-                    @if(!empty($settings['social_tiktok'])) <a href="{{ $settings['social_tiktok'] }}" target="_blank"
-                    class="text-white-50"><i class="fab fa-tiktok"></i></a> @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-disclaimer-box">
-                        <p>
-                            <strong>Disclaimer:</strong> {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }} is a
-                            private
-                            consultancy service. We are
-                            not the official Wafid, NAVTTC, or Tasheer government website. We charge a service fee to
-                            assist users in booking appointments and processing paperwork. You can book directly on the
-                            official websites if you possess the technical knowledge and payment methods.
-                        </p>
-                    </div>
+                <div class="footer-copyright">
+                    <span>&copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All rights reserved.</span>
                 </div>
             </div>
         </div>
