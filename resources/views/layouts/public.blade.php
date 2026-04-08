@@ -242,6 +242,7 @@
                             <li><a href="{{ route('ViewMedicalCenters') }}">Medical Centers</a></li>
                             <li><a href="{{ route('ViewMedicalReport') }}">Check Status</a></li>
                             <li><a href="{{ route('privacy.policy') }}">Privacy Policy</a></li>
+                            <li><a href="{{ route('terms.conditions') }}">Terms &amp; Conditions</a></li>
                         </ul>
                     </div>
 
@@ -290,6 +291,8 @@
                     <span>&copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All rights reserved.</span>
                     <span class="mx-2">·</span>
                     <a href="{{ route('privacy.policy') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Privacy Policy</a>
+                    <span class="mx-2">·</span>
+                    <a href="{{ route('terms.conditions') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Terms &amp; Conditions</a>
                 </div>
             </div>
         </div>

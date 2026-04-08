@@ -113,6 +113,11 @@ class PublicController extends Controller
         return view('public.privacy-policy');
     }
 
+    public function termsConditions()
+    {
+        return view('public.terms-conditions');
+    }
+
     public function index()
     {
         // Fetch up to 12 testimonials for the carousel: Prioritize Google, then Featured, then Latest approved
