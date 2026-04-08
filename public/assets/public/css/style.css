@@ -1549,6 +1549,16 @@ html {
     text-decoration: none;
 }
 
+/* Clickable card wrapper */
+.gcc-card-wrap {
+    display: block;
+    text-decoration: none;
+}
+.gcc-card-wrap:hover .gcc-card-link {
+    color: #ffd980;
+    gap: 8px;
+}
+
 @media (max-width: 767px) {
     .gcc-card {
         height: 190px;

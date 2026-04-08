@@ -84,6 +84,9 @@ Route::get('/blogs/{slug}', [PublicController::class, 'blogDetails'])->name('pub
 // City-wise Medical Centers (SEO)
 Route::get('/medical-centers-in-{city}', [PublicController::class, 'medicalCentersByCity'])->name('public.medical.city');
 
+// GCC Country Pages (SEO)
+Route::get('/gcc-country/{country}', [PublicController::class, 'gccCountryPage'])->name('public.gcc.country');
+
 // Guest routes (login page + submit)
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');

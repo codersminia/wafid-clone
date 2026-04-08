@@ -315,69 +315,81 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="{{ route('public.gcc.country', 'saudi-arabia') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
                         <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Saudi Arabia" loading="lazy">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Saudi Arabia</h3>
                             <p class="gcc-card-cities">Major cities: Riyadh, Jeddah, Dammam</p>
-                            <a href="{{ route('ViewMedicalCenters') }}?country=Saudi+Arabia" class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                            <span class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="{{ route('public.gcc.country', 'qatar') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
                         <img src="https://images.unsplash.com/photo-1553697388-94e804e2f0f6?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Qatar" loading="lazy">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Qatar</h3>
                             <p class="gcc-card-cities">Major cities: Doha, Al Khor</p>
-                            <a href="{{ route('ViewMedicalCenters') }}?country=Qatar" class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                            <span class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="{{ route('public.gcc.country', 'oman') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
                         <img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Oman" loading="lazy">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Oman</h3>
                             <p class="gcc-card-cities">Major cities: Muscat, Sohar</p>
-                            <a href="{{ route('ViewMedicalCenters') }}?country=Oman" class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                            <span class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="{{ route('public.gcc.country', 'uae') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
                         <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers UAE" loading="lazy">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">UAE</h3>
                             <p class="gcc-card-cities">Major cities: Dubai, Abu Dhabi</p>
-                            <a href="{{ route('ViewMedicalCenters') }}?country=UAE" class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                            <span class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="{{ route('public.gcc.country', 'kuwait') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
                         <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Kuwait" loading="lazy">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Kuwait</h3>
                             <p class="gcc-card-cities">Major cities: Kuwait City</p>
-                            <a href="{{ route('ViewMedicalCenters') }}?country=Kuwait" class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                            <span class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="{{ route('public.gcc.country', 'bahrain') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
                         <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Bahrain" loading="lazy">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Bahrain</h3>
                             <p class="gcc-card-cities">Major cities: Manama</p>
-                            <a href="{{ route('ViewMedicalCenters') }}?country=Bahrain" class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                            <span class="gcc-card-link">View Details <i class="fas fa-arrow-right"></i></span>
                         </div>
                     </div>
+                    </a>
                 </div>
 
             </div>
