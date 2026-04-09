@@ -543,13 +543,13 @@
                     <h2 class="appt-section-title">Pakistan City-Based GAMCA Booking</h2>
                     <p class="text-muted mb-4">We provide guidance for all major cities in Pakistan:</p>
                     <div class="row">
-                        @php $cities = ['Karachi','Lahore','Islamabad','Rawalpindi','Faisalabad','Peshawar']; @endphp
+                        @php $cities = ['karachi','lahore','islamabad','rawalpindi','peshawar']; @endphp
                         @foreach($cities as $city)
                         <div class="col-6 mb-3">
-                            <div class="appt-city-item">
+                            <a href="{{ route('public.medical.city', $city) }}" class="appt-city-item text-decoration-none" style="transition:all .2s ease;" onmouseover="this.style.background='#fff8e1';this.style.borderColor='var(--accent-gold)'" onmouseout="this.style.background='#f7f8fc';this.style.borderColor='#e8ecf0'">
                                 <i class="fas fa-map-marker-alt mr-2" style="color:var(--accent-gold);"></i>
-                                <span class="small font-weight-bold">GAMCA Appointment {{ $city }}</span>
-                            </div>
+                                <span class="small font-weight-bold" style="color:#1a252f;">GAMCA Appointment {{ ucfirst($city) }}</span>
+                            </a>
                         </div>
                         @endforeach
                     </div>
