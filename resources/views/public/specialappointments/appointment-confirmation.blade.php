@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Page Header -->
-    <section class="page-header bg-dark text-white py-5">
+    <section class="page-header text-white py-5" style="background:linear-gradient(135deg,#0f1923 0%,#1a252f 100%);">
         <div class="container">
             <h1>Confirm Choice Booking</h1>
             <p class="lead">Step 2 of 3: Premium Service Payment</p>
@@ -22,23 +22,20 @@
             </div> --}}
 
             <!-- Fee Alert -->
-            <div class="alert alert-warning border-0 mb-4" style="background-color: #fff3cd;">
+            <div class="alert border-0 mb-4" style="background-color:#fff8e1;border-left:4px solid var(--accent-gold) !important;border-left-style:solid !important;">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h5 class="alert-heading mb-2">
-                            <i class="fas fa-exclamation-triangle"></i> Appointment Fee
+                        <h5 class="alert-heading mb-2" style="color:#1a252f;">
+                            <i class="fas fa-exclamation-triangle mr-2" style="color:var(--accent-gold);"></i>Appointment Fee
                         </h5>
-                        <p class="mb-0">
-                            <strong>
-                                Fee Amount: {{ $fee }} PKR
-                            </strong>
-                            - Payment is required to confirm your appointment.
+                        <p class="mb-0" style="color:#495057;">
+                            <strong>Fee Amount: {{ $fee }} PKR</strong> — Payment is required to confirm your appointment.
                             Please proceed with payment using the account details below.
                         </p>
                     </div>
                     <div class="col-md-4 text-md-right mt-3 mt-md-0">
                         <a href="{{ route('special.payLater') }}" class="btn btn-outline-dark font-weight-bold">
-                            <i class="fas fa-clock"></i> Skip & Pay Later
+                            <i class="fas fa-clock mr-1"></i> Skip & Pay Later
                         </a>
                     </div>
                 </div>
@@ -47,14 +44,14 @@
             <!-- Confirmation Card -->
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-white border-bottom pt-4 pb-3">
-                    <h4 class="mb-0"><i class="fas fa-user-check text-danger"></i> Account Details</h4>
+                    <h4 class="mb-0"><i class="fas fa-user-check mr-2" style="color:var(--accent-gold);"></i>Account Details</h4>
                 </div>
                 <div class="card-body p-4">
                     <div class="row">
                         @foreach($paymentMethods as $method)
                             <div class="col-md-6 text-left mb-4">
                                 <div class="p-3 border rounded h-100 row mx-0"
-                                    style="background-color: #fff9e6; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                                    style="background-color:#fff8e1;box-shadow:0 4px 16px rgba(0,0,0,.08);border-color:#ffe082 !important;">
                                     <div class="col-md-5 text-center">
                                         @if($method->qr_code)
                                             <img src="{{ asset('uploads/qr/' . $method->qr_code) }}" alt="QR Code"
@@ -88,7 +85,7 @@
             <!-- Payment Details Form -->
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-white border-bottom pt-4 pb-3">
-                    <h4 class="mb-0"><i class="fas fa-credit-card text-danger"></i> Payment Information</h4>
+                    <h4 class="mb-0"><i class="fas fa-credit-card mr-2" style="color:var(--accent-gold);"></i>Payment Information</h4>
                 </div>
                 <div class="card-body p-4">
                     <form id="paymentForm" enctype="multipart/form-data">
@@ -136,7 +133,7 @@
                         <div class="form-group mb-4">
                             <label for="paymentProof" class="font-weight-600">Upload Payment Screenshot</label>
                             <div id="dropzone" class="border-2 rounded p-4 text-center dropzone-area"
-                                style="border: 2px dashed #dc3545; background-color: #fafafa; cursor: pointer !important; transition: all 0.3s ease;">
+                                style="border: 2px dashed var(--accent-gold); background-color: #fafafa; cursor: pointer !important; transition: all 0.3s ease;">
                                 <input type="file" name="proof_image" class="form-control-file d-none" id="paymentProof"
                                     accept=".jpg, .jpeg, .png">
                                 <label for="paymentProof" class="cursor-pointer mb-0" style="pointer-events: none;">
@@ -232,12 +229,12 @@
             }
 
             function highlight(e) {
-                dropzone.style.borderColor = '#dc3545';
-                dropzone.style.backgroundColor = '#fff5f5';
+                dropzone.style.borderColor = 'var(--accent-gold)';
+                dropzone.style.backgroundColor = '#fff8e1';
             }
 
             function unhighlight(e) {
-                dropzone.style.borderColor = '#ddd';
+                dropzone.style.borderColor = 'var(--accent-gold)';
                 dropzone.style.backgroundColor = '#fafafa';
             }
 
