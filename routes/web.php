@@ -86,7 +86,7 @@ Route::get('/blogs', [PublicController::class, 'blogs'])->name('public.blogs');
 Route::get('/blogs/{slug}', [PublicController::class, 'blogDetails'])->name('public.blogs.details');
 
 // City-wise Medical Centers (SEO)
-Route::get('/medical-centers-in-{city}', [PublicController::class, 'medicalCentersByCity'])->name('public.medical.city');
+Route::get('/{city}-medical-centers', [PublicController::class, 'medicalCentersByCity'])->name('public.medical.city');
 
 // GCC Country Pages (SEO)
 Route::get('/gcc-country/{country}', [PublicController::class, 'gccCountryPage'])->name('public.gcc.country');
