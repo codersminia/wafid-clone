@@ -1,7 +1,8 @@
 @extends('layouts.public')
 
-@section('title', 'Book NAVTTC / Takamol Skill Test | Saudi SVP Program')
-@section('meta_description', 'Official booking partner for NAVTTC Takamol Skill Verification Program (SVP). Book your test for Electrician, Plumber, Welder, and HVAC for Saudi Visa.')
+@section('title', 'NAVTTC Takamol Booking Pakistan | Saudi Skill Verification Program (SVP)')
+@section('meta_description', 'Book your NAVTTC Takamol trade test online in Pakistan for the Saudi Arabia Skill Verification Program (SVP). Step-by-step guidance, document verification, and WhatsApp support.')
+@section('meta_keywords', 'NAVTTC Takamol booking Pakistan, Saudi skill verification program Pakistan, Takamol test booking, SVP test Pakistan, NAVTTC trade test Saudi Arabia')
 
 @section('content')
 
@@ -168,35 +169,126 @@
     </style>
 
     <!-- Page Header -->
-    <section class="page-header bg-dark text-white py-5">
+    <section class="page-header text-white py-5" style="background:linear-gradient(135deg,#0f1923 0%,#1a252f 100%);">
         <div class="container">
-            <h1>Saudi Skill Verification Program (SVP)</h1>
-            <p class="lead">Book your NAVTTC / Takamol Trade Test online.</p>
-
-            <!-- Trust Badges -->
-            <div class="trust-badges mt-3 bg-white p-2 d-inline-block rounded shadow-sm">
-                <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC">
-                <span class="text-muted font-weight-bold">x</span>
-                <img src="{{ asset('assets/public/images/takamol-logo.svg') }}" alt="Takamol">
-                <!-- Ensure you have this logo -->
+            <nav aria-label="breadcrumb" class="mb-2">
+                <ol class="breadcrumb bg-transparent p-0 mb-0" style="font-size:.82rem;">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}" style="color:rgba(255,255,255,.6);">Home</a></li>
+                    <li class="breadcrumb-item active" style="color:rgba(255,255,255,.4);">NAVTTC Takamol Booking</li>
+                </ol>
+            </nav>
+            <div class="d-flex align-items-center flex-wrap" style="gap:12px;">
+                <div>
+                    <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:.72rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;">
+                        <i class="fas fa-exclamation-circle mr-1"></i> Mandatory for Saudi Visa
+                    </span>
+                    <h1 class="font-weight-bold mb-1">NAVTTC Takamol Booking Pakistan</h1>
+                    <p class="lead mb-2" style="color:rgba(255,255,255,.8);">Saudi Skill Verification Program (SVP) — Book your trade test online.</p>
+                </div>
+                <div class="ml-auto">
+                    <div class="bg-white p-2 rounded shadow-sm d-inline-flex align-items-center" style="gap:8px;">
+                        <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC" style="height:40px;">
+                        <span class="text-muted font-weight-bold">×</span>
+                        <img src="{{ asset('assets/public/images/takamol-logo.svg') }}" alt="Takamol" style="height:40px;">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Warning Alert -->
-    <div class="bg-warning py-2 text-dark text-center">
+    <!-- Warning Strip -->
+    <div style="background:var(--accent-gold);padding:12px 0;">
         <div class="container">
-            <small>
-                <i class="fas fa-exclamation-triangle"></i>
-                <strong>Requirement:</strong> This test is mandatory for 12 technical trades traveling to Saudi Arabia on a
-                new Work Visa.
-            </small>
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap:8px;">
+                <p class="mb-0 font-weight-bold" style="color:#0f1923;font-size:.9rem;">
+                    <i class="fas fa-exclamation-triangle mr-2"></i><strong>Requirement:</strong> This test is mandatory for 12 technical trades traveling to Saudi Arabia on a new Work Visa.
+                </p>
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hi%2C+I+need+help+with+NAVTTC+Takamol+booking." target="_blank" class="btn btn-dark btn-sm font-weight-bold px-4 flex-shrink-0">
+                    <i class="fab fa-whatsapp mr-1"></i>Get Help
+                </a>
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
     <section class="py-5">
         <div class="container">
+
+            {{-- ── TOP SEO SECTION ── --}}
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <span class="nt-seo-badge">NAVTTC Takamol SVP 2026</span>
+                    <h2 class="nt-seo-title">NAVTTC Takamol Booking Pakistan – Saudi Skill Verification Program (SVP)</h2>
+                    <p class="text-muted mb-3">Book your NAVTTC Takamol trade test online in Pakistan for the Saudi Arabia Skill Verification Program (SVP). This test is mandatory for workers in technical trades applying for a Saudi work visa.</p>
+                    <p class="text-muted mb-4">Our guided service helps you complete your Takamol booking, document verification, and application submission without errors. We ensure your details are correctly entered so your application is accepted on the official system.</p>
+                    <div class="row">
+                        @php $whyNt = [
+                            'Easy online NAVTTC Takamol booking',
+                            'Document verification before submission',
+                            'Avoid rejection due to wrong uploads',
+                            'WhatsApp support for quick updates',
+                            'Step-by-step guidance for test process',
+                        ]; @endphp
+                        @foreach($whyNt as $pt)
+                        <div class="col-md-6 mb-2">
+                            <div class="nt-check-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>{{ $pt }}</span>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="nt-info-card">
+                        <div class="nt-info-card-header">
+                            <i class="fas fa-certificate mr-2"></i>What is NAVTTC Takamol (SVP)?
+                        </div>
+                        <div class="p-4">
+                            <p class="small text-muted mb-3">The NAVTTC Takamol Skill Verification Program (SVP) is a mandatory requirement for selected technical professions going to Saudi Arabia. It verifies your skills, trade experience, and job category before visa processing.</p>
+                            <p class="small font-weight-bold mb-2" style="color:#1a252f;">Applies to trades like:</p>
+                            <div class="row">
+                                @php $trades = ['Electrician','Plumber','Welder','Mason','Carpenter','Technician']; @endphp
+                                @foreach($trades as $t)
+                                <div class="col-6 mb-1">
+                                    <div class="nt-mini-item"><i class="fas fa-tools" style="color:var(--accent-gold);font-size:.75rem;"></i><span class="small">{{ $t }}</span></div>
+                                </div>
+                                @endforeach
+                            </div>
+                            <div class="mt-3 p-2 rounded text-center" style="background:#fff3cd;border:1px solid #ffe082;">
+                                <p class="small mb-0 font-weight-bold" style="color:#856404;"><i class="fas fa-exclamation-circle mr-1"></i>Without passing this test, your Saudi work visa cannot proceed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ── DOCS STRIP ── --}}
+            <div class="nt-docs-strip mb-5">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-clipboard-list mr-2" style="color:var(--accent-gold);font-size:1.2rem;"></i>
+                    <h5 class="font-weight-bold mb-0">Documents Required for Takamol Booking</h5>
+                </div>
+                <div class="row">
+                    @php $docs = [
+                        ['icon'=>'fas fa-passport',      'text'=>'Passport (front page with photo)'],
+                        ['icon'=>'fas fa-id-card',       'text'=>'CNIC (front side)'],
+                        ['icon'=>'fas fa-user-circle',   'text'=>'Recent photo (white background)'],
+                        ['icon'=>'fab fa-whatsapp',      'text'=>'WhatsApp number (active)'],
+                        ['icon'=>'fas fa-briefcase',     'text'=>'Trade mentioned on your visa'],
+                    ]; @endphp
+                    @foreach($docs as $doc)
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <div class="nt-doc-pill">
+                            <i class="{{ $doc['icon'] }}"></i>
+                            <span class="small">{{ $doc['text'] }}</span>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <p class="small text-muted mb-0 mt-1"><i class="fas fa-exclamation-triangle mr-1" style="color:var(--accent-gold);"></i>Upload clear and readable images to avoid delays or rejection.</p>
+            </div>
+
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="appointment-form-wrapper shadow-lg">
@@ -1233,5 +1325,174 @@
             }
         @endpush
     @endpush
+
+{{-- ── BOTTOM SEO SECTIONS ── --}}
+<section class="py-5" style="background:#f7f8fc;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="nt-section-label">How It Works</span>
+            <h2 class="nt-section-title">Step-by-Step Takamol Booking Process</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row">
+                    @php $steps = [
+                        ['num'=>'1','title'=>'Fill the Form',          'desc'=>'Enter your personal details and WhatsApp number accurately.'],
+                        ['num'=>'2','title'=>'Select Your Trade',      'desc'=>'Choose the trade as written on your visa.'],
+                        ['num'=>'3','title'=>'Upload Documents',       'desc'=>'Upload passport, CNIC, and your photo clearly.'],
+                        ['num'=>'4','title'=>'Submit Request',         'desc'=>'Submit your application through our secure form.'],
+                        ['num'=>'5','title'=>'Document Review',        'desc'=>'Our team reviews and verifies your documents.'],
+                        ['num'=>'6','title'=>'Receive Confirmation',   'desc'=>'Application submitted to Takamol system. Receive test details on WhatsApp.'],
+                    ]; @endphp
+                    @foreach($steps as $step)
+                    <div class="col-md-4 mb-4">
+                        <div class="nt-step-card">
+                            <div class="nt-step-circle">{{ $step['num'] }}</div>
+                            <h6 class="font-weight-bold mb-2">{{ $step['title'] }}</h6>
+                            <p class="text-muted small mb-0">{{ $step['desc'] }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background:#fff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <span class="nt-section-label">Avoid These Errors</span>
+                <h2 class="nt-section-title">Common Mistakes to Avoid</h2>
+                <p class="text-muted mb-4">Even small mistakes can cause rejection or delays:</p>
+                @php $mistakes = [
+                    'Uploading blurry passport or CNIC images',
+                    'Selecting wrong trade',
+                    'Mismatch between visa and application',
+                    'Incorrect WhatsApp number',
+                    'Missing required documents',
+                ]; @endphp
+                @foreach($mistakes as $m)
+                <div class="nt-mistake-item">
+                    <i class="fas fa-times-circle mr-3" style="color:#e74c3c;font-size:1.1rem;flex-shrink:0;"></i>
+                    <span class="text-muted">{{ $m }}</span>
+                </div>
+                @endforeach
+                <div class="mt-4 p-3 rounded" style="background:#fff8e1;border-left:4px solid var(--accent-gold);">
+                    <p class="small mb-0"><i class="fas fa-lightbulb mr-2" style="color:var(--accent-gold);"></i><strong>Tip:</strong> We manually review your documents before applying to ensure maximum success rate.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <span class="nt-section-label">Why It Matters</span>
+                <h2 class="nt-section-title">Benefits of Skill Verification (SVP)</h2>
+                <p class="text-muted mb-4">Completing the Takamol SVP test gives you:</p>
+                @php $benefits = [
+                    ['icon'=>'fas fa-check-circle','text'=>'Required for Saudi work visa approval'],
+                    ['icon'=>'fas fa-star',         'text'=>'Confirms your professional skills'],
+                    ['icon'=>'fas fa-thumbs-up',    'text'=>'Improves job credibility'],
+                    ['icon'=>'fas fa-bolt',         'text'=>'Faster visa processing'],
+                ]; @endphp
+                @foreach($benefits as $b)
+                <div class="nt-benefit-item">
+                    <div class="nt-benefit-icon"><i class="{{ $b['icon'] }}"></i></div>
+                    <span class="text-muted">{{ $b['text'] }}</span>
+                </div>
+                @endforeach
+                <div class="mt-4 p-3 rounded" style="background:#f7f8fc;border:1px solid #e8ecf0;">
+                    <p class="small font-weight-bold mb-2">Who Needs This Test?</p>
+                    <p class="small text-muted mb-0">Workers applying for Saudi Arabia work visa in technical or skilled trades whose job category falls under SVP-approved professions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background:#f7f8fc;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <span class="nt-section-label">Quick Answers</span>
+                    <h2 class="nt-section-title">NAVTTC Takamol FAQs</h2>
+                </div>
+                <div id="ntFaqAccordion">
+                    @php $ntFaqs = [
+                        ['q'=>'Is Takamol test mandatory for Saudi Arabia?',  'a'=>'Yes, for selected technical trades, it is required under the Skill Verification Program (SVP). Without passing this test, your Saudi work visa cannot proceed.'],
+                        ['q'=>'How long does booking take?',                  'a'=>'Most applications are processed within 24–48 hours after document verification and submission.'],
+                        ['q'=>'Can I change my trade after submission?',      'a'=>'It depends on the system. Contact support immediately via WhatsApp if changes are needed.'],
+                        ['q'=>'What happens if my documents are rejected?',   'a'=>'You will be asked to re-upload correct documents before resubmission. Our team will guide you through the process.'],
+                    ]; @endphp
+                    @foreach($ntFaqs as $i => $faq)
+                    <div class="nt-faq-item">
+                        <button class="nt-faq-btn {{ $i > 0 ? 'collapsed' : '' }}" type="button" data-toggle="collapse" data-target="#ntfaq{{ $i }}" aria-expanded="{{ $i === 0 ? 'true' : 'false' }}">
+                            {{ $faq['q'] }}
+                            <div class="nt-faq-icon"><i class="fas fa-chevron-down" style="font-size:.75rem;"></i></div>
+                        </button>
+                        <div id="ntfaq{{ $i }}" class="collapse {{ $i === 0 ? 'show' : '' }}" data-parent="#ntFaqAccordion">
+                            <div class="nt-faq-body">{{ $faq['a'] }}</div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="text-center mt-4">
+                    <a href="{{ route('faq') }}" class="btn btn-outline-dark px-4 font-weight-bold">View All FAQs →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="background:linear-gradient(135deg,var(--accent-gold) 0%,#f4b942 100%);padding:50px 0;">
+    <div class="container text-center">
+        <h2 class="font-weight-bold mb-3" style="color:#0f1923;">Need Help with Your Takamol Booking?</h2>
+        <p class="mb-4" style="color:#1a252f;max-width:600px;margin:0 auto 24px;">Our team is ready to assist with trade selection, document verification, application submission, and test preparation tips.</p>
+        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hi%2C+I+need+help+with+NAVTTC+Takamol+booking." target="_blank" class="btn btn-dark btn-lg px-5 py-3 font-weight-bold">
+            <i class="fab fa-whatsapp mr-2"></i>Get Help on WhatsApp
+        </a>
+    </div>
+</section>
+
+@push('head')
+<style>
+    .nt-seo-badge {
+        display: inline-block;
+        background: var(--accent-gold);
+        color: #0f1923;
+        font-size: .72rem;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: 20px;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .nt-seo-title { font-size: 1.6rem; font-weight: 800; color: #1a252f; margin-bottom: 14px; }
+    .nt-check-item { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: #495057; }
+    .nt-check-item i { color: #28a745; margin-top: 2px; flex-shrink: 0; }
+    .nt-info-card { background: #fff; border: 1px solid #e8ecf0; border-radius: 14px; overflow: hidden; }
+    .nt-info-card-header { background: linear-gradient(135deg, #0f1923 0%, #1a252f 100%); color: var(--accent-gold); font-weight: 700; font-size: .95rem; padding: 16px 20px; }
+    .nt-mini-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+    .nt-docs-strip { background: #f7f8fc; border: 1px solid #e8ecf0; border-radius: 14px; padding: 24px; }
+    .nt-doc-pill { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #e8ecf0; border-radius: 10px; padding: 10px 14px; }
+    .nt-doc-pill i { color: var(--accent-gold); }
+    .nt-section-label { display: block; color: var(--accent-gold); font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .nt-section-title { font-size: 1.7rem; font-weight: 800; color: #1a252f; margin-bottom: 1rem; }
+    .nt-step-card { background: #fff; border: 1px solid #e8ecf0; border-radius: 14px; padding: 24px; text-align: center; height: 100%; transition: all .3s ease; }
+    .nt-step-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,.08); border-color: var(--accent-gold); }
+    .nt-step-circle { width: 52px; height: 52px; background: linear-gradient(135deg, #0f1923 0%, #1a252f 100%); color: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; margin: 0 auto 16px; }
+    .nt-mistake-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f4f8; }
+    .nt-mistake-item:last-child { border-bottom: none; }
+    .nt-benefit-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f4f8; }
+    .nt-benefit-item:last-child { border-bottom: none; }
+    .nt-benefit-icon { width: 42px; height: 42px; background: #fff8e1; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent-gold); flex-shrink: 0; }
+    .nt-faq-item { background: #fff; border: 1px solid #e8ecf0; border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color .3s; }
+    .nt-faq-item:hover { border-color: var(--accent-gold); }
+    .nt-faq-btn { width: 100%; text-align: left; background: transparent; border: none; padding: 20px 24px; font-weight: 600; font-size: .95rem; color: #1a252f; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .nt-faq-icon { width: 30px; height: 30px; background: #f8f9fa; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-gold); flex-shrink: 0; margin-left: 12px; transition: all .3s ease; }
+    .nt-faq-btn[aria-expanded="true"] .nt-faq-icon { background: var(--accent-gold); color: #fff; transform: rotate(180deg); }
+    .nt-faq-body { padding: 0 24px 20px; color: #6c757d; font-size: .9rem; line-height: 1.8; }
+</style>
+@endpush
 
 @endsection
