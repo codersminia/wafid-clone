@@ -178,8 +178,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                     <li class="nav-item ml-lg-3">
-                        <a class="nav-link nav-cta-btn" href="{{ route('medicalExamination') }}">
-                            <i class="fas fa-calendar-check mr-1"></i> Book Now
+                        <a class="nav-link nav-cta-btn" href="{{ route('medicalExamination') }}" style="color:#0f1923 !important;">
+                            <i class="fas fa-calendar-check mr-1" style="color:#0f1923 !important;"></i> Book Now
                         </a>
                     </li>
                 </ul>
