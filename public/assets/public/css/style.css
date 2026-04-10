@@ -1178,16 +1178,16 @@ html {
    ============================================ */
 
 .stats-bar {
-    background-color: #ffffff;
-    color: var(--text-dark);
+    background: linear-gradient(135deg, #0f1923 0%, #1a252f 100%);
+    color: #fff;
     position: relative;
     z-index: 100;
-    margin-top: -30px;         /* Slightly higher pull */
-    margin-bottom: 20px;       /* Added space for shadow */
-    border-radius: 12px;       /* Rounded a bit more */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Pronounced shadow */
-    border-top: 4px solid var(--accent-red); 
-    padding: 25px 15px;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    border-top: 4px solid var(--accent-gold);
+    padding: 28px 15px;
 }
 
 .stat-item {
@@ -1203,7 +1203,7 @@ html {
     top: 10%;
     height: 80%;
     width: 1px;
-    background-color: #eee;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .stat-item:last-child::after {
@@ -1214,7 +1214,7 @@ html {
 .stat-number {
     font-size: 2.2rem;
     font-weight: 800;
-    color: var(--accent-red); /* Red numbers */
+    color: var(--accent-gold);
     margin-bottom: 5px;
     line-height: 1;
 }
@@ -1225,7 +1225,7 @@ html {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.65);
     margin-bottom: 0;
 }
 
@@ -1235,22 +1235,22 @@ html {
 
 @media (max-width: 768px) {
     .stats-bar {
-        margin-top: -20px; /* Less overlap on mobile */
-        padding: 15px 10px;
-        border-radius: 6px;
+        margin-top: 20px;
+        padding: 10px 8px;
+        border-radius: 10px;
     }
 
     /* Force items to stay in one row on mobile */
     .stats-bar .row {
         display: flex;
-        flex-wrap: nowrap; /* Prevent stacking */
+        flex-wrap: nowrap;
         justify-content: space-between;
     }
 
     .stat-item {
-        padding: 0 5px;
+        padding: 0 4px;
         text-align: center;
-        flex: 1; /* Make them equal width */
+        flex: 1;
     }
 
     /* Hide dividers on very small screens to save space */
@@ -1259,14 +1259,18 @@ html {
     }
 
     .stat-number {
-        font-size: 1.3rem; /* Smaller numbers for mobile */
+        font-size: 1.1rem;
         margin-bottom: 2px;
     }
 
     .stat-label {
-        font-size: 0.6rem; /* Smaller text */
+        font-size: 0.55rem;
         letter-spacing: 0;
         line-height: 1.2;
+    }
+
+    .stat-label i {
+        display: none; /* hide icons on mobile to save space */
     }
 }
 
@@ -2135,9 +2139,10 @@ html {
 
 /* Stats bar */
 .stats-bar {
-    background: linear-gradient(135deg, var(--primary-mid) 0%, var(--primary-slate) 100%);
+    background: linear-gradient(135deg, #0f1923 0%, #1a252f 100%);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    border-top: 4px solid var(--accent-gold);
     margin-top: -40px;
     position: relative;
     z-index: 10;
@@ -2154,7 +2159,7 @@ html {
 
 .stat-label {
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.65);
     margin: 4px 0 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -2190,7 +2195,7 @@ html {
 @media (max-width: 767px) {
     .seo-intro-heading { font-size: 1.3rem; }
     .btn-seo-cta { width: 100%; text-align: center; }
-    .stat-number { font-size: 1.5rem; }
+    .stat-number { font-size: 1.1rem; }
 }
 
 /* ============================================

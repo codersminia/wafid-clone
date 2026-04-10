@@ -43,6 +43,9 @@
         position: relative;
         z-index: 99;
     }
+    @media (max-width: 768px) {
+        .stats-bar-wrapper { margin-top: 16px; }
+    }
 
     /* Process Section Overhaul */
     .process-container {
@@ -177,12 +180,12 @@
                                 @endif
                                 <div class="hero-buttons d-flex flex-column flex-md-row justify-content-center align-items-center">
                                     @if($banner->button_text && $banner->button_url)
-                                    <a href="{{ $banner->button_url }}" class="btn btn-light text-dark font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow">
-                                        {{ $banner->button_text }}
+                                    <a href="{{ $banner->button_url }}" class="btn font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow" style="background:var(--accent-gold);color:#0f1923;border:none;">
+                                        <i class="fas fa-calendar-check mr-2"></i>{{ $banner->button_text }}
                                     </a>
                                     @endif
-                                    <a href="{{ route('contact') }}" class="btn btn-outline-light font-weight-bold px-5 py-3">
-                                        Contact Support
+                                    <a href="{{ route('contact') }}" class="btn font-weight-bold px-5 py-3" style="border:2px solid var(--accent-gold);color:var(--accent-gold);background:transparent;">
+                                        <i class="fas fa-headset mr-2"></i>Contact Support
                                     </a>
                                 </div>
                             </div>
@@ -207,7 +210,7 @@
     @else
     <!-- Fallback static hero if no banners -->
     <section class="hero-section text-center"
-        style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) , url('{{ asset('assets/public/images/hero-bg.jpg') }}') center/cover no-repeat;">
+        style="background: linear-gradient(135deg, #0f1923 0%, #1a252f 100%);">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -218,11 +221,11 @@
                             Appointments</strong> handled by experts.
                     </p>
                     <div class="hero-buttons d-flex flex-column flex-md-row justify-content-center align-items-center">
-                        <a href="#services" class="btn btn-light text-dark font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow">
-                            Book Appointment
+                        <a href="#services" class="btn font-weight-bold px-5 py-3 mb-3 mb-md-0 mr-md-3 shadow" style="background:var(--accent-gold);color:#0f1923;border:none;">
+                            <i class="fas fa-calendar-check mr-2"></i>Book Appointment
                         </a>
-                        <a href="{{ route('contact') }}" class="btn btn-outline-light font-weight-bold px-5 py-3">
-                            Contact Support
+                        <a href="{{ route('contact') }}" class="btn font-weight-bold px-5 py-3" style="border:2px solid var(--accent-gold);color:var(--accent-gold);background:transparent;">
+                            <i class="fas fa-headset mr-2"></i>Contact Support
                         </a>
                     </div>
                 </div>
@@ -238,20 +241,20 @@
 
                 <!-- Item 1 -->
                 <div class="col-4 stat-item text-center">
-                    <div class="stat-number"><span class="counter" data-count="10000">0</span>+</div>
-                    <p class="stat-label">Appointments</p>
+                    <div class="stat-number"><span class="counter" data-count="50000">0</span>+</div>
+                    <p class="stat-label"><i class="fas fa-users mr-1" style="color:var(--accent-gold);"></i>Happy Clients</p>
                 </div>
 
                 <!-- Item 2 -->
                 <div class="col-4 stat-item text-center">
                     <div class="stat-number"><span class="counter" data-count="99">0</span>%</div>
-                    <p class="stat-label">Success</p>
+                    <p class="stat-label"><i class="fas fa-check-circle mr-1" style="color:var(--accent-gold);"></i>Success Rate</p>
                 </div>
 
                 <!-- Item 3 -->
                 <div class="col-4 stat-item text-center">
                     <div class="stat-number"><span class="counter" data-count="24">0</span>/7</div>
-                    <p class="stat-label">Support</p>
+                    <p class="stat-label"><i class="fas fa-headset mr-1" style="color:var(--accent-gold);"></i>Support</p>
                 </div>
 
             </div>
