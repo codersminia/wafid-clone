@@ -48,4 +48,7 @@
             </div>
         </div>
     </section>
+
+@include('public.partials.review-popup', ['service' => 'NAVTTC Takamol Booking'])
+
 @endsection

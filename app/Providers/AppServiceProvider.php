@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
                 'softskill_new' => SoftSkillCertificate::where('is_new', 1)->count(),
                 'contact_new' => ContactInquiry::where('is_new', 1)->count(),
                 'feedback_new' => PrivateFeedback::where('is_read', 0)->count(),
+                'reviews_pending' => \App\Models\ServiceReview::where('status', 'pending')->count(),
             ];
 
             $view->with($counts);

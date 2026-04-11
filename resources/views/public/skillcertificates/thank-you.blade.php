@@ -46,4 +46,7 @@
         </div>
     </div>
 </section>
+
+@include('public.partials.review-popup', ['service' => 'Soft Skill Certificate'])
+
 @endsection

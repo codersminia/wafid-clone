@@ -82,4 +82,7 @@
 
     </div>
 </section>
+
+@include('public.partials.review-popup', ['service' => 'WAFID Choice Center'])
+
 @endsection

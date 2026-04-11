@@ -51,4 +51,7 @@
         </div>
     </div>
 </section>
+
+@include('public.partials.review-popup', ['service' => 'Tasheer Saudi Visa Appointment'])
+
 @endsection

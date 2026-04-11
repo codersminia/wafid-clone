@@ -1811,4 +1811,125 @@ class AdminController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Banner deleted successfully']);
     }
+
+    // ── Service Reviews ───────────────────────────────────────────────────────
+    public function reviews()
+    {
+        $services = \App\Models\ServiceReview::distinct()->pluck('service')->sort()->values();
+        $pending  = \App\Models\ServiceReview::where('status', 'pending')->count();
+        return view('admin.reviews.index', compact('services', 'pending'));
+    }
+
+    public function reviewsData(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'name',
+            2 => 'service',
+            3 => 'rating',
+            4 => 'review',
+            5 => 'status',
+            6 => 'created_at',
+            7 => 'id', // actions
+        ];
+
+        $query = \App\Models\ServiceReview::query();
+
+        // Search
+        if (!empty($request->search['value'])) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                  ->orWhere('service', 'like', "%$search%")
+                  ->orWhere('review', 'like', "%$search%")
+                  ->orWhere('status', 'like', "%$search%");
+            });
+        }
+
+        // Service filter
+        if ($request->filled('service_filter')) {
+            $query->where('service', $request->service_filter);
+        }
+
+        // Status filter
+        if ($request->filled('status_filter')) {
+            $query->where('status', $request->status_filter);
+        }
+
+        $recordsTotal    = \App\Models\ServiceReview::count();
+        $recordsFiltered = $query->count();
+
+        if ($request->order) {
+            $col = $columns[$request->order[0]['column']] ?? 'created_at';
+            $query->orderBy($col, $request->order[0]['dir']);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $reviews = $query->skip($request->start)->take($request->length)->get();
+
+        $data = [];
+        foreach ($reviews as $r) {
+            // Stars HTML
+            $stars = '';
+            for ($i = 1; $i <= 5; $i++) {
+                $stars .= $i <= $r->rating
+                    ? '<i class="fas fa-star" style="color:#FFC654;font-size:.8rem;"></i>'
+                    : '<i class="far fa-star" style="color:#FFC654;font-size:.8rem;"></i>';
+            }
+
+            // Status badge
+            $statusColors = ['pending' => 'warning', 'approved' => 'success', 'rejected' => 'danger'];
+            $statusBadge  = '<span class="label label-' . ($statusColors[$r->status] ?? 'secondary') . ' label-inline font-weight-bold">' . ucfirst($r->status) . '</span>';
+
+            // Actions
+            $approveBtn = $r->status !== 'approved'
+                ? '<button class="btn btn-sm btn-success mr-1 review-approve" data-id="' . $r->id . '" title="Approve"><i class="la la-check"></i></button>'
+                : '';
+            $rejectBtn = $r->status !== 'rejected'
+                ? '<button class="btn btn-sm btn-warning mr-1 review-reject" data-id="' . $r->id . '" title="Reject"><i class="la la-times"></i></button>'
+                : '';
+            $deleteBtn = '<button class="btn btn-sm btn-danger review-delete" data-id="' . $r->id . '" title="Delete"><i class="la la-trash"></i></button>';
+
+            $data[] = [
+                '',
+                e($r->name) . '<br><small class="text-muted">' . ($r->ip_address ?? '') . '</small>',
+                '<span class="label label-light-primary label-inline font-weight-bold" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;" title="' . e($r->service) . '">' . e(Str::limit($r->service, 22)) . '</span>',
+                $stars . ' <small class="text-muted">(' . $r->rating . ')</small>',
+                $r->review
+                    ? '<span class="text-muted small">' . e(Str::limit($r->review, 60)) . '</span>'
+                      . (strlen($r->review) > 60 ? ' <a href="#" class="view-review text-primary small font-weight-bold" data-review="' . e($r->review) . '" data-name="' . e($r->name) . '">View</a>' : '')
+                    : '<span class="text-muted small">—</span>',
+                $statusBadge,
+                $r->created_at ? $r->created_at->format('d M Y') : '',
+                '<div style="display:flex;gap:4px;flex-wrap:nowrap;">' . $approveBtn . $rejectBtn . $deleteBtn . '</div>',
+                $r->id,
+            ];
+        }
+
+        return response()->json([
+            'draw'            => intval($request->draw),
+            'recordsTotal'    => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data'            => $data,
+        ]);
+    }
+
+    public function approveReview($id)
+    {
+        \App\Models\ServiceReview::findOrFail($id)->update(['status' => 'approved']);
+        return response()->json(['status' => 'success', 'message' => 'Review approved.']);
+    }
+
+    public function rejectReview($id)
+    {
+        \App\Models\ServiceReview::findOrFail($id)->update(['status' => 'rejected']);
+        return response()->json(['status' => 'success', 'message' => 'Review rejected.']);
+    }
+
+    public function deleteReview($id)
+    {
+        \App\Models\ServiceReview::findOrFail($id)->delete();
+        return response()->json(['status' => 'success', 'message' => 'Review deleted.']);
+    }
 }

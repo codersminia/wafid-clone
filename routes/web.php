@@ -28,6 +28,7 @@ Route::get('/about-us', [PublicController::class, 'about'])->name('about');
 Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact');
 Route::post('/contact-us', [PublicController::class, 'storecontact'])->name('contact.store');
 Route::post('/feedback', [PublicController::class, 'storeFeedback'])->name('feedback.store');
+Route::post('/submit-review', [PublicController::class, 'storeReview'])->name('review.store');
 Route::post('/track-whatsapp', [PublicController::class, 'trackWhatsapp'])->name('track.whatsapp');
 Route::post('/track-visitor', [PublicController::class, 'trackVisitor'])->name('track.visitor');
 
@@ -234,5 +235,14 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
         Route::get('/{id}/edit', [AdminController::class, 'editBanner'])->name('edit');
         Route::post('/{id}/update', [AdminController::class, 'updateBanner'])->name('update');
         Route::delete('/{id}', [AdminController::class, 'deleteBanner'])->name('delete');
+    });
+
+    // Service Reviews
+    Route::prefix('reviews')->name('reviews.')->group(function () {
+        Route::get('/', [AdminController::class, 'reviews'])->name('index');
+        Route::post('/data', [AdminController::class, 'reviewsData'])->name('data');
+        Route::post('/{id}/approve', [AdminController::class, 'approveReview'])->name('approve');
+        Route::post('/{id}/reject', [AdminController::class, 'rejectReview'])->name('reject');
+        Route::delete('/{id}', [AdminController::class, 'deleteReview'])->name('delete');
     });
 });

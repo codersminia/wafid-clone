@@ -63,4 +63,7 @@
 
     </div>
 </section>
+
+@include('public.partials.review-popup', ['service' => 'GAMCA / WAFID Appointment'])
+
 @endsection

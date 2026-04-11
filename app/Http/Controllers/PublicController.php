@@ -1579,4 +1579,29 @@ class PublicController extends Controller
         return view('public.gcc-country', compact('data', 'centers', 'relatedBlogs', 'otherCountries'));
     }
 
+    public function storeReview(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'    => 'required|string|max:100',
+            'service' => 'required|string|max:100',
+            'rating'  => 'required|integer|min:1|max:5',
+            'review'  => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        \App\Models\ServiceReview::create([
+            'name'       => $request->name,
+            'service'    => $request->service,
+            'rating'     => $request->rating,
+            'review'     => $request->review ?? '',
+            'status'     => 'pending',
+            'ip_address' => $request->ip(),
+        ]);
+
+        return response()->json(['status' => 'success']);
+    }
+
 }

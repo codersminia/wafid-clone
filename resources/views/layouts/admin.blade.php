@@ -382,6 +382,26 @@
                                 </a>
                             </li>
 
+                            <!-- Service Reviews -->
+                            <li class="menu-item {{ request()->routeIs('admin.reviews.*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.reviews.index') }}" class="menu-link">
+                                    <span class="svg-icon menu-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M12,17.5 L6.5,21 L8,14.5 L3,10 L9.5,9.5 L12,3.5 L14.5,9.5 L21,10 L16,14.5 L17.5,21 Z" fill="#000000"/>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span class="menu-text">Service Reviews</span>
+                                    @if($reviews_pending > 0)
+                                        <span class="menu-label">
+                                            <span class="label label-warning label-inline font-weight-bold">{{ $reviews_pending }}</span>
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
+
                             <li class="menu-section">
                                 <h4 class="menu-text">Medical Centers</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
