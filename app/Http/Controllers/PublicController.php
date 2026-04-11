@@ -1579,6 +1579,11 @@ class PublicController extends Controller
         return view('public.gcc-country', compact('data', 'centers', 'relatedBlogs', 'otherCountries'));
     }
 
+    public function leaveReview()
+    {
+        return view('public.leave-review');
+    }
+
     public function storeReview(Request $request)
     {
         $validator = Validator::make($request->all(), [

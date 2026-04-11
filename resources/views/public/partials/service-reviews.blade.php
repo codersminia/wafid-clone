@@ -11,7 +11,7 @@
     $totalReviews = \App\Models\ServiceReview::where('service', $service)->where('status', 'approved')->count();
 @endphp
 
-<section class="py-5" style="background:#fff;">
+<section class="py-5" id="reviews" style="background:#fff;">
     <div class="container">
 
         {{-- Header --}}
