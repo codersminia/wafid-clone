@@ -1443,6 +1443,8 @@
     </div>
 </section>
 
+@include('public.partials.service-reviews', ['service' => 'NAVTTC Takamol Booking'])
+
 <section style="background:linear-gradient(135deg,var(--accent-gold) 0%,#f4b942 100%);padding:50px 0;">
     <div class="container text-center">
         <h2 class="font-weight-bold mb-3" style="color:#0f1923;">Need Help with Your Takamol Booking?</h2>

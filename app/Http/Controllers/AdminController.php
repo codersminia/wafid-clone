@@ -1825,12 +1825,10 @@ class AdminController extends Controller
         $columns = [
             0 => 'id',
             1 => 'name',
-            2 => 'service',
-            3 => 'rating',
-            4 => 'review',
-            5 => 'status',
-            6 => 'created_at',
-            7 => 'id', // actions
+            2 => 'rating',
+            3 => 'status',
+            4 => 'created_at',
+            5 => 'id', // actions
         ];
 
         $query = \App\Models\ServiceReview::query();
@@ -1883,6 +1881,18 @@ class AdminController extends Controller
             $statusBadge  = '<span class="label label-' . ($statusColors[$r->status] ?? 'secondary') . ' label-inline font-weight-bold">' . ucfirst($r->status) . '</span>';
 
             // Actions
+            $viewBtn  = '<button class="btn btn-sm btn-info mr-1 review-view"'
+                . ' data-id="' . $r->id . '"'
+                . ' data-name="' . e($r->name) . '"'
+                . ' data-email="' . e($r->email ?? '') . '"'
+                . ' data-service="' . e($r->service) . '"'
+                . ' data-rating="' . $r->rating . '"'
+                . ' data-review="' . e($r->review) . '"'
+                . ' data-status="' . $r->status . '"'
+                . ' data-date="' . ($r->created_at ? $r->created_at->format('d M Y') : '') . '"'
+                . ' data-photo="' . ($r->photo ? asset($r->photo) : '') . '"'
+                . ' data-initial="' . strtoupper(substr($r->name, 0, 1)) . '"'
+                . ' title="View"><i class="la la-eye"></i></button>';
             $approveBtn = $r->status !== 'approved'
                 ? '<button class="btn btn-sm btn-success mr-1 review-approve" data-id="' . $r->id . '" title="Approve"><i class="la la-check"></i></button>'
                 : '';
@@ -1891,18 +1901,18 @@ class AdminController extends Controller
                 : '';
             $deleteBtn = '<button class="btn btn-sm btn-danger review-delete" data-id="' . $r->id . '" title="Delete"><i class="la la-trash"></i></button>';
 
+            // Photo thumb
+            $thumb = $r->photo
+                ? '<img src="' . asset($r->photo) . '" style="width:36px;height:36px;border-radius:50%;object-fit:cover;margin-right:8px;flex-shrink:0;">'
+                : '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#0f1923,#1a252f);display:inline-flex;align-items:center;justify-content:center;color:#FFC654;font-weight:700;font-size:.85rem;margin-right:8px;flex-shrink:0;">' . strtoupper(substr($r->name, 0, 1)) . '</div>';
+
             $data[] = [
                 '',
-                e($r->name) . '<br><small class="text-muted">' . ($r->ip_address ?? '') . '</small>',
-                '<span class="label label-light-primary label-inline font-weight-bold" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;" title="' . e($r->service) . '">' . e(Str::limit($r->service, 22)) . '</span>',
+                '<div class="d-flex align-items-center">' . $thumb . '<div><div class="font-weight-bold">' . e($r->name) . '</div><small class="text-muted">' . e(Str::limit($r->service, 22)) . '</small></div></div>',
                 $stars . ' <small class="text-muted">(' . $r->rating . ')</small>',
-                $r->review
-                    ? '<span class="text-muted small">' . e(Str::limit($r->review, 60)) . '</span>'
-                      . (strlen($r->review) > 60 ? ' <a href="#" class="view-review text-primary small font-weight-bold" data-review="' . e($r->review) . '" data-name="' . e($r->name) . '">View</a>' : '')
-                    : '<span class="text-muted small">—</span>',
                 $statusBadge,
                 $r->created_at ? $r->created_at->format('d M Y') : '',
-                '<div style="display:flex;gap:4px;flex-wrap:nowrap;">' . $approveBtn . $rejectBtn . $deleteBtn . '</div>',
+                '<div style="display:flex;gap:4px;flex-wrap:nowrap;">' . $viewBtn . $approveBtn . $rejectBtn . $deleteBtn . '</div>',
                 $r->id,
             ];
         }

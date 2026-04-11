@@ -598,6 +598,8 @@
         </div>
     </section>
 
+    @include('public.partials.service-reviews', ['service' => 'GAMCA / WAFID Appointment'])
+
     {{-- Bottom CTA --}}
     <section style="background:linear-gradient(135deg,var(--accent-gold) 0%,#f4b942 100%);padding:50px 0;">
         <div class="container text-center">

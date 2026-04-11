@@ -1583,20 +1583,32 @@ class PublicController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'    => 'required|string|max:100',
+            'email'   => 'nullable|email|max:150',
             'service' => 'required|string|max:100',
             'rating'  => 'required|integer|min:1|max:5',
-            'review'  => 'nullable|string|max:255',
+            'review'  => 'required|string|min:5|max:255',
+            'photo'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $name = 'review_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/reviews'), $name);
+            $photoPath = 'uploads/reviews/' . $name;
+        }
+
         \App\Models\ServiceReview::create([
             'name'       => $request->name,
+            'email'      => $request->email,
             'service'    => $request->service,
             'rating'     => $request->rating,
             'review'     => $request->review ?? '',
+            'photo'      => $photoPath,
             'status'     => 'pending',
             'ip_address' => $request->ip(),
         ]);
