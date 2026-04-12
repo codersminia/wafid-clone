@@ -326,3 +326,21 @@
 @endpush
 
 @endsection
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Refund Policy | {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}",
+    "url": "{{ url()->current() }}",
+    "description": "Read the Refund Policy of Gulf Medical Consultants. Understand refund eligibility, non-refundable cases, and cancellation terms for GAMCA/WAFID bookings.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Refund Policy", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush

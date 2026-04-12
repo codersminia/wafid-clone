@@ -1498,3 +1498,62 @@
 @endpush
 
 @endsection
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "NAVTTC Takamol Booking Pakistan | Saudi Skill Verification Program (SVP)",
+    "url": "{{ url()->current() }}",
+    "description": "Book your NAVTTC Takamol trade test online in Pakistan for the Saudi Arabia Skill Verification Program (SVP). Step-by-step guidance and WhatsApp support.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "NAVTTC Takamol Booking", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush
+
+@push('schema')
+@php
+    $svcRatings = \App\Models\ServiceReview::where('service', 'NAVTTC Takamol Booking')->where('status', 'approved')->pluck('rating')->filter(fn($r) => is_numeric($r));
+@endphp
+@if($svcRatings->count() > 0)
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#navttc-service-rating",
+    "name": "NAVTTC Takamol Skill Verification",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ round($svcRatings->avg(), 1) }}",
+        "reviewCount": {{ $svcRatings->count() }},
+        "bestRating": 5,
+        "worstRating": 1
+    }
+}
+@endif
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is Takamol test mandatory for Saudi Arabia?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, for selected technical trades, it is required under the Skill Verification Program (SVP). Without passing this test, your Saudi work visa cannot proceed." }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does NAVTTC Takamol booking take?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most applications are processed within 24-48 hours after document verification and submission." }
+        },
+        {
+            "@type": "Question",
+            "name": "What happens if my documents are rejected?",
+            "acceptedAnswer": { "@type": "Answer", "text": "You will be asked to re-upload correct documents before resubmission. Our team will guide you through the process." }
+        }
+    ]
+}
+@endpush

@@ -821,3 +821,62 @@
 @endpush
 
 @endsection
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Tasheer Appointment Pakistan | Saudi Visa Biometric Booking (Etimad Centers)",
+    "url": "{{ url()->current() }}",
+    "description": "Book your Tasheer appointment in Pakistan for Saudi Arabia visa biometric enrollment. Fast slot booking at Etimad centers in Karachi, Lahore, Islamabad & Rawalpindi.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Tasheer Appointment", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush
+
+@push('schema')
+@php
+    $svcRatings = \App\Models\ServiceReview::where('service', 'Tasheer Saudi Visa Appointment')->where('status', 'approved')->pluck('rating')->filter(fn($r) => is_numeric($r));
+@endphp
+@if($svcRatings->count() > 0)
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#tasheer-service-rating",
+    "name": "Tasheer Saudi Visa Appointment",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ round($svcRatings->avg(), 1) }}",
+        "reviewCount": {{ $svcRatings->count() }},
+        "bestRating": 5,
+        "worstRating": 1
+    }
+}
+@endif
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is Tasheer appointment mandatory for Saudi visa?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, biometric submission through Tasheer/Etimad is required for Saudi Arabia visa processing. Without this appointment, your visa application cannot proceed." }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does Tasheer booking take?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most appointments are booked within 24-48 hours depending on slot availability at your chosen center." }
+        },
+        {
+            "@type": "Question",
+            "name": "What should I bring to the Tasheer center?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Bring your original passport, appointment confirmation slip, and all required visa documents." }
+        }
+    ]
+}
+@endpush

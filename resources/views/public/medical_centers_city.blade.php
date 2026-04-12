@@ -389,3 +389,47 @@
         </style>
     @endpush
 @endsection
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "GAMCA Medical Centers in {{ $cityName }} | WAFID Appointment & Token Booking",
+    "url": "{{ url()->current() }}",
+    "description": "Find approved GAMCA medical centers in {{ $cityName }}. Book WAFID appointment, check fees, documents, and get your medical slip online for GCC visa.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "GAMCA Centers in {{ $cityName }}", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Are GAMCA centers available in {{ $cityName }}?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, there are approved WAFID medical centers for GCC medical tests in {{ $cityName }}. Browse the list on this page to find the nearest one." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I choose my center in {{ $cityName }}?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, with our premium Choice Center service you can select your preferred clinic in {{ $cityName }}." }
+        },
+        {
+            "@type": "Question",
+            "name": "Is appointment required before visiting a GAMCA center?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, a GAMCA/WAFID token is mandatory before visiting any medical center. You cannot walk in without a valid appointment slip." }
+        },
+        {
+            "@type": "Question",
+            "name": "How fast are GAMCA medical results available?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Usually within 24-48 hours after your medical test. You can check your status online using your passport number." }
+        }
+    ]
+}
+@endpush

@@ -813,3 +813,67 @@
     .appt-faq-body { padding: 0 24px 20px; color: #6c757d; font-size: .9rem; line-height: 1.8; }
 </style>
 @endpush
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Book GAMCA Appointment Online in Pakistan | WAFID Token Booking 2026",
+    "url": "{{ url()->current() }}",
+    "description": "Book your GAMCA appointment online in Pakistan with step-by-step guidance. WAFID token booking for Saudi Arabia, UAE, Qatar, Oman, Kuwait & Bahrain.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "GAMCA Appointment", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush
+
+@push('schema')
+@php
+    $svcRatings = \App\Models\ServiceReview::where('service', 'GAMCA / WAFID Appointment')->where('status', 'approved')->pluck('rating')->filter(fn($r) => is_numeric($r));
+@endphp
+@if($svcRatings->count() > 0)
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#wafid-medical-service-rating",
+    "name": "Wafid (GAMCA) Medical Examination",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ round($svcRatings->avg(), 1) }}",
+        "reviewCount": {{ $svcRatings->count() }},
+        "bestRating": 5,
+        "worstRating": 1
+    }
+}
+@endif
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How long does it take to get a GAMCA token?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most bookings are confirmed within the same day or within 24 hours after payment verification." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I reschedule my GAMCA appointment?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, but you must contact support before your appointment date. Rescheduling after the date may require a new token." }
+        },
+        {
+            "@type": "Question",
+            "name": "What happens if I enter wrong details?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Incorrect details can delay or cancel your token. Always double-check your passport number, name, and city before submitting." }
+        },
+        {
+            "@type": "Question",
+            "name": "Is GAMCA appointment mandatory?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, it is required for all GCC medical tests before visa processing. Without a valid GAMCA/WAFID token, you cannot proceed with your visa medical." }
+        }
+    ]
+}
+@endpush

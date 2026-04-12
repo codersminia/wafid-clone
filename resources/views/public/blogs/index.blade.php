@@ -683,3 +683,47 @@
     }
 </style>
 @endpush
+
+@push('schema')
+,{
+    "@type": "CollectionPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "GAMCA & WAFID Blog – Complete Guides for GCC Medical & Token Booking",
+    "url": "{{ url()->current() }}",
+    "description": "Gulf Medical Consultant Blog – Updated GAMCA/WAFID booking guides, fees, medical test tips, and country-specific GCC medical guides for Pakistan applicants.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is GAMCA/WAFID?",
+            "acceptedAnswer": { "@type": "Answer", "text": "GAMCA (now WAFID) is the system used for booking medical tests required for GCC visas. It is mandatory for workers, students, and travelers heading to Saudi Arabia, UAE, Oman, Kuwait, Qatar, or Bahrain." }
+        },
+        {
+            "@type": "Question",
+            "name": "Are your blog guides updated?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, all guides are updated based on the latest 2026 policies and Pakistan-specific requirements. We review and update content every 2-3 weeks to reflect any WAFID portal changes." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I book my medical through you?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, Gulf Medical Consultant provides complete guidance and support for GAMCA/WAFID booking. Contact us via WhatsApp or our contact page for personalized step-by-step assistance." }
+        },
+        {
+            "@type": "Question",
+            "name": "Which cities in Pakistan do you cover?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We provide guides for all major cities including Karachi, Lahore, Islamabad, Rawalpindi, Peshawar, and Quetta - helping you find the nearest approved GAMCA medical center." }
+        }
+    ]
+}
+@endpush

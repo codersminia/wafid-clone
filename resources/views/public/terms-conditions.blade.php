@@ -465,3 +465,21 @@
 @endpush
 
 @endsection
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Terms & Conditions | {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}",
+    "url": "{{ url()->current() }}",
+    "description": "Read the Terms & Conditions of Gulf Medical Consultants. Understand your rights and responsibilities when booking GAMCA/WAFID medical appointments in Pakistan.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Terms & Conditions", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush

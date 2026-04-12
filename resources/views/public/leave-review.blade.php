@@ -212,3 +212,21 @@ document.getElementById('lrForm').addEventListener('submit', async function(e){
 });
 </script>
 @endpush
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Leave a Review | {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}",
+    "url": "{{ url()->current() }}",
+    "description": "Share your experience with Gulf Medical Consultant. Rate our GAMCA, WAFID, NAVTTC, Tasheer, and Soft Skill services.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Leave a Review", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush

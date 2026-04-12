@@ -838,3 +838,68 @@
     .fas.fa-hospital-user { color: var(--accent-gold) !important; }
 </style>
 @endpush
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Choose GAMCA Medical Center | WAFID Choice Service Pakistan 2026",
+    "url": "{{ url()->current() }}",
+    "description": "Book your GAMCA appointment with center selection using our premium WAFID Choice service. Select your preferred medical center in Lahore or Gujranwala.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "GAMCA Appointment", "item": "{{ route('medicalExamination') }}" },
+            { "@type": "ListItem", "position": 3, "name": "Choice Center", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush
+
+@push('schema')
+@php
+    $svcRatings = \App\Models\ServiceReview::where('service', 'WAFID Choice Center')->where('status', 'approved')->pluck('rating')->filter(fn($r) => is_numeric($r));
+@endphp
+@if($svcRatings->count() > 0)
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#wafid-choice-service-rating",
+    "name": "Wafid Choice Medical Center Selection",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ round($svcRatings->avg(), 1) }}",
+        "reviewCount": {{ $svcRatings->count() }},
+        "bestRating": 5,
+        "worstRating": 1
+    }
+}
+@endif
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Can I select any GAMCA medical center?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, based on availability and system access, you can select your preferred GAMCA-approved medical center in Lahore or Gujranwala." }
+        },
+        {
+            "@type": "Question",
+            "name": "Is this better than standard booking?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, it gives you full control instead of random auto-assignment. Ideal if you have a preferred clinic or need a specific location." }
+        },
+        {
+            "@type": "Question",
+            "name": "Will I get confirmation quickly?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, most bookings are confirmed within 30 minutes to a few hours after payment verification." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I change my center later?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Changes may be possible before confirmation. Contact support immediately if you need to change your selected center." }
+        }
+    ]
+}
+@endpush

@@ -1064,3 +1064,100 @@ $(document).ready(function(){
 });
 </script>
 @endpush
+
+@push('schema')
+,{
+    "@type": "LocalBusiness",
+    "@id": "{{ url('/') }}#localbusiness",
+    "name": "{{ $settings['site_name'] ?? '' }}",
+    "url": "{{ url('/') }}",
+    "telephone": "{{ $settings['site_phone'] ?? '' }}",
+    "email": "{{ $settings['site_email'] ?? '' }}",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ $settings['site_address'] ?? '' }}",
+        "addressCountry": "PK"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "30.3753",
+        "longitude": "69.3451"
+    },
+    "parentOrganization": { "@id": "{{ url('/') }}#organization" }
+    <?php
+        $numericRatings = $testimonials->pluck('rating')->filter(fn($r) => is_numeric($r));
+    ?>
+    @if($testimonials->count() > 0 && $numericRatings->isNotEmpty())
+    ,"aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ round($numericRatings->avg(), 1) }}",
+        "reviewCount": {{ $testimonials->count() }},
+        "bestRating": 5,
+        "worstRating": 1
+    }
+    @endif
+}
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#service-wafid",
+    "name": "Wafid (GAMCA) Medical Appointment",
+    "description": "Book your official GAMCA medical appointment slip online. Fast processing with delivery to WhatsApp.",
+    "url": "{{ route('medicalExamination') }}",
+    "areaServed": "PK",
+    "provider": { "@id": "{{ url('/') }}#organization" }
+}
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#service-wafid-choice",
+    "name": "Wafid Choice Medical Center Selection",
+    "description": "Choose your preferred GAMCA-approved medical center for your GCC medical appointment.",
+    "url": "{{ route('special.appointment') }}",
+    "areaServed": "PK",
+    "provider": { "@id": "{{ url('/') }}#organization" }
+}
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#service-navttc",
+    "name": "NAVTTC / Takamol Skill Verification",
+    "description": "Book your NAVTTC Takamol skill verification test for Saudi Arabia employment.",
+    "url": "{{ route('navtechform') }}",
+    "areaServed": "PK",
+    "provider": { "@id": "{{ url('/') }}#organization" }
+}
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#service-tasheer",
+    "name": "Tasheer Saudi Visa Appointment",
+    "description": "Schedule your Tasheer Saudi visa appointment quickly and securely online.",
+    "url": "{{ route('tasheer.form') }}",
+    "areaServed": "PK",
+    "provider": { "@id": "{{ url('/') }}#organization" }
+}
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#service-softskill",
+    "name": "Soft Skill Certificate",
+    "description": "Obtain your soft skill certificate for Gulf employment requirements.",
+    "url": "{{ route('softskill.form') }}",
+    "areaServed": "PK",
+    "provider": { "@id": "{{ url('/') }}#organization" }
+}
+@if($homeFaqs->count() > 0)
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url('/') }}#faqpage",
+    "mainEntity": [
+        @foreach($homeFaqs as $faq)
+        {
+            "@type": "Question",
+            "name": "{{ addslashes(str_replace(["\r\n", "\n", "\r"], ' ', $faq->question)) }}",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{{ addslashes(str_replace(["\r\n", "\n", "\r"], ' ', $faq->answer)) }}"
+            }
+        }{{ !$loop->last ? ',' : '' }}
+        @endforeach
+    ]
+}
+@endif
+@endpush

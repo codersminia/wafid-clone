@@ -6,6 +6,21 @@
 
 @push('schema')
 ,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "{{ $data['title'] }}",
+    "url": "{{ url()->current() }}",
+    "description": "{{ $data['meta_desc'] }}",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "{{ $data['name'] }} GAMCA Medical", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+,{
     "@type": "FAQPage",
     "mainEntity": [
         @foreach($data['faqs'] as $i => $faq)

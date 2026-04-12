@@ -964,3 +964,62 @@
 @endpush
 
 @endsection
+
+@push('schema')
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Soft Skill Certificate Pakistan | Work Readiness Certificate for Gulf Jobs",
+    "url": "{{ url()->current() }}",
+    "description": "Get your Soft Skill Work Readiness Certificate in Pakistan for Gulf jobs in Saudi Arabia, UAE, Qatar, Oman, Kuwait & Bahrain. Delivered digitally on WhatsApp within 24 hours.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Soft Skill Certificate", "item": "{{ url()->current() }}" }
+        ]
+    }
+}
+@endpush
+
+@push('schema')
+@php
+    $svcRatings = \App\Models\ServiceReview::where('service', 'Soft Skill Certificate')->where('status', 'approved')->pluck('rating')->filter(fn($r) => is_numeric($r));
+@endphp
+@if($svcRatings->count() > 0)
+,{
+    "@type": "Service",
+    "@id": "{{ url('/') }}#softskill-service-rating",
+    "name": "Soft Skill Certificate",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ round($svcRatings->avg(), 1) }}",
+        "reviewCount": {{ $svcRatings->count() }},
+        "bestRating": 5,
+        "worstRating": 1
+    }
+}
+@endif
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is this certificate mandatory for Gulf jobs?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No, but it significantly improves your chances of selection and salary. Gulf employers prefer candidates with verified workplace skills." }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does it take to receive the Soft Skill Certificate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most certificates are issued within 24 hours after document verification and payment confirmation." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I use this certificate for all GCC countries?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, it is useful for jobs in all GCC countries including Saudi Arabia, UAE, Qatar, Oman, Kuwait, and Bahrain." }
+        }
+    ]
+}
+@endpush
