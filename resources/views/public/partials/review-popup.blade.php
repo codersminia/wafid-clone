@@ -1,6 +1,6 @@
 {{-- Review Popup — include on thank you pages with @include('public.partials.review-popup', ['service' => 'Service Name']) --}}
 
-<div class="modal fade" id="reviewPopupModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="reviewPopupModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:480px;">
         <div class="modal-content border-0" style="border-radius:16px;overflow:hidden;">
 
@@ -22,7 +22,7 @@
                     <p class="text-muted small">Your review has been submitted.</p>
                 </div>
 
-                <form id="reviewPopupForm" class="d-block">
+                <form id="reviewPopupForm">
                     @csrf
                     <input type="hidden" name="service" value="{{ $service ?? 'General' }}">
 
@@ -43,11 +43,11 @@
                         <input type="text" name="name" class="form-control" placeholder="Your name *" maxlength="100" required style="border-radius:8px;">
                     </div>
 
-                    {{-- Review (optional) --}}
+                    {{-- Review --}}
                     <div class="form-group mb-4">
                         <textarea name="review" class="form-control" rows="3"
-                            placeholder="Share your experience (optional, max 255 characters)"
-                            maxlength="255" style="border-radius:8px;resize:none;"></textarea>
+                            placeholder="Share your experience (max 255 characters) *"
+                            maxlength="255" style="border-radius:8px;resize:none;" required></textarea>
                         <small class="text-muted float-right" id="reviewCharCount">0 / 255</small>
                     </div>
 
@@ -59,12 +59,7 @@
                 </form>
             </div>
 
-            {{-- Skip --}}
-            <div class="text-center pb-3">
-                <button type="button" data-dismiss="modal" class="btn btn-link text-muted small p-0">
-                    Skip for now
-                </button>
-            </div>
+
 
         </div>
     </div>
@@ -77,7 +72,7 @@
     if (!sessionStorage.getItem('review_submitted_{{ Str::slug($service ?? "general") }}')) {
         setTimeout(function () {
             $('#reviewPopupModal').modal('show');
-        }, 3000);
+        }, 2000);
     }
 
     // Star interaction
@@ -124,6 +119,13 @@
             return;
         }
 
+        const reviewVal = document.querySelector('#reviewPopupForm textarea[name="review"]').value.trim();
+        if (!reviewVal) {
+            document.querySelector('#reviewPopupForm textarea[name="review"]').classList.add('is-invalid');
+            return;
+        }
+        document.querySelector('#reviewPopupForm textarea[name="review"]').classList.remove('is-invalid');
+
         const btn     = document.getElementById('reviewPopupBtn');
         const btnText = document.getElementById('reviewPopupBtnText');
         const loader  = document.getElementById('reviewPopupBtnLoader');
@@ -141,9 +143,8 @@
 
             if (data.status === 'success') {
                 sessionStorage.setItem('review_submitted_{{ Str::slug($service ?? "general") }}', '1');
-                document.getElementById('reviewPopupForm').classList.add('d-none');
+                document.getElementById('reviewPopupForm').setAttribute('style', 'display:none !important');
                 document.getElementById('reviewPopupSuccess').classList.remove('d-none');
-                setTimeout(function () { $('#reviewPopupModal').modal('hide'); }, 2500);
             }
         } catch (err) {
             // silent fail — don't block the user

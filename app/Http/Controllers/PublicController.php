@@ -1562,7 +1562,7 @@ class PublicController extends Controller
             'email'   => 'nullable|email|max:150',
             'service' => 'required|string|max:100',
             'rating'  => 'required|integer|min:1|max:5',
-            'review'  => 'required|string|min:5|max:255',
+            'review'  => 'required|string|max:255',
             'photo'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -1583,7 +1583,7 @@ class PublicController extends Controller
             'email'      => $request->email,
             'service'    => $request->service,
             'rating'     => $request->rating,
-            'review'     => $request->review ?? '',
+            'review'     => $request->review,
             'photo'      => $photoPath,
             'status'     => 'pending',
             'ip_address' => $request->ip(),
