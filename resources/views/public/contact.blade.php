@@ -256,30 +256,22 @@
                                 <input type="email" class="form-control" name="email" maxlength="100" required>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold small">Country for Medical Booking <span class="text-danger">*</span></label>
-                                    <select class="form-control custom-select" name="subject" required>
-                                        <option value="" selected disabled>Select GCC country...</option>
-                                        <option value="Saudi Arabia – GAMCA Medical">🇸🇦 Saudi Arabia – GAMCA Medical</option>
-                                        <option value="UAE – Visa Medical">🇦🇪 UAE – Visa Medical</option>
-                                        <option value="Qatar – WAFID Token">🇶🇦 Qatar – WAFID Token</option>
-                                        <option value="Oman – WAFID Token">🇴🇲 Oman – WAFID Token</option>
-                                        <option value="Kuwait – WAFID Token">🇰🇼 Kuwait – WAFID Token</option>
-                                        <option value="Bahrain – WAFID Token">🇧🇭 Bahrain – WAFID Token</option>
-                                        <option value="NAVTTC Booking">NAVTTC / Takamol Registration</option>
-                                        <option value="Tasheer/Visa">Tasheer Visa Center Appointment</option>
-                                        <option value="Payment">Payment Verification</option>
-                                        <option value="Other">Other Inquiry</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold small">Appointment Type</label>
-                                    <select class="form-control custom-select" name="appointment_type">
-                                        <option value="Standard">Standard Booking</option>
-                                        <option value="Priority">Priority / Same-Day</option>
-                                        <option value="Early Morning">Early Morning Slot</option>
-                                    </select>
-                                </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold small">Subject <span class="text-danger">*</span></label>
+                                <select class="form-control custom-select p-2" name="subject" required>
+                                    <option value="" selected disabled>Select Subject...</option>
+                                    <option value="Saudi Arabia – GAMCA Medical">🇸🇦 Saudi Arabia – GAMCA Medical</option>
+                                    <option value="UAE – Visa Medical">🇦🇪 UAE – Visa Medical</option>
+                                    <option value="Qatar – WAFID Token">🇶🇦 Qatar – WAFID Token</option>
+                                    <option value="Oman – WAFID Token">🇴🇲 Oman – WAFID Token</option>
+                                    <option value="Kuwait – WAFID Token">🇰🇼 Kuwait – WAFID Token</option>
+                                    <option value="Bahrain – WAFID Token">🇧🇭 Bahrain – WAFID Token</option>
+                                    <option value="NAVTTC Booking">NAVTTC / Takamol Registration</option>
+                                    <option value="Tasheer/Visa">Tasheer Visa Center Appointment</option>
+                                    <option value="Payment">Payment Verification</option>
+                                    <option value="Other">Other Inquiry</option>
+                                </select>
+                            </div>
                             </div>
                             <div class="mb-3">
                                 <label class="font-weight-bold small">Message / Query <span class="text-danger">*</span></label>
