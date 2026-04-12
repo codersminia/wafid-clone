@@ -29,6 +29,7 @@ Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact
 Route::post('/contact-us', [PublicController::class, 'storecontact'])->name('contact.store');
 Route::post('/submit-review', [PublicController::class, 'storeReview'])->name('review.store');
 Route::get('/leave-a-review', [PublicController::class, 'leaveReview'])->name('review.page');
+Route::post('/reviews/load', [PublicController::class, 'getServiceReviews'])->name('reviews.load');
 Route::post('/track-whatsapp', [PublicController::class, 'trackWhatsapp'])->name('track.whatsapp');
 Route::post('/track-visitor', [PublicController::class, 'trackVisitor'])->name('track.visitor');
 

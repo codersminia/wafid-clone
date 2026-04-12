@@ -1555,6 +1555,35 @@ class PublicController extends Controller
         return view('public.leave-review');
     }
 
+    public function getServiceReviews(Request $request)
+    {
+        $perPage = 6;
+        $page    = max(1, (int) $request->query('page', 1));
+        $service = $request->input('service', '');
+
+        $query = \App\Models\ServiceReview::where('service', $service)
+            ->where('status', 'approved')
+            ->orderBy('created_at', 'desc');
+
+        $total   = $query->count();
+        $reviews = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
+
+        return response()->json([
+            'reviews'      => $reviews->map(function ($r) {
+                return [
+                    'name'   => $r->name,
+                    'rating' => $r->rating,
+                    'review' => \Illuminate\Support\Str::limit($r->review, 140),
+                    'photo'  => $r->photo ? asset($r->photo) : null,
+                ];
+            }),
+            'total'        => $total,
+            'per_page'     => $perPage,
+            'current_page' => $page,
+            'last_page'    => (int) ceil($total / $perPage),
+        ]);
+    }
+
     public function storeReview(Request $request)
     {
         $validator = Validator::make($request->all(), [
