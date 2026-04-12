@@ -32,6 +32,8 @@ body {
   background: linear-gradient(90deg, #0f1923 0%, #1a252f 100%) !important;
   box-shadow: 0 2px 20px rgba(0,0,0,0.25);
   padding: 0.6rem 0;
+  position: sticky !important;
+  top: 0;
   z-index: 1050;
 }
 

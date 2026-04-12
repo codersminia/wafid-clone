@@ -116,8 +116,7 @@
     }
     </script>
     <style>
-        body,
-        html {
+        body {
             overflow-x: hidden !important;
         }
     </style>
