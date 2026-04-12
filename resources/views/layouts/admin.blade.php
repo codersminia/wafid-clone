@@ -402,6 +402,8 @@
                                 </a>
                             </li>
 
+                            
+
                             <li class="menu-section">
                                 <h4 class="menu-text">Medical Centers</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -545,6 +547,22 @@
                                         </svg>
                                     </span>
                                     <span class="menu-text">Traffic Analytics</span>
+                                </a>
+                            </li>
+
+                            <!-- Queue Monitor -->
+                            <li class="menu-item {{ request()->routeIs('admin.queue.*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <a href="{{ route('admin.queue.monitor') }}" class="menu-link">
+                                    <span class="svg-icon menu-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M12,4 C14.209139,4 16,5.790861 16,8 C16,10.209139 14.209139,12 12,12 C9.790861,12 8,10.209139 8,8 C8,5.790861 9.790861,4 12,4 Z" fill="#000000"/>
+                                                <path d="M3.00289517,16.1115362 C3.00289517,14.1115362 7.44,12 12,12 C16.56,12 20.9971048,14.1115362 20.9971048,16.1115362 L20.9971048,20 L3.00289517,20 L3.00289517,16.1115362 Z" fill="#000000" opacity="0.3"/>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span class="menu-text">Queue Monitor</span>
                                 </a>
                             </li>
 

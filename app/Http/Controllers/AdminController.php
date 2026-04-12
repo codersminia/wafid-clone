@@ -1944,4 +1944,45 @@ class AdminController extends Controller
         \App\Models\ServiceReview::findOrFail($id)->delete();
         return response()->json(['status' => 'success', 'message' => 'Review deleted.']);
     }
+
+    // ── Queue Monitor ─────────────────────────────────────────────────────────
+    public function queueMonitor()
+    {
+        $pending = \DB::table('jobs')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20, ['*'], 'pending_page');
+
+        $failed = \DB::table('failed_jobs')
+            ->orderBy('failed_at', 'desc')
+            ->paginate(20, ['*'], 'failed_page');
+
+        return view('admin.queue-monitor', compact('pending', 'failed'));
+    }
+
+    public function queueRetry($id)
+    {
+        $failed = \DB::table('failed_jobs')->where('id', $id)->first();
+        if (!$failed) return response()->json(['status' => 'error', 'message' => 'Job not found.'], 404);
+
+        \Artisan::call('queue:retry', ['id' => [$failed->uuid]]);
+        return response()->json(['status' => 'success', 'message' => 'Job queued for retry.']);
+    }
+
+    public function queueRetryAll()
+    {
+        \Artisan::call('queue:retry', ['id' => ['all']]);
+        return response()->json(['status' => 'success', 'message' => 'All failed jobs queued for retry.']);
+    }
+
+    public function queueDeleteFailed($id)
+    {
+        \DB::table('failed_jobs')->where('id', $id)->delete();
+        return response()->json(['status' => 'success', 'message' => 'Failed job deleted.']);
+    }
+
+    public function queueClearFailed()
+    {
+        \DB::table('failed_jobs')->truncate();
+        return response()->json(['status' => 'success', 'message' => 'All failed jobs cleared.']);
+    }
 }

@@ -245,4 +245,11 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
         Route::delete('/{id}', [AdminController::class, 'deleteReview'])->name('delete');
     });
 
+    // Queue Monitor
+    Route::get('/queue-monitor', [AdminController::class, 'queueMonitor'])->name('queue.monitor');
+    Route::post('/queue-monitor/retry/{id}', [AdminController::class, 'queueRetry'])->name('queue.retry');
+    Route::delete('/queue-monitor/failed/{id}', [AdminController::class, 'queueDeleteFailed'])->name('queue.delete.failed');
+    Route::post('/queue-monitor/retry-all', [AdminController::class, 'queueRetryAll'])->name('queue.retry.all');
+    Route::delete('/queue-monitor/clear-failed', [AdminController::class, 'queueClearFailed'])->name('queue.clear.failed');
+
 });
