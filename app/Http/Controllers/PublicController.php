@@ -421,11 +421,13 @@ class PublicController extends Controller
             } catch (\Exception $e) {}
         }
 
-        // Notify admin with payment proof attached
+        // Notify admin only if payment proof was uploaded
         try {
-            $payment        = $appointment->payment ?? $appointment->load('payment')->payment;
-            $proofImagePath = $payment ? public_path('uploads/medical-examination/' . $payment->proof_image) : null;
-            $this->notificationService->notifyAppointment('WAFID - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+            $payment = $appointment->payment;
+            if ($payment) {
+                $proofImagePath = public_path('uploads/medical-examination/' . $payment->proof_image);
+                $this->notificationService->notifyAppointment('WAFID - Payment Received', $appointment, [$proofImagePath]);
+            }
         } catch (\Exception $e) {}
 
         return view('public.appointments.thank-you', compact('appointment'));
@@ -680,11 +682,13 @@ class PublicController extends Controller
             } catch (\Exception $e) {}
         }
 
-        // Notify admin with payment proof attached
+        // Notify admin only if payment proof was uploaded
         try {
-            $payment        = $appointment->specialPayment ?? $appointment->load('specialPayment')->specialPayment;
-            $proofImagePath = $payment ? public_path('uploads/special-medical/' . $payment->proof_image) : null;
-            $this->notificationService->notifyAppointment('Special WAFID - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+            $payment = $appointment->specialPayment;
+            if ($payment) {
+                $proofImagePath = public_path('uploads/special-medical/' . $payment->proof_image);
+                $this->notificationService->notifyAppointment('Special WAFID - Payment Received', $appointment, [$proofImagePath]);
+            }
         } catch (\Exception $e) {}
 
         return view('public.specialappointments.thank-you', compact('appointment'));
@@ -869,9 +873,11 @@ class PublicController extends Controller
         session()->forget('navtech_paid_id');
 
         try {
-            $payment        = $appointment->payment;
-            $proofImagePath = $payment ? public_path('uploads/navtech/' . $payment->proof_image) : null;
-            $this->notificationService->notifyAppointment('NAVTTC - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+            $payment = $appointment->payment;
+            if ($payment) {
+                $proofImagePath = public_path('uploads/navtech/' . $payment->proof_image);
+                $this->notificationService->notifyAppointment('NAVTTC - Payment Received', $appointment, [$proofImagePath]);
+            }
         } catch (\Exception $e) {}
 
         return view('public.navtechappointments.thank-you', compact('appointment'));
@@ -989,9 +995,11 @@ class PublicController extends Controller
         session()->forget('tasheer_paid_id');
 
         try {
-            $payment        = $appointment->payment;
-            $proofImagePath = $payment ? public_path('uploads/' . $payment->proof_image) : null;
-            $this->notificationService->notifyAppointment('Tasheer - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+            $payment = $appointment->payment;
+            if ($payment) {
+                $proofImagePath = public_path('uploads/' . $payment->proof_image);
+                $this->notificationService->notifyAppointment('Tasheer - Payment Received', $appointment, [$proofImagePath]);
+            }
         } catch (\Exception $e) {}
 
         return view('public.tasheerappointments.thank-you', compact('appointment'));
@@ -1111,9 +1119,11 @@ class PublicController extends Controller
         session()->forget('softskill_paid_id');
 
         try {
-            $payment        = $record->payment;
-            $proofImagePath = $payment ? public_path('uploads/payments/' . $payment->proof_image) : null;
-            $this->notificationService->notifyAppointment('Soft Skill - Payment Received', $record, $proofImagePath ? [$proofImagePath] : []);
+            $payment = $record->payment;
+            if ($payment) {
+                $proofImagePath = public_path('uploads/payments/' . $payment->proof_image);
+                $this->notificationService->notifyAppointment('Soft Skill - Payment Received', $record, [$proofImagePath]);
+            }
         } catch (\Exception $e) {}
 
         return view('public.skillcertificates.thank-you', compact('record'));
