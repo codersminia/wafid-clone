@@ -412,16 +412,21 @@ class PublicController extends Controller
 
         session()->forget('appointment_paid_id');
 
-        // Send confirmation email with payment proof attached
+        // Send confirmation email to client + notify admin with proof
         if (!empty($appointment->email)) {
             try {
-                $payment       = $appointment->payment;
+                $payment        = $appointment->payment;
                 $proofImagePath = $payment ? public_path('uploads/medical-examination/' . $payment->proof_image) : null;
                 Mail::to($appointment->email)->send(new AppointmentConfirmationMail($appointment, $proofImagePath));
-            } catch (\Exception $e) {
-                // silent — don't block the user
-            }
+            } catch (\Exception $e) {}
         }
+
+        // Notify admin with payment proof attached
+        try {
+            $payment        = $appointment->payment ?? $appointment->load('payment')->payment;
+            $proofImagePath = $payment ? public_path('uploads/medical-examination/' . $payment->proof_image) : null;
+            $this->notificationService->notifyAppointment('WAFID - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+        } catch (\Exception $e) {}
 
         return view('public.appointments.thank-you', compact('appointment'));
     }
@@ -666,16 +671,21 @@ class PublicController extends Controller
 
         session()->forget('special_appointment_paid_id');
 
-        // Send confirmation email with payment proof attached
+        // Send confirmation email to client + notify admin with proof
         if (!empty($appointment->email)) {
             try {
                 $payment        = $appointment->specialPayment;
                 $proofImagePath = $payment ? public_path('uploads/special-medical/' . $payment->proof_image) : null;
                 Mail::to($appointment->email)->send(new AppointmentConfirmationMail($appointment, $proofImagePath));
-            } catch (\Exception $e) {
-                // silent — don't block the user
-            }
+            } catch (\Exception $e) {}
         }
+
+        // Notify admin with payment proof attached
+        try {
+            $payment        = $appointment->specialPayment ?? $appointment->load('specialPayment')->specialPayment;
+            $proofImagePath = $payment ? public_path('uploads/special-medical/' . $payment->proof_image) : null;
+            $this->notificationService->notifyAppointment('Special WAFID - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+        } catch (\Exception $e) {}
 
         return view('public.specialappointments.thank-you', compact('appointment'));
     }
@@ -857,6 +867,13 @@ class PublicController extends Controller
             return redirect()->route('navtechform');
         }
         session()->forget('navtech_paid_id');
+
+        try {
+            $payment        = $appointment->payment;
+            $proofImagePath = $payment ? public_path('uploads/navtech/' . $payment->proof_image) : null;
+            $this->notificationService->notifyAppointment('NAVTTC - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+        } catch (\Exception $e) {}
+
         return view('public.navtechappointments.thank-you', compact('appointment'));
     }
 
@@ -970,6 +987,13 @@ class PublicController extends Controller
         if (!$id || !$appointment = TasheerAppointment::find($id))
             return redirect()->route('tasheer.form');
         session()->forget('tasheer_paid_id');
+
+        try {
+            $payment        = $appointment->payment;
+            $proofImagePath = $payment ? public_path('uploads/' . $payment->proof_image) : null;
+            $this->notificationService->notifyAppointment('Tasheer - Payment Received', $appointment, $proofImagePath ? [$proofImagePath] : []);
+        } catch (\Exception $e) {}
+
         return view('public.tasheerappointments.thank-you', compact('appointment'));
     }
 
@@ -1085,6 +1109,13 @@ class PublicController extends Controller
         if (!$id || !$record = SoftSkillCertificate::find($id))
             return redirect()->route('softskill.form');
         session()->forget('softskill_paid_id');
+
+        try {
+            $payment        = $record->payment;
+            $proofImagePath = $payment ? public_path('uploads/payments/' . $payment->proof_image) : null;
+            $this->notificationService->notifyAppointment('Soft Skill - Payment Received', $record, $proofImagePath ? [$proofImagePath] : []);
+        } catch (\Exception $e) {}
+
         return view('public.skillcertificates.thank-you', compact('record'));
     }
 
