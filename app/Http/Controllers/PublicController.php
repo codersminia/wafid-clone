@@ -20,7 +20,6 @@ use App\Models\SoftSkillCertificate;
 use App\Models\SoftSkillPayment;
 use App\Models\Faq;
 use App\Models\ContactInquiry;
-use App\Models\PrivateFeedback;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactInquiryMail;
@@ -201,34 +200,6 @@ class PublicController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Thank you! Your inquiry has been sent successfully.'
-        ]);
-    }
-
-    public function storeFeedback(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:100',
-            'rating' => 'required|integer|min:1|max:5',
-            'message' => 'required|string|min:5|max:1000',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['status' => 'error', 'errors' => $validator->errors()], 422);
-        }
-
-        $sanitized = [
-            'name' => strip_tags($request->name),
-            'email' => strip_tags($request->email),
-            'rating' => $request->rating,
-            'message' => strip_tags($request->message),
-        ];
-
-        PrivateFeedback::create($sanitized);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Thank you for your feedback! It helps us improve our service.'
         ]);
     }
 

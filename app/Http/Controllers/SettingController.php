@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Testimonial;
-use App\Models\PrivateFeedback;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
@@ -14,9 +13,8 @@ class SettingController extends Controller
     {
         $settings = Setting::pluck('value', 'key')->all();
         $testimonials = Testimonial::orderBy('created_at', 'desc')->get();
-        $feedbacks = PrivateFeedback::orderBy('created_at', 'desc')->get();
 
-        return view('admin.settings.index', compact('settings', 'testimonials', 'feedbacks'));
+        return view('admin.settings.index', compact('settings', 'testimonials'));
     }
 
     public function update(Request $request)
@@ -103,26 +101,6 @@ class SettingController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Testimonial deleted successfully'
-        ]);
-    }
-
-    public function markFeedbackRead($id)
-    {
-        $feedback = PrivateFeedback::findOrFail($id);
-        $feedback->is_read = 1;
-        $feedback->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function deleteFeedback($id)
-    {
-        $feedback = PrivateFeedback::findOrFail($id);
-        $feedback->delete();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Feedback deleted successfully'
         ]);
     }
 }

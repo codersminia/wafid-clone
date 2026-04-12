@@ -524,12 +524,6 @@
                                         </svg>
                                     </span>
                                     <span class="menu-text">Website Settings</span>
-                                    @if($feedback_new > 0)
-                                        <span class="menu-label">
-                                            <span
-                                                class="label label-danger label-inline font-weight-bold sidebar-feedback-badge">{{ $feedback_new }}</span>
-                                        </span>
-                                    @endif
                                 </a>
                             </li>
 

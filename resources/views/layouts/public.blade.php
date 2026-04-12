@@ -228,6 +228,7 @@
                             <li><a href="{{ route('navtechform') }}">NAVTTC Test</a></li>
                             <li><a href="{{ route('tasheer.form') }}">Tasheer Visa</a></li>
                             <li><a href="{{ route('softskill.form') }}">Soft Skills</a></li>
+                            <li><a href="{{ route('review.page') }}" style="color:var(--accent-gold);font-weight:600;">Leave a Review</a></li>
                         </ul>
                     </div>
 

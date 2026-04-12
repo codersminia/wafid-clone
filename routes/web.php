@@ -27,7 +27,6 @@ Route::get('/about-us', [PublicController::class, 'about'])->name('about');
 
 Route::get('/contact-us', [PublicController::class, 'contactus'])->name('contact');
 Route::post('/contact-us', [PublicController::class, 'storecontact'])->name('contact.store');
-Route::post('/feedback', [PublicController::class, 'storeFeedback'])->name('feedback.store');
 Route::post('/submit-review', [PublicController::class, 'storeReview'])->name('review.store');
 Route::get('/leave-a-review', [PublicController::class, 'leaveReview'])->name('review.page');
 Route::post('/track-whatsapp', [PublicController::class, 'trackWhatsapp'])->name('track.whatsapp');
@@ -159,11 +158,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
 
-    // Testimonials & Feedback within Settings context
+    // Testimonials within Settings context
     Route::post('/settings/testimonials', [SettingController::class, 'storeTestimonial'])->name('settings.testimonials.store');
     Route::delete('/settings/testimonials/{id}', [SettingController::class, 'deleteTestimonial'])->name('settings.testimonials.delete');
-    Route::post('/settings/feedback/read/{id}', [SettingController::class, 'markFeedbackRead'])->name('settings.feedback.read');
-    Route::delete('/settings/feedback/{id}', [SettingController::class, 'deleteFeedback'])->name('settings.feedback.delete');
 
     Route::prefix('payment-methods')->name('payment.methods.')->group(function () {
         Route::get('/', [AdminController::class, 'allPaymentMethods'])->name('index');
@@ -246,4 +243,5 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->name('admin.')->group(
         Route::post('/{id}/reject', [AdminController::class, 'rejectReview'])->name('reject');
         Route::delete('/{id}', [AdminController::class, 'deleteReview'])->name('delete');
     });
+
 });

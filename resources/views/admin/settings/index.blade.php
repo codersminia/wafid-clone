@@ -53,17 +53,6 @@
                                         <span class="nav-text">Testimonials</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning font-weight-bold" data-toggle="tab"
-                                        href="#kt_tab_feedback">
-                                        <span class="nav-icon"><i class="flaticon2-mail text-warning"></i></span>
-                                        <span class="nav-text">Private Feedback</span>
-                                        @if($feedback_new > 0)
-                                            <span
-                                                class="label label-warning label-rounded label-inline ml-2 feedback-badge-count">{{ $feedback_new }}</span>
-                                        @endif
-                                    </a>
-                                </li>
                             </ul>
 
                             <div class="tab-content mt-5" id="myTabContent">
@@ -443,68 +432,7 @@
                                     </div>
                                 </div>
 
-                                <!-- PRIVATE FEEDBACK TAB -->
-                                <div class="tab-pane fade" id="kt_tab_feedback" role="tabpanel">
-                                    <div class="mb-5">
-                                        <h5 class="text-dark font-weight-bold mb-2">Private Client Feedback</h5>
-                                        <p class="text-muted mb-0">View private ratings and internal feedback submitted by
-                                            users via the contact form.</p>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-head-custom table-vertical-center" id="kt_feedback_table">
-                                            <thead>
-                                                <tr class="thead-dark">
-                                                    <th>Date</th>
-                                                    <th>Client</th>
-                                                    <th>Rating</th>
-                                                    <th>Message</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($feedbacks as $fb)
-                                                    <tr class="{{ !$fb->is_read ? 'bg-light-warning' : '' }}"
-                                                        id="fb-row-{{ $fb->id }}">
-                                                        <td>{{ $fb->created_at->format('d M Y') }}</td>
-                                                        <td>
-                                                            <div class="font-weight-bold">{{ $fb->name }}</div>
-                                                            <div class="small text-muted">{{ $fb->email }}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-warning">
-                                                                @for($i = 1; $i <= 5; $i++)
-                                                                    <i
-                                                                        class="{{ $i <= $fb->rating ? 'fas' : 'far' }} fa-star fa-sm"></i>
-                                                                @endfor
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-dark-75 text-truncate" style="max-width: 300px;"
-                                                                title="{{ $fb->message }}">
-                                                                {{ $fb->message }}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-clean btn-icon view-feedback"
-                                                                data-id="{{ $fb->id }}" data-name="{{ $fb->name }}"
-                                                                data-email="{{ $fb->email }}" data-rating="{{ $fb->rating }}"
-                                                                data-message="{{ $fb->message }}" data-read="{{ $fb->is_read }}"
-                                                                title="View Message">
-                                                                <i class="la la-eye text-primary"></i>
-                                                            </button>
-                                                            <button type="button"
-                                                                class="btn btn-sm btn-clean btn-icon delete-feedback"
-                                                                data-id="{{ $fb->id }}" title="Delete">
-                                                                <i class="la la-trash text-danger"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                <!-- end testimonials tab -->
                             </div>
 
                             <div class="card-footer" id="settings-footer">
@@ -636,38 +564,6 @@
         </div>
     </div>
 
-    <!-- Feedback View Modal -->
-    <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog" aria-labelledby="modalFeedbackLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalFeedbackLabel">Feedback from <span id="fb_name_display"></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i aria-hidden="true" class="ki ki-close"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-5">
-                        <label class="font-weight-bold">Client:</label>
-                        <div id="fb_client_info"></div>
-                    </div>
-                    <div class="mb-5">
-                        <label class="font-weight-bold">Rating:</label>
-                        <div id="fb_rating_display" class="text-warning"></div>
-                    </div>
-                    <div class="mb-5">
-                        <label class="font-weight-bold">Message:</label>
-                        <div class="p-4 bg-light rounded" id="fb_message_display" style="white-space: pre-wrap;"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection
 
 @push('scripts')
@@ -686,16 +582,9 @@
             order: [[0, 'desc']] // Default sort? Actually Client name is first. Let's do nothing for now or sort by something hidden.
         });
 
-        $('#kt_feedback_table').DataTable({
-            responsive: true,
-            pageLength: 50,
-            lengthMenu: [50, 100, 200],
-            order: [[0, 'desc']] // Sort by Date
-        });
-
         $(document).ready(function () {
             function toggleFooter(target) {
-                if (target === '#kt_tab_testimonials' || target === '#kt_tab_feedback') {
+                if (target === '#kt_tab_testimonials') {
                     $('#settings-footer').hide();
                 } else {
                     $('#settings-footer').show();
@@ -825,96 +714,7 @@
             });
         });
 
-        // Feedback Logic
-        $(document).on('click', '.view-feedback', function () {
-            var id = $(this).data('id');
-            var name = $(this).data('name');
-            var email = $(this).data('email');
-            var rating = $(this).data('rating');
-            var message = $(this).data('message');
-            var isRead = $(this).data('read');
-            var btn = $(this);
-
-            // Populate Modal
-            $('#fb_name_display').text(name);
-            $('#fb_client_info').html('<strong>' + name + '</strong> (' + email + ')');
-
-            var stars = '';
-            for (var i = 1; i <= 5; i++) {
-                stars += '<i class="' + (i <= rating ? 'fas' : 'far') + ' fa-star mr-1"></i>';
-            }
-            $('#fb_rating_display').html(stars);
-            $('#fb_message_display').text(message);
-
-            // Show Modal
-            $('#modalFeedback').modal('show');
-
-            // Mark as Read if unread
-            if (isRead == 0) {
-                $.ajax({
-                    url: '{{ url("admin/settings/feedback/read") }}/' + id,
-                    type: 'POST',
-                    data: { _token: '{{ csrf_token() }}' },
-                    success: function () {
-                        // Update UI
-                        $('#fb-row-' + id).removeClass('bg-light-warning');
-                        btn.data('read', 1);
-
-                        // Update Badges
-                        $('.feedback-badge-count').each(function () {
-                            var count = parseInt($(this).text()) - 1;
-                            if (count > 0) {
-                                $(this).text(count);
-                            } else {
-                                $(this).fadeOut();
-                            }
-                        });
-
-                        // Also update sidebar if it exists (assuming it uses the same class or we add it)
-                        $('.sidebar-feedback-badge').each(function () {
-                            var count = parseInt($(this).text()) - 1;
-                            if (count > 0) {
-                                $(this).text(count);
-                            } else {
-                                $(this).fadeOut();
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
-        $(document).on('click', '.delete-feedback', function () {
-            var id = $(this).data('id');
-            var btn = $(this);
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Delete this feedback permanently?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ url("admin/settings/feedback") }}/' + id,
-                        type: 'DELETE',
-                        data: { _token: '{{ csrf_token() }}' },
-                        success: function (res) {
-                            btn.closest('tr').fadeOut(function () {
-                                $(this).remove();
-                            });
-                            Swal.fire('Deleted!', res.message, 'success');
-                        },
-                        error: function () {
-                            Swal.fire('Error!', 'Something went wrong.', 'error');
-                        }
-                    });
-                }
-            });
-        });
+        // Feedback Logic removed
 
     </script>
 @endpush

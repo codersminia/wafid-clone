@@ -11,7 +11,6 @@ use App\Models\NavtechAppointment;
 use App\Models\TasheerAppointment;
 use App\Models\SoftSkillCertificate;
 use App\Models\ContactInquiry;
-use App\Models\PrivateFeedback;
 use App\Models\Setting;
 use App\Models\MedicalCenter;
 use Illuminate\Pagination\Paginator;
@@ -46,7 +45,6 @@ class AppServiceProvider extends ServiceProvider
                 'tasheer_new' => TasheerAppointment::where('is_new', 1)->count(),
                 'softskill_new' => SoftSkillCertificate::where('is_new', 1)->count(),
                 'contact_new' => ContactInquiry::where('is_new', 1)->count(),
-                'feedback_new' => PrivateFeedback::where('is_read', 0)->count(),
                 'reviews_pending' => \App\Models\ServiceReview::where('status', 'pending')->count(),
             ];
 
