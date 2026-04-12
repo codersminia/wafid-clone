@@ -63,6 +63,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/public/css/style.css') }}">
 
+    {{-- Preload above-the-fold assets --}}
+    <link rel="preload" as="image" href="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}" fetchpriority="high" imagesizes="(max-width: 991px) 160px, 200px">
+
     @stack('head')
 
     {{-- Global Schema Markup (Organization & WebSite) --}}
@@ -134,7 +137,10 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
-                    alt="{{ $settings['site_name'] ?? 'Logo' }}" height="auto" width="200" class="mr-2">
+                    alt="{{ $settings['site_name'] ?? 'Logo' }}"
+                    height="52" width="234" class="mr-2"
+                    sizes="(max-width: 991px) 160px, 200px"
+                    fetchpriority="high" loading="eager" decoding="sync">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -196,7 +202,8 @@
                     <!-- Brand -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <img src="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}"
-                            alt="{{ $settings['site_name'] ?? 'Gulf Medical' }}" height="50" class="mb-4">
+                            alt="{{ $settings['site_name'] ?? 'Gulf Medical' }}" height="50" class="mb-4"
+                            loading="lazy" decoding="async">
                         <p class="footer-about">{{ $settings['footer_text'] ?? 'Providing employment and residency services for Gulf Cooperation Council States.' }}</p>
                         <div class="footer-socials mt-4">
                             @if(!empty($settings['social_facebook']))

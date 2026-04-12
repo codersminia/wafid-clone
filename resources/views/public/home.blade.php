@@ -270,7 +270,7 @@
                 <div class="col-lg-5 col-md-5 mb-4 mb-md-0">
                     <div class="seo-img-wrapper">
                         <img
-                            src="{{ asset('assets/public/images/gamca-medical-appointment-new.jpg') }}"
+                            src="{{ asset('assets/public/images/gamca-medical-appointment-new.webp') }}"
                             alt="GAMCA Medical Appointment Pakistan"
                             class="img-fluid rounded shadow"
                             loading="lazy"
@@ -320,7 +320,12 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a href="{{ route('public.gcc.country', 'saudi-arabia') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
-                        <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Saudi Arabia" loading="lazy">
+                        <img
+                                src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&w=525&q=55"
+                                srcset="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&w=350&q=55 350w,
+                                        https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&w=525&q=55 525w"
+                                sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 350px"
+                                alt="GAMCA Medical Centers Saudi Arabia" loading="lazy" decoding="async">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Saudi Arabia</h3>
                             <p class="gcc-card-cities">Major cities: Riyadh, Jeddah, Dammam</p>
@@ -333,7 +338,12 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a href="{{ route('public.gcc.country', 'qatar') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
-                        <img src="https://images.unsplash.com/photo-1553697388-94e804e2f0f6?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Qatar" loading="lazy">
+                        <img
+                                src="https://images.unsplash.com/photo-1553697388-94e804e2f0f6?auto=format&fit=crop&w=525&q=55"
+                                srcset="https://images.unsplash.com/photo-1553697388-94e804e2f0f6?auto=format&fit=crop&w=350&q=55 350w,
+                                        https://images.unsplash.com/photo-1553697388-94e804e2f0f6?auto=format&fit=crop&w=525&q=55 525w"
+                                sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 350px"
+                                alt="GAMCA Medical Centers Qatar" loading="lazy" decoding="async">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Qatar</h3>
                             <p class="gcc-card-cities">Major cities: Doha, Al Khor</p>
@@ -346,7 +356,12 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a href="{{ route('public.gcc.country', 'oman') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
-                        <img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Oman" loading="lazy">
+                        <img
+                                src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=525&q=55"
+                                srcset="https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=350&q=55 350w,
+                                        https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=525&q=55 525w"
+                                sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 350px"
+                                alt="GAMCA Medical Centers Oman" loading="lazy" decoding="async">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Oman</h3>
                             <p class="gcc-card-cities">Major cities: Muscat, Sohar</p>
@@ -359,7 +374,12 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a href="{{ route('public.gcc.country', 'uae') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
-                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers UAE" loading="lazy">
+                        <img
+                                src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=525&q=55"
+                                srcset="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=350&q=55 350w,
+                                        https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=525&q=55 525w"
+                                sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 350px"
+                                alt="GAMCA Medical Centers UAE" loading="lazy" decoding="async">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">UAE</h3>
                             <p class="gcc-card-cities">Major cities: Dubai, Abu Dhabi</p>
@@ -372,7 +392,12 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a href="{{ route('public.gcc.country', 'kuwait') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
-                        <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Kuwait" loading="lazy">
+                        <img
+                                src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=525&q=55"
+                                srcset="https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=350&q=55 350w,
+                                        https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=525&q=55 525w"
+                                sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 350px"
+                                alt="GAMCA Medical Centers Kuwait" loading="lazy" decoding="async">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Kuwait</h3>
                             <p class="gcc-card-cities">Major cities: Kuwait City</p>
@@ -385,7 +410,12 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <a href="{{ route('public.gcc.country', 'bahrain') }}" class="gcc-card-wrap">
                     <div class="gcc-card">
-                        <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=600&q=70" alt="GAMCA Medical Centers Bahrain" loading="lazy">
+                        <img
+                                src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=525&q=55"
+                                srcset="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=350&q=55 350w,
+                                        https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=525&q=55 525w"
+                                sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, 350px"
+                                alt="GAMCA Medical Centers Bahrain" loading="lazy" decoding="async">
                         <div class="gcc-card-overlay">
                             <h3 class="gcc-card-title">Bahrain</h3>
                             <p class="gcc-card-cities">Major cities: Manama</p>
@@ -471,7 +501,7 @@
                     <div class="svc-card h-100">
                         <div class="svc-card-header">
                             <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="GAMCA Medical Slip WAFID" loading="lazy">
+                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="GAMCA Medical Slip WAFID" loading="lazy" decoding="async">
                             </div>
                             <div>
                                 <h3 class="svc-card-title">GAMCA Medical Appointment Slip</h3>
@@ -494,7 +524,7 @@
                     <div class="svc-card h-100">
                         <div class="svc-card-header">
                             <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid Choice Medical Center Selection" loading="lazy">
+                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid Choice Medical Center Selection" loading="lazy" decoding="async">
                             </div>
                             <div>
                                 <h3 class="svc-card-title">Wafid Choice Medical Center Selection</h3>
@@ -517,7 +547,7 @@
                     <div class="svc-card h-100">
                         <div class="svc-card-header">
                             <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC Takamol Skill Verification Saudi Visa" loading="lazy">
+                                <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC Takamol Skill Verification Saudi Visa" loading="lazy" decoding="async">
                             </div>
                             <div>
                                 <h3 class="svc-card-title">NAVTTC / Takamol Skill Verification</h3>
@@ -539,7 +569,7 @@
                     <div class="svc-card h-100">
                         <div class="svc-card-header">
                             <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/tasheer-logo.png') }}" alt="Tasheer Saudi Visa Biometric Appointment VFS" loading="lazy">
+                                <img src="{{ asset('assets/public/images/tasheer-logo.png') }}" alt="Tasheer Saudi Visa Biometric Appointment VFS" loading="lazy" decoding="async">
                             </div>
                             <div>
                                 <h3 class="svc-card-title">Tasheer / Saudi Visa Biometric Appointment</h3>
@@ -561,7 +591,7 @@
                     <div class="svc-card h-100">
                         <div class="svc-card-header">
                             <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/soft-skill-logo.png') }}" alt="Gulf Employment Soft Skill Certificate GCC" loading="lazy">
+                                <img src="{{ asset('assets/public/images/soft-skill-logo.png') }}" alt="Gulf Employment Soft Skill Certificate GCC" loading="lazy" decoding="async">
                             </div>
                             <div>
                                 <h3 class="svc-card-title">Gulf Employment Soft Skill Certificates</h3>
@@ -591,7 +621,7 @@
                         alt="GAMCA Medical Appointment Pakistan"
                         class="img-fluid rounded shadow-lg w-100 h-100"
                         style="object-fit: cover; min-height: 400px;"
-                        loading="lazy">
+                        loading="lazy" decoding="async">
                 </div>
                 <div class="col-lg-7 pl-lg-5">
                     <h6 class="text-accent-red font-weight-bold text-uppercase">Why Choose Us</h6>
@@ -656,7 +686,8 @@
                                     @if($tm->source == 'google')
                                         <div class="google-badge mb-3 d-flex align-items-center">
                                             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
-                                                width="60" alt="Google" class="mr-2" style="opacity: 0.7;">
+                                                width="60" alt="Google" class="mr-2" style="opacity: 0.7;"
+                                                loading="lazy" decoding="async">
                                             <span class="badge badge-light text-muted small">Google Review</span>
                                         </div>
                                     @endif
@@ -670,7 +701,7 @@
                                         <div class="symbol symbol-40 mr-3">
                                             @if($tm->client_image)
                                                 <img src="{{ asset($tm->client_image) }}" class="rounded-circle" width="40" height="40"
-                                                    alt="{{ $tm->client_name }}">
+                                                    alt="{{ $tm->client_name }}" loading="lazy" decoding="async">
                                             @else
                                                 <div class="rounded-circle bg-primary-dark text-white d-flex align-items-center justify-content-center"
                                                     style="width: 40px; height: 40px;">
@@ -733,7 +764,7 @@
                             @php $hasOfficeReviews = true; @endphp
                             <a href="{{ $office['google_review_url'] }}" target="_blank"
                                 class="btn btn-outline-dark m-2 shadow-sm border-secondary d-flex align-items-center">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/960px-Google_Favicon_2025.svg.png" width="20" height="20" class="mr-2" alt="Google">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/960px-Google_Favicon_2025.svg.png" width="20" height="20" class="mr-2" alt="Google" loading="lazy" decoding="async">
                                 <span class="font-weight-bold">Reviews: {{ $office['title'] ?? $office['city'] }}</span>
                             </a>
                         @endif
@@ -742,7 +773,7 @@
                     @if(!$hasOfficeReviews)
                         <a href="https://www.google.com/search?q=Gulf+Medical+Consultant" target="_blank"
                             class="btn btn-outline-dark d-flex align-items-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/960px-Google_Favicon_2025.svg.png" width="20" height="20" class="mr-2" alt="Google">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/960px-Google_Favicon_2025.svg.png" width="20" height="20" class="mr-2" alt="Google" loading="lazy" decoding="async">
                              View all reviews on Google
                         </a>
                     @endif
@@ -850,9 +881,9 @@
                     <article class="blog-home-card h-100">
                         <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-home-img-link">
                             @if($blog->image)
-                                <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" loading="lazy" width="400" height="220">
+                                <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" loading="lazy" decoding="async" width="400" height="220">
                             @else
-                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=70" alt="{{ $blog->title }}" loading="lazy" width="400" height="220">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=70" alt="{{ $blog->title }}" loading="lazy" decoding="async" width="400" height="220">
                             @endif
                         </a>
                         <div class="blog-home-body">
