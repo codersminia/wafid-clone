@@ -18,9 +18,10 @@ var KTCheckResultsTable = function () {
             columns: [
                 { data: 0 }, // id
                 { data: 1 }, // passport_no
-                { data: 2 }, // phone
-                { data: 3 }, // created_at
-                { data: 4 }  // actions
+                { data: 2 }, // nationality
+                { data: 3 }, // phone
+                { data: 4 }, // created_at
+                { data: 5 }  // actions
             ],
 
             columnDefs: [
@@ -33,11 +34,20 @@ var KTCheckResultsTable = function () {
                 {
                     targets: 2,
                     render: function (data) {
-                        return `<a href="tel:${data}" class="text-primary">${data}</a>`;
+                        return data ? `<span class="badge badge-light-primary">${data}</span>` : '-';
                     }
                 },
                 {
-                    targets: 4,
+                    targets: 3,
+                    render: function (data) {
+                        var clean = data ? data.replace(/\D/g, '') : '';
+                        var waUrl = 'https://wa.me/' + clean;
+                        return `<a href="tel:${data}" class="text-primary mr-2">${data}</a>` +
+                               `<a href="${waUrl}" target="_blank" class="btn btn-sm btn-success btn-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>`;
+                    }
+                },
+                {
+                    targets: 5,
                     orderable: false,
                     searchable: false
                 }

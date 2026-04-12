@@ -285,8 +285,9 @@ class AdminController extends Controller
         $columns = [
             0 => 'id',
             1 => 'passport_no',
-            2 => 'phone',
-            3 => 'created_at'
+            2 => 'nationality',
+            3 => 'phone',
+            4 => 'created_at'
         ];
 
         // Base query
@@ -333,9 +334,10 @@ class AdminController extends Controller
         foreach ($results as $row) {
             $rowClass = $row->is_new ? 'new-record' : '';
             $data[] = [
-                'DT_RowClass' => $rowClass, // add class for new records
+                'DT_RowClass' => $rowClass,
                 $row->id,
                 $row->passport_no,
+                $row->nationality,
                 $row->phone,
                 $row->created_at->format("d M Y"),
                 '<a href="javascript:;" class="btn btn-sm btn-clean btn-icon delete-result" data-id="' . $row->id . '" title="Delete">

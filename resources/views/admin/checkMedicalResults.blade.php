@@ -18,6 +18,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Passport No</th>
+                                <th>Nationality</th>
                                 <th>Phone</th>
                                 <th>Date</th>
                                 <th>Actions</th>

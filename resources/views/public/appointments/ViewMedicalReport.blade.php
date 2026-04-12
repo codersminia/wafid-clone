@@ -90,19 +90,138 @@
                                 
                                 <div class="form-group">
                                     <label class="font-weight-bold">Passport Number <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" name="passport_no" placeholder="e.g. AB1234567" style="text-transform: uppercase;" >
+                                    <input type="text" class="form-control form-control-lg" name="passport_no" id="passport_no" placeholder="e.g. AB1234567" style="text-transform: uppercase;">
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="font-weight-bold">Nationality</label>
-                                        <select name="nationality" class="form-control p-2">
+                                        <select name="nationality" id="nationality" class="form-control p-2">
+                                            <option value="">Select nationality</option>
+                                            <option value="Afghan">Afghan</option>
+                                            <option value="Albanian">Albanian</option>
+                                            <option value="Algerian">Algerian</option>
+                                            <option value="Angolan">Angolan</option>
+                                            <option value="Argentinian">Argentinian</option>
+                                            <option value="Armenian">Armenian</option>
+                                            <option value="Australian">Australian</option>
+                                            <option value="Austrian">Austrian</option>
+                                            <option value="Azerbaijani">Azerbaijani</option>
+                                            <option value="Bahraini">Bahraini</option>
+                                            <option value="Bangladeshi">Bangladeshi</option>
+                                            <option value="Belarusian">Belarusian</option>
+                                            <option value="Belgian">Belgian</option>
+                                            <option value="Bhutanese">Bhutanese</option>
+                                            <option value="Bosnian">Bosnian</option>
+                                            <option value="Brazilian">Brazilian</option>
+                                            <option value="British">British</option>
+                                            <option value="Bulgarian">Bulgarian</option>
+                                            <option value="Burkinabe">Burkinabe</option>
+                                            <option value="Burundian">Burundian</option>
+                                            <option value="Cambodian">Cambodian</option>
+                                            <option value="Cameroonian">Cameroonian</option>
+                                            <option value="Canadian">Canadian</option>
+                                            <option value="Chadian">Chadian</option>
+                                            <option value="Chilean">Chilean</option>
+                                            <option value="Chinese">Chinese</option>
+                                            <option value="Colombian">Colombian</option>
+                                            <option value="Congolese">Congolese</option>
+                                            <option value="Cuban">Cuban</option>
+                                            <option value="Cypriot">Cypriot</option>
+                                            <option value="Czech">Czech</option>
+                                            <option value="Danish">Danish</option>
+                                            <option value="Djibouti">Djibouti</option>
+                                            <option value="Dutch">Dutch</option>
+                                            <option value="Ecuadorean">Ecuadorean</option>
+                                            <option value="Egyptian">Egyptian</option>
+                                            <option value="Eritrean">Eritrean</option>
+                                            <option value="Ethiopian">Ethiopian</option>
+                                            <option value="Filipino">Filipino</option>
+                                            <option value="Finnish">Finnish</option>
+                                            <option value="French">French</option>
+                                            <option value="German">German</option>
+                                            <option value="Ghanaian">Ghanaian</option>
+                                            <option value="Greek">Greek</option>
+                                            <option value="Guatemalan">Guatemalan</option>
+                                            <option value="Indian">Indian</option>
+                                            <option value="Indonesian">Indonesian</option>
+                                            <option value="Iranian">Iranian</option>
+                                            <option value="Iraqi">Iraqi</option>
+                                            <option value="Irish">Irish</option>
+                                            <option value="Italian">Italian</option>
+                                            <option value="Ivorian">Ivorian</option>
+                                            <option value="Jamaican">Jamaican</option>
+                                            <option value="Japanese">Japanese</option>
+                                            <option value="Jordanian">Jordanian</option>
+                                            <option value="Kazakhstani">Kazakhstani</option>
+                                            <option value="Kenyan">Kenyan</option>
+                                            <option value="Kuwaiti">Kuwaiti</option>
+                                            <option value="Kyrgyzstani">Kyrgyzstani</option>
+                                            <option value="Laotian">Laotian</option>
+                                            <option value="Lebanese">Lebanese</option>
+                                            <option value="Libyan">Libyan</option>
+                                            <option value="Lithuanian">Lithuanian</option>
+                                            <option value="Malagasy">Malagasy</option>
+                                            <option value="Malawian">Malawian</option>
+                                            <option value="Malaysian">Malaysian</option>
+                                            <option value="Maldivian">Maldivian</option>
+                                            <option value="Malian">Malian</option>
+                                            <option value="Maltese">Maltese</option>
+                                            <option value="Mauritanian">Mauritanian</option>
+                                            <option value="Mexican">Mexican</option>
+                                            <option value="Moroccan">Moroccan</option>
+                                            <option value="Myanmar">Myanmar</option>
+                                            <option value="Nepalese">Nepalese</option>
+                                            <option value="New Zealander">New Zealander</option>
+                                            <option value="Nigerian">Nigerian</option>
+                                            <option value="Norwegian">Norwegian</option>
+                                            <option value="Omani">Omani</option>
                                             <option value="Pakistani" selected>Pakistani</option>
+                                            <option value="Palestinian">Palestinian</option>
+                                            <option value="Panamanian">Panamanian</option>
+                                            <option value="Peruvian">Peruvian</option>
+                                            <option value="Polish">Polish</option>
+                                            <option value="Portuguese">Portuguese</option>
+                                            <option value="Qatari">Qatari</option>
+                                            <option value="Romanian">Romanian</option>
+                                            <option value="Russian">Russian</option>
+                                            <option value="Rwandan">Rwandan</option>
+                                            <option value="Saudi">Saudi</option>
+                                            <option value="Senegalese">Senegalese</option>
+                                            <option value="Serbian">Serbian</option>
+                                            <option value="Sierra Leonean">Sierra Leonean</option>
+                                            <option value="Singaporean">Singaporean</option>
+                                            <option value="Slovakian">Slovakian</option>
+                                            <option value="Slovenian">Slovenian</option>
+                                            <option value="Somali">Somali</option>
+                                            <option value="South African">South African</option>
+                                            <option value="South Korean">South Korean</option>
+                                            <option value="Sri Lankan">Sri Lankan</option>
+                                            <option value="Sudanese">Sudanese</option>
+                                            <option value="Swedish">Swedish</option>
+                                            <option value="Swiss">Swiss</option>
+                                            <option value="Syrian">Syrian</option>
+                                            <option value="Taiwanese">Taiwanese</option>
+                                            <option value="Tajik">Tajik</option>
+                                            <option value="Tanzanian">Tanzanian</option>
+                                            <option value="Thai">Thai</option>
+                                            <option value="Togolese">Togolese</option>
+                                            <option value="Tunisian">Tunisian</option>
+                                            <option value="Turkish">Turkish</option>
+                                            <option value="Turkmen">Turkmen</option>
+                                            <option value="Ugandan">Ugandan</option>
+                                            <option value="Ukrainian">Ukrainian</option>
+                                            <option value="American">American</option>
+                                            <option value="Uzbekistani">Uzbekistani</option>
+                                            <option value="Venezuelan">Venezuelan</option>
+                                            <option value="Vietnamese">Vietnamese</option>
+                                            <option value="Yemeni">Yemeni</option>
+                                            <option value="Zambian">Zambian</option>
                                         </select>
                                     </div>     
                                     <div class="form-group col-md-6">
                                         <label class="font-weight-bold">WhatsApp Number <span class="text-danger">*</span></label>
-                                        <input type="tel" name="phone" class="form-control" id="phone" placeholder="0300 1234567" >
+                                        <input type="tel" name="phone" class="form-control" id="phone" placeholder="0300 1234567">
                                         <small class="text-muted">We will send the PDF to this number.</small>
                                     </div> 
                                 </div>
@@ -112,12 +231,6 @@
                                 </button>
                                 
                             </form>
-
-                            <!-- Success Message -->
-                            <div id="successMessage" class="alert alert-success mt-4 d-none text-center shadow-sm" style="border-left: 5px solid #28a745;">
-                                <h5 class="alert-heading font-weight-bold"><i class="fab fa-whatsapp"></i> Request Received!</h5>
-                                <p class="mb-0">Our team is checking the official database. You will receive your <strong>Medical Status PDF</strong> on WhatsApp shortly.</p>
-                            </div>
 
                         </div>
                     </div>
@@ -299,90 +412,206 @@
         </div>
     </section>
 
+{{-- ── Confirmation Popup Modal ── --}}
+<div id="msConfirmModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:16px;">
+    {{-- Backdrop --}}
+    <div id="msModalBackdrop" style="position:absolute;inset:0;background:rgba(15,25,35,.7);backdrop-filter:blur(3px);opacity:0;transition:opacity .3s ease;"></div>
+
+    {{-- Dialog --}}
+    <div id="msModalDialog" style="position:relative;width:100%;max-width:400px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.2);transform:translateY(16px);opacity:0;transition:transform .3s ease,opacity .3s ease;">
+
+        {{-- Header --}}
+        <div style="background:linear-gradient(135deg,#0f1923 0%,#1a252f 100%);padding:18px 20px 16px;text-align:center;">
+            <i class="fas fa-check-circle" style="font-size:1.6rem;color:var(--accent-gold);display:block;margin-bottom:8px;"></i>
+            <h6 style="color:#fff;font-weight:700;margin:0 0 4px;font-size:1rem;">Request Submitted!</h6>
+            <p style="color:rgba(255,255,255,.6);font-size:.82rem;margin:0;">Your medical status request has been received.</p>
+            <button type="button" id="msModalClose" style="position:absolute;top:12px;right:14px;background:none;border:none;color:rgba(255,255,255,.6);font-size:1.2rem;cursor:pointer;line-height:1;">&times;</button>
+        </div>
+
+        {{-- Body --}}
+        <div style="padding:18px 20px;">
+
+            {{-- Details --}}
+            <div style="background:#f7f8fc;border:1px solid #e8ecf0;border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:.85rem;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                    <span style="color:#6c757d;font-weight:600;">Passport</span>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span id="popupPassport" style="font-weight:700;color:#1a252f;"></span>
+                        <button type="button" id="popupCopyBtn" style="background:none;border:1px solid #dee2e6;border-radius:5px;padding:2px 8px;cursor:pointer;font-size:.72rem;color:#6c757d;">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="color:#6c757d;font-weight:600;">Nationality</span>
+                    <span id="popupNationality" style="font-weight:700;color:#1a252f;">Pakistani</span>
+                </div>
+            </div>
+
+            {{-- Tip --}}
+            <div style="background:#fff8e1;border-left:3px solid var(--accent-gold);border-radius:0 6px 6px 0;padding:10px 12px;margin-bottom:14px;font-size:.8rem;color:#856404;">
+                <strong><i class="fas fa-info-circle mr-1"></i>On the official site:</strong> Enter passport number &amp; select <strong id="popupTipNationality">Pakistani</strong> as nationality.
+            </div>
+
+            {{-- Buttons --}}
+            <div style="display:flex;flex-direction:column;gap:9px;">
+                <button type="button" id="popupWhatsappBtn"
+                    style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25d366;color:#fff;border:none;border-radius:8px;padding:11px 14px;font-weight:600;font-size:.9rem;cursor:pointer;width:100%;">
+                    <i class="fab fa-whatsapp"></i> Get Result on WhatsApp
+                    <span style="background:rgba(255,255,255,.25);font-size:.68rem;padding:2px 7px;border-radius:20px;">Recommended</span>
+                </button>
+                <button type="button" id="popupOfficialBtn"
+                    style="display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;color:#1a252f;border:1.5px solid #1a252f;border-radius:8px;padding:10px 14px;font-weight:600;font-size:.9rem;cursor:pointer;">
+                    <i class="fas fa-external-link-alt"></i> Check on Official Wafid Site
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 @push('scripts')
 <script>
-
     document.addEventListener('DOMContentLoaded', function () {
 
         // Auto Uppercase Passport
-        $('input[name="passport_no"]').on('keyup', function(){
-            $(this).val($(this).val().toUpperCase());
+        document.getElementById('passport_no').addEventListener('input', function () {
+            this.value = this.value.toUpperCase();
         });
 
-        // Apply phone mask
+        // Phone mask
         $('#phone').inputmask('9999 9999999', { clearMaskOnLostFocus: true });
 
-        const form = document.getElementById('appointmentForm');
-        const loader = document.getElementById('loaderOverlay');
+        var waNumber = '{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}';
 
-        const showLoader = () => loader.classList.add('show');
-        const hideLoader = () => loader.classList.remove('show');
+        var form        = document.getElementById('appointmentForm');
+        var loader      = document.getElementById('loaderOverlay');
+        var modal       = document.getElementById('msConfirmModal');
+        var backdrop    = document.getElementById('msModalBackdrop');
+        var dialog      = document.getElementById('msModalDialog');
+        var popupPassport  = document.getElementById('popupPassport');
+        var popupCopyBtn   = document.getElementById('popupCopyBtn');
+        var popupWaBtn     = document.getElementById('popupWhatsappBtn');
+        var popupOfficialBtn = document.getElementById('popupOfficialBtn');
+        var closeBtn    = document.getElementById('msModalClose');
 
+        var waUrl = '';
+
+        function openModal(passportNo, nationality) {
+            popupPassport.textContent = passportNo;
+            document.getElementById('popupNationality').textContent = nationality || 'Pakistani';
+            document.getElementById('popupTipNationality').textContent = nationality || 'Pakistani';
+
+            // Build WhatsApp URL
+            var waText = encodeURIComponent(
+                'Hi, I have submitted a medical status request.\nPassport Number: ' + passportNo + '\nNationality: ' + (nationality || 'Pakistani') + '\nPlease share my GAMCA/WAFID medical result.'
+            );
+            waUrl = 'https://wa.me/' + waNumber + '?text=' + waText;
+
+            modal.style.display = 'flex';
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    backdrop.style.opacity = '1';
+                    dialog.style.opacity   = '1';
+                    dialog.style.transform = 'translateY(0)';
+                });
+            });
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            backdrop.style.opacity = '0';
+            dialog.style.opacity   = '0';
+            dialog.style.transform = 'translateY(20px)';
+            setTimeout(function () {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 350);
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+
+        // Official Wafid site
+        popupOfficialBtn.addEventListener('click', function () {
+            window.open('https://wafid.com/en/medical-status-search/', '_blank');
+        });
+
+        // WhatsApp button
+        popupWaBtn.addEventListener('click', function () {
+            window.open(waUrl, '_blank');
+        });
+
+        // Copy passport
+        popupCopyBtn.addEventListener('click', function () {
+            navigator.clipboard.writeText(popupPassport.textContent).then(function () {
+                popupCopyBtn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                popupCopyBtn.style.color = '#28a745';
+                popupCopyBtn.style.borderColor = '#28a745';
+                setTimeout(function () {
+                    popupCopyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                    popupCopyBtn.style.color = '#6c757d';
+                    popupCopyBtn.style.borderColor = '#dee2e6';
+                }, 2000);
+            });
+        });
+
+        // Form submit
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            // remove previous errors
-            form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-            form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+            form.querySelectorAll('.is-invalid').forEach(function (el) { el.classList.remove('is-invalid'); });
+            form.querySelectorAll('.invalid-feedback').forEach(function (el) { el.remove(); });
 
-            const formData = new FormData(form);
+            var passportNo = document.getElementById('passport_no').value.trim();
+            var formData   = new FormData(form);
 
-            showLoader();
+            loader.classList.add('show');
 
             try {
-                const response = await fetch("{{ route('medicalResults.save') }}", {
-                    method: "POST",
+                var response = await fetch("{{ route('medicalResults.save') }}", {
+                    method: 'POST',
                     headers: {
-                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
-                        "Accept": "application/json",
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json',
                     },
                     body: formData
                 });
 
-                const data = await response.json();
+                var data = await response.json();
 
                 if (response.status === 422) {
-                    let firstErrorField = null;
-
-                    Object.keys(data.errors).forEach(field => {
-                        const input = form.querySelector(`[name="${field}"]`);
+                    var firstErrorField = null;
+                    Object.keys(data.errors).forEach(function (field) {
+                        var input = form.querySelector('[name="' + field + '"]');
                         if (input) {
                             input.classList.add('is-invalid');
-                            const error = document.createElement('div');
-                            error.className = 'invalid-feedback';
-                            error.innerHTML = `<i class="fas fa-times-circle mr-1"></i> ${data.errors[field][0]}`;
-                            input.parentNode.appendChild(error);
+                            var err = document.createElement('div');
+                            err.className = 'invalid-feedback';
+                            err.innerHTML = '<i class="fas fa-times-circle mr-1"></i>' + data.errors[field][0];
+                            input.parentNode.appendChild(err);
                             if (!firstErrorField) firstErrorField = input;
                         }
                     });
-
                     if (firstErrorField) {
                         firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         firstErrorField.focus();
                     }
-
                 } else if (data.status === 'success') {
+                    var nationality = document.getElementById('nationality').options[document.getElementById('nationality').selectedIndex].text;
+                    openModal(passportNo, nationality);
                     form.reset();
-                    const msg = document.getElementById('successMessage');
-                    msg.classList.remove('d-none');
-                    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // Optional: Hide success message after 10 seconds
-                    setTimeout(() => {
-                         msg.classList.add('d-none');
-                    }, 10000);
                 }
 
-            } catch (error) {
-                console.error(error);
+            } catch (err) {
+                console.error(err);
                 alert('Connection error. Please try again.');
             } finally {
-                hideLoader();
+                loader.classList.remove('show');
             }
         });
     });
-
 </script>
 @endpush
 
