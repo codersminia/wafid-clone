@@ -23,6 +23,7 @@ use App\Models\ContactInquiry;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactInquiryMail;
+use App\Mail\AppointmentConfirmationMail;
 use Illuminate\Support\Facades\DB;
 use App\Models\PaymentMethod;
 use App\Models\AppointmentFee;
@@ -409,8 +410,18 @@ class PublicController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
 
-        // Clear session so the user cannot reload the thank-you page
         session()->forget('appointment_paid_id');
+
+        // Send confirmation email with payment proof attached
+        if (!empty($appointment->email)) {
+            try {
+                $payment       = $appointment->payment;
+                $proofImagePath = $payment ? public_path('uploads/medical-examination/' . $payment->proof_image) : null;
+                Mail::to($appointment->email)->send(new AppointmentConfirmationMail($appointment, $proofImagePath));
+            } catch (\Exception $e) {
+                // silent — don't block the user
+            }
+        }
 
         return view('public.appointments.thank-you', compact('appointment'));
     }
@@ -653,8 +664,18 @@ class PublicController extends Controller
             return redirect()->route('home')->with('error', 'Unauthorized access.');
         }
 
-        // Clear session so page can't be reloaded
         session()->forget('special_appointment_paid_id');
+
+        // Send confirmation email with payment proof attached
+        if (!empty($appointment->email)) {
+            try {
+                $payment        = $appointment->specialPayment;
+                $proofImagePath = $payment ? public_path('uploads/special-medical/' . $payment->proof_image) : null;
+                Mail::to($appointment->email)->send(new AppointmentConfirmationMail($appointment, $proofImagePath));
+            } catch (\Exception $e) {
+                // silent — don't block the user
+            }
+        }
 
         return view('public.specialappointments.thank-you', compact('appointment'));
     }
