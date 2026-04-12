@@ -28,7 +28,7 @@ class NotificationService
     /**
      * Notify admin about a new appointment.
      */
-    public function notifyAppointment($type, $appointment)
+    public function notifyAppointment($type, $appointment, array $attachments = [])
     {
         $emails = $this->getAdminEmails();
 
@@ -38,7 +38,7 @@ class NotificationService
         }
 
         try {
-            Mail::to($emails)->send(new NewAppointmentMail($type, $appointment));
+            Mail::to($emails)->send(new NewAppointmentMail($type, $appointment, $attachments));
         } catch (\Exception $e) {
             Log::error("Failed to send appointment notification: " . $e->getMessage());
         }

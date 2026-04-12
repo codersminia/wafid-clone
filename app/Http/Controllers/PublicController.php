@@ -770,8 +770,14 @@ class PublicController extends Controller
 
             $appointment = NavtechAppointment::create($data);
 
-            // Send Admin Notification
-            $this->notificationService->notifyAppointment('Navtech', $appointment);
+            // Send Admin Notification with uploaded documents
+            $attachments = [];
+            foreach ($fileFields as $field) {
+                if (!empty($data[$field])) {
+                    $attachments[] = public_path('uploads/navtech/' . $data[$field]);
+                }
+            }
+            $this->notificationService->notifyAppointment('Navtech', $appointment, $attachments);
 
             session(['navtech_appointment_id' => $appointment->id]);
 
@@ -888,8 +894,12 @@ class PublicController extends Controller
 
             $appointment = TasheerAppointment::create($data);
 
-            // Send Admin Notification
-            $this->notificationService->notifyAppointment('Tasheer', $appointment);
+            // Send Admin Notification with passport pic attached
+            $attachments = [];
+            if (!empty($data['passport_pic'])) {
+                $attachments[] = public_path('uploads/' . $data['passport_pic']);
+            }
+            $this->notificationService->notifyAppointment('Tasheer', $appointment, $attachments);
 
             session(['tasheer_appointment_id' => $appointment->id]);
 
@@ -997,8 +1007,14 @@ class PublicController extends Controller
 
             $appointment = SoftSkillCertificate::create($data);
 
-            // Send Admin Notification
-            $this->notificationService->notifyAppointment('Soft Skill', $appointment);
+            // Send Admin Notification with uploaded documents
+            $attachments = [];
+            foreach ($fields as $field) {
+                if (!empty($data[$field])) {
+                    $attachments[] = public_path('uploads/softskill/' . $data[$field]);
+                }
+            }
+            $this->notificationService->notifyAppointment('Soft Skill', $appointment, $attachments);
 
             session(['softskill_id' => $appointment->id]);
 

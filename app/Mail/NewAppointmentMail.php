@@ -15,24 +15,19 @@ class NewAppointmentMail extends Mailable
     public $appointment;
     public $logo;
     public $adminLink;
+    public $fileAttachments;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($type, $appointment)
+    public function __construct($type, $appointment, array $attachments = [])
     {
-        $this->type = $type;
-        $this->appointment = $appointment;
+        $this->type             = $type;
+        $this->appointment      = $appointment;
+        $this->fileAttachments  = $attachments;
 
-        // Fetch logo and prepare admin link
-        $logoPath = Setting::get('logo');
-        $this->logo = $logoPath ? asset($logoPath) : null;
+        $logoPath        = Setting::get('logo');
+        $this->logo      = $logoPath ? asset($logoPath) : null;
         $this->adminLink = 'https://gamcawafidonline.com/admin/login';
     }
 
-    /**
-     * Build the message.
-     */
     public function build()
     {
         $name = '';
@@ -42,7 +37,18 @@ class NewAppointmentMail extends Mailable
             $name = $this->appointment->whatsapp_number;
         }
 
-        return $this->subject("New {$this->type} Appointment Booked - " . trim($name))
-            ->view('emails.new-appointment');
+        $mail = $this->subject("New {$this->type} Appointment Booked - " . trim($name))
+                     ->view('emails.new-appointment');
+
+        foreach ($this->fileAttachments as $path) {
+            if ($path && file_exists($path)) {
+                $mail->attach($path, [
+                    'as'   => basename($path),
+                    'mime' => mime_content_type($path),
+                ]);
+            }
+        }
+
+        return $mail;
     }
 }
