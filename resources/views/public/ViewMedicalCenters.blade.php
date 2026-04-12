@@ -1,18 +1,51 @@
 @extends('layouts.public')
 
-@section('title', 'Approved Wafid (GAMCA) Medical Centers List 2026 | Pakistan')
-@section('meta_description', 'Find the address and contact details of all approved Wafid (GAMCA) medical centers in Lahore, Karachi, Islamabad, Multan, and Peshawar. View ratings and locations.')
-@section('meta_keywords', 'gamca medical center list, wafid approved centers, gamca lahore address, gamca karachi location, gcc medical center pakistan')
+@section('title', 'Find Approved GAMCA / WAFID Medical Centers in Pakistan 2026')
+@section('meta_description', 'Search approved GAMCA/WAFID medical centers in Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, Gujranwala, Sialkot, Multan, Peshawar & Quetta. Find address, phone & map.')
+@section('meta_keywords', 'GAMCA medical center Pakistan, WAFID approved centers, GAMCA center Lahore, GAMCA center Karachi, GCC medical center Pakistan 2026')
 
 @push('schema')
-    ,{
-        "@type": "WebPage",
-        "@id": "{{ url()->current() }}#webpage",
-        "name": "Approved Wafid (GAMCA) Medical Centers List 2026 | Pakistan",
-        "description": "Find the address and contact details of all approved Wafid (GAMCA) medical centers in Pakistan. View
-        ratings and locations.",
-        "publisher": { "@id": "{{ url('/') }}#organization" }
+,{
+    "@type": "WebPage",
+    "@id": "{{ url()->current() }}#webpage",
+    "name": "Find Approved GAMCA / WAFID Medical Centers in Pakistan 2026",
+    "url": "{{ url()->current() }}",
+    "description": "Search approved GAMCA/WAFID medical centers in all major cities of Pakistan. Find address, phone number, and map location.",
+    "isPartOf": { "@id": "{{ url('/') }}#website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+            { "@type": "ListItem", "position": 2, "name": "Medical Center Search", "item": "{{ url()->current() }}" }
+        ]
     }
+}
+,{
+    "@type": "FAQPage",
+    "@id": "{{ url()->current() }}#faqpage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How do I know which GAMCA center to visit?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Your assigned center is mentioned on your appointment slip. Always follow that." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I visit any GAMCA center?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Only the assigned center is allowed unless you book a choice service." }
+        },
+        {
+            "@type": "Question",
+            "name": "Are all centers listed here approved?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. We only show WAFID-approved clinics listed by the GCC Health Council." }
+        },
+        {
+            "@type": "Question",
+            "name": "What are the working hours of GAMCA centers?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most centers operate between 9:00 AM to 5:00 PM, but it is best to confirm before visiting." }
+        }
+    ]
+}
 @endpush
 
 @section('content')
@@ -235,27 +268,89 @@
     </style>
 
     <!-- Page Header -->
-    <section class="page-header bg-dark text-white py-5">
+    <section class="page-header text-white py-5" style="background:linear-gradient(135deg,#0f1923 0%,#1a252f 100%);">
         <div class="container">
-            <h1 class="font-weight-bold">Approved Medical Centers List</h1>
-            <p class="lead">Search for Wafid authorized laboratories and hospitals in Pakistan.</p>
+            <nav aria-label="breadcrumb" class="mb-2">
+                <ol class="breadcrumb bg-transparent p-0 mb-0" style="font-size:.82rem;">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}" style="color:rgba(255,255,255,.6);">Home</a></li>
+                    <li class="breadcrumb-item active" style="color:rgba(255,255,255,.4);">Medical Center Search</li>
+                </ol>
+            </nav>
+            <span style="display:inline-block;background:var(--accent-gold);color:#0f1923;font-size:.72rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;">
+                <i class="fas fa-search mr-1"></i> WAFID Approved Centers
+            </span>
+            <h1 class="font-weight-bold mb-2">Find Approved GAMCA / WAFID Medical Centers in Pakistan</h1>
+            <p class="lead mb-0" style="color:rgba(255,255,255,.8);">Search authorized laboratories and clinics in Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad, Gujranwala, Sialkot, Multan, Peshawar & Quetta.</p>
         </div>
     </section>
 
-    <!-- Intro Text (SEO) -->
-    <div class="bg-light py-4 border-bottom">
+    <!-- Intro Strip -->
+    <div style="background:var(--accent-gold);padding:14px 0;">
         <div class="container">
-            <div class="row">
-                <div class="col-md-10 mx-auto text-center">
-                    <p class="mb-0 text-muted">
-                        To obtain a work visa for Saudi Arabia, UAE, Oman, Qatar, Kuwait, or Bahrain, you must visit an
-                        approved medical center. Use the search tool below to find the <strong>address, phone number, and
-                            location map</strong> of the nearest GAMCA center in your city.
-                    </p>
-                </div>
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap:8px;">
+                <p class="mb-0 font-weight-bold" style="color:#0f1923;font-size:.9rem;">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>You must visit the <strong>exact center assigned</strong> on your GAMCA/WAFID appointment slip — not any random hospital.
+                </p>
+                <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-sm font-weight-bold px-4 flex-shrink-0">
+                    <i class="fas fa-calendar-check mr-1"></i>Book Appointment
+                </a>
             </div>
         </div>
     </div>
+
+    <!-- Top SEO Section -->
+    <section class="py-5" style="background:#fff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <span style="display:block;color:var(--accent-gold);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">GAMCA / WAFID Center Guide</span>
+                    <h2 class="font-weight-bold mb-3" style="font-size:1.7rem;color:#1a252f;">Find Approved GAMCA Medical Centers in Pakistan</h2>
+                    <p class="text-muted mb-3">Looking for an approved GAMCA medical center in Pakistan? This page helps you quickly find authorized WAFID (GAMCA) laboratories and clinics in major cities. If you are applying for a work visa for <strong>Saudi Arabia, UAE, Qatar, Oman, Kuwait, or Bahrain</strong>, you must complete your medical test from an officially approved center.</p>
+                    <p class="text-muted mb-4">Use the search tool below to find the nearest clinic with accurate details including address, phone number, and map location.</p>
+                    <div class="row">
+                        @php $centerFeatures = [
+                            'All WAFID-approved centers listed',
+                            'Address, phone & map for each center',
+                            'Search by city or clinic name',
+                            'Updated 2026 center database',
+                            'Covers all major cities in Pakistan',
+                        ]; @endphp
+                        @foreach($centerFeatures as $f)
+                        <div class="col-md-6 mb-2">
+                            <div class="d-flex align-items-center" style="gap:10px;">
+                                <i class="fas fa-check-circle" style="color:#28a745;flex-shrink:0;"></i>
+                                <span class="small text-muted">{{ $f }}</span>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div style="background:#f7f8fc;border:1px solid #e8ecf0;border-radius:14px;overflow:hidden;">
+                        <div style="background:linear-gradient(135deg,#0f1923 0%,#1a252f 100%);color:var(--accent-gold);font-weight:700;font-size:.95rem;padding:16px 20px;">
+                            <i class="fas fa-hospital mr-2"></i>What is a GAMCA / WAFID Center?
+                        </div>
+                        <div class="p-4">
+                            <p class="small text-muted mb-3">A GAMCA (now WAFID) approved medical center is a licensed clinic authorized by the GCC Health Council to conduct medical examinations for GCC visa applicants.</p>
+                            <p class="small font-weight-bold mb-2" style="color:#1a252f;">Tests performed include:</p>
+                            @php $tests = [
+                                ['icon'=>'fas fa-tint',        'text'=>'Blood tests (HIV, Hepatitis B & C)'],
+                                ['icon'=>'fas fa-x-ray',       'text'=>'Chest X-ray (tuberculosis)'],
+                                ['icon'=>'fas fa-stethoscope', 'text'=>'Physical examination'],
+                                ['icon'=>'fas fa-heartbeat',   'text'=>'General health screening'],
+                            ]; @endphp
+                            @foreach($tests as $t)
+                            <div class="d-flex align-items-center mb-2" style="gap:10px;">
+                                <i class="{{ $t['icon'] }}" style="color:var(--accent-gold);font-size:.8rem;flex-shrink:0;"></i>
+                                <span class="small text-muted">{{ $t['text'] }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <section class="py-5">
@@ -392,61 +487,208 @@
         </div>
     </section>
 
-    <!-- SEO Content Block (Crucial for ranking) -->
-    <section class="py-5 bg-white border-top">
-        <div class="container seo-content">
+    <!-- Bottom SEO Content -->
+    <section class="py-5" style="background:#f7f8fc;border-top:1px solid #e8ecf0;">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-                    <h3>Guide to GAMCA Medical Centers in Pakistan</h3>
-                    <p>
-                        The GCC Health Council has authorized specific private medical centers in Pakistan to conduct
-                        medical examinations for work visa applicants. You cannot visit just any hospital; you must go to
-                        the center assigned to you on your appointment slip.
-                    </p>
 
-                    <h3>Centers by City</h3>
-                    <div class="mb-3">
-                        <span class="city-badge">Lahore</span>
-                        <span class="city-badge">Karachi</span>
-                        <span class="city-badge">Islamabad</span>
-                        <span class="city-badge">Rawalpindi</span>
-                        <span class="city-badge">Multan</span>
-                        <span class="city-badge">Peshawar</span>
-                        <span class="city-badge">Quetta</span>
-                        <span class="city-badge">Gujranwala</span>
-                        <span class="city-badge">Sialkot</span>
-                        <span class="city-badge">Faisalabad</span>
-                    </div>
-                    <p>
-                        <strong>Note for Applicants:</strong> If you book a standard appointment, the system will
-                        automatically assign one of these centers based on your city. If you wish to choose a specific
-                        center (e.g., one closer to your home), please use our <a
-                            href="{{ route('special.appointment') }}">Choice Appointment Service</a>.
-                    </p>
+                <!-- Left: How it works + Cities + Mistakes -->
+                <div class="col-lg-8 mb-4 mb-lg-0">
 
-                    <h3>Contacting a Center</h3>
-                    <p>
-                        You can use the list above to find the phone number and location map of your assigned center. It is
-                        recommended to call them before visiting to confirm their opening hours, usually <strong>9:00 AM to
-                            5:00 PM</strong>.
-                    </p>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card bg-light border-0">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold mb-3">Documents to Bring</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> Original Passport</li>
-                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> Original CNIC</li>
-                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> Wafid Appointment Slip</li>
-                                <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> 4 Recent Photos (Blue
-                                    Background)</li>
-                            </ul>
-                            <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-block mt-3">Book Appointment
-                                Now</a>
+                    <!-- How to find -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:28px;margin-bottom:20px;">
+                        <span style="display:block;color:var(--accent-gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Step-by-Step</span>
+                        <h3 class="font-weight-bold mb-3" style="font-size:1.2rem;color:#1a252f;">How to Find the Nearest GAMCA Center</h3>
+                        <div class="row">
+                            @php $steps = [
+                                ['num'=>'1','text'=>'Select your country (Pakistan)'],
+                                ['num'=>'2','text'=>'Choose your city from the dropdown'],
+                                ['num'=>'3','text'=>'Enter clinic name (optional)'],
+                                ['num'=>'4','text'=>'Click Search to view results'],
+                                ['num'=>'5','text'=>'View map, contact number & details'],
+                                ['num'=>'6','text'=>'Call to confirm timing before visiting'],
+                            ]; @endphp
+                            @foreach($steps as $step)
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center" style="gap:12px;background:#f7f8fc;border:1px solid #e8ecf0;border-radius:10px;padding:10px 14px;">
+                                    <span style="width:28px;height:28px;background:var(--accent-gold);color:#0f1923;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;">{{ $step['num'] }}</span>
+                                    <span class="small text-muted">{{ $step['text'] }}</span>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
+
+                    <!-- Popular Cities -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:28px;margin-bottom:20px;">
+                        <span style="display:block;color:var(--accent-gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Popular Locations</span>
+                        <h3 class="font-weight-bold mb-3" style="font-size:1.2rem;color:#1a252f;">Popular Cities for GAMCA Medical in Pakistan</h3>
+                        <div class="d-flex flex-wrap mb-3" style="gap:8px;">
+                            @php $cities = [
+                                ['name'=>'Karachi',    'slug'=>'karachi',    'note'=>'Largest number of approved clinics'],
+                                ['name'=>'Lahore',     'slug'=>'lahore',     'note'=>'High demand for Saudi visa medical'],
+                                ['name'=>'Islamabad',  'slug'=>'islamabad',  'note'=>'Twin city access'],
+                                ['name'=>'Rawalpindi', 'slug'=>'rawalpindi', 'note'=>'Twin city access'],
+                                ['name'=>'Sialkot',    'slug'=>'sialkot',    'note'=>'Northern Punjab coverage'],
+                                ['name'=>'Gujranwala', 'slug'=>'gujranwala', 'note'=>'Northern Punjab coverage'],      
+                                ['name'=>'Multan',     'slug'=>'multan',     'note'=>'South Punjab'],
+                                ['name'=>'Peshawar',   'slug'=>'peshawar',   'note'=>'KPK region'],
+                            ]; @endphp
+                            @foreach($cities as $city)
+                            <a href="{{ route('public.medical.city', $city['slug']) }}" style="display:inline-flex;align-items:center;gap:5px;background:#f0f4f8;border:1px solid #dde3ea;border-radius:20px;padding:6px 14px;font-size:.82rem;font-weight:600;color:#1a252f;text-decoration:none;transition:all .2s ease;">
+                                📍 {{ $city['name'] }}
+                            </a>
+                            @endforeach
+                        </div>
+                        <p class="small text-muted mb-0"><i class="fas fa-info-circle mr-1" style="color:var(--accent-gold);"></i>Click any city to view a dedicated page with all approved GAMCA centers and booking guidance.</p>
+                    </div>
+
+                    <!-- How assignment works -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:28px;margin-bottom:20px;">
+                        <span style="display:block;color:var(--accent-gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Center Assignment</span>
+                        <h3 class="font-weight-bold mb-3" style="font-size:1.2rem;color:#1a252f;">How GAMCA Center Assignment Works</h3>
+                        <p class="text-muted small mb-3">When you book a standard GAMCA appointment, the system automatically assigns a medical center based on your selected city and availability.</p>
+                        <div style="background:#fff8e1;border-left:4px solid var(--accent-gold);border-radius:8px;padding:14px 16px;">
+                            <p class="small font-weight-bold mb-1" style="color:#1a252f;"><i class="fas fa-crown mr-2" style="color:var(--accent-gold);"></i>Want more control?</p>
+                            <p class="small text-muted mb-2">Use the <strong>Choice Appointment Service</strong> to select your preferred medical center manually — ideal if you want a nearby clinic, prefer a specific hospital, or need better timing.</p>
+                            <a href="{{ route('special.appointment') }}" class="btn btn-dark btn-sm font-weight-bold">
+                                <i class="fas fa-hospital mr-1"></i>Use Choice Center Service
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Common Mistakes -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:28px;margin-bottom:20px;">
+                        <span style="display:block;color:var(--accent-gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Avoid These Errors</span>
+                        <h3 class="font-weight-bold mb-3" style="font-size:1.2rem;color:#1a252f;">Common Mistakes to Avoid</h3>
+                        @php $mistakes = [
+                            'Visiting the wrong medical center',
+                            'Mismatch between passport and slip details',
+                            'Arriving late or missing appointment time',
+                            'Not bringing required documents',
+                        ]; @endphp
+                        @foreach($mistakes as $m)
+                        <div class="d-flex align-items-center mb-3" style="gap:12px;padding:10px 0;border-bottom:1px solid #f0f4f8;">
+                            <i class="fas fa-times-circle" style="color:#e74c3c;font-size:1rem;flex-shrink:0;"></i>
+                            <span class="small text-muted">{{ $m }}</span>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <!-- FAQs -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:28px;">
+                        <span style="display:block;color:var(--accent-gold);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Quick Answers</span>
+                        <h3 class="font-weight-bold mb-4" style="font-size:1.2rem;color:#1a252f;">FAQs – Medical Center Search</h3>
+                        @php $mcFaqs = [
+                            ['q'=>'How do I know which GAMCA center to visit?',    'a'=>'Your assigned center is mentioned on your appointment slip. Always follow that.'],
+                            ['q'=>'Can I visit any GAMCA center?',                 'a'=>'No. Only the assigned center is allowed unless you book a choice service.'],
+                            ['q'=>'Are all centers listed here approved?',         'a'=>'Yes. We only show WAFID-approved clinics listed by the GCC Health Council.'],
+                            ['q'=>'What are the working hours?',                   'a'=>'Most centers operate between 9:00 AM to 5:00 PM, but it\'s best to confirm before visiting.'],
+                        ]; @endphp
+                        <div id="mcFaqAccordion">
+                            @foreach($mcFaqs as $i => $faq)
+                            <div style="background:#f7f8fc;border:1px solid #e8ecf0;border-radius:12px;margin-bottom:10px;overflow:hidden;">
+                                <button class="{{ $i > 0 ? 'collapsed' : '' }}" type="button" data-toggle="collapse" data-target="#mcfaq{{ $i }}" aria-expanded="{{ $i === 0 ? 'true' : 'false' }}"
+                                    style="width:100%;text-align:left;background:transparent;border:none;padding:16px 20px;font-weight:600;font-size:.9rem;color:#1a252f;display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+                                    {{ $faq['q'] }}
+                                    <i class="fas fa-chevron-down" style="font-size:.75rem;color:var(--accent-gold);flex-shrink:0;margin-left:10px;"></i>
+                                </button>
+                                <div id="mcfaq{{ $i }}" class="collapse {{ $i === 0 ? 'show' : '' }}" data-parent="#mcFaqAccordion">
+                                    <div style="padding:0 20px 16px;color:#6c757d;font-size:.88rem;line-height:1.8;">{{ $faq['a'] }}</div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{{ route('faq') }}" class="btn btn-outline-dark px-4 font-weight-bold">View All FAQs →</a>
+                        </div>
+                    </div>
+
                 </div>
+
+                <!-- Right Sidebar -->
+                <div class="col-lg-4">
+
+                    <!-- Documents to bring -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:24px;margin-bottom:20px;">
+                        <h5 class="font-weight-bold mb-3" style="font-size:.95rem;border-bottom:2px solid var(--accent-gold);padding-bottom:10px;">Before Visiting a Center</h5>
+                        @php $docs = [
+                            ['icon'=>'fas fa-passport',        'text'=>'Original Passport'],
+                            ['icon'=>'fas fa-id-card',         'text'=>'Original CNIC'],
+                            ['icon'=>'fas fa-file-alt',        'text'=>'Printed appointment slip (QR code)'],
+                            ['icon'=>'fas fa-images',          'text'=>'4 passport-size photos'],
+                            ['icon'=>'fas fa-money-bill-wave', 'text'=>'Cash for center fee (~PKR 25,000)'],
+                        ]; @endphp
+                        @foreach($docs as $doc)
+                        <div class="d-flex align-items-center mb-3" style="gap:12px;">
+                            <i class="{{ $doc['icon'] }}" style="color:var(--accent-gold);flex-shrink:0;"></i>
+                            <span class="small text-muted">{{ $doc['text'] }}</span>
+                        </div>
+                        @endforeach
+                        <div style="background:#f7f8fc;border-radius:8px;padding:12px;margin-top:4px;">
+                            <p class="small mb-0 text-muted"><i class="fas fa-clock mr-1" style="color:var(--accent-gold);"></i>Arrive early — most centers open at <strong>9:00 AM</strong>. Call ahead to confirm timing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Related Services -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:24px;margin-bottom:20px;">
+                        <h5 class="font-weight-bold mb-3" style="font-size:.95rem;border-bottom:2px solid var(--accent-gold);padding-bottom:10px;">Related Services</h5>
+                        <div class="d-flex flex-column" style="gap:8px;">
+                            <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-block font-weight-bold btn-sm text-left">
+                                <i class="fas fa-calendar-check mr-2"></i>GAMCA Appointment Booking
+                            </a>
+                            <a href="{{ route('special.appointment') }}" class="btn btn-outline-dark btn-block font-weight-bold btn-sm text-left">
+                                <i class="fas fa-hospital mr-2"></i>WAFID Choice Center
+                            </a>
+                            <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark btn-block font-weight-bold btn-sm text-left">
+                                <i class="fas fa-search mr-2"></i>Check Medical Status
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- GCC Country Guides -->
+                    <div style="background:#fff;border:1px solid #e8ecf0;border-radius:14px;padding:24px;margin-bottom:20px;">
+                        <h5 class="font-weight-bold mb-3" style="font-size:.95rem;border-bottom:2px solid var(--accent-gold);padding-bottom:10px;">GCC Country Guides</h5>
+                        <div class="d-flex flex-wrap" style="gap:8px;">
+                            @foreach([['flag'=>'🇸🇦','name'=>'Saudi Arabia','slug'=>'saudi-arabia'],['flag'=>'🇦🇪','name'=>'UAE','slug'=>'uae'],['flag'=>'🇶🇦','name'=>'Qatar','slug'=>'qatar'],['flag'=>'🇴🇲','name'=>'Oman','slug'=>'oman'],['flag'=>'🇰🇼','name'=>'Kuwait','slug'=>'kuwait'],['flag'=>'🇧🇭','name'=>'Bahrain','slug'=>'bahrain']] as $c)
+                            <a href="{{ route('public.gcc.country', $c['slug']) }}" style="display:inline-flex;align-items:center;gap:5px;background:#f0f4f8;border:1px solid #dde3ea;border-radius:20px;padding:5px 12px;font-size:.78rem;font-weight:600;color:#1a252f;text-decoration:none;">
+                                {{ $c['flag'] }} {{ $c['name'] }}
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp CTA -->
+                    <div style="background:linear-gradient(135deg,#0f1923 0%,#1a252f 100%);border-radius:14px;padding:24px;">
+                        <div class="d-flex align-items-center mb-3" style="gap:12px;">
+                            <div style="width:48px;height:48px;background:rgba(255,198,84,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                                <i class="fab fa-whatsapp" style="color:var(--accent-gold);font-size:1.5rem;"></i>
+                            </div>
+                            <h6 class="text-white font-weight-bold mb-0">Need Booking Help?</h6>
+                        </div>
+                        <p class="small mb-3" style="color:rgba(255,255,255,.8);">Get step-by-step guidance for your GAMCA/WAFID medical booking via WhatsApp.</p>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hi%2C+I+need+help+finding+a+GAMCA+medical+center." target="_blank" class="btn btn-warning btn-block font-weight-bold" style="color:#0f1923;">
+                            <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section style="background:linear-gradient(135deg,var(--accent-gold) 0%,#f4b942 100%);padding:50px 0;">
+        <div class="container text-center">
+            <h2 class="font-weight-bold mb-3" style="color:#0f1923;">Find Your Nearest GAMCA Center & Book Now</h2>
+            <p class="mb-4" style="color:#1a252f;max-width:600px;margin:0 auto 24px;">Use the search tool above to get accurate center details and avoid delays in your visa process.</p>
+            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center" style="gap:12px;">
+                <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-lg px-5 py-3 font-weight-bold">
+                    <i class="fas fa-calendar-check mr-2"></i>Book Appointment Now
+                </a>
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hi%2C+I+need+help+with+GAMCA+medical+center." target="_blank" class="btn btn-outline-dark btn-lg px-5 py-3 font-weight-bold">
+                    <i class="fab fa-whatsapp mr-2"></i>WhatsApp Support
+                </a>
             </div>
         </div>
     </section>
