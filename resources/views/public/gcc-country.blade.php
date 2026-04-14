@@ -45,7 +45,8 @@
         "@type": "Country",
         "name": "Pakistan"
     },
-    "serviceType": "Medical Appointment Booking"
+    "serviceType": "Medical Appointment Booking",
+    "url": "{{ route('medicalExamination') }}"
 }
 @endpush
 

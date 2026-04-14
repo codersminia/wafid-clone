@@ -15,7 +15,7 @@
     "@id": "{{ url('/') }}#organization",
     "name": "{{ $settings['site_name'] ?? 'Gulf Medical Consultant' }}",
     "url": "{{ url('/') }}",
-    "logo": "{{ asset('assets/public/images/logo.png') }}",
+    "logo": "{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}",
     "description": "Expert consultancy for GCC medical bookings, WAFID/GAMCA appointments, and NAVTTC skill tests for Pakistan-based applicants.",
     "address": {
         "@type": "PostalAddress",
@@ -322,7 +322,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Gulf Medical Consultant Team" class="img-fluid rounded shadow-lg" style="border-radius:16px !important;">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Gulf Medical Consultant Team" class="img-fluid rounded shadow-lg" style="border-radius:16px !important;" width="1000" height="667" loading="lazy" decoding="async">
             </div>
             <div class="col-lg-6 pl-lg-5">
                 <span class="section-subtitle">Our Story</span>
@@ -465,7 +465,7 @@
                 <span class="section-subtitle">What We Offer</span>
                 <h2 class="section-title mb-4">Our Services</h2>
                 <p class="text-muted mb-4">We provide consultancy and support for all GCC-related medical and skill test requirements, ensuring you're fully prepared for your journey abroad.</p>
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Our Services" class="img-fluid rounded shadow" style="border-radius:16px !important;">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Our Services" class="img-fluid rounded shadow" style="border-radius:16px !important;" width="800" height="534" loading="lazy" decoding="async">
             </div>
             <div class="col-lg-7">
                 <div class="service-item">

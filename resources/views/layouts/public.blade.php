@@ -59,7 +59,13 @@
         content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
 
     {{-- Canonical Link (Prevents duplicate content issues) --}}
+    @if(request()->has('page') || request()->has('search') || request()->has('category'))
     <link rel="canonical" href="{{ url()->current() }}" />
+    @else
+    <link rel="canonical" href="{{ url()->current() }}" />
+    @endif
+    {{-- Pagination rel links for blog --}}
+    @stack('pagination_links')
 
     <link rel="shortcut icon"
         href="{{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/public/images/favicon.png') }}" />
@@ -320,8 +326,7 @@
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.9/dist/jquery.inputmask.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.9/dist/jquery.inputmask.min.js" defer></script>
 
     <!-- Custom JS -->
     <script src="{{ asset('assets/public/js/script.js') }}"></script>

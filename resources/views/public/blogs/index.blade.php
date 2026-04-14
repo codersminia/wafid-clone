@@ -345,6 +345,15 @@
 
 @endsection
 
+@push('pagination_links')
+@if($blogs->previousPageUrl())
+<link rel="prev" href="{{ $blogs->previousPageUrl() }}">
+@endif
+@if($blogs->nextPageUrl())
+<link rel="next" href="{{ $blogs->nextPageUrl() }}">
+@endif
+@endpush
+
 @push('head')
 <style>
     /* ── Hero ── */

@@ -322,32 +322,31 @@
     </section>
 
     {{-- Structured Data for SEO --}}
-    @push('head')
-        <script type="application/ld+json">
+    @push('schema')
+    ,{
+      "@type": "ItemList",
+      "itemListElement": [
+        @foreach($centers as $index => $center)
             {
-              "@context": "https://schema.org",
-              "@type": "ItemList",
-              "itemListElement": [
-                @foreach($centers as $index => $center)
-                    {
-                      "@type": "ListItem",
-                      "position": {{ $index + 1 }},
-                      "item": {
-                        "@type": "MedicalOrganization",
-                        "name": "{{ $center->medical_center }}",
-                        "address": {
-                          "@type": "PostalAddress",
-                          "streetAddress": "{{ $center->address_line_1 }}",
-                          "addressLocality": "{{ $cityName }}",
-                          "addressCountry": "PK"
-                        },
-                        "telephone": "{{ $center->phone }}"
-                      }
-                    }{{ $loop->last ? '' : ',' }}
-                @endforeach
-              ]
-            }
-            </script>
+              "@type": "ListItem",
+              "position": {{ $index + 1 }},
+              "item": {
+                "@type": "MedicalOrganization",
+                "name": "{{ addslashes($center->medical_center) }}",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "{{ addslashes($center->address_line_1) }}",
+                  "addressLocality": "{{ $cityName }}",
+                  "addressCountry": "PK"
+                },
+                "telephone": "{{ $center->phone }}"
+              }
+            }{{ $loop->last ? '' : ',' }}
+        @endforeach
+      ]
+    }
+    @endpush
+    @push('head')
         <style>
             :root {
                 --theme-color: #FFC654;

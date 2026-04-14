@@ -13,12 +13,31 @@
         ,{
             "@type": "BlogPosting",
             "@id": "{{ url()->current() }}#blog",
-            "headline": "{{ $blog->title }}",
+            "headline": "{{ addslashes($blog->title) }}",
             "image": "{{ $blog->image ? asset($blog->image) : asset('assets/public/images/hero-bg.jpg') }}",
             "author": { "@id": "{{ url('/') }}#organization" },
             "publisher": { "@id": "{{ url('/') }}#organization" },
             "datePublished": "{{ $blog->published_at->toIso8601String() }}",
-            "description": "{{ $blog->meta_description ?? Str::limit($blog->short_description, 160) }}"
+            "dateModified": "{{ $blog->updated_at->toIso8601String() }}",
+            "description": "{{ addslashes($blog->meta_description ?? Str::limit($blog->short_description, 160)) }}",
+            "wordCount": {{ str_word_count(strip_tags($blog->content)) }},
+            "mainEntityOfPage": { "@id": "{{ url()->current() }}#webpage" },
+            "url": "{{ url()->current() }}"
+        },
+        {
+            "@type": "WebPage",
+            "@id": "{{ url()->current() }}#webpage",
+            "name": "{{ addslashes($blog->meta_title ?? $blog->title) }}",
+            "url": "{{ url()->current() }}",
+            "isPartOf": { "@id": "{{ url('/') }}#website" },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+                    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ route('public.blogs') }}" },
+                    { "@type": "ListItem", "position": 3, "name": "{{ addslashes(Str::limit($blog->title, 60)) }}", "item": "{{ url()->current() }}" }
+                ]
+            }
         }
     @endpush
 
