@@ -1,5 +1,5 @@
 @extends('layouts.public')
-
+@push('head')<meta name="robots" content="noindex, nofollow">@endpush
 @section('title', 'Complete Payment - Wafid Appointment')
 
 @section('content')

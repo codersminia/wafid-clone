@@ -10,3 +10,20 @@ Disallow: /admin/
 Disallow: /.env
 Disallow: /storage/
 Disallow: /vendor/
+
+# Disallow thin/transactional pages
+Disallow: /wafid-appointment/thank-you
+Disallow: /wafid-appointment/confirmation
+Disallow: /wafid-appointment/pay-later
+Disallow: /wafid-special-appointment/thank-you
+Disallow: /wafid-special-appointment/confirmation
+Disallow: /wafid-special-appointment/pay-later
+Disallow: /navttc-thank-you
+Disallow: /navttc-confirmation
+Disallow: /navttc-pay-later
+Disallow: /tasheer-thank-you
+Disallow: /tasheer-confirmation
+Disallow: /tasheer-pay-later
+Disallow: /soft-skill-thank-you
+Disallow: /soft-skill-confirmation
+Disallow: /soft-skill-pay-later

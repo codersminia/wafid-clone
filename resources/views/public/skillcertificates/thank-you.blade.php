@@ -1,5 +1,6 @@
 @extends('layouts.public')
 @section('title', 'Application Received - Soft Skill')
+@push('head')<meta name="robots" content="noindex, nofollow">@endpush
 
 @section('content')
 <style>

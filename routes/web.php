@@ -17,6 +17,7 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy'])->name('privacy.policy');
 Route::get('/terms-and-conditions', [PublicController::class, 'termsConditions'])->name('terms.conditions');
 Route::get('/refund-policy', [PublicController::class, 'refundPolicy'])->name('refund.policy');

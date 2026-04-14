@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Karachi',
 
     'error_alert_email' => env('ERROR_ALERT_EMAIL', env('MAIL_FROM_ADDRESS')),
 

@@ -1,5 +1,6 @@
 @extends('layouts.public')
 @section('title', 'Request Received - Tasheer')
+@push('head')<meta name="robots" content="noindex, nofollow">@endpush
 
 @section('content')
 <style>

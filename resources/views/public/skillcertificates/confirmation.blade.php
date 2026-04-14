@@ -1,5 +1,6 @@
 @extends('layouts.public')
 @section('title', 'Confirm Payment - Soft Skill Certificate')
+@push('head')<meta name="robots" content="noindex, nofollow">@endpush
 
 @section('content')
 

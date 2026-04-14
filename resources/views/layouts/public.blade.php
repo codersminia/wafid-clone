@@ -14,6 +14,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    {{-- Preconnect to CDN origins for faster resource loading --}}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
     {{-- Dynamic SEO Tags --}}
     <title>@yield('title', 'Gulf Medical Consultant - GCC Appointments & Services')</title>
     <meta name="description"

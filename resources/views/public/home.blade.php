@@ -723,14 +723,17 @@
 
 @push('schema')
             ,{
-              "@type": "Product",
-              "@id": "{{ url('/') }}#product",
-              "name": "Gulf Medical Consultants",
-              "mainEntityOfPage": { "@id": "{{ url('/') }}#website" },
+              "@type": "Service",
+              "@id": "{{ url('/') }}#service-gamca",
+              "name": "Gulf Medical Consultants – GAMCA/WAFID Booking Services",
+              "provider": { "@id": "{{ url('/') }}#organization" },
+              "areaServed": "PK",
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
-                "reviewCount": "1500"
+                "reviewCount": "1500",
+                "bestRating": 5,
+                "worstRating": 1
               },
               "review": [
                 @foreach($testimonials as $index => $tm)
@@ -744,7 +747,7 @@
                         "@type": "Person",
                         "name": "{{ $tm->client_name }}"
                       },
-                      "reviewBody": "{{ Str::limit($tm->content, 150) }}"
+                      "reviewBody": "{{ addslashes(Str::limit($tm->content, 150)) }}"
                     }{{ $index < count($testimonials) - 1 ? ',' : '' }}
                 @endforeach
               ]
