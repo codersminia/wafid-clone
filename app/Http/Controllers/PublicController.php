@@ -1170,11 +1170,30 @@ class PublicController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
-        $recentBlogs = Blog::where('status', 'published')
-            ->where('id', '!=', $blog->id)
-            ->orderBy('published_at', 'desc')
-            ->take(3)
-            ->get();
+        // Fetch related posts: same category first, fill up with recent if needed
+        $relatedBlogs = collect();
+
+        if ($blog->category_id) {
+            $relatedBlogs = Blog::where('status', 'published')
+                ->where('id', '!=', $blog->id)
+                ->where('category_id', $blog->category_id)
+                ->orderBy('published_at', 'desc')
+                ->take(3)
+                ->get();
+        }
+
+        // If fewer than 3 same-category posts, fill with recent from other categories
+        if ($relatedBlogs->count() < 3) {
+            $exclude = $relatedBlogs->pluck('id')->push($blog->id);
+            $filler = Blog::where('status', 'published')
+                ->whereNotIn('id', $exclude)
+                ->orderBy('published_at', 'desc')
+                ->take(3 - $relatedBlogs->count())
+                ->get();
+            $relatedBlogs = $relatedBlogs->merge($filler);
+        }
+
+        $recentBlogs = $relatedBlogs;
 
         return view('public.blogs.details', compact('blog', 'recentBlogs'));
     }

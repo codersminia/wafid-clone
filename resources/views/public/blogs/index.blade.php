@@ -142,7 +142,7 @@
                                 <div class="blog-card-body">
                                     <div class="blog-card-meta">
                                         <span><i class="far fa-calendar-alt mr-1"></i>{{ $blog->published_at->format('M d, Y') }}</span>
-                                        <span><i class="far fa-user mr-1"></i>Admin</span>
+                                        <span><i class="far fa-user mr-1"></i>{{ $blog->author ?? 'Editorial Team' }}</span>
                                     </div>
                                     <h3 class="blog-card-title">
                                         <a href="{{ route('public.blogs.details', $blog->slug) }}">{{ Str::limit($blog->title, 65) }}</a>
