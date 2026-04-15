@@ -1405,11 +1405,16 @@ class AdminController extends Controller
             'slug' => 'required|unique:blogs,slug',
             'category_id' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'featured_image_alt' => 'nullable|string|max:255',
+            'tags' => 'nullable|string',
+            'author' => 'nullable|string|max:255',
+            'focus_keyword' => 'nullable|string|max:255',
         ]);
 
         $data = $request->except('image');
         $data['slug'] = Str::slug($request->slug);
+        $data['author'] = $request->filled('author') ? $request->author : 'Editorial Team';
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -1447,11 +1452,16 @@ class AdminController extends Controller
             'slug' => 'required|unique:blogs,slug,' . $id,
             'category_id' => 'required',
             'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'featured_image_alt' => 'nullable|string|max:255',
+            'tags' => 'nullable|string',
+            'author' => 'nullable|string|max:255',
+            'focus_keyword' => 'nullable|string|max:255',
         ]);
 
         $data = $request->except('image');
         $data['slug'] = Str::slug($request->slug);
+        $data['author'] = $request->filled('author') ? $request->author : 'Editorial Team';
 
         if ($request->hasFile('image')) {
             if ($blog->image && file_exists(public_path($blog->image))) {

@@ -95,6 +95,27 @@
                                     <div class="separator separator-dashed my-5"></div>
                                     <h5>SEO Settings</h5>
                                     <div class="form-group">
+                                        <label>Focus Keyword</label>
+                                        <input type="text" name="focus_keyword" class="form-control"
+                                            value="{{ old('focus_keyword', $blog->focus_keyword) }}" placeholder="e.g. gamca medical test" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Featured Image ALT</label>
+                                        <input type="text" name="featured_image_alt" class="form-control"
+                                            value="{{ old('featured_image_alt', $blog->featured_image_alt) }}" placeholder="Describe the image" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Author</label>
+                                        <input type="text" name="author" class="form-control"
+                                            value="{{ old('author', $blog->author ?? 'Editorial Team') }}" placeholder="Editorial Team" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tags</label>
+                                        <input type="text" name="tags" class="form-control"
+                                            value="{{ old('tags', $blog->tags) }}" placeholder="gamca, wafid, gcc medical" />
+                                        <span class="form-text text-muted">Comma separated tags.</span>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Meta Title</label>
                                         <input type="text" name="meta_title" class="form-control"
                                             value="{{ $blog->meta_title }}" />
