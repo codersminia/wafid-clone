@@ -784,7 +784,7 @@
                                     <td>${center.phone || '-'}</td>
                                     <td style="word-break: break-all;">${center.email || '-'}</td>
                                     <td>
-                                        ${center.website ? `<a href="${center.website}" target="_blank" style="color:#007bff;"><i class="fas fa-link"></i></a>` : '-'}
+                                        ${center.website ? `<a href="${center.website}" target="_blank" style="color:#007bff;" aria-label="Visit ${center.medical_center} website" rel="noopener noreferrer"><i class="fas fa-link" aria-hidden="true"></i></a>` : '-'}
                                     </td>
                                     <td>${getStarRatingHtml(center.rating)}</td>
                                 `;

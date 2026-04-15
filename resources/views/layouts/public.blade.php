@@ -139,9 +139,12 @@
 
 <body style="overflow-x: hidden;">
 
+    <!-- Skip to main content (keyboard accessibility) -->
+    <a href="#main-content" class="sr-only sr-only-focusable" style="position:absolute;top:0;left:0;z-index:9999;padding:8px 16px;background:var(--accent-gold);color:#0f1923;font-weight:700;border-radius:0 0 4px 0;">Skip to main content</a>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RWFT77P"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
      
     <!-- Navigation -->
@@ -204,7 +207,9 @@
         </div>
     </nav>
 
-    @yield('content')
+    <main id="main-content">
+        @yield('content')
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -219,19 +224,19 @@
                         <p class="footer-about">{{ $settings['footer_text'] ?? 'Providing employment and residency services for Gulf Cooperation Council States.' }}</p>
                         <div class="footer-socials mt-4">
                             @if(!empty($settings['social_facebook']))
-                                <a href="{{ $settings['social_facebook'] }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{ $settings['social_facebook'] }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                             @endif
                             @if(!empty($settings['social_twitter']))
-                                <a href="{{ $settings['social_twitter'] }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ $settings['social_twitter'] }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
                             @endif
                             @if(!empty($settings['social_instagram']))
-                                <a href="{{ $settings['social_instagram'] }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="{{ $settings['social_instagram'] }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                             @endif
                             @if(!empty($settings['social_linkedin']))
-                                <a href="{{ $settings['social_linkedin'] }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="{{ $settings['social_linkedin'] }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                             @endif
                             @if(!empty($settings['social_tiktok']))
-                                <a href="{{ $settings['social_tiktok'] }}" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                                <a href="{{ $settings['social_tiktok'] }}" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
                             @endif
                         </div>
                     </div>
@@ -311,13 +316,13 @@
                 <div class="footer-copyright">
                     <span>&copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Gulf Medical Consultants' }}. All rights reserved.</span>
                     <span class="mx-2">·</span>
-                    <a href="{{ route('privacy.policy') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Privacy Policy</a>
+                    <a href="{{ route('privacy.policy') }}" style="color:rgba(255,255,255,.8);font-size:.82rem;text-decoration:none;">Privacy Policy</a>
                     <span class="mx-2">·</span>
-                    <a href="{{ route('terms.conditions') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Terms &amp; Conditions</a>
+                    <a href="{{ route('terms.conditions') }}" style="color:rgba(255,255,255,.8);font-size:.82rem;text-decoration:none;">Terms &amp; Conditions</a>
                     <span class="mx-2">·</span>
-                    <a href="{{ route('refund.policy') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Refund Policy</a>
+                    <a href="{{ route('refund.policy') }}" style="color:rgba(255,255,255,.8);font-size:.82rem;text-decoration:none;">Refund Policy</a>
                     <span class="mx-2">·</span>
-                    <a href="{{ route('disclaimer') }}" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Disclaimer</a>
+                    <a href="{{ route('disclaimer') }}" style="color:rgba(255,255,255,.8);font-size:.82rem;text-decoration:none;">Disclaimer</a>
                 </div>
             </div>
         </div>

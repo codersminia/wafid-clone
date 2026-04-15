@@ -433,7 +433,7 @@
     <section class="py-5 sec-bg-white-clean" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-accent-red font-weight-extrabold text-uppercase letter-spacing-2">How it works</h6>
+                <p class="text-accent-red font-weight-extrabold text-uppercase letter-spacing-2 mb-1" style="font-size:.85rem;">How it works</p>
                 <h2 class="font-weight-bold text-dark">Book GAMCA Medical Appointment in 3 Easy Steps</h2>
                 <div class="theme-divider"></div>
                 <p class="text-muted">We make your GAMCA medical appointment booking in Pakistan quick, secure, and stress-free. Follow these 3 simple steps to complete your GCC medical registration online without any confusion.</p>
@@ -488,7 +488,7 @@
     <section class="services-section py-5 sec-bg-light-warm" id="services" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-accent-red font-weight-bold text-uppercase">Our Services</h6>
+                <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Our Services</p>
                 <h2 class="font-weight-bold text-dark">Hassle-Free GAMCA WAFID &amp; Gulf Employment Appointments</h2>
                 <div class="theme-divider"></div>
                 <p class="text-muted mx-auto" style="max-width:620px;">At Gulf Medical Consultants, we make your medical, visa, and skill verification appointments for Gulf countries effortless, fast, and reliable. From GCC medical slips to Saudi visa appointments, our streamlined system ensures you save time and avoid errors.</p>
@@ -624,7 +624,7 @@
                         loading="lazy" decoding="async">
                 </div>
                 <div class="col-lg-7 pl-lg-5">
-                    <h6 class="text-accent-red font-weight-bold text-uppercase">Why Choose Us</h6>
+                    <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Why Choose Us</p>
                     <h2 class="font-weight-bold mb-2 text-dark">Why Choose Us for GAMCA Medical Appointment in Pakistan</h2>
                     <p class="text-muted mb-3">Booking your GAMCA (WAFID) medical appointment can be confusing — we simplify the entire process to make it smooth, secure, and hassle-free.</p>
                     <div class="theme-divider mx-0 mb-3"></div>
@@ -672,7 +672,7 @@
     <section class="py-5 sec-bg-testimonials" data-aos="fade-up">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-accent-red font-weight-bold text-uppercase">Testimonials</h6>
+                <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Testimonials</p>
                 <h2 class="font-weight-bold text-dark">What Our Clients Say</h2>
                 <div class="theme-divider"></div>
             </div>
@@ -789,7 +789,7 @@
     <section class="py-5 sec-bg-white-clean" id="locations">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-accent-red font-weight-bold text-uppercase">Find Us</h6>
+                <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Find Us</p>
                 <h2 class="font-weight-bold text-dark">Visit Our Offices</h2>
                 <p class="text-muted">We have physical presence in multiple cities for your convenience.</p>
                 <div class="theme-divider"></div>
@@ -841,7 +841,7 @@
                                         <div class="card-body p-0">
                                             <!-- Embedded Map -->
                                             @if(!empty($office['map_url']))
-                                                <iframe src="{{ $office['map_url'] }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                                <iframe src="{{ $office['map_url'] }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" title="Office location map"></iframe>
                                             @else
                                                 <div style="height: 400px; display: flex; align-items: center; justify-content: center; background: #eee;">
                                                     <p class="text-muted">Map URL not provided.</p>
@@ -873,7 +873,7 @@
     <section class="blog-home-section py-5 sec-bg-light-warm">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-accent-red font-weight-bold text-uppercase">Our Blog</h6>
+                <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Our Blog</p>
                 <h2 class="font-weight-bold text-dark">Latest News & Updates</h2>
                 <div class="theme-divider"></div>
                 <p class="text-muted">Stay informed with the latest updates on GAMCA, WAFID, and Gulf visa processes.</p>
@@ -904,8 +904,8 @@
                                     <i class="far fa-calendar-alt mr-1"></i>
                                     {{ $blog->published_at ? $blog->published_at->format('d M Y') : $blog->created_at->format('d M Y') }}
                                 </span>
-                                <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-home-read-more">
-                                    Read More <i class="fas fa-arrow-right"></i>
+                                <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-home-read-more" aria-label="Read more about {{ $blog->title }}">
+                                    Read More <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -929,7 +929,7 @@
             <div class="row">
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="home-faq-left">
-                        <h6 class="text-accent-red font-weight-bold text-uppercase">FAQ</h6>
+                        <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">FAQ</p>
                         <h2 class="font-weight-bold text-white mb-3">Frequently Asked Questions</h2>
                         <p style="color:rgba(255,255,255,0.75);" class="mb-4">Everything you need to know about GAMCA medical appointments, WAFID registration, and our booking process.</p>
                         <a href="{{ route('faq') }}" class="btn btn-light px-4 py-2 font-weight-bold text-dark">

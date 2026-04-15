@@ -148,8 +148,8 @@
                                         <a href="{{ route('public.blogs.details', $blog->slug) }}">{{ Str::limit($blog->title, 65) }}</a>
                                     </h3>
                                     <p class="blog-card-excerpt">{{ Str::limit($blog->short_description, 110) }}</p>
-                                    <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-card-link">
-                                        Read Article <i class="fas fa-arrow-right ml-1"></i>
+                                    <a href="{{ route('public.blogs.details', $blog->slug) }}" class="blog-card-link" aria-label="Read article: {{ $blog->title }}">
+                                        Read Article <i class="fas fa-arrow-right ml-1" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>

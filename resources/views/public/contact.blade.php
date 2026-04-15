@@ -456,7 +456,7 @@
                                     <div class="card-body p-0">
                                         <!-- Embedded Map -->
                                         @if(!empty($office['map_url']))
-                                            <iframe src="{{ $office['map_url'] }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                            <iframe src="{{ $office['map_url'] }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" title="Office location map"></iframe>
                                         @else
                                             <div style="height: 400px; display: flex; align-items: center; justify-content: center; background: #eee;">
                                                 <p class="text-muted">Map URL not provided.</p>
