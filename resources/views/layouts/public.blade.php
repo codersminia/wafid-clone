@@ -70,10 +70,29 @@
     <link rel="shortcut icon"
         href="{{ isset($settings['favicon']) ? asset($settings['favicon']) : asset('assets/public/images/favicon.png') }}" />
 
-    <!-- Bootstrap & CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Critical CSS: Bootstrap & FontAwesome loaded non-render-blocking -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"></noscript>
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Site CSS (critical, loaded normally) -->
     <link rel="stylesheet" href="{{ asset('assets/public/css/style.css') }}">
+
+    <!-- Critical inline CSS to prevent FOUC while Bootstrap loads async -->
+    <style>
+        *{box-sizing:border-box}
+        body{margin:0;font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;overflow-x:hidden}
+        .site-navbar{background:linear-gradient(90deg,#0f1923 0%,#1a252f 100%);padding:.6rem 0;position:sticky;top:0;z-index:1050}
+        .container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+        @media(min-width:576px){.container{max-width:540px}}
+        @media(min-width:768px){.container{max-width:720px}}
+        @media(min-width:992px){.container{max-width:960px}}
+        @media(min-width:1200px){.container{max-width:1140px}}
+        img{max-width:100%;height:auto}
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    </style>
 
     {{-- Preload above-the-fold assets --}}
     <link rel="preload" as="image" href="{{ isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png') }}" fetchpriority="high" imagesizes="(max-width: 991px) 160px, 200px">
@@ -328,13 +347,14 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- JS: jQuery first (sync, already at end of body so non-blocking) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap bundle and inputmask deferred after jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.9/dist/jquery.inputmask.min.js" defer></script>
 
     <!-- Custom JS -->
-    <script src="{{ asset('assets/public/js/script.js') }}"></script>
+    <script src="{{ asset('assets/public/js/script.js') }}" defer></script>
 
     <!-- WhatsApp floating button -->
     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hello!%20I%20need%20assistance%20with%20an%20appointment."
