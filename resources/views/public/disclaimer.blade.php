@@ -327,12 +327,6 @@
     "url": "{{ url()->current() }}",
     "description": "Read the Disclaimer of Gulf Medical Consultants. We are an independent GAMCA/WAFID booking service, not affiliated with any government authority or embassy.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "Disclaimer", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 @endpush

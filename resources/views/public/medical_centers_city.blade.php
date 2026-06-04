@@ -397,13 +397,7 @@
     "url": "{{ url()->current() }}",
     "description": "Find approved GAMCA medical centers in {{ $cityName }}. Book WAFID appointment, check fees, documents, and get your medical slip online for GCC visa.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "GAMCA Centers in {{ $cityName }}", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 ,{
     "@type": "FAQPage",

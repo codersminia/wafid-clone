@@ -435,12 +435,6 @@
     "url": "{{ url()->current() }}",
     "description": "Read the Privacy Policy of Gulf Medical Consultants. Learn how we collect, use, and protect your personal data when booking GAMCA/WAFID medical appointments.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 @endpush

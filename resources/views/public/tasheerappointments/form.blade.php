@@ -652,8 +652,7 @@
                 },
                 "availableChannel": {
                     "@type": "ServiceChannel",
-                    "serviceUrl": "{{ route('tasheer.form') }}",
-                    "serviceType": "Online booking"
+                    "serviceUrl": "{{ route('tasheer.form') }}"
                 }
             }
         @endpush
@@ -830,13 +829,7 @@
     "url": "{{ url()->current() }}",
     "description": "Book your Tasheer appointment in Pakistan for Saudi Arabia visa biometric enrollment. Fast slot booking at Etimad centers in Karachi, Lahore, Islamabad & Rawalpindi.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "Tasheer Appointment", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 @endpush
 

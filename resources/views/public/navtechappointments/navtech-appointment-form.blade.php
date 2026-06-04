@@ -1319,8 +1319,7 @@
                 },
                 "availableChannel": {
                     "@type": "ServiceChannel",
-                    "serviceUrl": "{{ route('navtechform') }}",
-                    "serviceType": "Online booking"
+                    "serviceUrl": "{{ route('navtechform') }}"
                 }
             }
         @endpush
@@ -1507,13 +1506,7 @@
     "url": "{{ url()->current() }}",
     "description": "Book your NAVTTC Takamol trade test online in Pakistan for the Saudi Arabia Skill Verification Program (SVP). Step-by-step guidance and WhatsApp support.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "NAVTTC Takamol Booking", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 @endpush
 

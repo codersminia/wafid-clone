@@ -270,7 +270,7 @@
                 <div class="col-lg-5 col-md-5 mb-4 mb-md-0">
                     <div class="seo-img-wrapper">
                         <img
-                            src="{{ asset('assets/public/images/gamca-medical-appointment-new.webp') }}"
+                            src="{{ asset('assets/public/images/gamca-medical-appointment-pic.webp') }}"
                             alt="GAMCA Medical Appointment Pakistan"
                             class="img-fluid rounded shadow"
                             loading="lazy"
@@ -727,30 +727,7 @@
               "@id": "{{ url('/') }}#service-gamca",
               "name": "Gulf Medical Consultants – GAMCA/WAFID Booking Services",
               "provider": { "@id": "{{ url('/') }}#organization" },
-              "areaServed": "PK",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "1500",
-                "bestRating": 5,
-                "worstRating": 1
-              },
-              "review": [
-                @foreach($testimonials as $index => $tm)
-                    {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": "{{ $tm->rating }}"
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": "{{ $tm->client_name }}"
-                      },
-                      "reviewBody": "{{ addslashes(Str::limit($tm->content, 150)) }}"
-                    }{{ $index < count($testimonials) - 1 ? ',' : '' }}
-                @endforeach
-              ]
+              "areaServed": "PK"
             }
 @endpush
             @endif
@@ -1098,6 +1075,22 @@ $(document).ready(function(){
         "bestRating": 5,
         "worstRating": 1
     }
+    ,"review": [
+        @foreach($testimonials as $index => $tm)
+            {
+              "@type": "Review",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "{{ $tm->rating }}"
+              },
+              "author": {
+                "@type": "Person",
+                "name": "{{ $tm->client_name }}"
+              },
+              "reviewBody": "{{ addslashes(Str::limit($tm->content, 150)) }}"
+            }{{ $index < count($testimonials) - 1 ? ',' : '' }}
+        @endforeach
+    ]
     @endif
 }
 ,{
@@ -1105,8 +1098,8 @@ $(document).ready(function(){
     "@id": "{{ url('/') }}#service-wafid",
     "name": "Wafid (GAMCA) Medical Appointment",
     "description": "Book your official GAMCA medical appointment slip online. Fast processing with delivery to WhatsApp.",
-    "url": "{{ route('medicalExamination') }}",
-    "areaServed": "PK",
+    "mainEntityOfPage": "{{ route('medicalExamination') }}",
+    "areaServed": { "@type": "Country", "name": "Pakistan" },
     "provider": { "@id": "{{ url('/') }}#organization" }
 }
 ,{
@@ -1114,8 +1107,8 @@ $(document).ready(function(){
     "@id": "{{ url('/') }}#service-wafid-choice",
     "name": "Wafid Choice Medical Center Selection",
     "description": "Choose your preferred GAMCA-approved medical center for your GCC medical appointment.",
-    "url": "{{ route('special.appointment') }}",
-    "areaServed": "PK",
+    "mainEntityOfPage": "{{ route('special.appointment') }}",
+    "areaServed": { "@type": "Country", "name": "Pakistan" },
     "provider": { "@id": "{{ url('/') }}#organization" }
 }
 ,{
@@ -1123,8 +1116,8 @@ $(document).ready(function(){
     "@id": "{{ url('/') }}#service-navttc",
     "name": "NAVTTC / Takamol Skill Verification",
     "description": "Book your NAVTTC Takamol skill verification test for Saudi Arabia employment.",
-    "url": "{{ route('navtechform') }}",
-    "areaServed": "PK",
+    "mainEntityOfPage": "{{ route('navtechform') }}",
+    "areaServed": { "@type": "Country", "name": "Pakistan" },
     "provider": { "@id": "{{ url('/') }}#organization" }
 }
 ,{
@@ -1132,8 +1125,8 @@ $(document).ready(function(){
     "@id": "{{ url('/') }}#service-tasheer",
     "name": "Tasheer Saudi Visa Appointment",
     "description": "Schedule your Tasheer Saudi visa appointment quickly and securely online.",
-    "url": "{{ route('tasheer.form') }}",
-    "areaServed": "PK",
+    "mainEntityOfPage": "{{ route('tasheer.form') }}",
+    "areaServed": { "@type": "Country", "name": "Pakistan" },
     "provider": { "@id": "{{ url('/') }}#organization" }
 }
 ,{
@@ -1141,8 +1134,8 @@ $(document).ready(function(){
     "@id": "{{ url('/') }}#service-softskill",
     "name": "Soft Skill Certificate",
     "description": "Obtain your soft skill certificate for Gulf employment requirements.",
-    "url": "{{ route('softskill.form') }}",
-    "areaServed": "PK",
+    "mainEntityOfPage": "{{ route('softskill.form') }}",
+    "areaServed": { "@type": "Country", "name": "Pakistan" },
     "provider": { "@id": "{{ url('/') }}#organization" }
 }
 @if($homeFaqs->count() > 0)

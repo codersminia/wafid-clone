@@ -689,8 +689,7 @@
                 },
                 "availableChannel": {
                     "@type": "ServiceChannel",
-                    "serviceUrl": "{{ route('special.appointment') }}",
-                    "serviceType": "Online booking"
+                    "serviceUrl": "{{ route('special.appointment') }}"
                 }
             }
         @endpush
@@ -847,14 +846,16 @@
     "url": "{{ url()->current() }}",
     "description": "Book your GAMCA appointment with center selection using our premium WAFID Choice service. Select your preferred medical center in Lahore or Gujranwala.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "GAMCA Appointment", "item": "{{ route('medicalExamination') }}" },
-            { "@type": "ListItem", "position": 3, "name": "Choice Center", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
+}
+,{
+    "@type": "BreadcrumbList",
+    "@id": "{{ url()->current() }}#breadcrumb",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+        { "@type": "ListItem", "position": 2, "name": "GAMCA Appointment", "item": "{{ route('medicalExamination') }}" },
+        { "@type": "ListItem", "position": 3, "name": "Choice Center", "item": "{{ url()->current() }}" }
+    ]
 }
 @endpush
 

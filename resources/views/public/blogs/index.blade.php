@@ -701,13 +701,7 @@
     "url": "{{ url()->current() }}",
     "description": "Gulf Medical Consultant Blog – Updated GAMCA/WAFID booking guides, fees, medical test tips, and country-specific GCC medical guides for Pakistan applicants.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 ,{
     "@type": "FAQPage",

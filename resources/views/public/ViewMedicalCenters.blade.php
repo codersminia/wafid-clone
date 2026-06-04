@@ -12,13 +12,7 @@
     "url": "{{ url()->current() }}",
     "description": "Search approved GAMCA/WAFID medical centers in all major cities of Pakistan. Find address, phone number, and map location.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "Medical Center Search", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 ,{
     "@type": "FAQPage",

@@ -800,8 +800,7 @@
                     },
                     "availableChannel": {
                         "@type": "ServiceChannel",
-                            "serviceUrl": "{{ route('softskill.form') }}",
-                                "serviceType": "Online application"
+                            "serviceUrl": "{{ route('softskill.form') }}"
                     }
                 }
             @endpush
@@ -973,13 +972,7 @@
     "url": "{{ url()->current() }}",
     "description": "Get your Soft Skill Work Readiness Certificate in Pakistan for Gulf jobs in Saudi Arabia, UAE, Qatar, Oman, Kuwait & Bahrain. Delivered digitally on WhatsApp within 24 hours.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "Soft Skill Certificate", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 @endpush
 

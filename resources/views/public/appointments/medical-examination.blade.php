@@ -719,8 +719,7 @@
             "@id": "{{ url('/') }}#wafid-medical-service",
             "name": "Wafid (GAMCA) Medical Examination",
             "serviceType": "Medical Test",
-            "description": "Online booking service for Wafid (GAMCA) medical examination appointments in Pakistan for GCC countries
-            including Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, and Oman.",
+            "description": "Online booking service for Wafid (GAMCA) medical examination appointments in Pakistan for GCC countries including Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, and Oman.",
             "provider": {
                 "@id": "{{ url('/') }}#organization"
             },
@@ -730,8 +729,7 @@
             },
             "availableChannel": {
                 "@type": "ServiceChannel",
-                "serviceUrl": "{{ route('medicalExamination') }}",
-                "serviceType": "Online booking"
+                "serviceUrl": "{{ route('medicalExamination') }}"
             }
             }
         @endpush
@@ -822,13 +820,7 @@
     "url": "{{ url()->current() }}",
     "description": "Book your GAMCA appointment online in Pakistan with step-by-step guidance. WAFID token booking for Saudi Arabia, UAE, Qatar, Oman, Kuwait & Bahrain.",
     "isPartOf": { "@id": "{{ url('/') }}#website" },
-    "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-            { "@type": "ListItem", "position": 2, "name": "GAMCA Appointment", "item": "{{ url()->current() }}" }
-        ]
-    }
+    "breadcrumb": { "@id": "{{ url()->current() }}#breadcrumb" }
 }
 @endpush
 

@@ -33,6 +33,9 @@
     <meta itemprop="image"
         content="@yield('og_image', isset($settings['logo']) ? asset($settings['logo']) : asset('assets/public/images/gulf-medical-logo.png'))">
 
+    {{-- Canonical URL (forces non-www) --}}
+    <link rel="canonical" href="{{ 'https://gamcawafidonline.com/' . ltrim(request()->getPathInfo(), '/') }}">
+
     {{-- Geo-Tagging (Crucial for Local SEO in Pakistan/India) --}}
     <meta name="geo.region" content="PK" />
     <meta name="geo.position" content="30.3753;69.3451" />
@@ -78,7 +81,7 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- Site CSS (critical, loaded normally) -->
-    <link rel="stylesheet" href="{{ asset('assets/public/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/public/css/style.css') }}?v=2">
 
     <!-- Critical inline CSS to prevent FOUC while Bootstrap loads async -->
     <style>
@@ -90,6 +93,9 @@
         @media(min-width:768px){.container{max-width:720px}}
         @media(min-width:992px){.container{max-width:960px}}
         @media(min-width:1200px){.container{max-width:1140px}}
+        @media(min-width:1400px){.container{max-width:1320px}}
+        @media(min-width:1600px){.container{max-width:1520px}}
+        @media(min-width:1920px){.container{max-width:1720px}}
         img{max-width:100%;height:auto}
         .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     </style>
@@ -140,7 +146,8 @@
                         ,{
                             "@type": "ListItem",
                             "position": 2,
-                            "name": "@yield('title')"
+                            "name": "@yield('title')",
+                            "item": "{{ url()->current() }}"
                         }
                     @endif
                 ]
@@ -354,7 +361,7 @@
     <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.9/dist/jquery.inputmask.min.js" defer></script>
 
     <!-- Custom JS -->
-    <script src="{{ asset('assets/public/js/script.js') }}" defer></script>
+    <script src="{{ asset('assets/public/js/script.js') }}?v=2" defer></script>
 
     <!-- WhatsApp floating button -->
     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp'] ?? '923000000000') }}?text=Hello!%20I%20need%20assistance%20with%20an%20appointment."

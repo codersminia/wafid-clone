@@ -17,6 +17,25 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 
+
+// Add this 301 Redirect to fix the Google Search Console 4xx error
+Route::get('navttc-appointment', function () {
+    return redirect('navttc-takamol-booking', 301);
+});
+
+// Put these at the top of your web.php file
+Route::redirect('/index.html', '/', 301);
+Route::redirect('/contact.html', '/contact-us', 301);
+Route::redirect('/faq.html', '/faq', 301);
+Route::redirect('/medical-centers.html', '/medical-center-search', 301);
+Route::redirect('/medical-examinations.html', '/wafid-appointment', 301);
+Route::redirect('/medical-examination', '/wafid-appointment', 301);
+
+// Catch ANY old city URL and redirect it to the new format
+Route::get('/medical-centers-in-{city}', function ($city) {
+    return redirect('/' . $city . '-medical-centers', 301);
+});
+
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy'])->name('privacy.policy');
 Route::get('/terms-and-conditions', [PublicController::class, 'termsConditions'])->name('terms.conditions');
