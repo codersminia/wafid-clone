@@ -151,6 +151,11 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+{{-- Preload the first banner image so the browser fetches it ASAP --}}
+@if($banners->count() > 0)
+<link rel="preload" as="image" href="{{ asset($banners->first()->image) }}" fetchpriority="high">
+@endif
 @endpush
 
 @section('content')
@@ -168,8 +173,25 @@
         <div class="carousel-inner">
             @foreach($banners as $i => $banner)
             <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
-                <div class="hero-section text-center" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ asset($banner->image) }}') center/cover no-repeat; will-change: transform;">
-                    <div class="container">
+                <div class="hero-section text-center" style="position:relative;overflow:hidden;">
+                    {{-- Real <img> so browser can preload/prioritize it --}}
+                    <img
+                        src="{{ asset($banner->image) }}"
+                        alt="{{ $banner->title ?? 'Banner' }}"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+                        @if($i === 0)
+                            fetchpriority="high"
+                            loading="eager"
+                            decoding="sync"
+                        @else
+                            loading="lazy"
+                            decoding="async"
+                        @endif
+                    >
+                    {{-- Dark overlay --}}
+                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
+                    {{-- Content --}}
+                    <div class="container" style="position:relative;z-index:2;">
                         <div class="row justify-content-center">
                             <div class="col-lg-10">
                                 @if($banner->title)
