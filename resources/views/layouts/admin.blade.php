@@ -51,6 +51,18 @@
         .flex-root {
             overflow-x: hidden !important;
         }
+
+        /* Sidebar service logo icons */
+        .menu-icon-logo {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            border-radius: 6px;
+            padding: 3px;
+            background: rgba(255,255,255,0.12);
+            filter: brightness(0) invert(1);
+            opacity: 1 !important;
+        }
     </style>
     @stack('styles')
 </head>
@@ -183,20 +195,7 @@
                                 aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="{{ route('admin.appointments') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M6,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 Z"
-                                                    fill="#000000" opacity="0.3" />
-                                                <path
-                                                    d="M10,12 L11,12 C11.5522847,12 12,12.4477153 12,13 L12,14 C12,14.5522847 11.5522847,15 11,15 L10,15 C9.44771525,15 9,14.5522847 9,14 L9,13 C9,12.4477153 9.44771525,12 10,12 Z M14,12 L15,12 C15.5522847,12 16,12.4477153 16,13 L16,14 C16,14.5522847 15.5522847,15 15,15 L14,15 C13.4477153,15 13,14.5522847 13,14 L13,13 C13,12.4477153 13.4477153,12 14,12 Z M10,16 L11,16 C11.5522847,16 12,16.4477153 12,17 L12,18 C12,18.5522847 11.5522847,19 11,19 L10,19 C9.44771525,19 9,18.5522847 9,18 L9,17 C9,16.4477153 9.44771525,16 10,16 Z M14,16 L15,16 C15.5522847,16 16,16.4477153 16,17 L16,18 C16,18.5522847 15.5522847,19 15,19 L14,19 C13.4477153,19 13,18.5522847 13,18 L13,17 C13,16.4477153 13.4477153,16 14,16 Z"
-                                                    fill="#000000" />
-                                                <rect fill="#000000" x="8" y="2" width="2" height="4" rx="1" />
-                                                <rect fill="#000000" x="14" y="2" width="2" height="4" rx="1" />
-                                            </g>
-                                        </svg>
+                                        <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid" class="menu-icon-logo">
                                     </span>
                                     <span class="menu-text">Wafid Appointments</span>
                                     @if($wafid_new > 0)
@@ -213,18 +212,7 @@
                                 aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="{{ route('admin.special.appointments') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <polygon points="0 0 24 0 24 24 0 24" />
-                                                <path
-                                                    d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
-                                                    fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                <path
-                                                    d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
-                                                    fill="#000000" fill-rule="nonzero" />
-                                            </g>
-                                        </svg>
+                                        <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid Choice" class="menu-icon-logo">
                                     </span>
                                     <span class="menu-text">Special Appointments</span>
                                     @if($special_new > 0)
@@ -241,18 +229,7 @@
                                 aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="{{ route('admin.tasheer.appointments') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M13,18.9450712 L13,20 L14,20 C14.5522847,20 15,20.4477153 15,21 C15,21.5522847 14.5522847,22 14,22 L10,22 C9.44771525,22 9,21.5522847 9,21 C9,20.4477153 9.44771525,20 10,20 L11,20 L11,18.9450712 C6.50326515,18.4585255 3,14.632911 3,10 C3,5.02943725 7.02943725,1 12,1 C16.9705627,1 21,5.02943725 21,10 C21,14.632911 17.4967348,18.4585255 13,18.9450712 Z"
-                                                    fill="#000000" opacity="0.3" />
-                                                <path
-                                                    d="M12,5 C10.3431458,5 9,6.34314575 9,8 C9,9.65685425 10.3431458,11 12,11 C13.6568542,11 15,9.65685425 15,8 C15,6.34314575 13.6568542,5 12,5 Z"
-                                                    fill="#000000" />
-                                            </g>
-                                        </svg>
+                                        <img src="{{ asset('assets/public/images/tasheer-logo.png') }}" alt="Tasheer" class="menu-icon-logo">
                                     </span>
                                     <span class="menu-text">Tasheer Appointments</span>
                                     @if($tasheer_new > 0)
@@ -269,15 +246,7 @@
                                 aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="{{ route('admin.navtech.appointments') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <path d="M12,2 L2,7 L12,12 L22,7 L12,2 Z" fill="#000000" />
-                                                <path
-                                                    d="M12,15 L2,10 L2,17 C2,18.7 6.5,22 12,22 C17.5,22 22,18.7 22,17 L22,10 L12,15 Z"
-                                                    fill="#000000" opacity="0.3" />
-                                            </g>
-                                        </svg>
+                                        <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC" class="menu-icon-logo">
                                     </span>
                                     <span class="menu-text">NAVTTC Appointments</span>
                                     @if($navtech_new > 0)
@@ -302,19 +271,7 @@
                                 aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="{{ route('admin.checkResults') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z"
-                                                    fill="#000000" opacity="0.3" />
-                                                <path
-                                                    d="M11,19 L13,19 L13,17 L11,17 L11,19 Z M11,15 L13,15 L13,7 L11,7 L11,15 Z"
-                                                    fill="#000000" />
-                                                <rect fill="#000000" x="10" y="2" width="4" height="2" rx="1" />
-                                            </g>
-                                        </svg>
+                                        <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Medical Results" class="menu-icon-logo">
                                     </span>
                                     <span class="menu-text">Medical Results</span>
                                     @if($medical_new > 0)
@@ -331,18 +288,7 @@
                                 aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="{{ route('admin.softskill.appointments') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M12,11 C14.209139,11 16,9.209139 16,7 C16,4.790861 14.209139,3 12,3 C9.790861,3 8,4.790861 8,7 C8,9.209139 9.790861,11 12,11 Z"
-                                                    fill="#000000" opacity="0.3" />
-                                                <path
-                                                    d="M10,13 C10,12.4477153 10.4477153,12 11,12 L13,12 C13.5522847,12 14,12.4477153 14,13 L14,21.4354132 L12.551699,20.501509 C12.2072615,20.2792945 11.7701764,20.2825852 11.4287813,20.5101815 L10,21.4627254 L10,13 Z"
-                                                    fill="#000000" />
-                                            </g>
-                                        </svg>
+                                        <img src="{{ asset('assets/public/images/soft-skill-logo.png') }}" alt="Soft Skills" class="menu-icon-logo">
                                     </span>
                                     <span class="menu-text">Soft Skill Certificates</span>
                                     @if($softskill_new > 0)

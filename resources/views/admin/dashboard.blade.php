@@ -4,13 +4,106 @@
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <style>
-            .hover-shadow-lg:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+            /* ── Stat Card Redesign ── */
+            .stat-card {
+                border-radius: 16px;
+                border: none;
+                text-decoration: none;
+                display: block;
+                overflow: hidden;
+                position: relative;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.10);
             }
-            .transition-all {
-                transition: all 0.3s ease-in-out !important;
+            .stat-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+                text-decoration: none;
             }
+            .stat-card .card-body { padding: 0; }
+
+            /* Top section: logo area */
+            .stat-card-top {
+                padding: 22px 22px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .stat-logo-wrap {
+                width: 56px;
+                height: 56px;
+                border-radius: 14px;
+                background: rgba(255,255,255,0.18);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                backdrop-filter: blur(4px);
+            }
+            .stat-logo-wrap img {
+                width: 36px;
+                height: 36px;
+                object-fit: contain;
+                filter: brightness(0) invert(1);
+            }
+            .stat-logo-wrap i {
+                font-size: 1.6rem;
+                color: #fff;
+            }
+            .stat-new-badge {
+                background: rgba(255,255,255,0.22);
+                color: #fff;
+                font-size: 0.78rem;
+                font-weight: 700;
+                padding: 5px 12px;
+                border-radius: 20px;
+                border: 1px solid rgba(255,255,255,0.35);
+                white-space: nowrap;
+            }
+
+            /* Bottom section: number + label */
+            .stat-card-bottom {
+                padding: 0 22px 20px;
+            }
+            .stat-card-number {
+                font-size: 2.6rem;
+                font-weight: 800;
+                color: #fff;
+                line-height: 1;
+                margin-bottom: 4px;
+            }
+            .stat-card-label {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: rgba(255,255,255,0.78);
+                letter-spacing: 0.3px;
+            }
+
+            /* Decorative circle */
+            .stat-card::before {
+                content: '';
+                position: absolute;
+                width: 130px;
+                height: 130px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.07);
+                bottom: -30px;
+                right: -20px;
+                pointer-events: none;
+            }
+            .stat-card::after {
+                content: '';
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.05);
+                bottom: 30px;
+                right: 60px;
+                pointer-events: none;
+            }
+
+            /* ── Sidebar logo icons — defined globally in layouts/admin.blade.php ── */
         </style>
         <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
@@ -29,167 +122,167 @@
                     </div>
                 </div>
 
-                <!-- PRIMARY STATS SECTION (Gradients) -->
+                <!-- STATS ROW 1 -->
                 <div class="row">
                     <!-- Wafid Appointments -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.appointments') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon-calendar-with-a-clock-time-tools text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.appointments') }}" class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid">
                                     </div>
                                     @if($stats['wafid']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-primary font-weight-bold px-4 py-2">+{{ $stats['wafid']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['wafid']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['wafid']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Wafid Appointments</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['wafid']['total']) }}</div>
+                                    <div class="stat-card-label">Wafid Appointments</div>
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- Tasheer Appointments -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.tasheer.appointments') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon2-world text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.tasheer.appointments') }}" class="stat-card" style="background: linear-gradient(135deg, #0f9b8e 0%, #14c9a0 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <img src="{{ asset('assets/public/images/tasheer-logo.png') }}" alt="Tasheer">
                                     </div>
                                     @if($stats['tasheer']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-success font-weight-bold px-4 py-2">+{{ $stats['tasheer']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['tasheer']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['tasheer']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Tasheer Appointments</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['tasheer']['total']) }}</div>
+                                    <div class="stat-card-label">Tasheer Appointments</div>
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- Special Appointments -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.special.appointments') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon-star text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.special.appointments') }}" class="stat-card" style="background: linear-gradient(135deg, #e67e22 0%, #f1c40f 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid Choice">
                                     </div>
                                     @if($stats['special']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-warning font-weight-bold px-4 py-2">+{{ $stats['special']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['special']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['special']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Special Appointments</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['special']['total']) }}</div>
+                                    <div class="stat-card-label">Special Appointments</div>
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- Contact Inquiries -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.contacts') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon2-mail text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.contacts') }}" class="stat-card" style="background: linear-gradient(135deg, #2980b9 0%, #6dd5fa 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <i class="flaticon2-mail"></i>
                                     </div>
                                     @if($stats['contact']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-info font-weight-bold px-4 py-2">+{{ $stats['contact']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['contact']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['contact']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Contact Inquiries</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['contact']['total']) }}</div>
+                                    <div class="stat-card-label">Contact Inquiries</div>
+                                </div>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                <!-- SECONDARY STATS SECTION (More Gradients) -->
+                <!-- STATS ROW 2 -->
                 <div class="row">
                     <!-- Medical Results -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.checkResults') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon2-cardiogram text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.checkResults') }}" class="stat-card" style="background: linear-gradient(135deg, #1a237e 0%, #1976d2 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Medical Results">
                                     </div>
                                     @if($stats['medical']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-primary font-weight-bold px-4 py-2">+{{ $stats['medical']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['medical']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['medical']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Medical Results</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['medical']['total']) }}</div>
+                                    <div class="stat-card-label">Medical Results</div>
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- NAVTTC -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.navtech.appointments') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon-calendar-with-a-clock-time-tools text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.navtech.appointments') }}" class="stat-card" style="background: linear-gradient(135deg, #007991 0%, #78ffd6 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC">
                                     </div>
                                     @if($stats['navtech']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-success font-weight-bold px-4 py-2">+{{ $stats['navtech']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['navtech']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['navtech']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">NAVTTC Training</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['navtech']['total']) }}</div>
+                                    <div class="stat-card-label">NAVTTC Training</div>
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- Soft Skills -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.softskill.appointments') }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon-users-1 text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.softskill.appointments') }}" class="stat-card" style="background: linear-gradient(135deg, #6a11cb 0%, #a855f7 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <img src="{{ asset('assets/public/images/soft-skill-logo.png') }}" alt="Soft Skills">
                                     </div>
                                     @if($stats['softskill']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-primary font-weight-bold px-4 py-2">+{{ $stats['softskill']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['softskill']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['softskill']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Soft Skills</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['softskill']['total']) }}</div>
+                                    <div class="stat-card-label">Soft Skill Certificates</div>
+                                </div>
                             </div>
                         </a>
                     </div>
 
                     <!-- Private Feedback -->
-                    <div class="col-xl-3 col-sm-6">
-                        <a href="{{ route('admin.settings.index', ['active_tab' => '#kt_tab_feedback']) }}" class="card card-custom gutter-b stretch-card hover-shadow-lg transition-all" style="background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); border: none;">
-                            <div class="card-body p-8">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="symbol symbol-50 symbol-light-white alpha-20">
-                                        <span class="symbol-label">
-                                            <i class="flaticon-chat-1 text-dark font-size-h1"></i>
-                                        </span>
+                    <div class="col-xl-3 col-sm-6 gutter-b">
+                        <a href="{{ route('admin.settings.index', ['active_tab' => '#kt_tab_feedback']) }}" class="stat-card" style="background: linear-gradient(135deg, #c0392b 0%, #f953c6 100%);">
+                            <div class="card-body">
+                                <div class="stat-card-top">
+                                    <div class="stat-logo-wrap">
+                                        <i class="flaticon-chat-1"></i>
                                     </div>
                                     @if($stats['feedback']['new'] > 0)
-                                        <span class="badge badge-pill badge-white text-danger font-weight-bold px-4 py-2">+{{ $stats['feedback']['new'] }} New</span>
+                                        <span class="stat-new-badge">+{{ $stats['feedback']['new'] }} New</span>
                                     @endif
                                 </div>
-                                <div class="text-white font-weight-bolder font-size-h1 mt-6">{{ number_format($stats['feedback']['total']) }}</div>
-                                <div class="text-white-50 font-weight-bold font-size-lg mt-1">Private Feedback</div>
+                                <div class="stat-card-bottom">
+                                    <div class="stat-card-number">{{ number_format($stats['feedback']['total']) }}</div>
+                                    <div class="stat-card-label">Private Feedback</div>
+                                </div>
                             </div>
                         </a>
                     </div>
