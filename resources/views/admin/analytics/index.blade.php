@@ -192,51 +192,63 @@
         <div class="container analytics-container">
 
             <!-- ── Stat Cards ── -->
-            <div class="row mb-2">
-                <div class="col-6 col-xl-3">
+            <div class="row mb-4">
+                <div class="col col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="flaticon2-group"></i></div>
                             <span class="asc-trend">All Time</span>
                         </div>
                         <div class="asc-bottom">
-                            <div class="asc-number" id="stat-total-visitors">{{ $stats['total_visitors'] }}</div>
+                            <div class="asc-number">{{ $stats['total_visitors'] }}</div>
                             <div class="asc-label">Total Sessions</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-xl-3">
+                <div class="col col-xl">
+                    <div class="analytics-stat-card" style="background:linear-gradient(135deg,#5e35b1 0%,#9c27b0 100%);">
+                        <div class="asc-top">
+                            <div class="asc-icon"><i class="flaticon2-user"></i></div>
+                            <span class="asc-trend">All Time</span>
+                        </div>
+                        <div class="asc-bottom">
+                            <div class="asc-number">{{ $stats['unique_ips'] }}</div>
+                            <div class="asc-label">Unique Visitors</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#0f9b8e 0%,#14c9a0 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="flaticon2-checking"></i></div>
                             <span class="asc-trend">Today</span>
                         </div>
                         <div class="asc-bottom">
-                            <div class="asc-number" id="stat-today-visitors">{{ $stats['today_visitors'] }}</div>
+                            <div class="asc-number">{{ $stats['today_visitors'] }}</div>
                             <div class="asc-label">Visitors Today</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-xl-3">
+                <div class="col col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#2980b9 0%,#6dd5fa 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="fab fa-whatsapp"></i></div>
                             <span class="asc-trend">All Time</span>
                         </div>
                         <div class="asc-bottom">
-                            <div class="asc-number" id="stat-total-wa">{{ $stats['total_whatsapp'] }}</div>
+                            <div class="asc-number">{{ $stats['total_whatsapp'] }}</div>
                             <div class="asc-label">Total WA Clicks</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-xl-3">
+                <div class="col col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#e67e22 0%,#f1c40f 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="fab fa-whatsapp"></i></div>
                             <span class="asc-trend">Today</span>
                         </div>
                         <div class="asc-bottom">
-                            <div class="asc-number" id="stat-today-wa">{{ $stats['today_whatsapp'] }}</div>
+                            <div class="asc-number">{{ $stats['today_whatsapp'] }}</div>
                             <div class="asc-label">WA Clicks Today</div>
                         </div>
                     </div>
