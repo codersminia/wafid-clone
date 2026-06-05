@@ -145,6 +145,46 @@
     .filter-inputs .btn-clear { flex: 1; justify-content: center; }
     .preset-btn { font-size: .72rem; padding: 0 9px; }
 }
+
+/* ── Visitor Journey Stepper ── */
+.vj-stepper { display: inline-flex; flex-direction: column; gap: 0; min-width: 180px; max-width: 320px; }
+.vj-step { display: flex; align-items: flex-start; gap: 8px; }
+.vj-step-last .vj-connector { display: none; }
+.vj-line-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding-top: 2px; }
+.vj-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    border: 2px solid;
+}
+.vj-dot-start  { background: #e8f4fd; border-color: #3699ff; }
+.vj-dot-mid    { background: #f5f8fa; border-color: #b5b5c3; }
+.vj-dot-end    { background: #fff5f8; border-color: #f64e60; }
+.vj-connector  { width: 2px; flex: 1; min-height: 14px; background: #ebedf3; margin: 2px 0; }
+.vj-content    { display: flex; align-items: center; gap: 5px; padding-bottom: 10px; flex-wrap: wrap; }
+.vj-page {
+    font-size: .78rem; font-weight: 600; color: #3f4254;
+    max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    background: #f5f8fa; border: 1px solid #ebedf3;
+    border-radius: 6px; padding: 2px 8px; display: inline-block;
+}
+.vj-tag {
+    font-size: .65rem; font-weight: 700; text-transform: uppercase;
+    border-radius: 10px; padding: 1px 7px; flex-shrink: 0;
+}
+.vj-tag-start { background: #e8f4fd; color: #3699ff; border: 1px solid #b8d9f8; }
+.vj-tag-end   { background: #fff5f8; color: #f64e60; border: 1px solid #fcc; }
+.vj-meta {
+    font-size: .73rem; color: #b5b5c3; margin-top: 4px;
+    padding-left: 18px;
+}
+.vj-step-hidden { display: none; }
+.vj-more-toggle { cursor: default; }
+.vj-expand-btn {
+    font-size: .72rem; font-weight: 700; color: #3699ff;
+    background: #e8f4fd; border: 1px solid #b8d9f8;
+    border-radius: 20px; padding: 2px 10px; cursor: pointer;
+    transition: all .2s;
+}
+.vj-expand-btn:hover { background: #3699ff; color: #fff; border-color: #3699ff; }
 </style>
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -161,7 +201,7 @@
                         </div>
                         <div class="asc-bottom">
                             <div class="asc-number" id="stat-total-visitors">{{ $stats['total_visitors'] }}</div>
-                            <div class="asc-label">Total Visitors</div>
+                            <div class="asc-label">Total Sessions</div>
                         </div>
                     </div>
                 </div>
@@ -257,7 +297,7 @@
                                 <div class="filter-result" id="v_result_bar" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid #ebedf3;">
                                     <span style="font-size:.82rem;color:#3f4254;">
                                         <i class="la la-users text-primary mr-1"></i>
-                                        Showing <strong id="v_result_count" class="text-primary">0</strong> visitor records
+                                        Showing <strong id="v_result_count" class="text-primary">0</strong> unique visitor sessions
                                         <span id="v_result_range" class="text-muted ml-1"></span>
                                     </span>
                                 </div>
@@ -266,8 +306,8 @@
                                 <table class="table table-head-custom table-vertical-center" id="visitors_datatable" style="width:100%">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>Date & Time</th>
-                                            <th>Page Viewed</th>
+                                            <th style="width:110px;">Visit Time</th>
+                                            <th>Journey (Start → End)</th>
                                             <th>Location / IP</th>
                                             <th>Referrer</th>
                                         </tr>
@@ -499,5 +539,24 @@ $(document).ready(function () {
         $($.fn.dataTable.tables(true)).DataTable().columns.adjust().responsive.recalc();
     });
 });
+
+// Expand/collapse journey hidden steps
+function vjToggle(btn) {
+    var stepper = btn.closest('.vj-stepper');
+    var hidden  = stepper.querySelectorAll('.vj-step-hidden');
+    var toggle  = btn.closest('.vj-more-toggle');
+    var isOpen  = btn.dataset.open === '1';
+
+    if (isOpen) {
+        hidden.forEach(function(el){ el.style.display = 'none'; });
+        btn.dataset.open = '0';
+        btn.textContent  = btn.dataset.label;
+    } else {
+        hidden.forEach(function(el){ el.style.display = 'flex'; });
+        btn.dataset.open  = '1';
+        btn.dataset.label = btn.textContent;
+        btn.textContent   = 'Show less';
+    }
+}
 </script>
 @endpush
