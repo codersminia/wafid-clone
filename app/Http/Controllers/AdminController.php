@@ -27,6 +27,8 @@ use App\Models\PrivateFeedback;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\MedicalCenter;
+use App\Models\VisitorLog;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -91,6 +93,10 @@ class AdminController extends Controller
             'feedback' => [
                 'total' => PrivateFeedback::count(),
                 'new' => PrivateFeedback::where('is_read', 0)->count()
+            ],
+            'visitors' => [
+                'total' => VisitorLog::distinct('ip_address')->count('ip_address'),
+                'today' => VisitorLog::distinct('ip_address')->whereDate('created_at', Carbon::today())->count('ip_address'),
             ],
         ];
 

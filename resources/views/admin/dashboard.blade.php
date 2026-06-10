@@ -267,21 +267,21 @@
                         </a>
                     </div>
 
-                    <!-- Private Feedback -->
+                    <!-- Site Visitors -->
                     <div class="col-xl-3 col-sm-6 gutter-b">
-                        <a href="{{ route('admin.settings.index', ['active_tab' => '#kt_tab_feedback']) }}" class="stat-card" style="background: linear-gradient(135deg, #c0392b 0%, #f953c6 100%);">
+                        <a href="{{ route('admin.analytics') }}" class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                             <div class="card-body">
                                 <div class="stat-card-top">
                                     <div class="stat-logo-wrap">
-                                        <i class="flaticon-chat-1"></i>
+                                        <i class="flaticon2-group"></i>
                                     </div>
-                                    @if($stats['feedback']['new'] > 0)
-                                        <span class="stat-new-badge">+{{ $stats['feedback']['new'] }} New</span>
+                                    @if($stats['visitors']['today'] > 0)
+                                        <span class="stat-new-badge">+{{ $stats['visitors']['today'] }} Today</span>
                                     @endif
                                 </div>
                                 <div class="stat-card-bottom">
-                                    <div class="stat-card-number">{{ number_format($stats['feedback']['total']) }}</div>
-                                    <div class="stat-card-label">Private Feedback</div>
+                                    <div class="stat-card-number">{{ number_format($stats['visitors']['total']) }}</div>
+                                    <div class="stat-card-label">Unique Visitors</div>
                                 </div>
                             </div>
                         </a>

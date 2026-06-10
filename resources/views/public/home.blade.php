@@ -330,6 +330,134 @@
         </div>
     </section>
 
+    <!-- Services Section -->
+    <section class="services-section py-5 sec-bg-light-warm" id="services" data-aos="fade-up">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Our Services</p>
+                <h2 class="font-weight-bold text-dark">Hassle-Free GAMCA WAFID &amp; Gulf Employment Appointments</h2>
+                <div class="theme-divider"></div>
+                <p class="text-muted mx-auto" style="max-width:620px;">At Gulf Medical Consultants, we make your medical, visa, and skill verification appointments for Gulf countries effortless, fast, and reliable. From GCC medical slips to Saudi visa appointments, our streamlined system ensures you save time and avoid errors.</p>
+            </div>
+
+            <div class="row">
+
+                <!-- 1. GAMCA Standard -->
+                <div class="col-lg-6 mb-4">
+                    <div class="svc-card h-100">
+                        <div class="svc-card-header">
+                            <div class="svc-logo-box">
+                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="GAMCA Medical Slip WAFID" loading="lazy" decoding="async">
+                            </div>
+                            <div>
+                                <h3 class="svc-card-title">GAMCA Medical Appointment Slip</h3>
+                                <span class="svc-badge svc-badge-green">Most Popular</span>
+                            </div>
+                        </div>
+                        <p class="svc-card-desc">Secure your official GAMCA medical appointment slip quickly. Our system automatically assigns the nearest GAMCA-approved medical center in your city. Once confirmed, your appointment slip is sent as a high-quality PDF directly to WhatsApp, ready to print and use.</p>
+                        <div class="svc-keywords">
+                            <span>GAMCA medical slip</span><span>GCC medical appointment</span><span>Gulf medical test</span><span>Wafid GAMCA</span>
+                        </div>
+                        <div class="svc-card-actions">
+                            <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-block">Book Now</a>
+                            <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark btn-block">Check Status</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Wafid Choice -->
+                <div class="col-lg-6 mb-4">
+                    <div class="svc-card h-100">
+                        <div class="svc-card-header">
+                            <div class="svc-logo-box">
+                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid Choice Medical Center Selection" loading="lazy" decoding="async">
+                            </div>
+                            <div>
+                                <h3 class="svc-card-title">Wafid Choice Medical Center Selection</h3>
+                                <span class="svc-badge svc-badge-red">Premium Service</span>
+                            </div>
+                        </div>
+                        <p class="svc-card-desc">Prefer a specific hospital or need to change your city? With our Wafid Choice Service, you can manually select your preferred medical center for your GAMCA medical appointment. Perfect for those seeking flexibility and control over their medical testing location.</p>
+                        <div class="svc-keywords">
+                            <span>GAMCA hospital selection</span><span>Premium medical slip</span><span>GCC appointment customization</span>
+                        </div>
+                        <div class="svc-card-actions">
+                            <a href="{{ route('special.appointment') }}" class="btn btn-dark btn-block">Book Special</a>
+                            <a href="{{ route('ViewMedicalCenters') }}" class="btn btn-outline-dark btn-block">Search Centers</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. NAVTTC -->
+                <div class="col-lg-6 mb-4">
+                    <div class="svc-card h-100">
+                        <div class="svc-card-header">
+                            <div class="svc-logo-box">
+                                <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC Takamol Skill Verification Saudi Visa" loading="lazy" decoding="async">
+                            </div>
+                            <div>
+                                <h3 class="svc-card-title">NAVTTC / Takamol Skill Verification</h3>
+                                <span class="svc-badge svc-badge-dark">Saudi Visa</span>
+                            </div>
+                        </div>
+                        <p class="svc-card-desc">Booking your mandatory Skills Verification Program (SVP) test has never been easier. Whether you're an electrician, plumber, or technician, we handle the booking for your NAVTTC / Takamol skill verification test required for Saudi employment.</p>
+                        <div class="svc-keywords">
+                            <span>NAVTTC skill test</span><span>Saudi visa SVP</span><span>Gulf job skill verification</span><span>Technical trades test</span>
+                        </div>
+                        <div class="svc-card-actions">
+                            <a href="{{ route('navtechform') }}" class="btn btn-dark btn-block">Book Skill Test</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Tasheer -->
+                <div class="col-lg-6 mb-4">
+                    <div class="svc-card h-100">
+                        <div class="svc-card-header">
+                            <div class="svc-logo-box">
+                                <img src="{{ asset('assets/public/images/tasheer-logo.png') }}" alt="Tasheer Saudi Visa Biometric Appointment VFS" loading="lazy" decoding="async">
+                            </div>
+                            <div>
+                                <h3 class="svc-card-title">Tasheer / Saudi Visa Biometric Appointment</h3>
+                                <span class="svc-badge svc-badge-dark">Visa Center</span>
+                            </div>
+                        </div>
+                        <p class="svc-card-desc">Complete your Saudi Visa biometric enrollment and document submission effortlessly. We handle appointments for Tasheer / VFS visa centers, ensuring your application process is smooth and timely.</p>
+                        <div class="svc-keywords">
+                            <span>Saudi visa appointment</span><span>Tasheer visa booking</span><span>VFS biometric appointment</span><span>Gulf visa services</span>
+                        </div>
+                        <div class="svc-card-actions">
+                            <a href="{{ route('tasheer.form') }}" class="btn btn-dark btn-block">Book Tasheer</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Soft Skills -->
+                <div class="col-lg-6 mb-4 mx-auto">
+                    <div class="svc-card h-100">
+                        <div class="svc-card-header">
+                            <div class="svc-logo-box">
+                                <img src="{{ asset('assets/public/images/soft-skill-logo.png') }}" alt="Gulf Employment Soft Skill Certificate GCC" loading="lazy" decoding="async">
+                            </div>
+                            <div>
+                                <h3 class="svc-card-title">Gulf Employment Soft Skill Certificates</h3>
+                                <span class="svc-badge svc-badge-green">Career Enhancement</span>
+                            </div>
+                        </div>
+                        <p class="svc-card-desc">Enhance your career opportunities in the Gulf with verifiable soft skill certifications. Our certificates are designed to make your resume stand out to GCC employers and improve your job prospects.</p>
+                        <div class="svc-keywords">
+                            <span>Gulf soft skills certificate</span><span>Career enhancement GCC</span><span>Employment soft skills</span>
+                        </div>
+                        <div class="svc-card-actions">
+                            <a href="{{ route('softskill.form') }}" class="btn btn-dark btn-block">Apply For Certificate</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- GCC Countries Section -->
     <section class="gcc-countries-section py-5" data-aos="fade-up">
         <div class="container">
@@ -502,134 +630,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section py-5 sec-bg-light-warm" id="services" data-aos="fade-up">
-        <div class="container">
-            <div class="text-center mb-5">
-                <p class="text-accent-red font-weight-bold text-uppercase mb-1" style="font-size:.85rem;">Our Services</p>
-                <h2 class="font-weight-bold text-dark">Hassle-Free GAMCA WAFID &amp; Gulf Employment Appointments</h2>
-                <div class="theme-divider"></div>
-                <p class="text-muted mx-auto" style="max-width:620px;">At Gulf Medical Consultants, we make your medical, visa, and skill verification appointments for Gulf countries effortless, fast, and reliable. From GCC medical slips to Saudi visa appointments, our streamlined system ensures you save time and avoid errors.</p>
-            </div>
-
-            <div class="row">
-
-                <!-- 1. GAMCA Standard -->
-                <div class="col-lg-6 mb-4">
-                    <div class="svc-card h-100">
-                        <div class="svc-card-header">
-                            <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="GAMCA Medical Slip WAFID" loading="lazy" decoding="async">
-                            </div>
-                            <div>
-                                <h3 class="svc-card-title">GAMCA Medical Appointment Slip</h3>
-                                <span class="svc-badge svc-badge-green">Most Popular</span>
-                            </div>
-                        </div>
-                        <p class="svc-card-desc">Secure your official GAMCA medical appointment slip quickly. Our system automatically assigns the nearest GAMCA-approved medical center in your city. Once confirmed, your appointment slip is sent as a high-quality PDF directly to WhatsApp, ready to print and use.</p>
-                        <div class="svc-keywords">
-                            <span>GAMCA medical slip</span><span>GCC medical appointment</span><span>Gulf medical test</span><span>Wafid GAMCA</span>
-                        </div>
-                        <div class="svc-card-actions">
-                            <a href="{{ route('medicalExamination') }}" class="btn btn-dark btn-block">Book Now</a>
-                            <a href="{{ route('ViewMedicalReport') }}" class="btn btn-outline-dark btn-block">Check Status</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Wafid Choice -->
-                <div class="col-lg-6 mb-4">
-                    <div class="svc-card h-100">
-                        <div class="svc-card-header">
-                            <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/wafid-logo.svg') }}" alt="Wafid Choice Medical Center Selection" loading="lazy" decoding="async">
-                            </div>
-                            <div>
-                                <h3 class="svc-card-title">Wafid Choice Medical Center Selection</h3>
-                                <span class="svc-badge svc-badge-red">Premium Service</span>
-                            </div>
-                        </div>
-                        <p class="svc-card-desc">Prefer a specific hospital or need to change your city? With our Wafid Choice Service, you can manually select your preferred medical center for your GAMCA medical appointment. Perfect for those seeking flexibility and control over their medical testing location.</p>
-                        <div class="svc-keywords">
-                            <span>GAMCA hospital selection</span><span>Premium medical slip</span><span>GCC appointment customization</span>
-                        </div>
-                        <div class="svc-card-actions">
-                            <a href="{{ route('special.appointment') }}" class="btn btn-dark btn-block">Book Special</a>
-                            <a href="{{ route('ViewMedicalCenters') }}" class="btn btn-outline-dark btn-block">Search Centers</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. NAVTTC -->
-                <div class="col-lg-6 mb-4">
-                    <div class="svc-card h-100">
-                        <div class="svc-card-header">
-                            <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/navttc-logo.png') }}" alt="NAVTTC Takamol Skill Verification Saudi Visa" loading="lazy" decoding="async">
-                            </div>
-                            <div>
-                                <h3 class="svc-card-title">NAVTTC / Takamol Skill Verification</h3>
-                                <span class="svc-badge svc-badge-dark">Saudi Visa</span>
-                            </div>
-                        </div>
-                        <p class="svc-card-desc">Booking your mandatory Skills Verification Program (SVP) test has never been easier. Whether you're an electrician, plumber, or technician, we handle the booking for your NAVTTC / Takamol skill verification test required for Saudi employment.</p>
-                        <div class="svc-keywords">
-                            <span>NAVTTC skill test</span><span>Saudi visa SVP</span><span>Gulf job skill verification</span><span>Technical trades test</span>
-                        </div>
-                        <div class="svc-card-actions">
-                            <a href="{{ route('navtechform') }}" class="btn btn-dark btn-block">Book Skill Test</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Tasheer -->
-                <div class="col-lg-6 mb-4">
-                    <div class="svc-card h-100">
-                        <div class="svc-card-header">
-                            <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/tasheer-logo.png') }}" alt="Tasheer Saudi Visa Biometric Appointment VFS" loading="lazy" decoding="async">
-                            </div>
-                            <div>
-                                <h3 class="svc-card-title">Tasheer / Saudi Visa Biometric Appointment</h3>
-                                <span class="svc-badge svc-badge-dark">Visa Center</span>
-                            </div>
-                        </div>
-                        <p class="svc-card-desc">Complete your Saudi Visa biometric enrollment and document submission effortlessly. We handle appointments for Tasheer / VFS visa centers, ensuring your application process is smooth and timely.</p>
-                        <div class="svc-keywords">
-                            <span>Saudi visa appointment</span><span>Tasheer visa booking</span><span>VFS biometric appointment</span><span>Gulf visa services</span>
-                        </div>
-                        <div class="svc-card-actions">
-                            <a href="{{ route('tasheer.form') }}" class="btn btn-dark btn-block">Book Tasheer</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Soft Skills -->
-                <div class="col-lg-6 mb-4 mx-auto">
-                    <div class="svc-card h-100">
-                        <div class="svc-card-header">
-                            <div class="svc-logo-box">
-                                <img src="{{ asset('assets/public/images/soft-skill-logo.png') }}" alt="Gulf Employment Soft Skill Certificate GCC" loading="lazy" decoding="async">
-                            </div>
-                            <div>
-                                <h3 class="svc-card-title">Gulf Employment Soft Skill Certificates</h3>
-                                <span class="svc-badge svc-badge-green">Career Enhancement</span>
-                            </div>
-                        </div>
-                        <p class="svc-card-desc">Enhance your career opportunities in the Gulf with verifiable soft skill certifications. Our certificates are designed to make your resume stand out to GCC employers and improve your job prospects.</p>
-                        <div class="svc-keywords">
-                            <span>Gulf soft skills certificate</span><span>Career enhancement GCC</span><span>Employment soft skills</span>
-                        </div>
-                        <div class="svc-card-actions">
-                            <a href="{{ route('softskill.form') }}" class="btn btn-dark btn-block">Apply For Certificate</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>

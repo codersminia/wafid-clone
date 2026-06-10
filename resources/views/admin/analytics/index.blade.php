@@ -193,7 +193,7 @@
 
             <!-- ── Stat Cards ── -->
             <div class="row mb-4">
-                <div class="col col-xl">
+                <div class="col-6 col-md-4 col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="flaticon2-group"></i></div>
@@ -205,7 +205,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-xl">
+                <div class="col-6 col-md-4 col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#5e35b1 0%,#9c27b0 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="flaticon2-user"></i></div>
@@ -217,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-xl">
+                <div class="col-6 col-md-4 col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#0f9b8e 0%,#14c9a0 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="flaticon2-checking"></i></div>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-xl">
+                <div class="col-6 col-md-4 col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#2980b9 0%,#6dd5fa 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="fab fa-whatsapp"></i></div>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-xl">
+                <div class="col-6 col-md-4 col-xl">
                     <div class="analytics-stat-card" style="background:linear-gradient(135deg,#e67e22 0%,#f1c40f 100%);">
                         <div class="asc-top">
                             <div class="asc-icon"><i class="fab fa-whatsapp"></i></div>
